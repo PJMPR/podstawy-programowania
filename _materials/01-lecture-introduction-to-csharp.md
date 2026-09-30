@@ -135,7 +135,7 @@ int koszt = cena + liczbaSztuk; // powinno być mnożenie
 Console.WriteLine(koszt);
 ```
 
-> **Demo:** uruchom kolejno każdy przykład. Jsks jest różnica między komunikatem kompilatora, przerwaniem działania i niepoprawnym wynikiem.
+> **Demo:** uruchom kolejno każdy przykład. Jaka jest różnica między komunikatem kompilatora, przerwaniem działania i niepoprawnym wynikiem.
 
 ---
 
@@ -350,7 +350,7 @@ Console.WriteLine($"{pierwszaLiczba} + {drugaLiczba} = {suma}");
 
 
 
-## 7. Podsumowanie i pytania kontrolne
+## 7. Podsumowanie
 
 - program jest uporządkowanym zestawem instrukcji,
 - instrukcje C# są wykonywane kolejno i zwykle kończą się średnikiem,
@@ -360,16 +360,6 @@ Console.WriteLine($"{pierwszaLiczba} + {drugaLiczba} = {suma}");
 - zmienna ma typ, nazwę i wartość,
 - typ mówi, jakie dane można przechowywać i jak można ich używać,
 - tekst pobrany z konsoli trzeba przekonwertować, zanim użyjemy go jak liczby.
-
-### Pytania kontrolne
-
-1. Czym różni się kod źródłowy od uruchomionego programu?
-2. Po co instrukcje kończymy średnikiem?
-3. Czym różnią się `Console.Write` i `Console.WriteLine`?
-4. Jaki typ wybierzesz dla ceny, a jaki dla liczby studentów?
-5. Dlaczego `"20" + 5` nie daje wyniku `25`?
-6. Jak pobrać od użytkownika liczbę całkowitą?
-7. Czym różnią się `"A"` i `'A'`?
 
 
 ## Ściąga
