@@ -12,17 +12,6 @@ content_ready: true
 
 Na tym wykładzie przejdziemy od pomysłu **„komputer wykonuje polecenia”** do pierwszych interaktywnych programów konsolowych w C#. Zobaczymy, jak kod źródłowy staje się działającym programem, jak komunikować się z użytkownikiem oraz jak przechowywać proste dane.
 
-Po wykładzie student powinien:
-
-- wyjaśnić, czym są program, kod źródłowy i instrukcja,
-- uruchomić program konsolowy w C#,
-- wyświetlać tekst i wartości za pomocą `Console.WriteLine`,
-- pobierać tekst za pomocą `Console.ReadLine`,
-- rozpoznawać i stosować typy `string`, `char`, `int`, `double`, `decimal` i `bool`,
-- deklarować zmienne oraz nadawać im wartości,
-- wskazać kilka typowych błędów początkującego programisty.
-
-
 ---
 
 ## 1. Czym jest program?
