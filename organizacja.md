@@ -119,7 +119,7 @@ Ocena z części laboratoryjnej zależy od:
 
 ### Ważna uwaga: Brak OOP na tym kursie
 
-⚠️ **To jest kurs PODSTAW programowania.** Nie obejmuje on Programowania Obiektowego (OOP).
+> **Ważne:** To jest kurs PODSTAW programowania. Nie obejmuje on Programowania Obiektowego (OOP).
 
 Koncepcje takie jak klasy, obiekty, dziedziczenie i polimorfizm będą wprowadzane dopiero w kolejnym semestrze w dedykowanym kursie.
 
@@ -142,4 +142,4 @@ Sprawdzaj portal regularnie, aby być na bieżąco z dostępnymi materiałami.
 
 ---
 
-**Jeśli masz pytania — pytaj!** Jesteśmy tu, aby Ci pomóc. 🚀
+**Jeśli masz pytania — pytaj!** Jesteśmy tu, aby Ci pomóc.

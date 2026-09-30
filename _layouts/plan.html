@@ -24,7 +24,13 @@ layout: default
                     {% if lecture %}
                         <div class="material-link">
                             <a href="{{ lecture.url | relative_url }}" class="material-link-anchor">
-                                <span class="material-kind">📚 Wykład</span>
+                                <span class="material-kind">
+                                    <svg class="material-kind-icon" aria-hidden="true" viewBox="0 0 24 24">
+                                        <path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H11v16H6.5A2.5 2.5 0 0 0 4 21.5Z"/>
+                                        <path d="M20 5.5A2.5 2.5 0 0 0 17.5 3H13v16h4.5a2.5 2.5 0 0 1 2.5 2.5Z"/>
+                                    </svg>
+                                    Wykład
+                                </span>
                                 <span class="material-link-title">{{ lecture.title }}</span>
                                 <span class="material-link-summary">{{ lecture.summary }}</span>
                                 {% include status-badge.html material=lecture %}
@@ -35,7 +41,13 @@ layout: default
                     {% if lab %}
                         <div class="material-link">
                             <a href="{{ lab.url | relative_url }}" class="material-link-anchor">
-                                <span class="material-kind">🔧 Laboratorium</span>
+                                <span class="material-kind">
+                                    <svg class="material-kind-icon" aria-hidden="true" viewBox="0 0 24 24">
+                                        <path d="M9 3h6M10 3v5l-5.5 9.2A2.5 2.5 0 0 0 6.7 21h10.6a2.5 2.5 0 0 0 2.2-3.8L14 8V3"/>
+                                        <path d="M7 16h10M9 13h6"/>
+                                    </svg>
+                                    Laboratorium
+                                </span>
                                 <span class="material-link-title">{{ lab.title }}</span>
                                 <span class="material-link-summary">{{ lab.summary }}</span>
                                 {% include status-badge.html material=lab %}

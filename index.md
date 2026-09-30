@@ -59,4 +59,4 @@ Szczegóły na temat narzędzi i wymagań znajdziesz w sekcji [Organizacja]({{ '
 
 ---
 
-**Powodzenia w nauce!** 🚀
+**Powodzenia w nauce!**
