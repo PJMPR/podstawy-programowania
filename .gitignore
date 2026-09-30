@@ -1,0 +1,31 @@
+# Jekyll
+_site/
+.sass-cache/
+.jekyll-cache/
+.jekyll-metadata
+*.gem
+
+# Ruby
+*.rbc
+*.config
+*.so
+*.egg-info/
+dist
+build
+.bundle
+.ruby-version
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Ruby Gems
+Gemfile.lock
+
+# OS
+.DS_Store
+Thumbs.db

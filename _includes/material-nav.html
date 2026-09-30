@@ -1,0 +1,28 @@
+<div class="material-nav-container">
+    <div class="nav-group">
+        {% if include.material.kind == 'lecture' %}
+            {% assign lab = site.materials | where: "week", include.material.week | where: "kind", "lab" | first %}
+            {% if lab %}
+                <a href="{{ lab.url | relative_url }}" class="nav-btn nav-next">
+                    <span>Przejdź do laboratorium</span>
+                    <span class="arrow">→</span>
+                </a>
+            {% endif %}
+        {% elsif include.material.kind == 'lab' %}
+            {% assign next_lecture = site.materials | where: "week", include.material.week | plus: 1 | where: "kind", "lecture" | first %}
+            {% if next_lecture %}
+                <a href="{{ next_lecture.url | relative_url }}" class="nav-btn nav-next">
+                    <span>Przejdź do następnego tygodnia</span>
+                    <span class="arrow">→</span>
+                </a>
+            {% endif %}
+        {% endif %}
+    </div>
+    
+    <div class="nav-group">
+        <a href="{{ '/plan/' | relative_url }}" class="nav-btn nav-back">
+            <span class="arrow">←</span>
+            <span>Wróć do planu kursu</span>
+        </a>
+    </div>
+</div>

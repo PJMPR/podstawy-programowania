@@ -1,0 +1,39 @@
+---
+layout: default
+---
+
+<div class="material-container">
+    <div class="material-header">
+        <div class="material-meta">
+            <span class="material-week">Tydzień {{ page.week }}</span>
+            <span class="material-kind">
+                {% if page.kind == 'lecture' %}
+                    Wykład
+                {% elsif page.kind == 'lab' %}
+                    Laboratorium
+                {% endif %}
+            </span>
+            {% include status-badge.html material=page %}
+        </div>
+        <h1 class="material-title">{{ page.title }}</h1>
+    </div>
+    
+    {% if page.summary %}
+        <div class="material-summary">
+            {{ page.summary }}
+        </div>
+    {% endif %}
+    
+    <div class="material-content">
+        <div class="material-placeholder">
+            <p>📋 <strong>Treść {{ page.kind == 'lecture' ? 'wykładu' : 'laboratorium' }} zostanie wkrótce opublikowana.</strong></p>
+            <p>Zaplanowana publikacja: <strong>Tydzień {{ page.week }}</strong></p>
+        </div>
+        
+        {{ content }}
+    </div>
+    
+    <div class="material-navigation">
+        {% include material-nav.html material=page %}
+    </div>
+</div>

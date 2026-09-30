@@ -1,0 +1,56 @@
+# Course configuration
+current_week: 1
+
+weeks:
+  - number: 1
+    title: "Wstęp do C# i środowiska programistycznego"
+  - number: 2
+    title: "Zmienne, typy danych i operatory"
+  - number: 3
+    title: "Instrukcje warunkowe"
+  - number: 4
+    title: "Pętle"
+  - number: 5
+    title: "Tablice"
+  - number: 6
+    title: "Funkcje i procedury"
+  - number: 7
+    title: "Zaawansowana praca z funkcjami"
+  - number: 8
+    title: "Rekurencja"
+  - number: 9
+    title: "Słowniki i listy"
+  - number: 10
+    title: "Przetwarzanie tekstu"
+  - number: 11
+    title: "Obsługa błędów i debugowanie"
+  - number: 12
+    title: "Plik i strumienie danych"
+  - number: 13
+    title: "Struktury i enumeracje"
+  - number: 14
+    title: "Algorytmy i złożoność obliczeniowa"
+  - number: 15
+    title: "Podsumowanie i projekt końcowy"
+
+# Course details
+course_name: "Podstawy programowania"
+semester: "1"
+language: "C#"
+level: "Początkujący"
+credits: 5
+
+# Course requirements
+requirements: "Brak wymagań wstępnych. Kurs jest przeznaczony dla osób bez doświadczenia w programowaniu."
+
+# Course objectives
+objectives: "Nauka programowania w C# od podstaw. Zrozumienie fundamentalnych koncepcji takich jak zmienne, typy danych, instrukcje warunkowe, pętle i funkcje. Stopniowe tworzenie konsolu gry typu roguelike w trakcie semestru."
+
+# Assessment
+assessment: "Obecność na laboratoriach, zadania domowe, projekt końcowy."
+
+# Tools
+tools: "Visual Studio Community, Visual Studio Code, .NET SDK"
+
+# Important note
+note: "Przedmiot nie obejmuje Programowania Obiektowego (OOP), które będzie wprowadzane w kolejnym semestrze."

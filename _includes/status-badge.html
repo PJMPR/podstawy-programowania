@@ -1,0 +1,7 @@
+{% if include.material.published == false %}
+    <span class="status-badge status-coming">Wkrótce</span>
+{% elsif include.material.unlock_week and include.material.unlock_week > site.data.course.current_week %}
+    <span class="status-badge status-locked">Zablokowany do tygodnia {{ include.material.unlock_week }}</span>
+{% else %}
+    <span class="status-badge status-available">Dostępny</span>
+{% endif %}

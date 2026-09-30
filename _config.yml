@@ -1,0 +1,48 @@
+# Jekyll Configuration
+title: Podstawy programowania
+description: Portal kursu Podstawy programowania - C# dla początkujących
+author: PJATK
+email: contact@pjatk.edu.pl
+url: https://pjatk-prg.github.io/podstawy-programowania
+baseurl: /podstawy-programowania
+
+# Build settings
+markdown: kramdown
+kramdown:
+  input: GFM
+  hard_wrap: false
+
+# Collections
+collections:
+  materials:
+    output: true
+    permalink: /:collection/:name/
+
+# Defaults
+defaults:
+  - scope:
+      path: ""
+      type: "materials"
+    values:
+      layout: "material"
+  - scope:
+      path: ""
+      type: "pages"
+    values:
+      layout: "page"
+
+# Exclude files
+exclude:
+  - .gitignore
+  - Gemfile
+  - Gemfile.lock
+  - README.md
+  - node_modules/
+
+# Plugins
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+
+# Theme
+theme: minima

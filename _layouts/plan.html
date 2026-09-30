@@ -1,0 +1,47 @@
+---
+layout: default
+---
+
+<div class="plan-container">
+    <h1 class="plan-title">{{ page.title }}</h1>
+    
+    {% if page.description %}
+        <p class="plan-description">{{ page.description }}</p>
+    {% endif %}
+    
+    <div class="weeks-grid">
+        {% for week in site.data.course.weeks %}
+            <div class="week-card" data-week="{{ week.number }}">
+                <div class="week-header">
+                    <h2 class="week-number">Tydzień {{ week.number }}</h2>
+                    <p class="week-title">{{ week.title }}</p>
+                </div>
+                
+                <div class="week-materials">
+                    {% assign lecture = site.materials | where: "week", week.number | where: "kind", "lecture" | first %}
+                    {% assign lab = site.materials | where: "week", week.number | where: "kind", "lab" | first %}
+                    
+                    {% if lecture %}
+                        <div class="material-link">
+                            <a href="{{ lecture.url | relative_url }}" class="material-link-anchor">
+                                <span class="material-kind">📚 Wykład</span>
+                                <span class="material-link-title">{{ lecture.title }}</span>
+                                {% include status-badge.html material=lecture %}
+                            </a>
+                        </div>
+                    {% endif %}
+                    
+                    {% if lab %}
+                        <div class="material-link">
+                            <a href="{{ lab.url | relative_url }}" class="material-link-anchor">
+                                <span class="material-kind">🔧 Laboratorium</span>
+                                <span class="material-link-title">{{ lab.title }}</span>
+                                {% include status-badge.html material=lab %}
+                            </a>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
