@@ -1,9 +1,9 @@
 ---
 layout: material
-title: "Przetwarzanie tekstu"
+title: "Współrzędne i ruch na planszy"
 kind: lecture
 week: 10
-summary: "Praca ze stringami. Metody string, interpolacja, regex basics, parsowanie danych."
+summary: "Praca z indeksami, zależności między osiami X i Y oraz kontrolowanie granic tablicy."
 published: false
 unlock_week: 10
 ---

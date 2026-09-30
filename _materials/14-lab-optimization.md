@@ -1,9 +1,9 @@
 ---
 layout: material
-title: "Optymalizacja gry i zaawansowane algorytmy"
+title: "Rogue 0.9"
 kind: lab
 week: 14
-summary: "Praktyka: profilowanie gry, optymalizacja pętli, użycie wydajnych algorytmów, pathfinding."
+summary: "Łączymy ruch, mapę, kolizje, walkę i zapis w jedną działającą grę."
 published: false
 unlock_week: 14
 ---

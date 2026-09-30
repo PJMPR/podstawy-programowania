@@ -1,9 +1,9 @@
 ---
 layout: material
-title: "Obsługa błędów i debugowanie"
+title: "Warunki na danych i kolizje"
 kind: lecture
 week: 11
-summary: "Try-catch-finally, wyjątki, typy wyjątków, debugger, breakpointy, logging."
+summary: "Sprawdzanie poprawności ruchu, łączenie funkcji oraz dekompozycja problemu."
 published: false
 unlock_week: 11
 ---

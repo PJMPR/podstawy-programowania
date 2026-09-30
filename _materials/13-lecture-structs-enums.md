@@ -1,9 +1,9 @@
 ---
 layout: material
-title: "Struktury i enumeracje"
+title: "Pliki"
 kind: lecture
 week: 13
-summary: "Tworzenie własnych typów danych. Struct vs class, enum, properties, value types."
+summary: "Zapis i odczyt tekstu, obsługa ścieżek oraz podstawowa obsługa błędów."
 published: false
 unlock_week: 13
 ---

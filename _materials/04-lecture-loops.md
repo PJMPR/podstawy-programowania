@@ -1,9 +1,9 @@
 ---
 layout: material
-title: "Pętle: for, while, do-while"
+title: "switch i sterowanie programem"
 kind: lecture
 week: 4
-summary: "Powtarzanie kodu. Nauka pętli for, while, do-while i sterowania ich przebiegiem."
+summary: "Wielowariantowe decyzje z użyciem instrukcji switch oraz walidacja danych wejściowych."
 published: false
 unlock_week: 4
 ---

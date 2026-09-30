@@ -111,7 +111,7 @@ Ocena z części laboratoryjnej zależy od:
 
 ### Komunikacja i wsparcie
 
-- **Pytania i wątpliwości:** Skontaktuj się z prowadzącym na laboratories lub przez pocztę
+- **Pytania i wątpliwości:** Skontaktuj się z prowadzącym na laboratoriach, pocztę lub platformę Teams
 - **Problemy techniczne:** Zgłoś zaraz, gdy je odkryjesz — im szybciej, tym więcej pomocy możemy udzielić
 - **Przedłużenie terminu:** Możliwe na uzasadniony wniosek
 
@@ -139,16 +139,6 @@ Podstawy wprowadzone na tym kursie będą fundamentem dla OOP w przyszłości.
 Materiały są dodawane i aktualizowane **raz w tygodniu** (zwykle **w poniedziałek** o godz. **9:00**).
 
 Sprawdzaj portal regularnie, aby być na bieżąco z dostępnymi materiałami.
-
----
-
-### Kontakt
-
-**Prowadzący kursu:**
-- Email: {{ site.email }}
-- Strona: {{ site.url }}
-- Pokój: [do uzupełnienia]
-- Godziny konsultacji: [do uzupełnienia]
 
 ---
 

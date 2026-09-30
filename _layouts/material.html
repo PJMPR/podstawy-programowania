@@ -25,7 +25,17 @@ layout: default
     {% endif %}
     
     <div class="material-content">
-        {{ content }}
+        {% if page.content_ready %}
+            {{ content }}
+        {% else %}
+            <h2>Zakres materiału</h2>
+            <p>{{ page.summary }}</p>
+            {% if page.kind == 'lecture' %}
+                <p>Materiał teoretyczny stanowi podstawę do wykonania laboratorium w tym tygodniu.</p>
+            {% else %}
+                <p>Podczas laboratorium rozwiniesz projekt gry o opisany wyżej element.</p>
+            {% endif %}
+        {% endif %}
     </div>
     
     <div class="material-navigation">

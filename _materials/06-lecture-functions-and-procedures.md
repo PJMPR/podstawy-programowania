@@ -1,9 +1,9 @@
 ---
 layout: material
-title: "Funkcje i procedury"
+title: "Funkcje i metody"
 kind: lecture
 week: 6
-summary: "Dzielenie kodu na wielokrotnie użyteczne części. Deklaracja, wywoływanie i zwracanie wartości z funkcji."
+summary: "Parametry, wartości zwracane, zakres zmiennych i dzielenie problemu na mniejsze części."
 published: false
 unlock_week: 6
 ---

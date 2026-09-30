@@ -1,9 +1,9 @@
 ---
 layout: material
-title: "Algorytmy i złożoność obliczeniowa"
+title: "Łączenie większego programu"
 kind: lecture
 week: 14
-summary: "Big O notation, analiza algorytmów, optymalizacja, algorytmy sortowania i wyszukiwania."
+summary: "Organizacja funkcji, ograniczanie powtarzalności kodu, prosty refactoring proceduralny i debugowanie."
 published: false
 unlock_week: 14
 ---

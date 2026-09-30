@@ -1,9 +1,9 @@
 ---
 layout: material
-title: "Praca ze zmiennymi i operatorami"
+title: "Karta bohatera"
 kind: lab
 week: 2
-summary: "Praktyka: deklaracja zmiennych, operacje arytmetyczne, konwersje typów i prace z tekstem."
+summary: "Dodajemy HP, siłę, złoto i doświadczenie oraz wykonujemy proste obliczenia obrażeń i leczenia."
 published: false
 unlock_week: 2
 ---

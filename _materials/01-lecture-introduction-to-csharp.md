@@ -1,9 +1,9 @@
 ---
 layout: material
-title: "Wstęp do C# i środowiska programistycznego"
+title: "Pierwszy program w C#"
 kind: lecture
 week: 1
-summary: "Poznajemy historię C#, zapoznajemy się z IDE i tworzymy nasz pierwszy program 'Hello World'. Omawiamy strukturę projektu i jak uruchamiać kod."
+summary: "Czym jest program i instrukcja, uruchamianie kodu, Console.WriteLine, Console.ReadLine oraz podstawowe typy danych."
 published: true
 ---
 

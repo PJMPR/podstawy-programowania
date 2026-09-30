@@ -1,9 +1,9 @@
 ---
 layout: material
-title: "Instalacja środowiska i pierwszy program"
+title: "Hello Adventurer"
 kind: lab
 week: 1
-summary: "Praktyczne ćwiczenia: instalacja Visual Studio, tworzenie projektu, uruchamianie programu i debugowanie."
+summary: "Tworzymy ekran startowy gry, pobieramy imię gracza i wyświetlamy jego podstawowe statystyki."
 published: true
 ---
 

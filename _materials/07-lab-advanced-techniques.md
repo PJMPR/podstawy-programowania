@@ -1,9 +1,9 @@
 ---
 layout: material
-title: "Zaawansowane techniki w grze"
+title: "Walka i zdarzenia losowe"
 kind: lab
 week: 7
-summary: "Praktyka: funkcje z ref/out, callback'i, optymalizacja performansu."
+summary: "Dodajemy losowe obrażenia, trafienia krytyczne, skarby i przeciwników."
 published: false
 unlock_week: 7
 ---

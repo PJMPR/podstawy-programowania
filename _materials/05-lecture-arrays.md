@@ -1,9 +1,9 @@
 ---
 layout: material
-title: "Tablice"
+title: "Pętle while, do-while i for"
 kind: lecture
 week: 5
-summary: "Przechowywanie wielu wartości. Deklaracja, inicjalizacja i dostęp do elementów tablicy."
+summary: "Powtarzanie operacji za pomocą pętli while, do-while i for oraz określanie warunków zakończenia."
 published: false
 unlock_week: 5
 ---

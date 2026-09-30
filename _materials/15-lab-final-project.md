@@ -1,9 +1,9 @@
 ---
 layout: material
-title: "Projekt końcowy: Pełna gra roguelike"
+title: "Rogue 1.0"
 kind: lab
 week: 15
-summary: "Finalny projekt: kompletna gra z wszystkimi elementami kursu, prezentacja i ocena."
+summary: "Finalizujemy projekt, testujemy grę, wprowadzamy poprawki i prezentujemy gotowe rozwiązanie."
 published: false
 unlock_week: 15
 ---

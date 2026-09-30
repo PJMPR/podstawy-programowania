@@ -1,9 +1,9 @@
 ---
 layout: material
-title: "Rekurencja"
+title: "Tablice jednowymiarowe"
 kind: lecture
 week: 8
-summary: "Funkcje wywołujące siebie. Rekurencja prosta, warunek stopu, stos wołań i stackoverflow."
+summary: "Tworzenie tablic jednowymiarowych, indeksowanie, iterowanie po elementach i wyszukiwanie danych."
 published: false
 unlock_week: 8
 ---

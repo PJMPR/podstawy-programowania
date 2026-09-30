@@ -1,9 +1,9 @@
 ---
 layout: material
-title: "Warunki w praktyce: rozgałęzienia logiki"
+title: "Pierwsze decyzje"
 kind: lab
 week: 3
-summary: "Praktyka: implementacja logiki warunkowej, testowanie różnych ścieżek, dodanie decyzji do gry."
+summary: "Implementujemy decyzje związane ze skrzynią, drzwiami i pułapką oraz wybór między walką a ucieczką."
 published: false
 unlock_week: 3
 ---

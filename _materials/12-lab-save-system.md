@@ -1,9 +1,9 @@
 ---
 layout: material
-title: "Zapis i odczyt gier: save system"
+title: "Interfejs gry"
 kind: lab
 week: 12
-summary: "Praktyka: system zapisu gry, ładowanie saves, eksport danych, high scores."
+summary: "Tworzymy komunikaty, status bohatera, symbole mapy i wykorzystujemy kolory konsoli."
 published: false
 unlock_week: 12
 ---

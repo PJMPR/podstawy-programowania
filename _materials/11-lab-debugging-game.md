@@ -1,9 +1,9 @@
 ---
 layout: material
-title: "Debugowanie gry i obsługa błędów"
+title: "Ściany, drzwi i przeszkody"
 kind: lab
 week: 11
-summary: "Praktyka: dodawanie try-catch, debugging bałów, logowanie, testowanie granic."
+summary: "Dodajemy kolizje: gracz nie może wyjść poza mapę ani przechodzić przez ściany i przeszkody."
 published: false
 unlock_week: 11
 ---

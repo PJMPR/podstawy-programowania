@@ -1,9 +1,9 @@
 ---
 layout: material
-title: "Struktury w grze: pozycje, stany"
+title: "Save / Load"
 kind: lab
 week: 13
-summary: "Praktyka: struktura Position, enum GameState, properties, definiowanie własnych typów."
+summary: "Zapisujemy do pliku i odczytujemy pozycję gracza, HP, złoto oraz mapę."
 published: false
 unlock_week: 13
 ---

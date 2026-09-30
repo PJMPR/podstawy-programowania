@@ -1,9 +1,9 @@
 ---
 layout: material
-title: "Zmienne, typy danych i operatory"
+title: "Zmienne, typy i operatory"
 kind: lecture
 week: 2
-summary: "Wprowadzenie do zmiennych, typów danych (int, double, string, bool), deklaracji oraz operatorów arytmetycznych i logicznych."
+summary: "Typy int, double, string, char i bool, operatory arytmetyczne oraz konwersje typów."
 published: false
 unlock_week: 2
 ---

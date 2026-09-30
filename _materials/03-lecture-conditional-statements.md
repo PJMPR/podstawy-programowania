@@ -1,9 +1,9 @@
 ---
 layout: material
-title: "Instrukcje warunkowe: if, else, switch"
+title: "Instrukcje warunkowe"
 kind: lecture
 week: 3
-summary: "Nauka podejmowania decyzji w programie. Warunkowe wykonywanie kodu za pomocą if, else-if, else i switch."
+summary: "Instrukcje if, else if i else oraz operatory logiczne i operatory porównania."
 published: false
 unlock_week: 3
 ---

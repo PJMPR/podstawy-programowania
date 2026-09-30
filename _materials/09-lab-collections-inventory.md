@@ -1,9 +1,9 @@
 ---
 layout: material
-title: "Kolekcje w grze: inventory, mapa enemys"
+title: "Pierwsza mapa lochu"
 kind: lab
 week: 9
-summary: "Praktyka: system inventorysu, lista enemys, słownik przedmiotów, LINQ queries."
+summary: "Budujemy mapę typu char[,] zawierającą ściany, podłogę i pozycję bohatera."
 published: false
 unlock_week: 9
 ---

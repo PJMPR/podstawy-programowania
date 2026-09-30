@@ -1,9 +1,9 @@
 ---
 layout: material
-title: "Funkcje w grze: modularyzacja kodu"
+title: "Porządkowanie gry"
 kind: lab
 week: 6
-summary: "Praktyka: refaktoryzacja kodu do funkcji, organizacja logiki gry, funkcje pomocnicze."
+summary: "Porządkujemy kod za pomocą metod ShowStatus(), Attack(), Heal() oraz ReadCommand()."
 published: false
 unlock_week: 6
 ---

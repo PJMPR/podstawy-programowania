@@ -1,9 +1,9 @@
 ---
 layout: material
-title: "Słowniki i listy"
+title: "Tablice dwuwymiarowe"
 kind: lecture
 week: 9
-summary: "Kolekcje danych. List<T>, Dictionary<K,V>, LINQ basics, iteracja po kolekcjach."
+summary: "Wiersze, kolumny, współrzędne i przetwarzanie danych za pomocą zagnieżdżonych pętli."
 published: false
 unlock_week: 9
 ---

@@ -1,9 +1,9 @@
 ---
 layout: material
-title: "Zaawansowana praca z funkcjami"
+title: "Losowość i proste algorytmy"
 kind: lecture
 week: 7
-summary: "Funkcje rekurencyjne, parametry ref/out, przeciążanie funkcji, wyrażenia lambda."
+summary: "Klasa Random, generowanie wartości z zakresu, prawdopodobieństwo i proste symulacje."
 published: false
 unlock_week: 7
 ---

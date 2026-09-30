@@ -1,9 +1,9 @@
 ---
 layout: material
-title: "Pliki i strumienie danych"
+title: "Napisy i znaki"
 kind: lecture
 week: 12
-summary: "Zapis i odczyt plików. File I/O, StreamReader/StreamWriter, serializacja, formaty danych."
+summary: "Typy string i char, podstawowe operacje tekstowe oraz formatowanie danych wyjściowych."
 published: false
 unlock_week: 12
 ---

@@ -1,9 +1,9 @@
 ---
 layout: material
-title: "Tekst w grze: dialog, logi, komunikaty"
+title: "Sterowanie WASD"
 kind: lab
 week: 10
-summary: "Praktyka: system dialogów, logi akcji, formatowanie wiadomości, parsowanie poleceń gracza."
+summary: "Implementujemy poruszanie bohaterem po mapie za pomocą klawiszy W, A, S i D."
 published: false
 unlock_week: 10
 ---

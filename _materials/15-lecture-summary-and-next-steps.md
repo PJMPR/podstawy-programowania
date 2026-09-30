@@ -1,9 +1,9 @@
 ---
 layout: material
-title: "Podsumowanie i projekt końcowy"
+title: "Podsumowanie podstaw programowania"
 kind: lecture
 week: 15
-summary: "Przegląd kursu, best practices, przygotowanie do OOP, co dalej w programowaniu."
+summary: "Czytanie kodu, szukanie błędów i dalsze kierunki nauki oraz wprowadzenie do problemu organizacji większych programów bez wchodzenia w OOP."
 published: false
 unlock_week: 15
 ---

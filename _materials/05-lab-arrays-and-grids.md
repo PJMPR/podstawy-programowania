@@ -1,9 +1,9 @@
 ---
 layout: material
-title: "Tablice w praktyce: mapy i gridy"
+title: "Game loop"
 kind: lab
 week: 5
-summary: "Praktyka: tworzenie map, reprezentacja mapy gry, operacje na tablicach 2D."
+summary: "Tworzymy główną pętlę gry działającą do momentu śmierci bohatera albo wyjścia użytkownika."
 published: false
 unlock_week: 5
 ---

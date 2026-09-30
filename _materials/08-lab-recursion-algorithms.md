@@ -1,9 +1,9 @@
 ---
 layout: material
-title: "Rekurencja w praktyce: algorytmy i eksploracja"
+title: "Ekwipunek bohatera"
 kind: lab
 week: 8
-summary: "Praktyka: implementacja klasycznych algorytmów rekurencyjnych, eksploracja mapy, szukanie ścieżek."
+summary: "Tworzymy tablicę przedmiotów oraz mechanizmy ich przeglądania, wyszukiwania i używania."
 published: false
 unlock_week: 8
 ---

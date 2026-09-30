@@ -1,9 +1,9 @@
 ---
 layout: material
-title: "Pętle w grze: powtarzanie akcji"
+title: "Menu gry"
 kind: lab
 week: 4
-summary: "Praktyka: implementacja pętli, główna pętla gry, powtarzające się akcje i animacje."
+summary: "Budujemy menu wyboru akcji gracza: ekwipunek, statystyki oraz wyjście z gry."
 published: false
 unlock_week: 4
 ---

@@ -26,6 +26,7 @@ layout: default
                             <a href="{{ lecture.url | relative_url }}" class="material-link-anchor">
                                 <span class="material-kind">📚 Wykład</span>
                                 <span class="material-link-title">{{ lecture.title }}</span>
+                                <span class="material-link-summary">{{ lecture.summary }}</span>
                                 {% include status-badge.html material=lecture %}
                             </a>
                         </div>
@@ -36,6 +37,7 @@ layout: default
                             <a href="{{ lab.url | relative_url }}" class="material-link-anchor">
                                 <span class="material-kind">🔧 Laboratorium</span>
                                 <span class="material-link-title">{{ lab.title }}</span>
+                                <span class="material-link-summary">{{ lab.summary }}</span>
                                 {% include status-badge.html material=lab %}
                             </a>
                         </div>
