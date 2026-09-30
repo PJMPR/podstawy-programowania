@@ -3,7 +3,7 @@ title: Podstawy programowania
 description: Portal kursu Podstawy programowania - C# dla początkujących
 author: PJATK
 email: contact@pjatk.edu.pl
-url: https://pjatk-prg.github.io/podstawy-programowania
+url: https://pjatk-prg.github.io
 baseurl: /podstawy-programowania
 
 # Build settings
@@ -16,7 +16,7 @@ kramdown:
 collections:
   materials:
     output: true
-    permalink: /:collection/:name/
+    permalink: /materialy/:name/
 
 # Defaults
 defaults:

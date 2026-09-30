@@ -45,11 +45,11 @@ Aby uczestniczyć w kursie, potrzebujesz:
 - **.NET SDK** (bezpłatne)
 - Chęci do nauki i eksperymentowania
 
-Szczegóły na temat narzędzi i wymagań znajdziesz w sekcji [Organizacja](/organizacja/).
+Szczegóły na temat narzędzi i wymagań znajdziesz w sekcji [Organizacja]({{ '/organizacja/' | relative_url }}).
 
 ### Jak zacząć?
 
-1. **Przejdź do [Planu kursu](/plan/)** — zapoznaj się z harmonogramem tygodni i dostępnymi materiałami.
+1. **Przejdź do [Planu kursu]({{ '/plan/' | relative_url }})** — zapoznaj się z harmonogramem tygodni i dostępnymi materiałami.
 2. **Przeglądaj materiały** — każdy wykład i laboratorium mają osobną stronę z opisem i miejscem na treść.
 3. **Pracuj systematycznie** — wykonuj laboratoria w rytmie kursu i buduj swój projekt tygodniowo.
 

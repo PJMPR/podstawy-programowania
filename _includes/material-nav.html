@@ -9,7 +9,8 @@
                 </a>
             {% endif %}
         {% elsif include.material.kind == 'lab' %}
-            {% assign next_lecture = site.materials | where: "week", include.material.week | plus: 1 | where: "kind", "lecture" | first %}
+            {% assign next_week = include.material.week | plus: 1 %}
+            {% assign next_lecture = site.materials | where: "week", next_week | where: "kind", "lecture" | first %}
             {% if next_lecture %}
                 <a href="{{ next_lecture.url | relative_url }}" class="nav-btn nav-next">
                     <span>Przejdź do następnego tygodnia</span>

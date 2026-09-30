@@ -25,11 +25,6 @@ layout: default
     {% endif %}
     
     <div class="material-content">
-        <div class="material-placeholder">
-            <p>📋 <strong>Treść {{ page.kind == 'lecture' ? 'wykładu' : 'laboratorium' }} zostanie wkrótce opublikowana.</strong></p>
-            <p>Zaplanowana publikacja: <strong>Tydzień {{ page.week }}</strong></p>
-        </div>
-        
         {{ content }}
     </div>
     
