@@ -37,7 +37,7 @@ Ta strona zawiera praktyczne informacje o kursie — wymagania, narzędzia, zasa
 
 ### Narzędzia i środowisko programistyczne
 
-Aby pracować na tym kursie, będziesz potrzebować następujących narzędzi (wszystkie bezpłatne):
+Aby pracować na tym kursie, będziesz potrzebować następujących narzędzi (bezpłatnych lub dostępnych w ramach licencji edukacyjnej):
 
 #### {{ site.data.course.tools }}
 
@@ -53,6 +53,12 @@ Aby pracować na tym kursie, będziesz potrzebować następujących narzędzi (w
 - Alternatywa dla bardziej minimalnego podejścia
 - Pobierz: [code.visualstudio.com](https://code.visualstudio.com/)
 
+**JetBrains Rider**
+- Wieloplatformowe IDE przeznaczone do pracy z C# i platformą .NET
+- Rozbudowane podpowiedzi, refaktoryzacja kodu i zintegrowany debugger
+- Będzie wykorzystywane podczas kursu jako jedno z obsługiwanych środowisk programistycznych
+- Pobierz: [jetbrains.com/rider](https://www.jetbrains.com/rider/)
+
 **.NET SDK**
 - Niezbędny do kompilacji i uruchamiania programów
 - Zawiera kompilator C#, biblioteki standardowe i narzędzia CLI
@@ -64,29 +70,31 @@ Aby pracować na tym kursie, będziesz potrzebować następujących narzędzi (w
 
 ### Zasady zaliczenia
 
-{{ site.data.course.assessment }}
+Student otrzymuje **dwie niezależne oceny końcowe**: jedną z części wykładowej i jedną z części laboratoryjnej.
 
-#### Ocena
+#### Część wykładowa
 
-Ocena końcowa zależy od:
+Podstawą oceny z części wykładowej jest:
 
-1. **Obecność na laboratoriach** (20%)
+- **Egzamin końcowy z wykładu** sprawdzający wiedzę teoretyczną i znajomość zagadnień omawianych podczas kursu.
+
+#### Część laboratoryjna
+
+Ocena z części laboratoryjnej zależy od:
+
+1. **Obecności na laboratoriach**
    - Regularne uczestnictwo jest ważne
    - Usprawiedliwione nieobecności powinny być zgłoszone wcześniej
 
-2. **Zadania domowe i ćwiczenia** (40%)
+2. **Zadań domowych i ćwiczeń**
    - Tygodniowe zadania praktyczne
    - Rozbudowa projektu gry roguelike
    - Terminowość oddawania zadań
 
-3. **Projekt końcowy** (30%)
+3. **Projektu końcowego**
    - Funkcjonalna gra konsolowa typu roguelike
    - Prezentacja i objaśnienie kodu
    - Możliwość rozszerzenia poza minimalne wymagania
-
-4. **Uczestnictwo i aktywność** (10%)
-   - Pytania, dyskusje i propozycje usprawnień
-   - Pomoc kolegom z grupy
 
 #### Skala ocen
 
