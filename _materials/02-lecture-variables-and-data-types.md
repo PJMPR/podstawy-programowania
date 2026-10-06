@@ -138,15 +138,24 @@ Nazwy stałych zapisujemy w tych materiałach stylem **PascalCase**.
 
 Typ określa zbiór dozwolonych wartości, zajmowaną pamięć i możliwe operacje.
 
-| Typ | Przykład | Typowe zastosowanie |
-|---|---:|---|
-| `int` | `120` | poziom, liczba przedmiotów, punkty życia |
-| `long` | `8_000_000_000L` | bardzo duże liczby całkowite |
-| `double` | `1.75` | pomiary i obliczenia przybliżone |
-| `decimal` | `49.99m` | kwoty i obliczenia dziesiętne wymagające dużej dokładności |
-| `bool` | `true` | wartość logiczna: prawda albo fałsz |
-| `char` | `'A'` | pojedynczy znak |
-| `string` | `"Alicja"` | tekst złożony z dowolnej liczby znaków |
+| Typ | Rozmiar | Przykład | Typowe zastosowanie |
+|---|---:|---:|---|
+| `sbyte` | 8 bitów | `-100` | bardzo małe liczby całkowite ze znakiem (`-128`–`127`) |
+| `byte` | 8 bitów | `255` | surowe dane, składowe kolorów (`0`–`255`) |
+| `short` | 16 bitów | `-30_000` | małe liczby całkowite ze znakiem |
+| `ushort` | 16 bitów | `60_000` | małe nieujemne liczby całkowite |
+| `int` | 32 bity | `120` | najczęściej używany typ całkowity: poziom, licznik, punkty życia |
+| `uint` | 32 bity | `4_000_000_000U` | duże nieujemne liczby całkowite |
+| `long` | 64 bity | `8_000_000_000L` | bardzo duże liczby całkowite ze znakiem |
+| `ulong` | 64 bity | `16_000_000_000UL` | bardzo duże nieujemne liczby całkowite |
+| `float` | 32 bity | `1.75f` | grafika i obliczenia przybliżone, gdy wystarcza około 6–9 cyfr precyzji |
+| `double` | 64 bity | `1.75` | pomiary i obliczenia przybliżone; około 15–17 cyfr precyzji |
+| `decimal` | 128 bitów | `49.99m` | kwoty i obliczenia dziesiętne; około 28–29 cyfr precyzji |
+| `bool` | — | `true` | wartość logiczna: prawda albo fałsz |
+| `char` | 16 bitów | `'A'` | pojedynczy znak |
+| `string` | zależny od tekstu | `"Alicja"` | tekst złożony z dowolnej liczby znaków |
+
+Typy rozpoczynające się literą `u`, na przykład `uint`, są **bez znaku** (ang. *unsigned*), dlatego przechowują tylko zero i liczby dodatnie. Dzięki temu ich maksymalna wartość jest większa niż w odpowiadających im typach ze znakiem.
 
 ### Literał i zmienna
 
@@ -154,6 +163,9 @@ Typ określa zbiór dozwolonych wartości, zajmowaną pamięć i możliwe operac
 
 ```csharp
 int liczbaStrzal = 12;
+short temperatura = -15;
+uint liczbaMieszkancow = 4_000_000U;
+float wysokoscSkoku = 1.75f;
 double czasPrzejscia = 4.5;
 decimal cena = 29.99m;
 char symbolGracza = '@';
@@ -165,28 +177,42 @@ Warto zwrócić uwagę na zapis:
 
 - tekst umieszczamy w cudzysłowie: `"Nela"`,
 - pojedynczy znak w apostrofach: `'N'`,
+- literał `float` kończymy literą `f`,
 - literał `decimal` kończymy literą `m`,
+- literał typu bez znaku możemy zakończyć literą `U`,
 - literał `long`, który nie mieści się w `int`, kończymy literą `L`,
+- dla literału `ulong` łączymy oba oznaczenia: `UL`,
 - znak `_` może poprawić czytelność dużych liczb: `1_000_000`.
 
-### `double` czy `decimal`?
+### `float`, `double` czy `decimal`?
 
-`double` przechowuje liczby zmiennoprzecinkowe w postaci binarnej, czyli za pomocą potęg liczby `2`. Niektórych prostych ułamków dziesiętnych, takich jak `0.1` i `0.2`, nie da się w tym systemie zapisać za pomocą skończonej liczby cyfr. Ich rozwinięcie binarne jest nieskończone — podobnie jak `1 / 3` ma nieskończone rozwinięcie `0,333...` w systemie dziesiętnym.
+Zarówno `float`, jak i `double` zapisują liczby w systemie binarnym. Działają według tej samej zasady, ale `float` zajmuje mniej pamięci i ma mniejszą precyzję. W zwykłych obliczeniach zmiennoprzecinkowych najczęściej używamy `double`; `float` jest często spotykany na przykład w grafice komputerowej, gdzie oszczędność pamięci może mieć znaczenie.
 
-Komputer ma ograniczoną liczbę bitów, dlatego zapisuje najbliższą możliwą wartość. Powstaje bardzo mały **błąd reprezentacji**, który może stać się widoczny po wykonaniu obliczeń. Nie jest to usterka typu `double`, lecz skutek zaokrąglenia nieskończonego rozwinięcia do dostępnej precyzji.
+`double` przechowuje liczbę w systemie binarnym. Jej część ułamkowa jest budowana z potęg liczby `2`, na przykład `1/2`, `1/4`, `1/8` i `1/16`. Dlatego niektóre wartości można zapisać dokładnie:
+
+```text
+0,5 = 1/2
+0,75 = 1/2 + 1/4
+```
+
+Nie da się jednak w ten sposób zapisać dokładnie wielu prostych ułamków dziesiętnych, między innymi `0.1` i `0.2`. Ich zapis binarny ma nieskończenie wiele cyfr — podobnie jak `1 / 3` ma nieskończony zapis `0,333...` w systemie dziesiętnym.
+
+`double` ma ograniczoną liczbę bitów, dlatego zapisuje najbliższą możliwą wartość. W pamięci znajduje się więc liczba minimalnie różniąca się od tej zapisanej w kodzie. Jest to **błąd reprezentacji**. Zwykle jest bardzo mały, ale może stać się widoczny po wykonaniu obliczeń. Nie jest to usterka typu `double`, lecz skutek zaokrąglenia nieskończonego rozwinięcia do dostępnej precyzji.
 
 ```csharp
 double wynik = 0.1 + 0.2;
 Console.WriteLine(wynik); // może pokazać 0,30000000000000004
 ```
 
-Typ `decimal` zapisuje ułamki w systemie dziesiętnym, dlatego wartości takie jak `0.1` i `0.2` może reprezentować dokładnie. Z tego powodu do pieniędzy zwykle wybieramy `decimal`:
+Typ `decimal` działa inaczej: przechowuje cyfry liczby oraz informację o liczbie miejsc po przecinku w systemie dziesiętnym. Można go w uproszczeniu wyobrazić sobie jako liczbę całkowitą pomnożoną przez potęgę `10`. Na przykład `0.1m` jest przechowywane jako `1 × 10⁻¹`, a `12.34m` jako `1234 × 10⁻²`. Te wartości są więc reprezentowane dokładnie:
 
 ```csharp
 decimal cena = 0.1m;
 decimal podatek = 0.2m;
 Console.WriteLine(cena + podatek); // 0,3
 ```
+
+Nie oznacza to, że `decimal` potrafi dokładnie zapisać każdy wynik. On również ma ograniczoną precyzję, więc na przykład rozwinięcie `1 / 3` musi zostać zaokrąglone. Nie występuje w nim jednak problem z dokładnym zapisem typowych skończonych ułamków dziesiętnych, takich jak `0.1`, `19.99` czy `0.01`. Z tego powodu `decimal` zwykle wybieramy do obliczeń finansowych, a `double` do pomiarów i obliczeń naukowych, w których niewielki błąd przybliżenia jest akceptowalny.
 
 ---
 
