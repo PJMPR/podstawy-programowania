@@ -171,14 +171,16 @@ Warto zwrócić uwagę na zapis:
 
 ### `double` czy `decimal`?
 
-`double` przechowuje liczby zmiennoprzecinkowe w postaci binarnej. Jest szybki i dobry do pomiarów, ale część wartości dziesiętnych zapisuje tylko w przybliżeniu.
+`double` przechowuje liczby zmiennoprzecinkowe w postaci binarnej, czyli za pomocą potęg liczby `2`. Niektórych prostych ułamków dziesiętnych, takich jak `0.1` i `0.2`, nie da się w tym systemie zapisać za pomocą skończonej liczby cyfr. Ich rozwinięcie binarne jest nieskończone — podobnie jak `1 / 3` ma nieskończone rozwinięcie `0,333...` w systemie dziesiętnym.
+
+Komputer ma ograniczoną liczbę bitów, dlatego zapisuje najbliższą możliwą wartość. Powstaje bardzo mały **błąd reprezentacji**, który może stać się widoczny po wykonaniu obliczeń. Nie jest to usterka typu `double`, lecz skutek zaokrąglenia nieskończonego rozwinięcia do dostępnej precyzji.
 
 ```csharp
 double wynik = 0.1 + 0.2;
 Console.WriteLine(wynik); // może pokazać 0,30000000000000004
 ```
 
-Do pieniędzy zwykle wybieramy `decimal`:
+Typ `decimal` zapisuje ułamki w systemie dziesiętnym, dlatego wartości takie jak `0.1` i `0.2` może reprezentować dokładnie. Z tego powodu do pieniędzy zwykle wybieramy `decimal`:
 
 ```csharp
 decimal cena = 0.1m;
