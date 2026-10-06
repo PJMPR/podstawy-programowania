@@ -4,8 +4,7 @@ title: "Zmienne, typy i operatory"
 kind: lecture
 week: 2
 summary: "Zmienne i stałe, typy liczbowe, operatory arytmetyczne i logiczne, kolejność działań oraz konwersje typów."
-published: false
-unlock_week: 2
+published: true
 content_ready: true
 ---
 
