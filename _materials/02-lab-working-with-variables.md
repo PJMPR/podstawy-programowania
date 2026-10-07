@@ -4,8 +4,7 @@ title: "Karta bohatera"
 kind: lab
 week: 2
 summary: "Ćwiczymy dobór typów, operatory, konwersje i wartości logiczne, a następnie rozbudowujemy kartę bohatera."
-published: false
-unlock_week: 2
+published: true
 content_ready: true
 ---
 
@@ -209,25 +208,75 @@ Nie używaj jeszcze instrukcji warunkowych, pętli, tablic ani własnych funkcji
 
 #### Przykładowy kierunek
 
+Przykładowym rozwiązaniem może być karta wojowniczki Miry, oznaczonej na mapie
+symbolem `@`. Program pobiera jej imię, symbol, aktualne punkty zdrowia, siłę,
+premię broni, liczbę zajętych miejsc w plecaku, ilość złota oraz mnożnik ataku
+specjalnego. Do zapisania tych danych można wykorzystać typy `string`, `char`,
+`int` i `double`, a wyniki sprawdzeń przechowywać jako wartości typu `bool`.
+
+Maksymalne zdrowie bohaterki i pojemność plecaka mogą być stałymi. Dla
+przykładowych wartości wynoszą one odpowiednio `100` punktów i `10` miejsc.
+Mira ma `75` punktów zdrowia, `12` punktów siły, premię broni równą `5` oraz
+zajętych `6` miejsc w plecaku. Zwykłe obrażenia są sumą siły i premii broni,
+więc wynoszą `17`. Obrażenia ataku specjalnego powstają przez pomnożenie tej
+wartości przez mnożnik `1,5`. Wynik `25,5` można jawnie przekształcić na `int`,
+otrzymując `25` punktów obrażeń. Taka konwersja świadomie odrzuca część
+ułamkową.
+
+Procent zdrowia oblicza się przez podzielenie aktualnego zdrowia przez zdrowie
+maksymalne i pomnożenie wyniku przez `100`. Przed dzieleniem jedną z wartości
+całkowitych należy jawnie przekształcić na `double`, aby otrzymać wynik
+ułamkowy. W tym przykładzie jest to `75,00%`. Wolne miejsce w plecaku jest
+różnicą między jego pojemnością a liczbą zajętych miejsc, dlatego wynosi `4`.
+
+Operatory `/` i `%` można dodatkowo wykorzystać do podziału złota między
+drużynę. Jeśli po otrzymaniu nagrody i opłaceniu naprawy wyposażenia Mira ma
+`43` monety, a drużyna liczy `4` osoby, każda osoba otrzyma `10` monet, a
+`3` monety pozostaną w skarbcu. Stan złota można wcześniej zaktualizować za
+pomocą dwóch skróconych operatorów przypisania: dodać nagrodę operatorem `+=`,
+a następnie odjąć koszt naprawy operatorem `-=`.
+
+Na podstawie obliczonych danych program tworzy wartości logiczne. Mira żyje,
+jeśli jej zdrowie jest większe od zera. Ma miejsce w plecaku, jeśli liczba
+wolnych miejsc jest większa od zera. Jest gotowa do wyprawy, jeśli żyje, ma
+wolne miejsce i posiada mapę. Można też sprawdzić, czy wymaga leczenia, przez
+zanegowanie informacji o pełnym zdrowiu. Dla podanych danych wartości te
+wynoszą odpowiednio `True`, `True`, `True` i `True`.
+
+Na końcu program wyświetla jedną czytelną kartę zawierającą dane wejściowe,
+zwykłe i specjalne obrażenia, zdrowie zapisane jako `75/100 (75,00%)`, stan
+plecaka, podział złota oraz obliczone wartości logiczne. Wszystkie liczby
+ułamkowe są prezentowane z dwoma miejscami po przecinku.
+
+Przykładowa karta dla opisanego rozwiązania może wyglądać następująco:
+
 ```text
-+====================================+
-|          HELLO ADVENTURER          |
-+====================================+
-| Bohater: Mira                  @    |
-| Poziom: 2                           |
-+------------------------------------+
-| Zdrowie: 75/100 (75,00%)            |
-| Siła: 12                            |
-| Premia broni: 5                     |
-| Obrażenia: 17                       |
-| Złoto: 43                           |
-| Plecak: 6/10                        |
-| Wolne miejsca: 4                    |
-+------------------------------------+
-| Żyje: True                          |
-| Ma miejsce w plecaku: True          |
-| Gotowy do wyprawy: True             |
-+====================================+
++==========================================+
+|             KARTA BOHATERA               |
++==========================================+
+| Bohater: Mira                         @   |
++------------------------------------------+
+| Zdrowie: 75/100 (75,00%)                  |
+| Siła: 12                                  |
+| Premia broni: 5                           |
+| Zwykłe obrażenia: 17                      |
+| Mnożnik ataku specjalnego: 1,50           |
+| Obrażenia ataku specjalnego: 25           |
++------------------------------------------+
+| Plecak: 6/10                              |
+| Wolne miejsca: 4                          |
+| Złoto: 43                                 |
+| Liczba członków drużyny: 4                |
+| Złoto dla jednej osoby: 10                |
+| Złoto pozostające w skarbcu: 3            |
++------------------------------------------+
+| Ma mapę: True                             |
+| Żyje: True                                |
+| Ma pełne zdrowie: False                   |
+| Wymaga leczenia: True                     |
+| Ma miejsce w plecaku: True                |
+| Gotowa do wyprawy: True                   |
++==========================================+
 ```
 
 Nie musisz kopiować układu ani wartości. Zaprojektuj własną kartę i dobierz statystyki pasujące do bohatera.
