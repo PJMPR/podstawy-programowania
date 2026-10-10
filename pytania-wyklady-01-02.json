@@ -1,0 +1,482 @@
+[
+  {
+    "Content": "Czym jest program komputerowy?",
+    "QuestionType": 1,
+    "NumberOfOptions": 4,
+    "Points": 1,
+    "Answers": [
+      { "Content": "A. Uporządkowanym zestawem instrukcji opisujących, co komputer ma zrobić", "Weight": null, "Correct": true },
+      { "Content": "B. Wyłącznie plikiem zawierającym dane użytkownika", "Weight": null, "Correct": false },
+      { "Content": "C. Każdym tekstem zapisanym w pliku z rozszerzeniem .txt", "Weight": null, "Correct": false },
+      { "Content": "D. Urządzeniem służącym do wykonywania obliczeń", "Weight": null, "Correct": false }
+    ]
+  },
+  {
+    "Content": "Które polecenie kompiluje i uruchamia projekt .NET?",
+    "QuestionType": 1,
+    "NumberOfOptions": 4,
+    "Points": 1,
+    "Answers": [
+      { "Content": "A. dotnet new console", "Weight": null, "Correct": false },
+      { "Content": "B. dotnet run", "Weight": null, "Correct": true },
+      { "Content": "C. cd", "Weight": null, "Correct": false },
+      { "Content": "D. Console.Run()", "Weight": null, "Correct": false }
+    ]
+  },
+  {
+    "Content": "Jakie rozszerzenie mają pliki z kodem źródłowym C#?",
+    "QuestionType": 1,
+    "NumberOfOptions": 4,
+    "Points": 1,
+    "Answers": [
+      { "Content": "A. .net", "Weight": null, "Correct": false },
+      { "Content": "B. .java", "Weight": null, "Correct": false },
+      { "Content": "C. .cs", "Weight": null, "Correct": true },
+      { "Content": "D. .console", "Weight": null, "Correct": false }
+    ]
+  },
+  {
+    "Content": "Który opis przedstawia błąd logiczny?",
+    "QuestionType": 1,
+    "NumberOfOptions": 4,
+    "Points": 1,
+    "Answers": [
+      { "Content": "A. Kod nie spełnia reguł składni języka", "Weight": null, "Correct": false },
+      { "Content": "B. Program nie może zostać skompilowany z powodu braku średnika", "Weight": null, "Correct": false },
+      { "Content": "C. Podczas działania int.Parse próbuje przetworzyć tekst kot", "Weight": null, "Correct": false },
+      { "Content": "D. Program uruchamia się, ale wskutek użycia dodawania zamiast mnożenia podaje zły wynik", "Weight": null, "Correct": true }
+    ]
+  },
+  {
+    "Content": "Które stwierdzenia o Console.WriteLine są prawdziwe?",
+    "QuestionType": 1,
+    "NumberOfOptions": 4,
+    "Points": 1,
+    "Answers": [
+      { "Content": "A. Może wyświetlać tekst i liczby", "Weight": null, "Correct": true },
+      { "Content": "B. Po wyświetleniu wartości przechodzi do nowego wiersza", "Weight": null, "Correct": true },
+      { "Content": "C. Zawsze pobiera dane od użytkownika", "Weight": null, "Correct": false },
+      { "Content": "D. Nie może wyświetlić wartości bool", "Weight": null, "Correct": false }
+    ]
+  },
+  {
+    "Content": "Które sekwencje specjalne mają podane znaczenie?",
+    "QuestionType": 1,
+    "NumberOfOptions": 4,
+    "Points": 1,
+    "Answers": [
+      { "Content": "A. \\n oznacza nowy wiersz", "Weight": null, "Correct": true },
+      { "Content": "B. \\t oznacza nowy wiersz", "Weight": null, "Correct": false },
+      { "Content": "C. \\n oznacza tabulator", "Weight": null, "Correct": false },
+      { "Content": "D. \\t oznacza tabulator", "Weight": null, "Correct": true }
+    ]
+  },
+  {
+    "Content": "Które zapisy poprawnie tworzą interpolowany napis w C#?",
+    "QuestionType": 1,
+    "NumberOfOptions": 4,
+    "Points": 1,
+    "Answers": [
+      { "Content": "A. $\"Cześć, {imie}!\"", "Weight": null, "Correct": true },
+      { "Content": "B. \"Cześć, (imie)!\"", "Weight": null, "Correct": false },
+      { "Content": "C. $\"Za rok: {wiek + 1}\"", "Weight": null, "Correct": true },
+      { "Content": "D. \"Za rok: $wiek + 1\"", "Weight": null, "Correct": false }
+    ]
+  },
+  {
+    "Content": "Które stwierdzenia dotyczące zmiennych w C# są prawdziwe?",
+    "QuestionType": 1,
+    "NumberOfOptions": 4,
+    "Points": 1,
+    "Answers": [
+      { "Content": "A. Przy każdym ponownym przypisaniu trzeba ponownie podać typ", "Weight": null, "Correct": false },
+      { "Content": "B. Zmienna ma nazwę i przechowuje wartość określonego typu", "Weight": null, "Correct": true },
+      { "Content": "C. Wartości raz przypisanej do zmiennej nie można zmienić", "Weight": null, "Correct": false },
+      { "Content": "D. Wielkość liter w nazwach zmiennych ma znaczenie", "Weight": null, "Correct": true }
+    ]
+  },
+  {
+    "Content": "Które pary typ–zastosowanie są poprawne?",
+    "QuestionType": 1,
+    "NumberOfOptions": 4,
+    "Points": 1,
+    "Answers": [
+      { "Content": "A. int — liczby całkowite", "Weight": null, "Correct": true },
+      { "Content": "B. bool — dowolny tekst", "Weight": null, "Correct": false },
+      { "Content": "C. char — wiele słów", "Weight": null, "Correct": false },
+      { "Content": "D. decimal — dokładne wartości dziesiętne, na przykład kwoty", "Weight": null, "Correct": true }
+    ]
+  },
+  {
+    "Content": "Które stwierdzenia o Console.ReadLine() są prawdziwe?",
+    "QuestionType": 1,
+    "NumberOfOptions": 4,
+    "Points": 1,
+    "Answers": [
+      { "Content": "A. Zawsze zwraca wartość typu int", "Weight": null, "Correct": false },
+      { "Content": "B. Czeka na wpisanie danych i naciśnięcie Enter", "Weight": null, "Correct": true },
+      { "Content": "C. Zwraca wpisaną wartość jako tekst", "Weight": null, "Correct": true },
+      { "Content": "D. Automatycznie dodaje jeden do wpisanej liczby", "Weight": null, "Correct": false }
+    ]
+  },
+  {
+    "Content": "Które instrukcje są poprawnymi deklaracjami zmiennych zgodnymi z materiałem?",
+    "QuestionType": 1,
+    "NumberOfOptions": 4,
+    "Points": 1,
+    "Answers": [
+      { "Content": "A. string nazwa = \"Ada\";", "Weight": null, "Correct": true },
+      { "Content": "B. int punkty = 100;", "Weight": null, "Correct": true },
+      { "Content": "C. bool graTrwa = true;", "Weight": null, "Correct": true },
+      { "Content": "D. char symbol = \"A\";", "Weight": null, "Correct": false }
+    ]
+  },
+  {
+    "Content": "Które sytuacje mogą zakończyć się błędem wykonania podczas używania Parse?",
+    "QuestionType": 1,
+    "NumberOfOptions": 4,
+    "Points": 1,
+    "Answers": [
+      { "Content": "A. int.Parse(\"25\")", "Weight": null, "Correct": false },
+      { "Content": "B. int.Parse(\"kot\")", "Weight": null, "Correct": true },
+      { "Content": "C. double.Parse tekstu, który nie przedstawia liczby", "Weight": null, "Correct": true },
+      { "Content": "D. int.Parse danych wpisanych przez użytkownika, jeśli nie są poprawną liczbą całkowitą", "Weight": null, "Correct": true }
+    ]
+  },
+  {
+    "Content": "Które informacje opisują instrukcje najwyższego poziomu w nowoczesnym C#?",
+    "QuestionType": 1,
+    "NumberOfOptions": 4,
+    "Points": 1,
+    "Answers": [
+      { "Content": "A. Pozwalają pisać krótki program bez ręcznego tworzenia klasy Program i metody Main", "Weight": null, "Correct": true },
+      { "Content": "B. Wymagają ręcznego zadeklarowania metody Main", "Weight": null, "Correct": false },
+      { "Content": "C. Mogą prowadzić do tego samego efektu co zapis z klasą Program i metodą Main", "Weight": null, "Correct": true },
+      { "Content": "D. Można w nich użyć Console.WriteLine(\"Hello, World!\");", "Weight": null, "Correct": true }
+    ]
+  },
+  {
+    "Content": "Które nazwy są zgodne z opisanymi regułami nazw zmiennych w C#?",
+    "QuestionType": 1,
+    "NumberOfOptions": 4,
+    "Points": 1,
+    "Answers": [
+      { "Content": "A. liczbaStudentow", "Weight": null, "Correct": true },
+      { "Content": "B. temperaturaCiala", "Weight": null, "Correct": true },
+      { "Content": "C. 2graczy", "Weight": null, "Correct": false },
+      { "Content": "D. czyZalogowany", "Weight": null, "Correct": true }
+    ]
+  },
+  {
+    "Content": "Które stwierdzenia poprawnie porównują Console.Write i Console.WriteLine?",
+    "QuestionType": 1,
+    "NumberOfOptions": 4,
+    "Points": 1,
+    "Answers": [
+      { "Content": "A. Console.Write pozostawia kursor w tym samym wierszu", "Weight": null, "Correct": true },
+      { "Content": "B. Console.WriteLine po wyświetleniu przechodzi do nowego wiersza", "Weight": null, "Correct": true },
+      { "Content": "C. Console.Write służy wyłącznie do wyświetlania liczb", "Weight": null, "Correct": false },
+      { "Content": "D. Console.WriteLine nie potrafi wyświetlać tekstu", "Weight": null, "Correct": false }
+    ]
+  },
+  {
+    "Content": "Które typy mogą przechowywać liczbę z częścią ułamkową?",
+    "QuestionType": 1,
+    "NumberOfOptions": 4,
+    "Points": 1,
+    "Answers": [
+      { "Content": "A. int", "Weight": null, "Correct": false },
+      { "Content": "B. char", "Weight": null, "Correct": false },
+      { "Content": "C. double", "Weight": null, "Correct": true },
+      { "Content": "D. decimal", "Weight": null, "Correct": true }
+    ]
+  },
+  {
+    "Content": "Które działania wykonuje prosty kalkulator sumy przedstawiony na wykładzie?",
+    "QuestionType": 1,
+    "NumberOfOptions": 4,
+    "Points": 1,
+    "Answers": [
+      { "Content": "A. Pobiera dwie wartości za pomocą Console.ReadLine()", "Weight": null, "Correct": true },
+      { "Content": "B. Porównuje liczby za pomocą instrukcji if", "Weight": null, "Correct": false },
+      { "Content": "C. Zamienia pobrane teksty na wartości int", "Weight": null, "Correct": true },
+      { "Content": "D. Zapisuje wynik jako wartość bool", "Weight": null, "Correct": false }
+    ]
+  },
+  {
+    "Content": "Które stwierdzenia o wykonywaniu prostego programu są prawdziwe?",
+    "QuestionType": 1,
+    "NumberOfOptions": 4,
+    "Points": 1,
+    "Answers": [
+      { "Content": "A. Instrukcje zawsze wykonują się od dołu do góry", "Weight": null, "Correct": false },
+      { "Content": "B. Kompilator sprawdza składnię i typy", "Weight": null, "Correct": true },
+      { "Content": "C. Program powstaje nawet wtedy, gdy wystąpi błąd kompilacji", "Weight": null, "Correct": false },
+      { "Content": "D. Jeśli nie ma błędów kompilacji, środowisko .NET może uruchomić program", "Weight": null, "Correct": true }
+    ]
+  },
+  {
+    "Content": "Które stwierdzenia o tekście i znakach są prawdziwe?",
+    "QuestionType": 1,
+    "NumberOfOptions": 4,
+    "Points": 1,
+    "Answers": [
+      { "Content": "A. Wartość string zapisujemy w cudzysłowie", "Weight": null, "Correct": true },
+      { "Content": "B. Wartość char zapisujemy w cudzysłowie", "Weight": null, "Correct": false },
+      { "Content": "C. Typ string przechowuje wyłącznie pojedynczy znak", "Weight": null, "Correct": false },
+      { "Content": "D. Typ char może przechowywać pojedynczy znak, na przykład 'A'", "Weight": null, "Correct": true }
+    ]
+  },
+  {
+    "Content": "Które elementy występują w deklaracji int liczbaPunktow = 100;?",
+    "QuestionType": 1,
+    "NumberOfOptions": 4,
+    "Points": 1,
+    "Answers": [
+      { "Content": "A. int jest nazwą zmiennej", "Weight": null, "Correct": false },
+      { "Content": "B. liczbaPunktow jest nazwą zmiennej", "Weight": null, "Correct": true },
+      { "Content": "C. 100 jest wartością przypisaną zmiennej", "Weight": null, "Correct": true },
+      { "Content": "D. int określa wartość logiczną", "Weight": null, "Correct": false }
+    ]
+  },
+  {
+    "Content": "Po wykonaniu kodu int punkty = 10; punkty = punkty + 5; punkty = punkty * 2; jaka będzie wartość zmiennej punkty?",
+    "QuestionType": 1,
+    "NumberOfOptions": 4,
+    "Points": 1,
+    "Answers": [
+      { "Content": "A. 15", "Weight": null, "Correct": false },
+      { "Content": "B. 20", "Weight": null, "Correct": false },
+      { "Content": "C. 25", "Weight": null, "Correct": false },
+      { "Content": "D. 30", "Weight": null, "Correct": true }
+    ]
+  },
+  {
+    "Content": "Który opis słowa kluczowego var jest prawdziwy?",
+    "QuestionType": 1,
+    "NumberOfOptions": 4,
+    "Points": 1,
+    "Answers": [
+      { "Content": "A. var oznacza, że typ zmiennej może dowolnie zmieniać się w czasie działania", "Weight": null, "Correct": false },
+      { "Content": "B. var można zastosować bez wartości początkowej w każdym przypadku", "Weight": null, "Correct": false },
+      { "Content": "C. Kompilator ustala typ na podstawie wartości początkowej", "Weight": null, "Correct": true },
+      { "Content": "D. var zawsze tworzy zmienną typu string", "Weight": null, "Correct": false }
+    ]
+  },
+  {
+    "Content": "Które słowo kluczowe służy do zadeklarowania wartości, której nie można ponownie przypisać?",
+    "QuestionType": 1,
+    "NumberOfOptions": 4,
+    "Points": 1,
+    "Answers": [
+      { "Content": "A. static", "Weight": null, "Correct": false },
+      { "Content": "B. const", "Weight": null, "Correct": true },
+      { "Content": "C. var", "Weight": null, "Correct": false },
+      { "Content": "D. string", "Weight": null, "Correct": false }
+    ]
+  },
+  {
+    "Content": "Która deklaracja najlepiej pasuje do kwoty pieniężnej zgodnie z materiałem?",
+    "QuestionType": 1,
+    "NumberOfOptions": 4,
+    "Points": 1,
+    "Answers": [
+      { "Content": "A. decimal cena = 19.99m;", "Weight": null, "Correct": true },
+      { "Content": "B. bool cena = true;", "Weight": null, "Correct": false },
+      { "Content": "C. char cena = '19.99';", "Weight": null, "Correct": false },
+      { "Content": "D. int cena = 19.99;", "Weight": null, "Correct": false }
+    ]
+  },
+  {
+    "Content": "Które zapisy literałów są poprawne dla wskazanych typów?",
+    "QuestionType": 1,
+    "NumberOfOptions": 4,
+    "Points": 1,
+    "Answers": [
+      { "Content": "A. decimal cena = 29.99;", "Weight": null, "Correct": false },
+      { "Content": "B. float wysokosc = 1.75;", "Weight": null, "Correct": false },
+      { "Content": "C. long liczba = 8_000_000_000L;", "Weight": null, "Correct": true },
+      { "Content": "D. ulong liczba = 16_000_000_000UL;", "Weight": null, "Correct": true }
+    ]
+  },
+  {
+    "Content": "Które stwierdzenia poprawnie porównują typy double i decimal?",
+    "QuestionType": 1,
+    "NumberOfOptions": 4,
+    "Points": 1,
+    "Answers": [
+      { "Content": "A. decimal zwykle wybiera się do obliczeń finansowych", "Weight": null, "Correct": true },
+      { "Content": "B. double zapisuje liczby zmiennoprzecinkowe w systemie binarnym", "Weight": null, "Correct": true },
+      { "Content": "C. decimal potrafi dokładnie zapisać każdy możliwy wynik, w tym 1/3", "Weight": null, "Correct": false },
+      { "Content": "D. double zawsze dokładnie przechowuje 0.1", "Weight": null, "Correct": false }
+    ]
+  },
+  {
+    "Content": "Które wyrażenia mają podane wyniki dla zmiennych typu int?",
+    "QuestionType": 1,
+    "NumberOfOptions": 4,
+    "Points": 1,
+    "Answers": [
+      { "Content": "A. 7 / 3 daje 2", "Weight": null, "Correct": true },
+      { "Content": "B. 7 % 3 daje 2", "Weight": null, "Correct": false },
+      { "Content": "C. 2 + 3 * 4 daje 14", "Weight": null, "Correct": true },
+      { "Content": "D. (2 + 3) * 4 daje 20", "Weight": null, "Correct": true }
+    ]
+  },
+  {
+    "Content": "Które stwierdzenia o dzieleniu w C# są prawdziwe?",
+    "QuestionType": 1,
+    "NumberOfOptions": 4,
+    "Points": 1,
+    "Answers": [
+      { "Content": "A. Dzielenie dwóch wartości int zawsze daje wartość double", "Weight": null, "Correct": false },
+      { "Content": "B. W dzieleniu dwóch int część ułamkowa zostaje odrzucona", "Weight": null, "Correct": true },
+      { "Content": "C. Wyrażenie 7 / 2.0 wykonuje dzielenie zmiennoprzecinkowe", "Weight": null, "Correct": true },
+      { "Content": "D. Przypisanie wyniku 7 / 2 do double przywraca utraconą część ułamkową", "Weight": null, "Correct": false }
+    ]
+  },
+  {
+    "Content": "Które skrócone operatory odpowiadają podanym pełnym zapisom?",
+    "QuestionType": 1,
+    "NumberOfOptions": 4,
+    "Points": 1,
+    "Answers": [
+      { "Content": "A. punkty += 10; odpowiada punkty = punkty - 10;", "Weight": null, "Correct": false },
+      { "Content": "B. punkty -= 5; odpowiada punkty = punkty - 5;", "Weight": null, "Correct": true },
+      { "Content": "C. punkty *= 2; odpowiada punkty = punkty * 2;", "Weight": null, "Correct": true },
+      { "Content": "D. punkty %= 4; odpowiada punkty = punkty % 4;", "Weight": null, "Correct": true }
+    ]
+  },
+  {
+    "Content": "Które wyniki instrukcji Console.WriteLine są poprawne?",
+    "QuestionType": 1,
+    "NumberOfOptions": 4,
+    "Points": 1,
+    "Answers": [
+      { "Content": "A. Console.WriteLine(2 + 3) wyświetli 6", "Weight": null, "Correct": false },
+      { "Content": "B. Console.WriteLine(\"2\" + \"3\") wyświetli 23", "Weight": null, "Correct": true },
+      { "Content": "C. Console.WriteLine(\"Wynik: \" + 2 + 3) wyświetli Wynik: 23", "Weight": null, "Correct": true },
+      { "Content": "D. Console.WriteLine($\"Wynik: {2 + 3}\") wyświetli Wynik: 23", "Weight": null, "Correct": false }
+    ]
+  },
+  {
+    "Content": "Które operatory służą do porównywania wartości?",
+    "QuestionType": 1,
+    "NumberOfOptions": 4,
+    "Points": 1,
+    "Answers": [
+      { "Content": "A. ==", "Weight": null, "Correct": true },
+      { "Content": "B. =", "Weight": null, "Correct": false },
+      { "Content": "C. !=", "Weight": null, "Correct": true },
+      { "Content": "D. >=", "Weight": null, "Correct": true }
+    ]
+  },
+  {
+    "Content": "Dla bool maKlucz = true; i bool maLatarnie = false; które wyrażenia dadzą true?",
+    "QuestionType": 1,
+    "NumberOfOptions": 4,
+    "Points": 1,
+    "Answers": [
+      { "Content": "A. maKlucz && maLatarnie", "Weight": null, "Correct": false },
+      { "Content": "B. maKlucz || maLatarnie", "Weight": null, "Correct": true },
+      { "Content": "C. !maLatarnie", "Weight": null, "Correct": true },
+      { "Content": "D. !maKlucz", "Weight": null, "Correct": false }
+    ]
+  },
+  {
+    "Content": "Które stwierdzenia o operatorach logicznych są prawdziwe?",
+    "QuestionType": 1,
+    "NumberOfOptions": 4,
+    "Points": 1,
+    "Answers": [
+      { "Content": "A. Operator && daje true tylko wtedy, gdy oba warunki są prawdziwe", "Weight": null, "Correct": true },
+      { "Content": "B. Operator || daje true, gdy przynajmniej jeden warunek jest prawdziwy", "Weight": null, "Correct": true },
+      { "Content": "C. Operator ! pozostawia wartość bool bez zmiany", "Weight": null, "Correct": false },
+      { "Content": "D. Wyrażenie !false ma wartość true", "Weight": null, "Correct": true }
+    ]
+  },
+  {
+    "Content": "Które przykłady przedstawiają konwersję niejawną opisaną w materiale?",
+    "QuestionType": 1,
+    "NumberOfOptions": 4,
+    "Points": 1,
+    "Answers": [
+      { "Content": "A. Przypisanie wartości int do zmiennej long", "Weight": null, "Correct": true },
+      { "Content": "B. Rzutowanie double na int za pomocą (int)", "Weight": null, "Correct": false },
+      { "Content": "C. Zamiana string na int za pomocą int.Parse", "Weight": null, "Correct": false },
+      { "Content": "D. Przypisanie wartości int do zmiennej double", "Weight": null, "Correct": true }
+    ]
+  },
+  {
+    "Content": "Które stwierdzenia o rzutowaniu double na int są prawdziwe?",
+    "QuestionType": 1,
+    "NumberOfOptions": 4,
+    "Points": 1,
+    "Answers": [
+      { "Content": "A. (int)12.8 daje 12", "Weight": null, "Correct": true },
+      { "Content": "B. Rzutowanie zawsze zaokrągla do najbliższej liczby całkowitej", "Weight": null, "Correct": false },
+      { "Content": "C. (int)(-2.9) daje -2", "Weight": null, "Correct": true },
+      { "Content": "D. Rzutowanie odrzuca część ułamkową", "Weight": null, "Correct": true }
+    ]
+  },
+  {
+    "Content": "Które metody lub zapisy służą do opisanych konwersji?",
+    "QuestionType": 1,
+    "NumberOfOptions": 4,
+    "Points": 1,
+    "Answers": [
+      { "Content": "A. int.Parse(\"42\") zamienia poprawny tekst na int", "Weight": null, "Correct": true },
+      { "Content": "B. liczba.ToString() może utworzyć tekstową postać liczby", "Weight": null, "Correct": true },
+      { "Content": "C. Zwykłe rzutowanie (int)\"42\" poprawnie zamienia tekst na liczbę", "Weight": null, "Correct": false },
+      { "Content": "D. bool.Parse(\"true\") zwraca tekst", "Weight": null, "Correct": false }
+    ]
+  },
+  {
+    "Content": "Które wyrażenia pozwolą uzyskać wynik 3,5 jako double dla sumy 7 i liczby elementów 2?",
+    "QuestionType": 1,
+    "NumberOfOptions": 4,
+    "Points": 1,
+    "Answers": [
+      { "Content": "A. double wynik = 7 / 2;", "Weight": null, "Correct": false },
+      { "Content": "B. double wynik = 7.0 / 2;", "Weight": null, "Correct": false },
+      { "Content": "C. double wynik = 7 / 2.0;", "Weight": null, "Correct": true },
+      { "Content": "D. double wynik = (double)7 / 2;", "Weight": null, "Correct": true }
+    ]
+  },
+  {
+    "Content": "Które stwierdzenia o formatowaniu za pomocą F2 są prawdziwe?",
+    "QuestionType": 1,
+    "NumberOfOptions": 4,
+    "Points": 1,
+    "Answers": [
+      { "Content": "A. Zapis {wartosc:F2} zmienia wartość przechowywaną w zmiennej", "Weight": null, "Correct": false },
+      { "Content": "B. F2 służy wyłącznie do formatowania typu string", "Weight": null, "Correct": false },
+      { "Content": "C. F2 pozwala wyświetlić liczbę z dwoma miejscami po przecinku", "Weight": null, "Correct": true },
+      { "Content": "D. Formatowanie zmienia wygląd wyniku, a nie wartość zmiennej", "Weight": null, "Correct": true }
+    ]
+  },
+  {
+    "Content": "Które stwierdzenia o typach całkowitych bez znaku są prawdziwe?",
+    "QuestionType": 1,
+    "NumberOfOptions": 4,
+    "Points": 1,
+    "Answers": [
+      { "Content": "A. uint i ulong mogą przechowywać liczby ujemne", "Weight": null, "Correct": false },
+      { "Content": "B. Typy bez znaku przechowują zero i liczby dodatnie", "Weight": null, "Correct": true },
+      { "Content": "C. uint jest typem tekstowym", "Weight": null, "Correct": false },
+      { "Content": "D. ulong jest 8-bitowym typem całkowitym", "Weight": null, "Correct": false }
+    ]
+  },
+  {
+    "Content": "Po wykonaniu kodu int punktyZycia = 100; punktyZycia -= 25; punktyZycia += 10; które odpowiedzi są prawdziwe?",
+    "QuestionType": 1,
+    "NumberOfOptions": 4,
+    "Points": 1,
+    "Answers": [
+      { "Content": "A. Końcowa wartość wynosi 85", "Weight": null, "Correct": true },
+      { "Content": "B. Operator -= zmniejsza wartość zmiennej", "Weight": null, "Correct": true },
+      { "Content": "C. Końcowa wartość wynosi 65", "Weight": null, "Correct": false },
+      { "Content": "D. Operator += w tym przykładzie zmniejsza wartość o 10", "Weight": null, "Correct": false }
+    ]
+  }
+]
