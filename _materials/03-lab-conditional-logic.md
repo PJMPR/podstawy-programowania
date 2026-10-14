@@ -221,7 +221,9 @@ Program powinien:
 7. obsłużyć nieznaną akcję za pomocą default,
 8. wykorzystać co najmniej jedno połączenie operatorów && i ||,
 9. wykorzystać operator ?: do utworzenia co najmniej jednej krótkiej informacji tekstowej,
-10. nie używać pętli, tablic ani własnych funkcji.
+10. pokolorować wynik programu za pomocą Console.ForegroundColor lub Console.BackgroundColor,
+11. przywrócić domyślne kolory za pomocą Console.ResetColor(),
+12. nie używać pętli, tablic ani własnych funkcji.
 
 #### Proponowane reguły
 
@@ -248,9 +250,13 @@ Następnie wyświetl menu:
 
 Pobierz numer akcji i obsłuż go przez switch-case. Dla nieznanego numeru wyświetl odpowiedni komunikat.
 
-#### Przykładowy kierunek rozwiązania
+#### Trzy warianty prezentacji wyniku
 
-Dla bohaterki Neli, która ma 75 punktów życia, 2 mikstury, 120 sztuk złota i mapę, program może wyświetlić:
+Wybierz jeden z poniższych wariantów. W każdym z nich wyświetl te same dane, ale zaprojektuj inny układ i zastosuj kolory zgodnie z opisem.
+
+##### Wariant A. Klasyczna karta bohatera
+
+Użyj ramki złożonej ze znaków +, - i |.
 
     +======================================+
     |           KARTA BOHATERA             |
@@ -268,7 +274,41 @@ Dla bohaterki Neli, która ma 75 punktów życia, 2 mikstury, 120 sztuk złota i
     | Gotowa do walki: True                |
     +======================================+
 
-Układ, nazwy i wartości możesz zaprojektować samodzielnie. Najważniejsze jest, aby wynik był czytelny dla osoby, która nie widzi kodu programu.
+Pokoloruj nagłówek na jasny kolor na ciemnym tle. Wartość zdrowia pokaż na zielono, żółto albo czerwono zależnie od stanu bohatera.
+
+##### Wariant B. Panel statusu
+
+Przedstaw informacje jako krótkie sekcje raportu:
+
+    ===== STATUS BOHATERA =====
+    Nela
+
+    ZDROWIE       75
+    MIKSTURY       2
+    ZŁOTO        120
+    MAPA         TAK
+
+    GOTOWOŚĆ DO WYPRAWY: TAK
+    =========================
+
+Użyj osobnego koloru dla nagłówka, osobnego dla danych oraz koloru sygnalizującego wynik decyzji. Dla wartości logicznych możesz wyświetlać komunikaty TAK/NIE zamiast True/False.
+
+##### Wariant C. Dziennik wyprawy
+
+Przedstaw wynik jako wpis narracyjny:
+
+    * * * DZIENNIK WYPRAWY * * *
+    Bohaterka Nela rozpoczyna dzień z 75 punktami zdrowia.
+    W plecaku ma 2 mikstury i mapę.
+    Posiada 120 sztuk złota.
+
+    Status: GOTOWA DO WYPRAWY
+    Wybrana akcja: rozpocznij wyprawę
+    * * * * * * * * * * * * * *
+
+Kolorem wyróżnij tytuł, status oraz ostrzeżenia. Jeśli bohater nie może działać, użyj koloru czerwonego dla komunikatu o przyczynie.
+
+Niezależnie od wybranego wariantu wynik powinien być czytelny dla osoby, która nie widzi kodu programu. Po każdym kolorowanym fragmencie przywróć ustawienia za pomocą Console.ResetColor().
 
 #### Kryteria ukończenia
 
@@ -279,6 +319,9 @@ Układ, nazwy i wartości możesz zaprojektować samodzielnie. Najważniejsze je
 - [ ] Menu akcji działa za pomocą switch-case.
 - [ ] Istnieje przypadek default.
 - [ ] Wynik zawiera dane wejściowe, stan bohatera i komunikat podjętej decyzji.
+- [ ] Wynik jest przedstawiony w jednym z trzech wariantów prezentacji.
+- [ ] Co najmniej nagłówek, status i jeden komunikat decyzji są odpowiednio pokolorowane.
+- [ ] Kolory są resetowane po zakończeniu kolorowanych fragmentów.
 - [ ] Testowane były wartości graniczne, np. 0, 1, 24, 25 i 100 punktów życia lub złota.
 - [ ] Kod nie używa pętli, tablic ani własnych funkcji.
 
