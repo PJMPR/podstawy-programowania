@@ -362,7 +362,60 @@ Program nie powtarza jeszcze menu — pętle poznamy później.
 
 ---
 
-## 8. Najczęstsze błędy
+## 8. Warunek jednolinijkowy — operator ?:
+
+Jeśli chcemy wybrać jedną z dwóch wartości, możemy użyć operatora warunkowego ?:. Jest to skrócony zapis prostego if i else.
+
+Ogólna składnia wygląda tak:
+
+    warunek ? wartośćDlaPrawdy : wartośćDlaFałszu
+
+Przykład:
+
+    int punktyZycia = 75;
+    string stan = punktyZycia > 0 ? "żyje" : "nie żyje";
+
+    Console.WriteLine($"Bohater {stan}.");
+
+Najpierw program sprawdza warunek przed znakiem zapytania. Jeśli jest prawdziwy, wybiera wartość między ? a :. Jeśli jest fałszywy, wybiera wartość znajdującą się po :.
+
+Ten zapis jest równoważny:
+
+    string stan;
+
+    if (punktyZycia > 0)
+    {
+        stan = "żyje";
+    }
+    else
+    {
+        stan = "nie żyje";
+    }
+
+Operator ?: najlepiej stosować wtedy, gdy każda gałąź tylko wybiera wartość. Jeżeli w gałęziach znajduje się kilka instrukcji albo wykonywane są różne działania, czytelniejszy będzie pełny if i else.
+
+Można go użyć również do wyświetlenia krótkiego komunikatu:
+
+    bool maMape = true;
+    Console.WriteLine(maMape ? "Mapa jest w plecaku." : "Brakuje mapy.");
+
+Operator ?: nie zastępuje switch-case. Służy do wyboru jednej z dwóch wartości, a switch pozwala obsłużyć wiele konkretnych wariantów.
+
+### Zagnieżdżony operator warunkowy
+
+Technicznie można połączyć kilka operatorów ?:, ale taki zapis szybko staje się nieczytelny:
+
+    string opis = punktyZycia <= 0
+        ? "nie żyje"
+        : punktyZycia < 25
+            ? "jest ranny"
+            : "jest w dobrej formie";
+
+Przy większej liczbie wariantów lepiej użyć if i else if.
+
+---
+
+## 9. Najczęstsze błędy
 
 ### Średnik po warunku
 
@@ -392,6 +445,7 @@ Bez klamer tylko pierwsza instrukcja należy do if. Pamiętaj też, że warunek 
 - && wymaga obu warunków, || co najmniej jednego, a ! odwraca wynik,
 - switch-case służy do wyboru na podstawie jednej wartości,
 - break kończy przypadek switch, a default obsługuje pozostałe wartości,
+- operator ?: jest krótkim zapisem wyboru jednej z dwóch wartości,
 - if pasuje do zakresów i złożonych warunków, a switch do konkretnych wariantów.
 
 ## Ściąga
@@ -406,6 +460,8 @@ Bez klamer tylko pierwsza instrukcja należy do if. Pamiętaj też, że warunek 
     }
 
     bool gotowy = (punktyZycia > 0) && (maMape || maKlucz);
+
+    string stan = punktyZycia > 0 ? "żyje" : "nie żyje";
 
     switch (opcja)
     {

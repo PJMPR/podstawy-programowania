@@ -37,6 +37,61 @@ Możesz pracować w jednym projekcie, zastępując kod po ukończeniu zadania, a
 
 ---
 
+## Kolorowanie tekstu i tła konsoli
+
+Kolor może ułatwić odczytywanie komunikatów programu. W C# kolor tekstu zmieniamy za pomocą właściwości Console.ForegroundColor, a kolor tła za pomocą Console.BackgroundColor.
+
+    Console.ForegroundColor = ConsoleColor.Green;
+    Console.WriteLine("Bohater żyje.");
+
+    Console.ForegroundColor = ConsoleColor.Red;
+    Console.WriteLine("Bohater nie żyje.");
+
+    Console.ResetColor();
+
+Console.ResetColor() przywraca domyślne kolory konsoli. Warto wywołać tę metodę po kolorowanym komunikacie, aby następne teksty nie odziedziczyły przypadkowego koloru.
+
+Kolor tła ustawiamy podobnie:
+
+    Console.BackgroundColor = ConsoleColor.DarkBlue;
+    Console.ForegroundColor = ConsoleColor.White;
+    Console.Clear();
+    Console.WriteLine("Raport bohatera");
+    Console.ResetColor();
+
+Console.Clear() czyści ekran i pozwala od razu zobaczyć efekt zmiany tła. Dostępne kolory znajdują się w wyliczeniu ConsoleColor, np. Red, Green, Yellow, Blue, Cyan, White, DarkGray i DarkBlue.
+
+Kolor można wybrać również warunkowo:
+
+    if (punktyZycia > 0)
+    {
+        Console.ForegroundColor = ConsoleColor.Green;
+        Console.WriteLine("Bohater żyje.");
+    }
+    else
+    {
+        Console.ForegroundColor = ConsoleColor.Red;
+        Console.WriteLine("Bohater nie żyje.");
+    }
+
+    Console.ResetColor();
+
+> **Ważne:** kolory są elementem wyglądu programu. Nie powinny być jedynym sposobem przekazywania informacji — komunikat tekstowy nadal musi jasno opisywać wynik.
+
+### Ćwiczenie kolorystyczne
+
+Rozbuduj zadanie 1 albo zadanie 4:
+
+1. wyświetl pozytywny wynik na zielono,
+2. wyświetl ostrzeżenie na żółto,
+3. wyświetl błąd lub przegraną na czerwono,
+4. po każdym komunikacie przywróć domyślny kolor,
+5. w raporcie użyj innego koloru tła niż domyślny, a następnie przywróć ustawienia.
+
+Nie koloruj całego programu jednym kolorem. Dobierz kolor do znaczenia komunikatu.
+
+---
+
 ## Poziom łatwy
 
 ### Zadanie 1. Czy liczba jest parzysta?
@@ -118,6 +173,17 @@ Przykładowe scenariusze:
 
 ## Poziom trudny
 
+### Krótkie ćwiczenie. Operator warunkowy
+
+Zanim przejdziesz do trudniejszych zadań, wykonaj dwa krótkie przykłady z operatorem ?:.
+
+1. Pobierz punkty życia i utwórz zmienną tekstową stan, która otrzyma wartość „żyje” albo „nie żyje”.
+2. Pobierz liczbę złota i utwórz zmienną tekstową informacja, która będzie zawierać komunikat „Możesz kupić miksturę.” albo „Brakuje złota.”. Przyjmij cenę mikstury równą 30.
+
+W obu przykładach użyj operatora warunkowego zamiast pełnego if i else.
+
+Następnie przepisz jeden z przykładów za pomocą pełnego if i else. Porównaj oba zapisy i odpowiedz, który jest czytelniejszy w tym konkretnym przypadku.
+
 ### Zadanie 5. Raport z walki
 
 Napisz program opisujący wynik jednej decyzji podczas walki. Pobierz:
@@ -154,7 +220,8 @@ Program powinien:
 6. użyć switch-case do wyboru jednej z akcji,
 7. obsłużyć nieznaną akcję za pomocą default,
 8. wykorzystać co najmniej jedno połączenie operatorów && i ||,
-9. nie używać pętli, tablic ani własnych funkcji.
+9. wykorzystać operator ?: do utworzenia co najmniej jednej krótkiej informacji tekstowej,
+10. nie używać pętli, tablic ani własnych funkcji.
 
 #### Proponowane reguły
 
@@ -220,6 +287,9 @@ Układ, nazwy i wartości możesz zaprojektować samodzielnie. Najważniejsze je
 - Dodaj osobne komunikaty dla bohatera bez mapy i bez kompasu.
 - Dodaj wybór poziomu trudności przez switch-case.
 - Dodaj informację, czy bohater może kupić miksturę za 30 sztuk złota.
+- Dodaj do karty krótkie komunikaty utworzone operatorem ?:, np. informację o mapie, złocie lub gotowości do wyprawy.
+- Pokoloruj kartę bohatera: zdrowie na zielono, niski poziom zdrowia na żółto, a przegraną na czerwono.
+- Ustaw ciemne tło dla nagłówka karty i wywołaj ResetColor po jego wyświetleniu.
 - Rozróżnij akcję leczenia, gdy mikstura jest dostępna, od próby leczenia bez mikstury.
 
 ---
@@ -231,6 +301,9 @@ Po ukończeniu laboratorium potrafisz:
 - stosować if, else if i else,
 - porównywać liczby i teksty,
 - łączyć warunki za pomocą &&, || i !,
+- stosować operator warunkowy ?: do prostego wyboru jednej z dwóch wartości,
+- zmieniać kolor tekstu za pomocą Console.ForegroundColor,
+- zmieniać kolor tła za pomocą Console.BackgroundColor i przywracać ustawienia przez Console.ResetColor,
 - sprawdzać przedziały i wartości graniczne,
 - używać zagnieżdżonych instrukcji warunkowych,
 - wybierać wariant za pomocą switch-case,
