@@ -6,7 +6,6 @@ week: 3
 summary: "Podejmowanie decyzji za pomocą if, else if, else i switch-case oraz budowanie warunków z operatorów porównania i logiki."
 published: true
 content_ready: true
-unlock_week: 3
 ---
 
 ## Cel wykładu
