@@ -4,7 +4,7 @@ title: "Pierwsze decyzje"
 kind: lab
 week: 3
 summary: "Ćwiczymy instrukcje if, else if, else i switch-case, a następnie rozbudowujemy kartę bohatera o decyzje i wybór akcji."
-published: false
+published: true
 content_ready: true
 ---
 
