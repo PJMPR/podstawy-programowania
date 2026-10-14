@@ -310,28 +310,6 @@ Kolorem wyróżnij tytuł, status oraz ostrzeżenia. Jeśli bohater nie może dz
 
 Niezależnie od wybranego wariantu wynik powinien być czytelny dla osoby, która nie widzi kodu programu. Po każdym kolorowanym fragmencie przywróć ustawienia za pomocą Console.ResetColor().
 
-Na stronie przykładowy wynik może być pokazany kolorowo za pomocą HTML i CSS. Taki podgląd nie jest kodem C# — służy wyłącznie do prezentacji wyglądu:
-
-<div class="console-preview">
-<div class="console-preview-divider">+======================================+</div>
-<div class="console-preview-title">|           KARTA BOHATERA             |</div>
-<div class="console-preview-divider">+======================================+</div>
-<div>| Bohater: Nela                        |</div>
-<div class="console-preview-ok">| Zdrowie: 75                          |</div>
-<div>| Mikstury: 2                          |</div>
-<div>| Złoto: 120                           |</div>
-<div>| Ma mapę: True                        |</div>
-<div class="console-preview-divider">+--------------------------------------+</div>
-<div class="console-preview-ok">| Żyje: True                           |</div>
-<div class="console-preview-warn">| Niski poziom zdrowia: False          |</div>
-<div class="console-preview-ok">| Może wyruszyć: True                  |</div>
-<div class="console-preview-ok">| Jest bogata: True                    |</div>
-<div class="console-preview-ok">| Gotowa do walki: True                |</div>
-<div class="console-preview-divider">+======================================+</div>
-</div>
-
-Właściwy program C# musi nadal używać Console.ForegroundColor, Console.BackgroundColor i Console.ResetColor. HTML/CSS koloruje tylko przykład wyświetlany na stronie.
-
 #### Kryteria ukończenia
 
 - [ ] Program kompiluje się i uruchamia bez błędów dla poprawnych danych.
