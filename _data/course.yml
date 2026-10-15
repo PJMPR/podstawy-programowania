@@ -9,29 +9,29 @@ weeks:
   - number: 3
     title: "Instrukcje warunkowe"
   - number: 4
-    title: "switch i sterowanie programem"
+    title: "Pętle i sterowanie przebiegiem gry"
   - number: 5
-    title: "Pętle while, do-while i for"
+    title: "Tablice i listy – przechowywanie danych"
   - number: 6
-    title: "Funkcje i metody"
+    title: "Słowniki i przetwarzanie kolekcji"
   - number: 7
-    title: "Losowość i proste algorytmy"
+    title: "Metody – organizacja i ponowne wykorzystanie kodu"
   - number: 8
-    title: "Tablice jednowymiarowe"
+    title: "Losowość i algorytmy mechanik gier"
   - number: 9
-    title: "Tablice dwuwymiarowe"
+    title: "Tablice dwuwymiarowe i reprezentacja świata gry"
   - number: 10
-    title: "Współrzędne i ruch na planszy"
+    title: "Ruch, kolizje i logika rozgrywki"
   - number: 11
-    title: "Warunki na danych i kolizje"
+    title: "Klasy i obiekty – praktyczne wprowadzenie"
   - number: 12
-    title: "Napisy i znaki"
+    title: "Zarządzanie stanem gry i przepływem rozgrywki"
   - number: 13
-    title: "Pliki"
+    title: "Operacje na plikach i zapisywanie danych"
   - number: 14
-    title: "Łączenie większego programu"
+    title: "Debugowanie i obsługa błędów"
   - number: 15
-    title: "Podsumowanie podstaw programowania"
+    title: "Integracja programu i dobre praktyki programowania"
 
 # Course details
 course_name: "Podstawy programowania"
@@ -44,7 +44,7 @@ credits: 5
 requirements: "Brak wymagań wstępnych. Kurs jest przeznaczony dla osób bez doświadczenia w programowaniu."
 
 # Course objectives
-objectives: "Nauka programowania w C# od podstaw. Zrozumienie fundamentalnych koncepcji takich jak zmienne, typy danych, instrukcje warunkowe, pętle i funkcje. Stopniowe tworzenie konsolu gry typu roguelike w trakcie semestru."
+objectives: "Nauka programowania w C# od podstaw. Zrozumienie fundamentalnych koncepcji takich jak zmienne, typy danych, instrukcje warunkowe, pętle, kolekcje, metody oraz podstawy klas i obiektów. Stopniowe tworzenie konsolowej gry typu roguelike w trakcie semestru."
 
 # Assessment
 assessment: "Dwie niezależne oceny: egzamin końcowy z wykładu oraz zaliczenie części laboratoryjnej."
@@ -53,4 +53,4 @@ assessment: "Dwie niezależne oceny: egzamin końcowy z wykładu oraz zaliczenie
 tools: "Visual Studio Community, Visual Studio Code, JetBrains Rider, .NET SDK"
 
 # Important note
-note: "Przedmiot nie obejmuje Programowania Obiektowego (OOP), które będzie wprowadzane w kolejnym semestrze."
+note: "Przedmiot obejmuje jedynie praktyczne podstawy klas i obiektów, bez dziedziczenia, interfejsów i polimorfizmu. Pełne Programowanie Obiektowe (OOP) będzie wprowadzane w kolejnym semestrze."
