@@ -154,7 +154,7 @@ Następnie wyświetl decyzję zgodnie z regułami:
 2. Jeśli żyje i ma klucz albo zna hasło, może wejść.
 3. W przeciwnym przypadku nie może wejść, ponieważ nie ma sposobu otwarcia drzwi.
 
-Użyj operatorów porównania, &&, || oraz instrukcji if, else if i else.
+Użyj operatorów porównania, `&&`, `||` oraz instrukcji `if`, `else if` i `else`.
 
 Przykładowe scenariusze:
 
@@ -218,7 +218,7 @@ Program powinien:
 5. użyć if, else if lub else do opisania stanu bohatera,
 6. użyć switch-case do wyboru jednej z akcji,
 7. obsłużyć nieznaną akcję za pomocą default,
-8. wykorzystać co najmniej jedno połączenie operatorów && i ||,
+8. wykorzystać co najmniej jedno połączenie operatorów `&&` i `||`,
 9. wykorzystać operator ?: do utworzenia co najmniej jednej krótkiej informacji tekstowej,
 10. pokolorować wynik programu za pomocą Console.ForegroundColor lub Console.BackgroundColor,
 11. przywrócić domyślne kolory za pomocą Console.ResetColor(),
@@ -255,7 +255,7 @@ Wybierz jeden z poniższych wariantów. W każdym z nich wyświetl te same dane,
 
 ##### Wariant A. Klasyczna karta bohatera
 
-Użyj ramki złożonej ze znaków +, - i |.
+Użyj ramki złożonej ze znaków `+`, `-` i `|`.
 
     +======================================+
     |           KARTA BOHATERA             |
@@ -342,7 +342,7 @@ Po ukończeniu laboratorium potrafisz:
 
 - stosować if, else if i else,
 - porównywać liczby i teksty,
-- łączyć warunki za pomocą &&, || i !,
+- łączyć warunki za pomocą `&&`, `||` i `!`,
 - stosować operator warunkowy ?: do prostego wyboru jednej z dwóch wartości,
 - zmieniać kolor tekstu za pomocą Console.ForegroundColor,
 - zmieniać kolor tła za pomocą Console.BackgroundColor i przywracać ustawienia przez Console.ResetColor,
