@@ -4,7 +4,7 @@ title: "Menu gry w pętli"
 kind: lab
 week: 4
 summary: "Ćwiczymy pętle while, do-while i for, walidujemy dane oraz budujemy powtarzane menu gry."
-published: true
+published: false
 content_ready: true
 ---
 
