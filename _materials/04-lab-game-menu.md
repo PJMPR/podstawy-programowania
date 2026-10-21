@@ -92,29 +92,29 @@ Na tym etapie możesz założyć, że użytkownik wpisuje liczby w poprawnym for
 
 ## Poziom średni
 
-### Zadanie 3. Prostokąt i tabliczka mnożenia
+### Zadanie 3. Choinka z gwiazdek
 
-W pierwszej części pobierz szerokość oraz wysokość od 1 do 10. Za pomocą dwóch zagnieżdżonych pętli `for` narysuj prostokąt ze znaków `#`.
+Pobierz od użytkownika wysokość choinki od 2 do 10. Za pomocą zagnieżdżonych pętli `for` wyświetl wyśrodkowaną choinkę złożoną ze znaków `*`.
 
-Dla szerokości 5 i wysokości 3 wynik powinien wyglądać tak:
+W każdym kolejnym wierszu korony powinny znaleźć się:
 
-    #####
-    #####
-    #####
+- odpowiednia liczba spacji, aby wyśrodkować choinkę,
+- nieparzysta liczba gwiazdek: 1, 3, 5, 7 i tak dalej.
 
-W drugiej części wyświetl tabliczkę mnożenia od 1 do 10. Każdy wiersz i każda kolumna mają reprezentować jeden czynnik. Postaraj się wyrównać wartości:
+Po narysowaniu korony dodaj pień: pojedynczą gwiazdkę wyśrodkowaną względem choinki.
 
-    for (int wiersz = 1; wiersz <= 10; wiersz++)
-    {
-        for (int kolumna = 1; kolumna <= 10; kolumna++)
-        {
-            Console.Write($"{wiersz * kolumna,4}");
-        }
+Dla wysokości 5 wynik powinien wyglądać tak:
 
-        Console.WriteLine();
-    }
+        *
+       ***
+      *****
+     *******
+    *********
+        *
 
-Wyjaśnij, ile razy wykona się wewnętrzna pętla oraz ile wyników mnożenia powstanie łącznie.
+Program powinien używać osobnych pętli do wyświetlania spacji i gwiazdek. Nie używaj metody `PadLeft`, `PadRight` ani `Repeat`.
+
+Wyjaśnij, jak zmienia się liczba spacji i gwiazdek w kolejnych wierszach oraz ile gwiazdek znajduje się w ostatnim wierszu korony.
 
 ### Zadanie 4. Poprawna liczba tur
 
@@ -181,6 +181,26 @@ Po pętli wyświetl jeden z komunikatów: zwycięstwo, porażka albo ucieczka.
 > **Wskazówka:** przyda się zmienna logiczna `ucieczka`. Warunek walki może sprawdzać zdrowie obu postaci oraz to, czy gracz nie uciekł.
 
 Przetestuj co najmniej cztery scenariusze: zwycięstwo przez atak, przegraną, użycie wszystkich mikstur oraz ucieczkę.
+
+#### Dla chętnych: losowe obrażenia
+
+Wzbogać walkę o losowość. Zamiast stałej wartości obrażeń możesz losować siłę każdego ataku, na przykład:
+
+- bohater zadaje od 8 do 15 punktów obrażeń,
+- przeciwnik zadaje od 4 do 9 punktów obrażeń.
+
+Na początku programu utwórz jeden obiekt `Random`, a następnie używaj go podczas całej walki:
+
+    Random losowanie = new Random();
+
+    int obrazeniaBohatera = losowanie.Next(8, 16);
+    int obrazeniaPrzeciwnika = losowanie.Next(4, 10);
+
+    Console.WriteLine($"Bohater zadaje {obrazeniaBohatera} punktów obrażeń.");
+
+Metoda `Next(min, max)` losuje liczbę całkowitą od `min` włącznie do `max` wyłącznie. Dlatego `Next(8, 16)` może zwrócić wartości od 8 do 15.
+
+Po każdej turze wyświetl wylosowaną wartość obrażeń, aby gracz wiedział, jaki był efekt ataku. Pamiętaj, że pokonany przeciwnik nadal nie może zaatakować.
 
 ### Zadanie 6. Projekt — „Hello Adventurer 4.0: menu gry”
 
