@@ -358,6 +358,7 @@ W każdej iteracji głównej pętli gry program zwykle:
 3. aktualizuje stan gry,
 4. sprawdza warunek zakończenia.
 
+```csharp
     int punktyZycia = 50;
     int zloto = 0;
     int numerTury = 1;
@@ -402,6 +403,7 @@ W każdej iteracji głównej pętli gry program zwykle:
     {
         Console.WriteLine("Bohater nie może kontynuować wyprawy.");
     }
+```
 
 `continue` przy nieznanej akcji powoduje, że numer tury nie wzrośnie. Błędny wybór nie jest liczony jako rozegrana tura.
 
