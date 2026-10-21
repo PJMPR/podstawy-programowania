@@ -12,6 +12,7 @@ content_ready: true
 
 Podczas tego laboratorium nauczysz się wielokrotnie wykonywać instrukcje, kontrolować liczbę iteracji i bezpiecznie kończyć pętle. Ostatnie zadanie rozbuduje projekt **„Hello Adventurer”** o menu działające aż do zakończenia gry.
 
+
 Do wykonania jest **6 zadań**:
 
 - 2 łatwe,
