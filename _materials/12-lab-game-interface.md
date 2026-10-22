@@ -1,31 +1,30 @@
 ---
 layout: material
-title: "Interfejs gry"
+title: "Stany i interfejs gry"
 kind: lab
 week: 12
-summary: "Tworzymy komunikaty, status bohatera, symbole mapy i wykorzystujemy kolory konsoli."
+summary: "Budujemy ekrany menu, rozgrywki, zwycięstwa i porażki oraz przejścia między poziomami."
 published: false
-unlock_week: 12
+content_ready: false
 ---
 
-## Zadania laboratoryjne
+## Cel laboratorium
 
-Materiały do tego laboratorium będą dostępne tutaj. Na tym etapie znajduje się tylko placeholder.
+Spraw, aby interfejs zawsze odzwierciedlał bieżący stan programu, a przejścia między fazami gry były jawne i przewidywalne.
 
-### Zadania do wykonania:
-1. Implementuj system zapisu gry
-2. Stwórz system ładowania saves
-3. Eksportuj staty gracza
-4. Stwórz tablerę wyników (high scores)
-5. Obsłuż korupty saves
+## Zadania
 
-### Rozszerzenie:
-- Dodaj system cloud saves
-- Implementuj backup saves
-- Stwórz replay system
+1. Zdefiniuj `enum GameState` dla menu, gry, zwycięstwa, porażki i wyjścia.
+2. Uruchamiaj odpowiedni ekran zależnie od bieżącego stanu.
+3. Wyświetl mapę, HP, złoto, ekwipunek i ostatni komunikat akcji.
+4. Dodaj rozpoczęcie nowej gry resetujące wszystkie potrzebne dane.
+5. Dodaj drugi poziom i przejście po osiągnięciu wyjścia.
+6. Zapewnij osobne ekrany zwycięstwa i porażki z opcją ponownej gry.
 
-### Punkty kontrolne:
-- [ ] Save/load działa
-- [ ] Dane są trwałe
-- [ ] Brak data loss
-- [ ] Multiple saves wspierane
+## Kryteria ukończenia
+
+- [ ] Każdy stan ma jasno określone możliwe przejścia.
+- [ ] Nowa gra nie zachowuje przypadkowych danych poprzedniej rozgrywki.
+- [ ] Interfejs przekazuje informacje również tekstem, nie tylko kolorem.
+- [ ] Pełną grę można rozpocząć, wygrać lub przegrać i zakończyć.
+

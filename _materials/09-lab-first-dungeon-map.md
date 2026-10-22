@@ -3,29 +3,32 @@ layout: material
 title: "Pierwsza mapa lochu"
 kind: lab
 week: 9
-summary: "Budujemy mapę typu char[,] zawierającą ściany, podłogę i pozycję bohatera."
+summary: "Budujemy i wyświetlamy mapę `char[,]` zawierającą podłogę, ściany, wyjście i bohatera."
 published: false
-unlock_week: 9
+content_ready: false
 ---
 
-## Zadania laboratoryjne
+## Cel laboratorium
 
-Materiały do tego laboratorium będą dostępne tutaj. Na tym etapie znajduje się tylko placeholder.
+Zamień tablicę dwuwymiarową w czytelny model świata gry. W tym tygodniu mapa jeszcze nie musi obsługiwać sterowania.
 
-### Zadania do wykonania:
-1. Stwórz system inventorysysu z List
-2. Stwórz słownik przedmiotów i ich eigenschości
-3. Zarządzaj listą enemys
-4. Użyj LINQ do filtrowania
-5. Implementuj wyszukiwanie przedmiotów
+## Konwencja
 
-### Rozszerzenie:
-- Dodaj system craftingu
-- Implementuj droploot system
-- Stwórz questlog za pomocą List/Dictionary
+W całym projekcie używaj zapisu `mapa[y, x]`: pierwszy indeks oznacza wiersz, drugi kolumnę.
 
-### Punkty kontrolne:
-- [ ] Inventory działa
-- [ ] LINQ zapytania działają
-- [ ] Listy i słowniki zoptymalizowane
-- [ ] Gra rozbudowana o nowe systemy
+## Zadania
+
+1. Utwórz małą `char[,]` i wyświetl ją zagnieżdżonymi pętlami.
+2. Zbuduj prostokątną mapę z podłogą `.` i ścianą `#` na krawędziach.
+3. Umieść wyjście `>` i kilka przeszkód.
+4. Przechowuj pozycję gracza w dwóch zmiennych i wyświetlaj `@` bez trwałego nadpisywania podłoża.
+5. Napisz metody tworzenia oraz wyświetlania mapy.
+6. Dodaj legendę i sprawdzanie, czy współrzędne mieszczą się na planszy.
+
+## Kryteria ukończenia
+
+- [ ] Obie pętle korzystają z właściwego wymiaru `GetLength`.
+- [ ] Mapa nie jest zniekształcona ani transponowana.
+- [ ] Pozycja bohatera i dane podłoża są rozdzielone.
+- [ ] Program nie odczytuje pola poza granicą tablicy.
+

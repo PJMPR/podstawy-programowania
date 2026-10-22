@@ -1,31 +1,31 @@
 ---
 layout: material
-title: "Porządkowanie gry"
+title: "Porządkowanie gry za pomocą metod"
 kind: lab
 week: 6
-summary: "Porządkujemy kod za pomocą metod ShowStatus(), Attack(), Heal() oraz ReadCommand()."
+summary: "Dzielimy rosnący program na małe metody z parametrami i wartościami zwracanymi."
 published: false
-unlock_week: 6
+content_ready: false
 ---
 
-## Zadania laboratoryjne
+## Cel laboratorium
 
-Materiały do tego laboratorium będą dostępne tutaj. Na tym etapie znajduje się tylko placeholder.
+Uporządkuj kod gry bez zmiany jej zachowania. Ćwicz zwykłe parametry, wartości zwracane i zasięg zmiennych.
 
-### Zadania do wykonania:
-1. Wydziel kod do osobnych funkcji
-2. Stwórz funkcję do wyświetlania mapy
-3. Stwórz funkcję do ruchu gracza
-4. Stwórz funkcję do walki z enemys
-5. Refaktoryzuj istniejący kod
+## Zadania
 
-### Rozszerzenie:
-- Dodaj funkcje dla każdej akcji
-- Stwórz funkcje pomocnicze
-- Implementuj menu za pomocą funkcji
+1. Napisz `ShowStatus(string name, int health, int gold)` i `ShowMenu()`.
+2. Napisz `ReadCommand()`, która ponawia pytanie aż otrzyma dozwoloną komendę.
+3. Napisz metody `CalculateDamage`, `Heal` oraz `IsGameOver` i sprawdź je dla wartości granicznych.
+4. Wydziel wyświetlanie ekwipunku i historii akcji.
+5. Zrefaktoryzuj projekt z tygodnia 5 tak, aby główna pętla przedstawiała ogólny przebieg gry.
 
-### Punkty kontrolne:
-- [ ] Kod podzielony na funkcje
-- [ ] Funkcje działają prawidłowo
-- [ ] Kod jest czytelny
-- [ ] Gra cały czas działa
+> Nie używaj `ref`, `out`, delegatów ani zmiennych globalnych jako sposobu przekazywania każdego wyniku.
+
+## Kryteria ukończenia
+
+- [ ] Program zawiera metody `void` i metody zwracające wartość.
+- [ ] Parametry mają odpowiednie typy i czytelne nazwy.
+- [ ] Logika obliczeń nie wymaga bezpośredniego odczytu z konsoli.
+- [ ] Po refaktoryzacji zachowanie gry pozostało poprawne.
+

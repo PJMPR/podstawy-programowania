@@ -1,37 +1,45 @@
 ---
 layout: material
-title: "Rogue 1.0"
+title: "Rogue 1.0 — finalizacja projektu"
 kind: lab
 week: 15
-summary: "Finalizujemy projekt, testujemy grę, wprowadzamy poprawki i prezentujemy gotowe rozwiązanie."
+summary: "Wykonujemy test końcowy, porządkujemy kod i prezentujemy kompletną grę."
 published: false
-unlock_week: 15
+content_ready: false
 ---
 
-## Zadania laboratoryjne
+## Cel laboratorium
 
-Materiały do tego laboratorium będą dostępne tutaj. Na tym etapie znajduje się tylko placeholder.
+Zamknij projekt w mierzalnej wersji 1.0. Refaktoryzacja nie może zmienić poprawnego zachowania programu.
 
-### Zadania do wykonania:
-1. Ukończ niezakończone elementy gry
-2. Dodaj brakujące funkcjonalności
-3. Zoptymalizuj kod
-4. Przetestuj kompletną grę
-5. Przygotuj prezentację
+## Minimalny zakres wersji 1.0
 
-### Rozszerzenie:
-- Dodaj nowe poziomy
-- Stwórz editor poziomów
-- Implementuj osiągnięcia
+- menu i możliwość zakończenia programu,
+- mapa co najmniej jednego kompletnego poziomu,
+- sterowanie, granice i ściany,
+- bohater oraz co najmniej jeden przeciwnik,
+- walka i przedmiot możliwy do użycia,
+- warunki zwycięstwa i porażki,
+- zapis i wczytywanie stanu,
+- czytelne komunikaty i brak awarii w scenariuszach testowych.
 
-### Punkty kontrolne:
-- [ ] Gra działa od początku do końca
-- [ ] Wszystkie ficzeury zaimplementowane
-- [ ] Kod jest czysty
-- [ ] Gra jest zabawna
-- [ ] Dokumentacja kompletna
+## Zadania
 
-### Prezentacja
-- Przygotuj demo gry
-- Omów najciekawsze części kodu
-- Pokaż wszystkie funkcjonalności
+1. Usuń problemy pozostałe z wersji 0.9.
+2. Wybierz jeden fragment z powtórzeniami i bezpiecznie go zrefaktoryzuj.
+3. Wykonaj pełny test od uruchomienia do zwycięstwa oraz osobny do porażki.
+4. Przetestuj zapis przed i po istotnej zmianie stanu.
+5. Usuń martwy kod i popraw nieczytelne nazwy.
+6. Przygotuj krótkie demo: cel gry, jedna mechanika i jedno rozwiązanie w kodzie.
+
+## Kryteria ukończenia
+
+- [ ] Wszystkie elementy minimalnego zakresu działają.
+- [ ] Testy końcowe mają zapisane wyniki.
+- [ ] Po refaktoryzacji powtórzono test regresji.
+- [ ] Inna osoba potrafi uruchomić grę na podstawie krótkiej instrukcji.
+
+## Rozszerzenia opcjonalne
+
+Kolejny poziom, nowy rodzaj przeciwnika, dodatkowy przedmiot albo ranking wyników. Rozszerzenie wykonuj dopiero po spełnieniu całego zakresu obowiązkowego.
+

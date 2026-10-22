@@ -3,26 +3,36 @@ layout: material
 title: "Zarządzanie stanem gry i przepływem rozgrywki"
 kind: lecture
 week: 12
-summary: "Stan postaci i świata, przechodzenie między poziomami oraz mechanizmy rozpoczęcia i zakończenia gry."
+summary: "Fazy gry, stan postaci i świata, przejścia między poziomami oraz rozpoczęcie i zakończenie rozgrywki."
 published: false
-unlock_week: 12
+content_ready: false
 ---
 
-## Zawartość wykładu
+## Cel wykładu
 
-Materiały do tego wykładu będą dostępne tutaj. Na tym etapie znajduje się tylko placeholder.
+Pętla mówi, że gra trwa, a stan gry mówi, w jakiej fazie się znajduje i jakie przejścia są teraz dozwolone.
 
-### Tematy do omówienia:
-- Stan postaci i świata gry
-- Punkty życia, wynik i zasoby gracza
-- Rozpoczynanie, trwanie i kończenie rozgrywki
-- Przechodzenie między poziomami
-- Warunki zwycięstwa i porażki
-- Proste automaty stanów
-- Porządkowanie przepływu programu
+## Zakres wykładu — 90 minut
 
-### Po tym wykładzie powinieneś umieć:
-- Określić dane składające się na stan gry
-- Aktualizować stan po wykonaniu akcji
-- Kontrolować przejścia między etapami rozgrywki
-- Zaimplementować mechanizmy zakończenia i ponownego uruchomienia gry
+| Część | Czas |
+|---|---:|
+| Dane składające się na stan gry | 10 min |
+| `enum` i fazy rozgrywki | 15 min |
+| Przejścia między stanami | 20 min |
+| Nowa gra, reset i kolejny poziom | 15 min |
+| Zwycięstwo i porażka | 10 min |
+| Interfejs odzwierciedlający stan | 15 min |
+| Podsumowanie | 5 min |
+
+## Zagadnienia do rozwinięcia
+
+- `GameState` jako skończony zbiór faz,
+- menu, rozgrywka, zwycięstwo, porażka i wyjście,
+- jawne warunki przejść,
+- inicjalizacja oraz pełny reset,
+- numer poziomu i wymiana mapy,
+- dane zachowywane i zerowane między poziomami,
+- ekran wynikający z bieżącego stanu.
+
+> Automat stanów traktujemy jako praktyczny model przepływu, bez formalnej teorii automatów.
+

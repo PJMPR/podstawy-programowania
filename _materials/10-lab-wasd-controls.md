@@ -1,31 +1,31 @@
 ---
 layout: material
-title: "Sterowanie WASD"
+title: "Sterowanie WASD i kolizje"
 kind: lab
 week: 10
-summary: "Implementujemy poruszanie bohaterem po mapie za pomocą klawiszy W, A, S i D."
+summary: "Poruszamy bohaterem po mapie, blokujemy ściany i obsługujemy wyjście z poziomu."
 published: false
-unlock_week: 10
+content_ready: false
 ---
 
-## Zadania laboratoryjne
+## Cel laboratorium
 
-Materiały do tego laboratorium będą dostępne tutaj. Na tym etapie znajduje się tylko placeholder.
+Zmień statyczną mapę w prostą rozgrywkę turową sterowaną klawiszami.
 
-### Zadania do wykonania:
-1. Stwórz system dialogów NPC
-2. Implementuj logi akcji gracza
-3. Parsuj komendy gracza
-4. Formatuj wiadomości gry
-5. Stwórz system tooltip'ów
+## Zadania
 
-### Rozszerzenie:
-- Dodaj system wiadomości
-- Implementuj czat/dialogi
-- Stwórz bestiary z opisami
+1. Odczytaj `W`, `A`, `S`, `D` za pomocą `Console.ReadKey(true)`.
+2. Zamień klawisz na zmianę `dx` i `dy`.
+3. Oblicz proponowaną pozycję, nie zmieniając jeszcze aktualnej.
+4. Odrzuć ruch poza mapę lub na ścianę `#`.
+5. Zatwierdź ruch na podłogę i ponownie narysuj planszę.
+6. Dodaj drzwi, złoto albo miksturę oraz wyjście kończące poziom.
+7. Dodaj komendę kończącą grę i komunikat ostatniej akcji.
 
-### Punkty kontrolne:
-- [ ] Dialogi działają
-- [ ] Logi rejestrują akcje
-- [ ] Parsowanie komend działa
-- [ ] Formatowanie konsystentne
+## Kryteria ukończenia
+
+- [ ] Nieznany klawisz nie przesuwa gracza.
+- [ ] Gracz nie opuszcza planszy i nie przechodzi przez ściany.
+- [ ] Interakcja zachodzi dopiero po poprawnym ruchu.
+- [ ] Można osiągnąć warunek zwycięstwa.
+

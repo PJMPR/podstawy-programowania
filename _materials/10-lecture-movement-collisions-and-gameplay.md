@@ -3,26 +3,36 @@ layout: material
 title: "Ruch, kolizje i logika rozgrywki"
 kind: lecture
 week: 10
-summary: "Poruszanie postacią, granice planszy, wykrywanie kolizji, interakcje i warunki zwycięstwa."
+summary: "Sterowanie postacią, granice mapy, pola blokujące, interakcje i warunki zwycięstwa."
 published: false
-unlock_week: 10
+content_ready: false
 ---
 
-## Zawartość wykładu
+## Cel wykładu
 
-Materiały do tego wykładu będą dostępne tutaj. Na tym etapie znajduje się tylko placeholder.
+Statyczna mapa stanie się planszą reagującą na wejście gracza. Ruch potraktujemy jako propozycję, którą gra zatwierdza dopiero po sprawdzeniu reguł.
 
-### Tematy do omówienia:
-- Zmiana współrzędnych postaci
-- Obsługa sterowania gracza
-- Sprawdzanie granic planszy
-- Wykrywanie kolizji ze ścianami i przeszkodami
-- Interakcje z obiektami na mapie
-- Warunki zwycięstwa i porażki
-- Rozdzielanie logiki ruchu od wyświetlania
+## Zakres wykładu — 90 minut
 
-### Po tym wykładzie powinieneś umieć:
-- Zaimplementować ruch postaci po planszy
-- Blokować ruch poza mapę i przez przeszkody
-- Obsługiwać proste interakcje z obiektami
-- Zapisać reguły zakończenia rozgrywki
+| Część | Czas |
+|---|---:|
+| `Console.ReadKey` i kierunki | 15 min |
+| Aktualna i proponowana pozycja | 15 min |
+| Sprawdzanie granic | 15 min |
+| Kolizje ze ścianami | 15 min |
+| Interakcje i zwycięstwo | 15 min |
+| Pełna iteracja pętli gry | 10 min |
+| Podsumowanie | 5 min |
+
+## Zagadnienia do rozwinięcia
+
+- mapowanie WASD na `dx` i `dy`,
+- walidacja współrzędnych przed dostępem do tablicy,
+- rozpoznawanie pola przechodniego,
+- zatwierdzanie albo odrzucanie ruchu,
+- przedmiot, drzwi i wyjście,
+- kolejność: renderowanie, wejście, aktualizacja, sprawdzenie końca,
+- oddzielenie wejścia, reguł i wyświetlania.
+
+> Optymalizacja renderowania konsoli nie jest celem tego tygodnia.
+

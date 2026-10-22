@@ -1,29 +1,39 @@
 ---
 layout: material
-title: "Klasy i obiekty – praktyczne wprowadzenie"
+title: "Klasy i obiekty — praktyczne wprowadzenie"
 kind: lecture
 week: 11
-summary: "Proste klasy i obiekty, pola, właściwości i metody na przykładzie postaci gracza i przeciwnika."
+summary: "Klasy, obiekty, właściwości, konstruktor i metody na przykładzie bohatera i przeciwnika."
 published: false
-unlock_week: 11
+content_ready: false
 ---
 
-## Zawartość wykładu
+## Cel wykładu
 
-Materiały do tego wykładu będą dostępne tutaj. Na tym etapie znajduje się tylko placeholder.
+Zamiast wielu luźnych zmiennych opiszemy gracza i przeciwnika jako obiekty łączące powiązane dane oraz zachowania.
 
-### Tematy do omówienia:
-- Definiowanie prostych klas
-- Tworzenie obiektów
-- Pola i właściwości
-- Metody obiektów
-- Klasy `Player` i `Enemy`
-- Przenoszenie danych i zachowań do klasy
-- Różnica między klasą a obiektem
-- Zakres wprowadzenia: bez dziedziczenia, interfejsów i polimorfizmu
+## Zakres wykładu — 90 minut
 
-### Po tym wykładzie powinieneś umieć:
-- Zdefiniować prostą klasę
-- Utworzyć i skonfigurować obiekt
-- Korzystać z pól, właściwości i metod obiektu
-- Zamodelować gracza i przeciwnika za pomocą klas
+| Część | Czas |
+|---|---:|
+| Klasa a obiekt | 10 min |
+| Definicja i tworzenie obiektu | 15 min |
+| Pola, właściwości i konstruktor | 20 min |
+| Metody instancji | 15 min |
+| Klasy `Player` i `Enemy` | 15 min |
+| Refaktoryzacja fragmentu gry | 10 min |
+| Podsumowanie | 5 min |
+
+## Zagadnienia do rozwinięcia
+
+- klasa jako opis i obiekt jako instancja,
+- operator `new`,
+- stan początkowy w konstruktorze,
+- właściwości opisujące obiekt,
+- `this` tylko tam, gdzie poprawia jednoznaczność,
+- metody `TakeDamage` i `Heal`,
+- lista obiektów przeciwników,
+- przeniesienie istniejących danych bez zmiany reguł gry.
+
+> Nie wprowadzamy dziedziczenia, interfejsów, klas abstrakcyjnych ani polimorfizmu.
+

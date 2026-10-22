@@ -3,29 +3,30 @@ layout: material
 title: "Ekwipunek bohatera"
 kind: lab
 week: 8
-summary: "Tworzymy tablicę przedmiotów oraz mechanizmy ich przeglądania, wyszukiwania i używania."
+summary: "Łączymy listę posiadanych przedmiotów ze słownikami ich opisów i efektów."
 published: false
-unlock_week: 8
+content_ready: false
 ---
 
-## Zadania laboratoryjne
+## Cel laboratorium
 
-Materiały do tego laboratorium będą dostępne tutaj. Na tym etapie znajduje się tylko placeholder.
+Zastosuj listę, gdy liczba elementów się zmienia, oraz słownik, gdy wartość wyszukujemy według nazwy.
 
-### Zadania do wykonania:
-1. Implementuj silnię rekurencyjnie
-2. Implementuj Fibonacci
-3. Stwórz algorytm szukania ścieżki (pathfinding)
-4. Eksploracja mapy za pomocą rekurencji
-5. Flood fill dla tego samego terenu
+## Zadania
 
-### Rozszerzenie:
-- Stwórz AI na bazie rekurencji
-- Implementuj binary search
-- Eksperymentuj z deep recursion
+1. Utwórz listę przedmiotów oraz słownik opisów.
+2. Dodaj słownik wartości leczenia lub cen dla znanych przedmiotów.
+3. Wyświetl ekwipunek z opisami, bezpiecznie obsługując nieznaną nazwę.
+4. Pozwól użyć przedmiotu: zastosuj efekt, a następnie usuń jedną sztukę.
+5. Połącz łupy z tygodnia 7 z ekwipunkiem i ogranicz pojemność plecaka.
+6. Za pomocą pętli policz liczbę przedmiotów każdego rodzaju.
 
-### Punkty kontrolne:
-- [ ] Klasyczne algorytmy działają
-- [ ] Rekurencja stosowana w grze
-- [ ] Brak stack overflow
-- [ ] Zoptymalizowane
+> Nie używaj LINQ. Celem jest świadome ćwiczenie pętli, list i słowników.
+
+## Kryteria ukończenia
+
+- [ ] Brak klucza nie kończy programu wyjątkiem.
+- [ ] Użyty przedmiot znika tylko po udanym zastosowaniu.
+- [ ] Program rozróżnia listę posiadanych rzeczy od katalogu ich właściwości.
+- [ ] Pełny plecak jest obsłużony czytelnym komunikatem.
+

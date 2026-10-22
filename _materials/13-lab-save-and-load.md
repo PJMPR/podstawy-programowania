@@ -1,31 +1,31 @@
 ---
 layout: material
-title: "Save / Load"
+title: "Zapis i wczytywanie gry"
 kind: lab
 week: 13
-summary: "Zapisujemy do pliku i odczytujemy pozycję gracza, HP, złoto oraz mapę."
+summary: "Zapisujemy do pliku i odtwarzamy pozycję gracza, HP, złoto, poziom oraz mapę."
 published: false
-unlock_week: 13
+content_ready: false
 ---
 
-## Zadania laboratoryjne
+## Cel laboratorium
 
-Materiały do tego laboratorium będą dostępne tutaj. Na tym etapie znajduje się tylko placeholder.
+Zaprojektuj prosty, jawny format tekstowy i odtwórz z niego minimalny kompletny stan rozgrywki.
 
-### Zadania do wykonania:
-1. Stwórz strukturę Position dla współrzędnych
-2. Stwórz enum dla stanów gry
-3. Stwórz enum dla kierunków
-4. Zdefiniuj typ dla przedmiotu
-5. Używaj struktur w grze
+## Zadania
 
-### Rozszerzenie:
-- Dodaj property validation
-- Stwórz bardziej złożone struktury
-- Implementuj System.IEquatable
+1. Zapisz i odczytaj próbny tekst za pomocą metod klasy `File`.
+2. Ustal format zawierający wersję, imię, HP, złoto, pozycję i numer poziomu.
+3. Napisz metodę zapisującą stan gracza do pliku.
+4. Sprawdź istnienie pliku i bezpiecznie odtwórz wartości.
+5. Dodaj zapis mapy jako kolejnych wierszy o stałej szerokości.
+6. Dodaj opcje „Zapisz” i „Wczytaj” do gry.
+7. Odrzuć zapis o złej wersji, brakujących polach albo niepoprawnych liczbach.
 
-### Punkty kontrolne:
-- [ ] Struktury działają
-- [ ] Enumeracje użyte prawidłowo
-- [ ] Kod bardziej czytelny
-- [ ] Gra rozbudowana
+## Kryteria ukończenia
+
+- [ ] Po ponownym uruchomieniu można kontynuować zapisaną grę.
+- [ ] Brak pliku jest obsłużony komunikatem.
+- [ ] Niepoprawny plik nie pozostawia częściowo zmienionego stanu.
+- [ ] Ścieżka i format zapisu są opisane w materiale.
+

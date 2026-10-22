@@ -3,27 +3,35 @@ layout: material
 title: "Debugowanie i obsługa błędów"
 kind: lecture
 week: 14
-summary: "Praca z debuggerem, analiza zmiennych, typowe błędy, try-catch oraz walidacja danych."
+summary: "Debugger, analiza zmiennych, komunikaty błędów, wyjątki i walidacja danych."
 published: false
-unlock_week: 14
+content_ready: false
 ---
 
-## Zawartość wykładu
+## Cel wykładu
 
-Materiały do tego wykładu będą dostępne tutaj. Na tym etapie znajduje się tylko placeholder.
+Debugowanie jest uporządkowanym procesem: odtworzenie problemu, zebranie dowodów, znalezienie przyczyny, mała poprawka i ponowny test.
 
-### Tematy do omówienia:
-- Rodzaje błędów programistycznych
-- Debugger i breakpointy
-- Śledzenie wykonania programu krok po kroku
-- Analiza wartości zmiennych
-- Wyjątki i instrukcja `try-catch`
-- Czytanie komunikatów błędów i stosu wywołań
-- Walidacja danych wejściowych
-- Defensywne podejście do niepoprawnych danych
+## Zakres wykładu — 90 minut
 
-### Po tym wykładzie powinieneś umieć:
-- Lokalizować błędy za pomocą debuggera
-- Analizować zmienne i przebieg programu
-- Obsługiwać przewidywalne błędy za pomocą `try-catch`
-- Walidować dane przekazywane do programu
+| Część | Czas |
+|---|---:|
+| Rodzaje błędów i strategia diagnozy | 10 min |
+| Komunikaty i stos wywołań | 10 min |
+| Breakpointy i wykonywanie krokowe | 20 min |
+| Obserwowanie zmiennych | 10 min |
+| Wyjątki i `try-catch` | 15 min |
+| Walidacja danych | 15 min |
+| Demonstracja naprawy i podsumowanie | 10 min |
+
+## Zagadnienia do rozwinięcia
+
+- błędy kompilacji, wykonania i logiki,
+- pierwsza istotna linia komunikatu,
+- breakpoint, step over i step into,
+- wartości lokalne i stos wywołań,
+- przepływ sterowania do `catch`,
+- kiedy użyć warunku, `TryParse` albo `try-catch`,
+- nieukrywanie błędów pustym blokiem `catch`,
+- przypadek testowy odtwarzający usterkę.
+

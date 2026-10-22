@@ -3,29 +3,35 @@ layout: material
 title: "Walka i zdarzenia losowe"
 kind: lab
 week: 7
-summary: "Dodajemy losowe obrażenia, trafienia krytyczne, skarby i przeciwników."
+summary: "Dodajemy losowe obrażenia, trafienia krytyczne, przeciwników i nagrody."
 published: false
-unlock_week: 7
+content_ready: false
 ---
 
-## Zadania laboratoryjne
+## Cel laboratorium
 
-Materiały do tego laboratorium będą dostępne tutaj. Na tym etapie znajduje się tylko placeholder.
+Zbuduj kompletną, kończącą się walkę i zastosuj `Random` w małych metodach o czytelnych regułach.
 
-### Zadania do wykonania:
-1. Stwórz funkcje z parametrami ref i out
-2. Implementuj callback do zdarzeń
-3. Wykorzystaj wyrażenia lambda
-4. Optymalizuj performans gry
-5. Dodaj nowe funkcje dla gry
+## Zadania
 
-### Rozszerzenie:
-- Stwórz system callbacków
-- Implementuj event system
-- Optymalizuj pętlę gry
+1. Sprawdź granice `Random.Next` na serii losowań.
+2. Napisz metodę losującą nazwę przeciwnika z tablicy.
+3. Zaimplementuj obrażenia z zakresu oraz 20% szansy na trafienie krytyczne.
+4. Zbuduj pętlę walki: atak, leczenie albo ucieczka; pokonany przeciwnik nie kontratakuje.
+5. Po zwycięstwie wylosuj złoto i opcjonalny przedmiot, a opis dodaj do historii gry.
 
-### Punkty kontrolne:
-- [ ] Funkcje ref/out działają
-- [ ] Callback'i działają
-- [ ] Lambda wyrażenia rozumiane
-- [ ] Gra jest szybka
+## Scenariusze testowe
+
+- zwycięstwo zwykłym atakiem,
+- trafienie krytyczne,
+- brak mikstur,
+- skuteczna ucieczka,
+- przegrana bohatera.
+
+## Kryteria ukończenia
+
+- [ ] Program korzysta z jednego obiektu `Random`.
+- [ ] Zakresy losowania są zgodne ze specyfikacją.
+- [ ] Walka zawsze może się zakończyć.
+- [ ] Zdrowie nie jest wyświetlane jako liczba ujemna.
+
