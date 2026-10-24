@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("RogueSemesterGame")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+610b81feeb44b42c82b76bdb9756ce641bae5fff")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+9a2af2df9bc59b7773ff06ef088c9a5223311636")]
 [assembly: System.Reflection.AssemblyProductAttribute("RogueSemesterGame")]
 [assembly: System.Reflection.AssemblyTitleAttribute("RogueSemesterGame")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

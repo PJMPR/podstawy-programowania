@@ -1,0 +1,482 @@
+[
+  {
+    "Content": "Jakiego typu musi być warunek instrukcji if w C#?",
+    "QuestionType": 1,
+    "NumberOfOptions": 4,
+    "Points": 1,
+    "Answers": [
+      { "Content": "A. bool", "Weight": null, "Correct": true },
+      { "Content": "B. int", "Weight": null, "Correct": false },
+      { "Content": "C. string", "Weight": null, "Correct": false },
+      { "Content": "D. char", "Weight": null, "Correct": false }
+    ]
+  },
+  {
+    "Content": "Które operatory porównania są poprawnie opisane?",
+    "QuestionType": 1,
+    "NumberOfOptions": 4,
+    "Points": 1,
+    "Answers": [
+      { "Content": "A. == oznacza równość", "Weight": null, "Correct": true },
+      { "Content": "B. != oznacza różność", "Weight": null, "Correct": true },
+      { "Content": "C. = oznacza porównanie wartości", "Weight": null, "Correct": false },
+      { "Content": "D. <= oznacza mniejsze lub równe", "Weight": null, "Correct": true }
+    ]
+  },
+  {
+    "Content": "<p>Co zrobi poniższa instrukcja, gdy <code>punktyZycia</code> wynosi 0?</p><pre><code>if (punktyZycia &gt; 0)\n{\n    Console.WriteLine(\"Bohater żyje.\");\n}</code></pre>",
+    "QuestionType": 1,
+    "NumberOfOptions": 4,
+    "Points": 1,
+    "Answers": [
+      { "Content": "A. Wykona blok if", "Weight": null, "Correct": false },
+      { "Content": "B. Pominie blok if", "Weight": null, "Correct": true },
+      { "Content": "C. Zmieni punktyZycia na 1", "Weight": null, "Correct": false },
+      { "Content": "D. Spowoduje błąd kompilacji", "Weight": null, "Correct": false }
+    ]
+  },
+  {
+    "Content": "Które stwierdzenia o konstrukcji if-else są prawdziwe?",
+    "QuestionType": 1,
+    "NumberOfOptions": 4,
+    "Points": 1,
+    "Answers": [
+      { "Content": "A. Przy pojedynczym wykonaniu zostanie wybrany dokładnie jeden z dwóch bloków", "Weight": null, "Correct": true },
+      { "Content": "B. Blok else wykonuje się, gdy warunek if jest fałszywy", "Weight": null, "Correct": true },
+      { "Content": "C. Bloki if i else zawsze wykonują się kolejno", "Weight": null, "Correct": false },
+      { "Content": "D. else wymaga podania własnego warunku w nawiasie", "Weight": null, "Correct": false }
+    ]
+  },
+  {
+    "Content": "<p>Co wypisze poniższy kod dla <code>punkty = 82</code>?</p><pre><code>if (punkty &gt;= 90)\n{\n    Console.WriteLine(\"bardzo dobry\");\n}\nelse if (punkty &gt;= 75)\n{\n    Console.WriteLine(\"dobry\");\n}\nelse if (punkty &gt;= 50)\n{\n    Console.WriteLine(\"dostateczny\");\n}</code></pre>",
+    "QuestionType": 1,
+    "NumberOfOptions": 4,
+    "Points": 1,
+    "Answers": [
+      { "Content": "A. bardzo dobry", "Weight": null, "Correct": false },
+      { "Content": "B. dobry", "Weight": null, "Correct": true },
+      { "Content": "C. dostateczny", "Weight": null, "Correct": false },
+      { "Content": "D. Wszystkie trzy komunikaty", "Weight": null, "Correct": false }
+    ]
+  },
+  {
+    "Content": "Dlaczego kolejność warunków w łańcuchu else if ma znaczenie?",
+    "QuestionType": 1,
+    "NumberOfOptions": 4,
+    "Points": 1,
+    "Answers": [
+      { "Content": "A. Program wykonuje pierwszy blok, którego warunek jest prawdziwy", "Weight": null, "Correct": true },
+      { "Content": "B. Warunek ogólny umieszczony wcześniej może zasłonić warunek szczegółowy", "Weight": null, "Correct": true },
+      { "Content": "C. Program zawsze sprawdza warunki od dołu do góry", "Weight": null, "Correct": false },
+      { "Content": "D. Wszystkie prawdziwe bloki zawsze zostaną wykonane", "Weight": null, "Correct": false }
+    ]
+  },
+  {
+    "Content": "<p>Które wyrażenia mają wartość <code>true</code> dla poniższych zmiennych?</p><pre><code>bool maKlucz = false;\nbool znaHaslo = true;</code></pre>",
+    "QuestionType": 1,
+    "NumberOfOptions": 4,
+    "Points": 1,
+    "Answers": [
+      { "Content": "A. maKlucz && znaHaslo", "Weight": null, "Correct": false },
+      { "Content": "B. maKlucz || znaHaslo", "Weight": null, "Correct": true },
+      { "Content": "C. !maKlucz", "Weight": null, "Correct": true },
+      { "Content": "D. !znaHaslo", "Weight": null, "Correct": false }
+    ]
+  },
+  {
+    "Content": "Które stwierdzenia opisują krótkie wartościowanie operatora &&?",
+    "QuestionType": 1,
+    "NumberOfOptions": 4,
+    "Points": 1,
+    "Answers": [
+      { "Content": "A. Gdy lewa część jest false, prawa część nie musi być sprawdzana", "Weight": null, "Correct": true },
+      { "Content": "B. Może chronić przed odczytem właściwości obiektu, który jest null", "Weight": null, "Correct": true },
+      { "Content": "C. Prawa część jest zawsze sprawdzana jako pierwsza", "Weight": null, "Correct": false },
+      { "Content": "D. Operator && daje true, gdy choć jeden warunek jest true", "Weight": null, "Correct": false }
+    ]
+  },
+  {
+    "Content": "Które stwierdzenia o zagnieżdżonych instrukcjach if są prawdziwe?",
+    "QuestionType": 1,
+    "NumberOfOptions": 4,
+    "Points": 1,
+    "Answers": [
+      { "Content": "A. Instrukcja if może znajdować się wewnątrz innej instrukcji if", "Weight": null, "Correct": true },
+      { "Content": "B. Klamry pomagają jednoznacznie wskazać, do którego if należy else", "Weight": null, "Correct": true },
+      { "Content": "C. Każde zagnieżdżenie powoduje błąd kompilacji", "Weight": null, "Correct": false },
+      { "Content": "D. Zagnieżdżenie zawsze można zastąpić operatorem przypisania =", "Weight": null, "Correct": false }
+    ]
+  },
+  {
+    "Content": "Kiedy switch-case jest szczególnie czytelnym wyborem?",
+    "QuestionType": 1,
+    "NumberOfOptions": 4,
+    "Points": 1,
+    "Answers": [
+      { "Content": "A. Gdy porównujemy jedną wartość z kilkoma konkretnymi wariantami", "Weight": null, "Correct": true },
+      { "Content": "B. Gdy sprawdzamy skomplikowane zakresy kilku niezależnych zmiennych", "Weight": null, "Correct": false },
+      { "Content": "C. Przy obsłudze numeru wybranego z menu", "Weight": null, "Correct": true },
+      { "Content": "D. Wyłącznie wtedy, gdy wartość ma typ bool", "Weight": null, "Correct": false }
+    ]
+  },
+  {
+    "Content": "Jaką rolę pełnią elementy klasycznego switch-case?",
+    "QuestionType": 1,
+    "NumberOfOptions": 4,
+    "Points": 1,
+    "Answers": [
+      { "Content": "A. case opisuje konkretny obsługiwany wariant", "Weight": null, "Correct": true },
+      { "Content": "B. default obsługuje wartości, do których nie pasuje żaden case", "Weight": null, "Correct": true },
+      { "Content": "C. break kończy wykonywanie danego wariantu switch", "Weight": null, "Correct": true },
+      { "Content": "D. switch automatycznie powtarza wybór w pętli", "Weight": null, "Correct": false }
+    ]
+  },
+  {
+    "Content": "Co umożliwia zapis kilku etykiet case jedna pod drugą przed wspólnym blokiem instrukcji?",
+    "QuestionType": 1,
+    "NumberOfOptions": 4,
+    "Points": 1,
+    "Answers": [
+      { "Content": "A. Obsłużenie kilku wartości w ten sam sposób", "Weight": null, "Correct": true },
+      { "Content": "B. Utworzenie automatycznej pętli", "Weight": null, "Correct": false },
+      { "Content": "C. Pominięcie sprawdzania wartości switch", "Weight": null, "Correct": false },
+      { "Content": "D. Zamianę tekstu na liczbę", "Weight": null, "Correct": false }
+    ]
+  },
+  {
+    "Content": "<p>Jaką wartość otrzyma zmienna <code>stan</code>?</p><pre><code>int punktyZycia = 75;\nstring stan = punktyZycia &gt; 0 ? \"żyje\" : \"nie żyje\";</code></pre>",
+    "QuestionType": 1,
+    "NumberOfOptions": 4,
+    "Points": 1,
+    "Answers": [
+      { "Content": "A. żyje", "Weight": null, "Correct": true },
+      { "Content": "B. nie żyje", "Weight": null, "Correct": false },
+      { "Content": "C. true", "Weight": null, "Correct": false },
+      { "Content": "D. 75", "Weight": null, "Correct": false }
+    ]
+  },
+  {
+    "Content": "Kiedy warto zastosować operator warunkowy ?: zgodnie z materiałem?",
+    "QuestionType": 1,
+    "NumberOfOptions": 4,
+    "Points": 1,
+    "Answers": [
+      { "Content": "A. Gdy wybieramy jedną z dwóch wartości", "Weight": null, "Correct": true },
+      { "Content": "B. Gdy każda gałąź jest krótka i czytelna", "Weight": null, "Correct": true },
+      { "Content": "C. Do zastępowania każdej wielowariantowej instrukcji switch", "Weight": null, "Correct": false },
+      { "Content": "D. Gdy każda gałąź zawiera wiele różnych instrukcji", "Weight": null, "Correct": false }
+    ]
+  },
+  {
+    "Content": "<p>Co jest nie tak z poniższym kodem?</p><pre><code>if (punktyZycia &gt; 0);\n{\n    Console.WriteLine(\"Żyje\");\n}</code></pre>",
+    "QuestionType": 1,
+    "NumberOfOptions": 4,
+    "Points": 1,
+    "Answers": [
+      { "Content": "A. Średnik kończy instrukcję if, więc następujący blok wykona się niezależnie od warunku", "Weight": null, "Correct": true },
+      { "Content": "B. Warunek powinien zwracać int", "Weight": null, "Correct": false },
+      { "Content": "C. Console.WriteLine nie może znajdować się po if", "Weight": null, "Correct": false },
+      { "Content": "D. Operator > służy do przypisania", "Weight": null, "Correct": false }
+    ]
+  },
+  {
+    "Content": "<p>Co stanie się w poniższym kodzie, w którym po instrukcji <code>if</code> nie zastosowano klamer?</p><pre><code>if (maKlucz)\n    Console.WriteLine(\"Masz klucz.\");\n    Console.WriteLine(\"Idziesz dalej.\");</code></pre>",
+    "QuestionType": 1,
+    "NumberOfOptions": 4,
+    "Points": 1,
+    "Answers": [
+      { "Content": "A. Oba komunikaty zależą od maKlucz", "Weight": null, "Correct": false },
+      { "Content": "B. Tylko pierwszy komunikat zależy od maKlucz", "Weight": null, "Correct": true },
+      { "Content": "C. Drugi komunikat wykona się zawsze", "Weight": null, "Correct": true },
+      { "Content": "D. Żaden komunikat nie może się wykonać", "Weight": null, "Correct": false }
+    ]
+  },
+  {
+    "Content": "Które warunki poprawnie opisują przedziały wieku: dziecko poniżej 13 lat, nastolatek od 13 do 17 lat?",
+    "QuestionType": 1,
+    "NumberOfOptions": 4,
+    "Points": 1,
+    "Answers": [
+      { "Content": "A. wiek < 13 dla dziecka", "Weight": null, "Correct": true },
+      { "Content": "B. wiek >= 13 && wiek < 18 dla nastolatka", "Weight": null, "Correct": true },
+      { "Content": "C. wiek > 18 dla nastolatka", "Weight": null, "Correct": false },
+      { "Content": "D. wiek == 13 dla każdego dziecka", "Weight": null, "Correct": false }
+    ]
+  },
+  {
+    "Content": "Które stwierdzenia o porównywaniu tekstów operatorem == są zgodne z materiałem?",
+    "QuestionType": 1,
+    "NumberOfOptions": 4,
+    "Points": 1,
+    "Answers": [
+      { "Content": "A. Można porównywać teksty za pomocą ==", "Weight": null, "Correct": true },
+      { "Content": "B. Porównanie jest wrażliwe na wielkość liter", "Weight": null, "Correct": true },
+      { "Content": "C. = i == zawsze mają to samo znaczenie", "Weight": null, "Correct": false },
+      { "Content": "D. Teksty można porównywać wyłącznie w switch", "Weight": null, "Correct": false }
+    ]
+  },
+  {
+    "Content": "<p>Czy blok instrukcji zostanie wykonany?</p><pre><code>bool drzwiOtwarte = false;\n\nif (!drzwiOtwarte)\n{\n    Console.WriteLine(\"Drzwi są zamknięte.\");\n}</code></pre>",
+    "QuestionType": 1,
+    "NumberOfOptions": 4,
+    "Points": 1,
+    "Answers": [
+      { "Content": "A. Pominie blok, ponieważ drzwiOtwarte jest false", "Weight": null, "Correct": false },
+      { "Content": "B. Wykona blok, ponieważ !false daje true", "Weight": null, "Correct": true },
+      { "Content": "C. Zmieni typ zmiennej na string", "Weight": null, "Correct": false },
+      { "Content": "D. Spowoduje błąd przez użycie operatora !", "Weight": null, "Correct": false }
+    ]
+  },
+  {
+    "Content": "Które zastosowania instrukcji if i switch są właściwie dobrane?",
+    "QuestionType": 1,
+    "NumberOfOptions": 4,
+    "Points": 1,
+    "Answers": [
+      { "Content": "A. if do sprawdzania zakresu punktów", "Weight": null, "Correct": true },
+      { "Content": "B. switch do obsługi konkretnych numerów menu", "Weight": null, "Correct": true },
+      { "Content": "C. switch automatycznie zastępuje każdą pętlę", "Weight": null, "Correct": false },
+      { "Content": "D. if można używać tylko do porównywania tekstów", "Weight": null, "Correct": false }
+    ]
+  },
+  {
+    "Content": "Z jakich elementów składa się typowy mechanizm pętli?",
+    "QuestionType": 1,
+    "NumberOfOptions": 4,
+    "Points": 1,
+    "Answers": [
+      { "Content": "A. Stan początkowy", "Weight": null, "Correct": true },
+      { "Content": "B. Warunek kontynuowania", "Weight": null, "Correct": true },
+      { "Content": "C. Zmiana stanu przybliżająca do końca", "Weight": null, "Correct": true },
+      { "Content": "D. Obowiązkowa instrukcja switch", "Weight": null, "Correct": false }
+    ]
+  },
+  {
+    "Content": "<p>Ile iteracji wykona poniższa pętla i jaką wartość będzie mieć potem zmienna <code>tura</code>?</p><pre><code>int tura = 1;\n\nwhile (tura &lt;= 5)\n{\n    tura++;\n}</code></pre>",
+    "QuestionType": 1,
+    "NumberOfOptions": 4,
+    "Points": 1,
+    "Answers": [
+      { "Content": "A. 4 iteracje, tura = 5", "Weight": null, "Correct": false },
+      { "Content": "B. 5 iteracji, tura = 6", "Weight": null, "Correct": true },
+      { "Content": "C. 6 iteracji, tura = 6", "Weight": null, "Correct": false },
+      { "Content": "D. Pętla będzie nieskończona", "Weight": null, "Correct": false }
+    ]
+  },
+  {
+    "Content": "Które stwierdzenia o pętli while są prawdziwe?",
+    "QuestionType": 1,
+    "NumberOfOptions": 4,
+    "Points": 1,
+    "Answers": [
+      { "Content": "A. Sprawdza warunek przed każdą iteracją", "Weight": null, "Correct": true },
+      { "Content": "B. Może nie wykonać się ani razu", "Weight": null, "Correct": true },
+      { "Content": "C. Zawsze wykonuje się dokładnie raz", "Weight": null, "Correct": false },
+      { "Content": "D. Jest przydatna, gdy liczba powtórzeń nie jest znana z góry", "Weight": null, "Correct": true }
+    ]
+  },
+  {
+    "Content": "Które stwierdzenia o pętli do-while są prawdziwe?",
+    "QuestionType": 1,
+    "NumberOfOptions": 4,
+    "Points": 1,
+    "Answers": [
+      { "Content": "A. Sprawdza warunek po wykonaniu bloku", "Weight": null, "Correct": true },
+      { "Content": "B. Jej blok wykona się co najmniej raz", "Weight": null, "Correct": true },
+      { "Content": "C. Po końcowym warunku while występuje średnik", "Weight": null, "Correct": true },
+      { "Content": "D. Nie nadaje się do menu pokazywanego przynajmniej raz", "Weight": null, "Correct": false }
+    ]
+  },
+  {
+    "Content": "<p>Jakie są elementy nagłówka poniższej pętli?</p><pre><code>for (int tura = 1; tura &lt;= 5; tura++)\n{\n    Console.WriteLine(tura);\n}</code></pre>",
+    "QuestionType": 1,
+    "NumberOfOptions": 4,
+    "Points": 1,
+    "Answers": [
+      { "Content": "A. int tura = 1 to inicjalizacja", "Weight": null, "Correct": true },
+      { "Content": "B. tura <= 5 to warunek", "Weight": null, "Correct": true },
+      { "Content": "C. tura++ to zmiana licznika po iteracji", "Weight": null, "Correct": true },
+      { "Content": "D. Każdy z trzech elementów wykonuje się tylko raz", "Weight": null, "Correct": false }
+    ]
+  },
+  {
+    "Content": "<p>Jakie wartości wypisze poniższa pętla?</p><pre><code>for (int liczba = 0; liczba &lt;= 10; liczba += 2)\n{\n    Console.WriteLine(liczba);\n}</code></pre>",
+    "QuestionType": 1,
+    "NumberOfOptions": 4,
+    "Points": 1,
+    "Answers": [
+      { "Content": "A. 0, 2, 4, 6, 8, 10", "Weight": null, "Correct": true },
+      { "Content": "B. 1, 3, 5, 7, 9", "Weight": null, "Correct": false },
+      { "Content": "C. 0, 2, 4, 6, 8", "Weight": null, "Correct": false },
+      { "Content": "D. Wyłącznie 10", "Weight": null, "Correct": false }
+    ]
+  },
+  {
+    "Content": "Które stwierdzenia dotyczące akumulatora sumy są prawdziwe?",
+    "QuestionType": 1,
+    "NumberOfOptions": 4,
+    "Points": 1,
+    "Answers": [
+      { "Content": "A. Przechowuje dotychczasowy wynik", "Weight": null, "Correct": true },
+      { "Content": "B. Dla sumy zwykle zaczyna od 0", "Weight": null, "Correct": true },
+      { "Content": "C. Można go aktualizować operatorem +=", "Weight": null, "Correct": true },
+      { "Content": "D. Musi mieć typ bool", "Weight": null, "Correct": false }
+    ]
+  },
+  {
+    "Content": "<p>Ile razy poniższy kod wypisze znak <code>#</code>?</p><pre><code>for (int wiersz = 1; wiersz &lt;= 3; wiersz++)\n{\n    for (int kolumna = 1; kolumna &lt;= 5; kolumna++)\n    {\n        Console.Write(\"#\");\n    }\n}</code></pre>",
+    "QuestionType": 1,
+    "NumberOfOptions": 4,
+    "Points": 1,
+    "Answers": [
+      { "Content": "A. 3", "Weight": null, "Correct": false },
+      { "Content": "B. 5", "Weight": null, "Correct": false },
+      { "Content": "C. 8", "Weight": null, "Correct": false },
+      { "Content": "D. 15", "Weight": null, "Correct": true }
+    ]
+  },
+  {
+    "Content": "Które opisy instrukcji break i continue są poprawne?",
+    "QuestionType": 1,
+    "NumberOfOptions": 4,
+    "Points": 1,
+    "Answers": [
+      { "Content": "A. break natychmiast kończy najbliższą pętlę", "Weight": null, "Correct": true },
+      { "Content": "B. continue pomija resztę bieżącej iteracji", "Weight": null, "Correct": true },
+      { "Content": "C. continue zawsze kończy cały program", "Weight": null, "Correct": false },
+      { "Content": "D. break w pętli zagnieżdżonej kończy automatycznie wszystkie pętle", "Weight": null, "Correct": false }
+    ]
+  },
+  {
+    "Content": "Dlaczego int.TryParse jest bezpieczniejszy od int.Parse przy danych od użytkownika?",
+    "QuestionType": 1,
+    "NumberOfOptions": 4,
+    "Points": 1,
+    "Answers": [
+      { "Content": "A. Pozwala sprawdzić, czy konwersja się udała", "Weight": null, "Correct": true },
+      { "Content": "B. Zwraca bool informujący o powodzeniu", "Weight": null, "Correct": true },
+      { "Content": "C. Może przekazać uzyskaną liczbę przez parametr out", "Weight": null, "Correct": true },
+      { "Content": "D. Każdy tekst automatycznie zamienia na poprawną liczbę", "Weight": null, "Correct": false }
+    ]
+  },
+  {
+    "Content": "<p>Po co w walidacji liczby tur stosuje się poniższy warunek?</p><pre><code>if (liczbaTur &lt; 1 || liczbaTur &gt; 10)\n{\n    Console.WriteLine(\"Liczba musi należeć do zakresu 1–10.\");\n    continue;\n}</code></pre>",
+    "QuestionType": 1,
+    "NumberOfOptions": 4,
+    "Points": 1,
+    "Answers": [
+      { "Content": "A. Aby wykryć wartość spoza dozwolonego zakresu", "Weight": null, "Correct": true },
+      { "Content": "B. Aby zaakceptować wyłącznie wartości mniejsze od 1", "Weight": null, "Correct": false },
+      { "Content": "C. Aby sprawdzić format tekstu zamiast TryParse", "Weight": null, "Correct": false },
+      { "Content": "D. Aby zakończyć program dla każdej poprawnej wartości", "Weight": null, "Correct": false }
+    ]
+  },
+  {
+    "Content": "<p>Co spowoduje wybranie opcji <code>3</code> w poniższym fragmencie menu?</p><pre><code>bool graDziala = true;\n\nwhile (graDziala)\n{\n    string wybor = Console.ReadLine()!;\n\n    switch (wybor)\n    {\n        case \"3\":\n            graDziala = false;\n            break;\n    }\n}</code></pre>",
+    "QuestionType": 1,
+    "NumberOfOptions": 4,
+    "Points": 1,
+    "Answers": [
+      { "Content": "A. Następne sprawdzenie warunku zakończy pętlę", "Weight": null, "Correct": true },
+      { "Content": "B. Pętla zacznie działać dwa razy szybciej", "Weight": null, "Correct": false },
+      { "Content": "C. Program automatycznie ustawi wartość z powrotem na true", "Weight": null, "Correct": false },
+      { "Content": "D. Zostanie pominięta tylko jedna instrukcja switch", "Weight": null, "Correct": false }
+    ]
+  },
+  {
+    "Content": "Jakie etapy zwykle występują w jednej iteracji głównej pętli gry?",
+    "QuestionType": 1,
+    "NumberOfOptions": 4,
+    "Points": 1,
+    "Answers": [
+      { "Content": "A. Pokazanie aktualnego stanu", "Weight": null, "Correct": true },
+      { "Content": "B. Pobranie decyzji gracza", "Weight": null, "Correct": true },
+      { "Content": "C. Aktualizacja stanu gry", "Weight": null, "Correct": true },
+      { "Content": "D. Bezwarunkowe ponowne uruchomienie systemu", "Weight": null, "Correct": false }
+    ]
+  },
+  {
+    "Content": "<p>Jaki jest skutek wykonania <code>continue</code> dla nieznanej akcji?</p><pre><code>switch (akcja)\n{\n    default:\n        Console.WriteLine(\"Nieznana akcja.\");\n        continue;\n}\n\nnumerTury++;</code></pre>",
+    "QuestionType": 1,
+    "NumberOfOptions": 4,
+    "Points": 1,
+    "Answers": [
+      { "Content": "A. Nieznana akcja nie zwiększy numeru tury", "Weight": null, "Correct": true },
+      { "Content": "B. Gra natychmiast się zakończy", "Weight": null, "Correct": false },
+      { "Content": "C. Numer tury zwiększy się dwa razy", "Weight": null, "Correct": false },
+      { "Content": "D. Zmienna numerTury zostanie wyzerowana", "Weight": null, "Correct": false }
+    ]
+  },
+  {
+    "Content": "<p>Co może spowodować brak zmiany zmiennej <code>licznik</code> w poniższej pętli?</p><pre><code>int licznik = 1;\n\nwhile (licznik &lt;= 5)\n{\n    Console.WriteLine(licznik);\n}</code></pre>",
+    "QuestionType": 1,
+    "NumberOfOptions": 4,
+    "Points": 1,
+    "Answers": [
+      { "Content": "A. Pętlę nieskończoną, jeśli warunek pozostaje prawdziwy", "Weight": null, "Correct": true },
+      { "Content": "B. Automatyczne zwiększanie licznika przez while", "Weight": null, "Correct": false },
+      { "Content": "C. Wykonanie bloku dokładnie pięć razy", "Weight": null, "Correct": false },
+      { "Content": "D. Zamianę pętli while na for", "Weight": null, "Correct": false }
+    ]
+  },
+  {
+    "Content": "<p>Co jest skutkiem średnika umieszczonego po nagłówku pętli?</p><pre><code>for (int i = 0; i &lt; 5; i++);\n{\n    Console.WriteLine(\"X\");\n}</code></pre>",
+    "QuestionType": 1,
+    "NumberOfOptions": 4,
+    "Points": 1,
+    "Answers": [
+      { "Content": "A. Pętla wykonuje pustą instrukcję, a blok z X wykona się później raz", "Weight": null, "Correct": true },
+      { "Content": "B. Blok z X wykona się pięć razy", "Weight": null, "Correct": false },
+      { "Content": "C. Średnik zwiększa licznik dwukrotnie", "Weight": null, "Correct": false },
+      { "Content": "D. Pętla staje się pętlą do-while", "Weight": null, "Correct": false }
+    ]
+  },
+  {
+    "Content": "<p>Jakie liczby wypisze poniższa pętla?</p><pre><code>for (int i = 1; i &lt; 5; i++)\n{\n    Console.WriteLine(i);\n}</code></pre>",
+    "QuestionType": 1,
+    "NumberOfOptions": 4,
+    "Points": 1,
+    "Answers": [
+      { "Content": "A. 1, 2, 3, 4", "Weight": null, "Correct": true },
+      { "Content": "B. 1, 2, 3, 4, 5", "Weight": null, "Correct": false },
+      { "Content": "C. 0, 1, 2, 3, 4", "Weight": null, "Correct": false },
+      { "Content": "D. Tylko 5", "Weight": null, "Correct": false }
+    ]
+  },
+  {
+    "Content": "<p>Dlaczego poniższa pętla może być nieskończona?</p><pre><code>for (int i = 1; i &lt;= 5; i--)\n{\n    Console.WriteLine(i);\n}</code></pre>",
+    "QuestionType": 1,
+    "NumberOfOptions": 4,
+    "Points": 1,
+    "Answers": [
+      { "Content": "A. Licznik maleje, więc pozostaje mniejszy lub równy 5", "Weight": null, "Correct": true },
+      { "Content": "B. Operator -- zawsze kończy program", "Weight": null, "Correct": false },
+      { "Content": "C. Warunek i <= 5 od początku jest fałszywy", "Weight": null, "Correct": false },
+      { "Content": "D. Pętla for nie pozwala odliczać w dół", "Weight": null, "Correct": false }
+    ]
+  },
+  {
+    "Content": "<p>Dlaczego poniższa pętla blokuje się, gdy <code>licznik</code> osiągnie wartość 2?</p><pre><code>int licznik = 0;\n\nwhile (licznik &lt; 5)\n{\n    if (licznik == 2)\n    {\n        continue;\n    }\n\n    licznik++;\n}</code></pre>",
+    "QuestionType": 1,
+    "NumberOfOptions": 4,
+    "Points": 1,
+    "Answers": [
+      { "Content": "A. Może stale pomijać instrukcję zmieniającą licznik", "Weight": null, "Correct": true },
+      { "Content": "B. Zawsze ustawia licznik na zero", "Weight": null, "Correct": false },
+      { "Content": "C. Automatycznie wykonuje break", "Weight": null, "Correct": false },
+      { "Content": "D. Zmienia while w switch", "Weight": null, "Correct": false }
+    ]
+  },
+  {
+    "Content": "Które rodzaje pętli są trafnie dobrane do sytuacji?",
+    "QuestionType": 1,
+    "NumberOfOptions": 4,
+    "Points": 1,
+    "Answers": [
+      { "Content": "A. for do wykonania dokładnie 10 tur", "Weight": null, "Correct": true },
+      { "Content": "B. while do gry trwającej, dopóki bohater żyje", "Weight": null, "Correct": true },
+      { "Content": "C. do-while do menu pokazywanego co najmniej raz", "Weight": null, "Correct": true },
+      { "Content": "D. switch zamiast zagnieżdżonych pętli do tworzenia prostokąta znaków", "Weight": null, "Correct": false }
+    ]
+  }
+]
