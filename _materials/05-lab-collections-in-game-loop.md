@@ -3,29 +3,29 @@ layout: material
 title: "Kolekcje w pętli gry"
 kind: lab
 week: 5
-summary: "Dodajemy do istniejącej pętli gry tablice danych, listę przedmiotów i historię akcji."
+summary: "Ćwiczymy tablice, listy i słowniki oraz wykorzystujemy je w pętli gry."
 published: true
 content_ready: true
 ---
 
 ## Cel laboratorium
 
-Podczas tego laboratorium wykorzystasz tablice i listy do przechowywania wielu danych. Nauczysz się bezpiecznie pracować z indeksami, obliczać statystyki kolekcji oraz dodawać i usuwać elementy ekwipunku. Ostatnie zadanie rozbuduje projekt **„Hello Adventurer”** o plecak i historię akcji.
+Podczas tego laboratorium wykorzystasz tablice, listy i słowniki do przechowywania wielu danych. Nauczysz się bezpiecznie pracować z indeksami i kluczami, obliczać statystyki kolekcji oraz dodawać i usuwać elementy. Zadania projektowe wykorzystują kolekcje w pętli gry.
 
-Do wykonania jest **6 zadań**:
+Do wykonania jest **9 zadań**:
 
-- 2 łatwe,
-- 2 średnie,
-- 2 trudne.
+- 3 łatwe,
+- 3 średnie,
+- 3 trudne.
 
-> **Ważne:** używaj wyłącznie poznanych elementów. Nie używaj jeszcze własnych metod, słowników, LINQ, tablic 2D ani klas tworzonych przez siebie.
+> **Ważne:** używaj wyłącznie poznanych elementów. Nie używaj jeszcze własnych metod, LINQ, tablic 2D ani klas tworzonych przez siebie.
 
 ---
 
 ## Przygotowanie
 
 1. Otwórz projekt konsolowy C# z poprzedniego laboratorium albo utwórz nowy.
-2. Jeżeli projekt nie rozpoznaje `List<T>`, dodaj na początku pliku `using System.Collections.Generic;`.
+2. Jeżeli projekt nie rozpoznaje `List<T>` lub `Dictionary<TKey, TValue>`, dodaj na początku pliku `using System.Collections.Generic;`.
 3. Po każdej zmianie skompiluj i uruchom program.
 4. Dla każdego indeksu sprawdź, skąd pochodzi i czy jego zakres został zweryfikowany.
 5. Przetestuj kolekcję pustą, jednoelementową oraz zawierającą kilka elementów.
@@ -110,11 +110,34 @@ Przykład:
 
 Limit `6` jest na razie tylko informacją w nagłówku. Ograniczenie pojemności dodasz w późniejszym zadaniu.
 
+### Zadanie 3. Cennik kupca
+
+Utwórz słownik cen:
+
+    Dictionary<string, int> ceny = new Dictionary<string, int>
+    {
+        { "Mikstura", 15 },
+        { "Pochodnia", 5 },
+        { "Miecz", 40 }
+    };
+
+Program powinien:
+
+1. wyświetlić liczbę pozycji za pomocą `Count`,
+2. wyświetlić wszystkie nazwy i ceny pętlą `foreach`, korzystając z `Key` i `Value`,
+3. pobrać od użytkownika nazwę przedmiotu,
+4. sprawdzić ją przez `ContainsKey`,
+5. wyświetlić cenę albo komunikat, że przedmiotu nie ma,
+6. zmienić cenę mikstury na 12 przez `ceny["Mikstura"] = 12`,
+7. ponownie wyświetlić cały cennik.
+
+Przetestuj nazwę istniejącą i nieistniejącą. Wyjaśnij, dlaczego odczyt `ceny[nazwa]` bez sprawdzenia może zakończyć program błędem.
+
 ---
 
 ## Poziom średni
 
-### Zadanie 3. Najlepsza i najgorsza wyprawa
+### Zadanie 4. Najlepsza i najgorsza wyprawa
 
 Pobierz od użytkownika liczbę tur od 1 do 10. Utwórz tablicę o podanej długości, a następnie wczytaj ilość złota zdobytą w każdej turze. Nie pozwalaj podać wyniku ujemnego.
 
@@ -144,7 +167,7 @@ Przetestuj co najmniej:
 - maksimum występujące kilka razy,
 - dane bez wartości 0.
 
-### Zadanie 4. Bezpieczny wybór i usuwanie
+### Zadanie 5. Bezpieczny wybór i usuwanie
 
 Utwórz listę:
 
@@ -189,11 +212,36 @@ Przykład:
 
 Wyjaśnij, dlaczego sprawdzenie powinno używać `przedmioty.Count`, a nie liczby wpisanej na stałe.
 
+### Zadanie 6. Magazyn przedmiotów
+
+Utwórz słownik stanów magazynowych:
+
+    Dictionary<string, int> magazyn = new Dictionary<string, int>
+    {
+        { "Mikstura", 3 },
+        { "Pochodnia", 2 },
+        { "Klucz", 1 }
+    };
+
+Zbuduj menu działające w pętli: pokaż magazyn, przyjmij dostawę, wydaj przedmiot, usuń pustą pozycję, zakończ.
+
+Wymagania:
+
+1. dostawa istniejącego przedmiotu zwiększa jego stan, a nowego dodaje parę przez `Add`,
+2. liczba przyjmowanych lub wydawanych sztuk musi być dodatnia,
+3. wydanie jest możliwe tylko dla istniejącego klucza i wystarczającego stanu,
+4. wartość nigdy nie może spaść poniżej 0,
+5. pozycję można usunąć przez `Remove` tylko wtedy, gdy jej wartość wynosi 0,
+6. każda operacja wyświetla komunikat o powodzeniu albo przyczynie odmowy,
+7. wyświetlanie magazynu obsługuje pusty słownik.
+
+Przetestuj dodanie nowego klucza, aktualizację istniejącego, próbę wydania zbyt wielu sztuk oraz usunięcie pustej i niepustej pozycji.
+
 ---
 
 ## Poziom trudny
 
-### Zadanie 5. Historia akcji z filtrowaniem
+### Zadanie 7. Historia akcji z filtrowaniem
 
 Zbuduj menu działające w pętli:
 
@@ -223,7 +271,7 @@ Wymagania:
 
 Przetestuj pustą historię, historię z 1, 3 i 5 wpisami oraz czyszczenie potwierdzone i anulowane.
 
-### Zadanie 6. Projekt — „Hello Adventurer 5.0: ekwipunek i dziennik”
+### Zadanie 8. Projekt — „Hello Adventurer 5.0: ekwipunek i dziennik”
 
 Rozbuduj projekt z tygodnia 4. Zachowaj główną pętlę gry, zdrowie, złoto i numer tury. Zastąp licznik mikstur listą przedmiotów i dodaj historię wydarzeń.
 
@@ -377,7 +425,7 @@ Program powinien:
 9. poprawnie obsługiwać puste listy,
 10. nie modyfikować listy wewnątrz `foreach`,
 11. nie tworzyć kolekcji przechowujących stan wewnątrz głównej pętli,
-12. nie używać własnych metod, słowników, tablic 2D ani LINQ.
+12. nie używać własnych metod, tablic 2D ani LINQ.
 
 #### Kryteria ukończenia
 
@@ -415,6 +463,36 @@ Sprawdź co najmniej:
 - Pozwól wyświetlić historię od najnowszego do najstarszego wpisu.
 - Dodaj potwierdzenie przed wyrzuceniem przedmiotu.
 
+### Zadanie 9. Projekt — bestiariusz i statystyki walk
+
+Zbuduj program zarządzający bestiariuszem. Użyj dwóch słowników o tych samych kluczach:
+
+    Dictionary<string, int> punktyZycia = new Dictionary<string, int>();
+    Dictionary<string, int> liczbaPokonanych = new Dictionary<string, int>();
+
+Kluczem jest unikalna nazwa gatunku przeciwnika. Pierwszy słownik przechowuje bazowe punkty życia, a drugi liczbę pokonanych przeciwników danego gatunku.
+
+Menu powinno umożliwiać dodanie gatunku, wyświetlenie bestiariusza, zarejestrowanie zwycięstwa, zmianę punktów życia, usunięcie gatunku z obu słowników, wyszukanie gatunku, pokazanie raportu i zakończenie programu.
+
+Raport oblicz samodzielnie pętlą, bez LINQ. Pokaż:
+
+- liczbę gatunków,
+- łączną liczbę pokonanych przeciwników,
+- nazwę i wynik najczęściej pokonywanego gatunku,
+- średnią liczbę punktów życia jako `double`,
+- gatunki, których jeszcze nie pokonano.
+
+Wymagania dodatkowe:
+
+- oba słowniki przez cały czas zawierają ten sam zestaw kluczy,
+- duplikat nazwy jest odrzucany,
+- nie odczytuj wartości przed sprawdzeniem `ContainsKey`,
+- obsłuż pusty bestiariusz i pusty raport,
+- nie dodawaj ani nie usuwaj par podczas iterowania po słowniku,
+- błędna komenda lub liczba nie kończy programu.
+
+Przetestuj pusty bestiariusz, duplikat nazwy, nieistniejący gatunek, remisujące maksima oraz usunięcie gatunku z obu słowników.
+
 ---
 
 ## Pytania kontrolne
@@ -429,6 +507,10 @@ Sprawdź co najmniej:
 8. Dlaczego nie należy usuwać elementów listy podczas `foreach`?
 9. Jak przeliczyć numer 1 widoczny w menu na indeks kolekcji?
 10. Dlaczego minimum warto rozpocząć od pierwszego elementu zamiast od 0?
+11. Czym różni się klucz słownika od indeksu listy?
+12. Dlaczego klucze słownika muszą być unikalne?
+13. Co może się stać po odczycie `slownik[klucz]`, jeśli klucz nie istnieje?
+14. Kiedy użyć `ContainsKey`, a kiedy `Count`?
 
 ---
 
@@ -443,6 +525,9 @@ Po ukończeniu laboratorium potrafisz:
 - ręcznie obliczać sumę, średnią, minimum i maksimum,
 - wyszukiwać oraz zliczać elementy,
 - dodawać i usuwać elementy `List<T>`,
+- tworzyć słowniki i przechowywać pary klucz–wartość,
+- bezpiecznie sprawdzać klucze przez `ContainsKey`,
+- dodawać, aktualizować, usuwać i wyświetlać elementy słownika,
 - poprawnie obsługiwać pustą kolekcję,
 - przechowywać ekwipunek i historię akcji w pętli gry,
-- dobrać tablicę albo listę do charakteru danych.
+- dobrać tablicę, listę albo słownik do charakteru danych.

@@ -1,9 +1,9 @@
 ---
 layout: material
-title: "Tablice i listy — przechowywanie wielu wartości"
+title: "Tablice, listy i słowniki — przechowywanie wielu wartości"
 kind: lecture
 week: 5
-summary: "Tablice jednowymiarowe, listy, indeksowanie, iterowanie oraz podstawowe algorytmy operujące na kolekcjach."
+summary: "Tablice jednowymiarowe, listy, słowniki, indeksowanie, iterowanie oraz podstawowe algorytmy operujące na kolekcjach."
 published: true
 content_ready: true
 ---
@@ -12,7 +12,7 @@ content_ready: true
 
 Dotychczas każda informacja wymagała osobnej zmiennej. To wystarcza dla imienia i punktów życia bohatera, ale staje się niewygodne, gdy chcemy zapisać wyniki dziesięciu tur, kilka nazw przeciwników albo zawartość plecaka.
 
-**Kolekcja** pozwala przechowywać wiele wartości pod jedną nazwą. Poznamy dwa podstawowe rodzaje kolekcji w C#: tablicę o stałym rozmiarze oraz listę, której rozmiar może się zmieniać.
+**Kolekcja** pozwala przechowywać wiele wartości pod jedną nazwą. Poznamy trzy podstawowe rodzaje kolekcji w C#: tablicę o stałym rozmiarze, listę, której rozmiar może się zmieniać, oraz słownik, który łączy unikalne klucze z wartościami.
 
 Po tym wykładzie będziesz potrafić:
 
@@ -23,10 +23,12 @@ Po tym wykładzie będziesz potrafić:
 - samodzielnie obliczyć sumę, minimum i maksimum,
 - wyszukać wartość i policzyć jej wystąpienia,
 - tworzyć oraz modyfikować `List<T>`,
-- wybrać tablicę albo listę odpowiednio do problemu,
+- tworzyć `Dictionary<TKey, TValue>` i korzystać z kluczy,
+- bezpiecznie dodawać, odczytywać, zmieniać i usuwać pary klucz–wartość,
+- wybrać tablicę, listę albo słownik odpowiednio do problemu,
 - rozpoznawać typowe błędy związane z kolekcjami.
 
-> **Granica materiału:** korzystamy z tablic jednowymiarowych i `List<T>`. Nie używamy jeszcze tablic 2D, słowników, LINQ ani własnych metod.
+> **Granica materiału:** korzystamy z tablic jednowymiarowych, `List<T>` i `Dictionary<TKey, TValue>`. Nie używamy jeszcze tablic 2D, LINQ ani własnych metod.
 
 ---
 
@@ -519,15 +521,79 @@ Idąc od końca, nie pomijamy elementów, które po usunięciu przesunęły się
 
 ---
 
-## 14. Tablica czy lista?
+## 14. Słownik — wartości dostępne przez klucz
 
-| Cecha | Tablica `T[]` | Lista `List<T>` |
-|---|---|---|
-| Rozmiar | stały po utworzeniu | może się zmieniać |
-| Liczba elementów | `Length` | `Count` |
-| Dostęp przez indeks | tak | tak |
-| Dodawanie i usuwanie | brak prostych operacji | `Add`, `Remove`, `RemoveAt` |
-| Przykład | wyniki 5 tur | zawartość plecaka |
+Tablica i lista identyfikują element przez indeks liczbowy. Czasem naturalniejszym identyfikatorem jest nazwa przedmiotu, kod lokacji albo imię postaci. Wtedy przydaje się `Dictionary<TKey, TValue>` — kolekcja par **klucz–wartość**.
+
+    Dictionary<string, int> ceny = new Dictionary<string, int>
+    {
+        { "Mikstura", 15 },
+        { "Pochodnia", 5 },
+        { "Miecz", 40 }
+    };
+
+W tym przykładzie kluczem jest `string`, a wartością `int`. Każdy klucz musi być unikalny, natomiast wartości mogą się powtarzać. Jeżeli kompilator nie rozpoznaje typu `Dictionary`, dodaj `using System.Collections.Generic;`.
+
+### Odczyt i zmiana wartości
+
+    Console.WriteLine(ceny["Mikstura"]); // 15
+    ceny["Mikstura"] = 12;
+
+Odwołanie do nieistniejącego klucza przez nawiasy kwadratowe powoduje `KeyNotFoundException`. Klucz pochodzący od użytkownika należy najpierw sprawdzić:
+
+    Console.Write("Podaj nazwę przedmiotu: ");
+    string nazwa = Console.ReadLine()!;
+
+    if (ceny.ContainsKey(nazwa))
+    {
+        Console.WriteLine($"Cena: {ceny[nazwa]} sztuk złota");
+    }
+    else
+    {
+        Console.WriteLine("Nie ma takiego przedmiotu.");
+    }
+
+### Dodawanie, usuwanie i iterowanie
+
+    ceny.Add("Tarcza", 30);
+    bool usunieto = ceny.Remove("Pochodnia");
+
+`Add` wymaga nowego klucza. Ponowne dodanie istniejącego klucza powoduje błąd. Indekser może zmienić istniejącą wartość lub dodać nową parę:
+
+    ceny["Miecz"] = 45;       // zmiana
+    ceny["Zwój"] = 20;        // dodanie
+
+Po parach słownika przechodzimy pętlą `foreach`:
+
+    foreach (KeyValuePair<string, int> para in ceny)
+    {
+        Console.WriteLine($"{para.Key}: {para.Value} sztuk złota");
+    }
+
+`para.Key` oznacza klucz, a `para.Value` przypisaną mu wartość. Słownik ma właściwość `Count`, podobnie jak lista.
+
+| Operacja | Znaczenie |
+|---|---|
+| `slownik.Count` | liczba par |
+| `slownik.Add(klucz, wartosc)` | dodaje nową parę |
+| `slownik.ContainsKey(klucz)` | sprawdza istnienie klucza |
+| `slownik[klucz]` | odczytuje lub ustawia wartość |
+| `slownik.Remove(klucz)` | usuwa parę i zwraca wynik operacji |
+| `slownik.Clear()` | usuwa wszystkie pary |
+
+> **Ważne:** nie zmieniaj rozmiaru słownika przez `Add`, `Remove` ani `Clear` wewnątrz `foreach` iterującego po tym słowniku.
+
+---
+
+## 15. Tablica, lista czy słownik?
+
+| Cecha | Tablica `T[]` | Lista `List<T>` | Słownik `Dictionary<TKey, TValue>` |
+|---|---|---|---|
+| Rozmiar | stały po utworzeniu | może się zmieniać | może się zmieniać |
+| Liczba elementów | `Length` | `Count` | `Count` |
+| Sposób dostępu | indeks liczbowy | indeks liczbowy | unikalny klucz |
+| Dodawanie i usuwanie | brak prostych operacji | `Add`, `Remove`, `RemoveAt` | `Add`, `Remove` |
+| Przykład | wyniki 5 tur | zawartość plecaka | ceny przedmiotów |
 
 Wybierz tablicę, gdy liczba miejsc jest częścią problemu, np. siedem dni tygodnia, trzy próby albo wyniki ustalonej liczby tur.
 
@@ -535,9 +601,11 @@ Wybierz listę, gdy elementy pojawiają się i znikają, np. ekwipunek, historia
 
 Lista nie jest „lepszą tablicą” w każdej sytuacji. Dobry typ kolekcji pokazuje zamiar programu.
 
+Wybierz słownik, gdy chcesz znaleźć wartość na podstawie znaczącego, unikalnego klucza, np. cenę według nazwy przedmiotu albo liczbę odwiedzin według nazwy lokacji. Do danych uporządkowanych pozycją lepiej pasuje tablica lub lista.
+
 ---
 
-## 15. Kolekcje w pętli gry
+## 16. Kolekcje w pętli gry
 
 Lista może przechowywać historię akcji wykonanych podczas gry:
 
@@ -588,7 +656,7 @@ Każda poprawna akcja może dopisać nowy element, a lista sama zwiększa swój 
 
 ---
 
-## 16. Najczęstsze błędy
+## 17. Najczęstsze błędy
 
 ### Użycie długości jako indeksu
 
@@ -634,9 +702,22 @@ Nie dodawaj ani nie usuwaj elementów listy w trakcie `foreach`. Użyj pojedyncz
 
 Kolekcje przechowujące stan gry trzeba utworzyć **przed** główną pętlą.
 
+### Odczyt nieistniejącego klucza
+
+    int cena = ceny["Łuk"]; // błąd, jeśli klucza nie ma
+
+Przed odczytem klucza pochodzącego od użytkownika sprawdź `ceny.ContainsKey("Łuk")`.
+
+### Ponowne dodanie tego samego klucza
+
+    ceny.Add("Miecz", 40);
+    ceny.Add("Miecz", 45); // błąd: klucz już istnieje
+
+Klucze słownika muszą być unikalne. Istniejącą wartość zmieniamy przez `ceny["Miecz"] = 45`.
+
 ---
 
-## 17. Przykład przewodni — raport wyprawy i plecak
+## 18. Przykład przewodni — raport wyprawy i plecak
 
 Poniższy fragment łączy tablicę stałych wyników z listą zmiennego ekwipunku:
 
@@ -694,6 +775,8 @@ Warunek `>` sprawia, że przy remisie zapamiętujemy pierwszą turę z najlepszy
 - `foreach` upraszcza odczyt wszystkich elementów,
 - sumę, minimum, maksimum, wyszukiwanie i zliczanie można wykonać pętlą,
 - `Add` dodaje element do listy, `Remove` usuwa po wartości, a `RemoveAt` po indeksie,
+- słownik przechowuje pary klucz–wartość, a każdy klucz musi być unikalny,
+- `ContainsKey` pozwala bezpiecznie sprawdzić klucz przed odczytem,
 - każdy indeks pochodzący od użytkownika trzeba sprawdzić przed użyciem,
 - nie należy zmieniać rozmiaru listy podczas `foreach`.
 
@@ -725,4 +808,18 @@ Warunek `>` sprawia, że przy remisie zapamiętujemy pierwszą turę z najlepszy
     if (indeks >= 0 && indeks < plecak.Count)
     {
         plecak.RemoveAt(indeks);
+    }
+
+    Dictionary<string, int> ceny = new Dictionary<string, int>();
+    ceny.Add("Mikstura", 15);
+    ceny["Mikstura"] = 12;
+
+    if (ceny.ContainsKey("Mikstura"))
+    {
+        Console.WriteLine(ceny["Mikstura"]);
+    }
+
+    foreach (KeyValuePair<string, int> para in ceny)
+    {
+        Console.WriteLine($"{para.Key}: {para.Value}");
     }
