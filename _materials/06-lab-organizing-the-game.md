@@ -133,9 +133,9 @@ while (isRunning)
 }
 ```
 
-> **Maciuś Pierwszy (junior):** Usunąłem powtórzenia. Teraz `ShowMenu` ma 48 parametrów.
+> **Maciuś:** Usunąłem powtórzenia. Teraz `ShowMenu` ma 48 parametrów.
 >
-> **Jan Kowalski (senior):** Świetnie, stworzyłeś formularz podatkowy. Zostaw tylko dane, których metoda naprawdę potrzebuje.
+> **Jan:** Świetnie, stworzyłeś formularz podatkowy. Zostaw tylko dane, których metoda naprawdę potrzebuje.
 
 ## Zadanie 3. Metody zwracające wynik
 
@@ -177,9 +177,9 @@ if (IsGameOver(health))
 | `IsGameOver(0)` | `true` |
 | `IsGameOver(1)` | `false` |
 
-> **Maciuś Pierwszy (junior):** Wywołałem `Heal(health, 10, maxHealth)`, ale zdrowie się nie zmieniło.
+> **Maciuś:** Wywołałem `Heal(health, 10, maxHealth)`, ale zdrowie się nie zmieniło.
 >
-> **Jan Kowalski (senior):** Automat wydał resztę, tylko odszedłeś bez jej zabrania. Zapisz wynik: `health = Heal(...)`.
+> **Jan:** Automat wydał resztę, tylko odszedłeś bez jej zabrania. Zapisz wynik: `health = Heal(...)`.
 
 ## Zadanie 4. Walidacja komendy
 

@@ -24,6 +24,11 @@ Po wykładzie potrafisz:
 
 > **Cel praktyczny:** po refaktoryzacji główna część programu ma przypominać plan gry, a nie instrukcję składania szafy bez obrazków.
 
+W przykładach będą nam towarzyszyć:
+
+- **Maciuś Pierwszy — junior programista**, pełen pomysłów i odrobiny zbyt dużej wiary w kopiowanie kodu,
+- **Jan Kowalski — senior programista**, który widział już niejeden `Method1` i nadal zachował poczucie humoru.
+
 ## Zakres wykładu — 90 minut
 
 | Część | Czas |
@@ -69,9 +74,9 @@ Metodę warto wydzielić, gdy fragment:
 - jest długi i zasłania główny przebieg programu,
 - przyda się do sprawdzenia niezależnie od reszty gry.
 
-> **Maciuś Pierwszy (junior):** Skopiowałem ten kod tylko cztery razy. To jeszcze nie jest powtórzenie, prawda?
+> **Maciuś:** Skopiowałem ten kod tylko cztery razy. To jeszcze nie jest powtórzenie, prawda?
 >
-> **Jan Kowalski (senior):** Oczywiście. To cztery niezależne egzemplarze tego samego błędu.
+> **Jan:** Oczywiście. To cztery niezależne egzemplarze tego samego błędu.
 
 ## 2. Anatomia metody
 
@@ -127,9 +132,9 @@ ShowStatus("Ada", 80);
 ShowStatus("Goblin", 35);
 ```
 
-> **Maciuś Pierwszy (junior):** Metoda nie widziała zmiennej `health`, więc zrobiłem drugą zmienną globalną.
+> **Maciuś:** Metoda nie widziała zmiennej `health`, więc zrobiłem drugą zmienną globalną.
 >
-> **Jan Kowalski (senior):** A gdy nie znajdziesz kluczy, dorabiasz drugie drzwi? Przekaż `health` jako parametr.
+> **Jan:** A gdy nie znajdziesz kluczy, dorabiasz drugie drzwi? Przekaż `health` jako parametr.
 
 ## 4. `void` czy wartość zwracana?
 
@@ -176,9 +181,9 @@ int Heal(int health, int amount, int maxHealth)
 
 Wczesny `return` obsługuje szczególny przypadek bez dodatkowego zagnieżdżania.
 
-> **Maciuś Pierwszy (junior):** Moja metoda `CalculateDamage` wypisuje wynik, odejmuje zdrowie i jeszcze pyta, czy zaatakować ponownie.
+> **Maciuś:** Moja metoda `CalculateDamage` wypisuje wynik, odejmuje zdrowie i jeszcze pyta, czy zaatakować ponownie.
 >
-> **Jan Kowalski (senior):** To nie metoda. To jednoosobowy dział firmy bez zakresu obowiązków.
+> **Jan:** To nie metoda. To jednoosobowy dział firmy bez zakresu obowiązków.
 
 ## 5. Jedna odpowiedzialność i przepływ danych
 
@@ -276,9 +281,9 @@ Użyj `=>`, gdy metoda ma jedno proste wyrażenie i pozostaje czytelna bez dodat
 
 Nie przyznajemy punktów za zmieszczenie całej gry po prawej stronie jednej strzałki.
 
-> **Maciuś Pierwszy (junior):** Przepisałem wszystko na `=>`. Teraz metoda mieści się w jednej linii.
+> **Maciuś:** Przepisałem wszystko na `=>`. Teraz metoda mieści się w jednej linii.
 >
-> **Jan Kowalski (senior):** A ja mogę zapisać numer telefonu bez spacji. To jeszcze nie znaczy, że lepiej się go czyta.
+> **Jan:** A ja mogę zapisać numer telefonu bez spacji. To jeszcze nie znaczy, że lepiej się go czyta.
 
 ### Ta sama strzałka, dwa zastosowania
 
