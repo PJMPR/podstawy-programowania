@@ -44,6 +44,10 @@ W przykładach będą nam towarzyszyć:
 
 ## 1. Kiedy kod zaczyna prosić o metodę?
 
+> **Maciuś:** Skopiowałem ten kod tylko cztery razy. To jeszcze nie jest powtórzenie, prawda?
+>
+> **Jan:** Oczywiście. To cztery niezależne egzemplarze tego samego błędu.
+
 ```csharp
 Console.WriteLine("====================");
 Console.WriteLine($"Bohater: {heroName}");
@@ -74,10 +78,6 @@ Metodę warto wydzielić, gdy fragment:
 - jest długi i zasłania główny przebieg programu,
 - przyda się do sprawdzenia niezależnie od reszty gry.
 
-> **Maciuś:** Skopiowałem ten kod tylko cztery razy. To jeszcze nie jest powtórzenie, prawda?
->
-> **Jan:** Oczywiście. To cztery niezależne egzemplarze tego samego błędu.
-
 ## 2. Anatomia metody
 
 ```csharp
@@ -107,6 +107,10 @@ Nazwy metod zapisujemy w C# w stylu `PascalCase`. Dobra nazwa mówi, co metoda r
 
 ## 3. Parametry i argumenty
 
+> **Maciuś:** Metoda nie widziała zmiennej `health`, więc zrobiłem drugą zmienną globalną.
+>
+> **Jan:** A gdy nie znajdziesz kluczy, dorabiasz drugie drzwi? Przekaż `health` jako parametr.
+
 Parametr jest nazwą danych w definicji metody. Argument jest konkretną wartością przekazaną podczas wywołania.
 
 ```csharp
@@ -132,11 +136,11 @@ ShowStatus("Ada", 80);
 ShowStatus("Goblin", 35);
 ```
 
-> **Maciuś:** Metoda nie widziała zmiennej `health`, więc zrobiłem drugą zmienną globalną.
->
-> **Jan:** A gdy nie znajdziesz kluczy, dorabiasz drugie drzwi? Przekaż `health` jako parametr.
-
 ## 4. `void` czy wartość zwracana?
+
+> **Maciuś:** Moja metoda `CalculateDamage` wypisuje wynik, odejmuje zdrowie i jeszcze pyta, czy zaatakować ponownie.
+>
+> **Jan:** To nie metoda. To jednoosobowy dział firmy bez zakresu obowiązków.
 
 Metoda `void` wykonuje czynność, ale nie daje wywołującemu wyniku:
 
@@ -180,10 +184,6 @@ int Heal(int health, int amount, int maxHealth)
 ```
 
 Wczesny `return` obsługuje szczególny przypadek bez dodatkowego zagnieżdżania.
-
-> **Maciuś:** Moja metoda `CalculateDamage` wypisuje wynik, odejmuje zdrowie i jeszcze pyta, czy zaatakować ponownie.
->
-> **Jan:** To nie metoda. To jednoosobowy dział firmy bez zakresu obowiązków.
 
 ## 5. Jedna odpowiedzialność i przepływ danych
 
@@ -255,6 +255,10 @@ Zamiast udostępniać wszystkim metodom wszystkie zmienne, przekazujemy tylko da
 
 ## 7. Funkcje strzałkowe — krótki zapis krótkiej metody
 
+> **Maciuś:** Przepisałem wszystko na `=>`. Teraz metoda mieści się w jednej linii.
+>
+> **Jan:** A ja mogę zapisać numer telefonu bez spacji. To jeszcze nie znaczy, że lepiej się go czyta.
+
 W C# zapis `=>` nazywamy składnią z ciałem wyrażeniowym. Potocznie mówi się też o zapisie strzałkowym. Na tym etapie używamy go jako skrótu dla metody wykonującej **jedno proste wyrażenie**.
 
 Te dwa zapisy robią to samo:
@@ -280,10 +284,6 @@ void ShowSeparator() => Console.WriteLine("--------------------");
 Użyj `=>`, gdy metoda ma jedno proste wyrażenie i pozostaje czytelna bez dodatkowych zmiennych. Zwykły blok będzie lepszy dla kilku kroków, warunków i wielu instrukcji.
 
 Nie przyznajemy punktów za zmieszczenie całej gry po prawej stronie jednej strzałki.
-
-> **Maciuś:** Przepisałem wszystko na `=>`. Teraz metoda mieści się w jednej linii.
->
-> **Jan:** A ja mogę zapisać numer telefonu bez spacji. To jeszcze nie znaczy, że lepiej się go czyta.
 
 ### Ta sama strzałka, dwa zastosowania
 

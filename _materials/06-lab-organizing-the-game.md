@@ -108,6 +108,10 @@ Odpowiedz:
 
 ## Zadanie 2. Wydziel wyświetlanie
 
+> **Maciuś:** Usunąłem powtórzenia. Teraz `ShowMenu` ma 48 parametrów.
+>
+> **Jan:** Świetnie, stworzyłeś formularz podatkowy. Zostaw tylko dane, których metoda naprawdę potrzebuje.
+
 Napisz metody:
 
 ```csharp
@@ -133,11 +137,11 @@ while (isRunning)
 }
 ```
 
-> **Maciuś:** Usunąłem powtórzenia. Teraz `ShowMenu` ma 48 parametrów.
->
-> **Jan:** Świetnie, stworzyłeś formularz podatkowy. Zostaw tylko dane, których metoda naprawdę potrzebuje.
-
 ## Zadanie 3. Metody zwracające wynik
+
+> **Maciuś:** Wywołałem `Heal(health, 10, maxHealth)`, ale zdrowie się nie zmieniło.
+>
+> **Jan:** Automat wydał resztę, tylko odszedłeś bez jej zabrania. Zapisz wynik: `health = Heal(...)`.
 
 Napisz i wykorzystaj trzy metody:
 
@@ -176,10 +180,6 @@ if (IsGameOver(health))
 | `Heal(95, 10, 100)` | `100` |
 | `IsGameOver(0)` | `true` |
 | `IsGameOver(1)` | `false` |
-
-> **Maciuś:** Wywołałem `Heal(health, 10, maxHealth)`, ale zdrowie się nie zmieniło.
->
-> **Jan:** Automat wydał resztę, tylko odszedłeś bez jej zabrania. Zapisz wynik: `health = Heal(...)`.
 
 ## Zadanie 4. Walidacja komendy
 
