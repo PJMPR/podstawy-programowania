@@ -24,8 +24,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
         focusButton.type = 'button';
         focusButton.className = 'code-action-btn focus-code-btn';
-        focusButton.textContent = 'Skup';
-        focusButton.setAttribute('aria-label', `Pokaż tylko fragment kodu numer ${index + 1}`);
+        focusButton.textContent = 'Powiększ';
+        focusButton.setAttribute('aria-label', `Powiększ fragment kodu numer ${index + 1}`);
         actions.appendChild(focusButton);
 
         copyButton.addEventListener('click', async () => {
