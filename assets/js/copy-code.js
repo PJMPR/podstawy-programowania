@@ -41,7 +41,52 @@ document.addEventListener('DOMContentLoaded', () => {
             openFocusView(focusView, code, focusButton, index + 1);
         });
     });
+
+    setupDialogues(focusView);
 });
+
+function setupDialogues(focusView) {
+    const quotes = document.querySelectorAll('.material-content blockquote');
+    let dialogueNumber = 0;
+
+    quotes.forEach((quote) => {
+        const lines = Array.from(quote.querySelectorAll('p'));
+        const hasMacius = lines.some((line) => line.textContent.trim().startsWith('Maciuś:'));
+        const hasJan = lines.some((line) => line.textContent.trim().startsWith('Jan:'));
+
+        if (!hasMacius || !hasJan) {
+            return;
+        }
+
+        dialogueNumber += 1;
+        quote.classList.add('dialogue-card');
+        quote.setAttribute('aria-label', `Rozmowa Maciusia z Janem, dialog ${dialogueNumber}`);
+
+        lines.forEach((line) => {
+            const text = line.textContent.trim();
+            line.classList.add('dialogue-line');
+
+            if (text.startsWith('Maciuś:')) {
+                line.classList.add('dialogue-junior');
+                line.setAttribute('data-avatar', 'M');
+            } else if (text.startsWith('Jan:')) {
+                line.classList.add('dialogue-senior');
+                line.setAttribute('data-avatar', 'J');
+            }
+        });
+
+        const button = document.createElement('button');
+        button.type = 'button';
+        button.className = 'dialogue-expand-btn';
+        button.textContent = 'Powiększ';
+        button.setAttribute('aria-label', `Powiększ dialog ${dialogueNumber}`);
+        quote.appendChild(button);
+
+        button.addEventListener('click', () => {
+            openDialogueView(focusView, quote, button, dialogueNumber);
+        });
+    });
+}
 
 function createFocusView() {
     const overlay = document.createElement('div');
@@ -95,7 +140,21 @@ function openFocusView(focusView, code, trigger, number) {
 
     pre.appendChild(focusedCode);
     focusView.codeContainer.replaceChildren(pre);
+    focusView.codeContainer.classList.remove('is-dialogue');
     focusView.title.textContent = `Kod do analizy · fragment ${number}`;
+    focusView.returnFocus = trigger;
+    focusView.overlay.hidden = false;
+    document.body.classList.add('code-focus-open');
+    focusView.closeButton.focus();
+}
+
+function openDialogueView(focusView, quote, trigger, number) {
+    const focusedDialogue = quote.cloneNode(true);
+    focusedDialogue.querySelector('.dialogue-expand-btn')?.remove();
+
+    focusView.codeContainer.replaceChildren(focusedDialogue);
+    focusView.codeContainer.classList.add('is-dialogue');
+    focusView.title.textContent = `Rozmowa Maciusia z Janem · dialog ${number}`;
     focusView.returnFocus = trigger;
     focusView.overlay.hidden = false;
     document.body.classList.add('code-focus-open');
@@ -105,6 +164,7 @@ function openFocusView(focusView, code, trigger, number) {
 function closeFocusView(focusView) {
     focusView.overlay.hidden = true;
     focusView.codeContainer.replaceChildren();
+    focusView.codeContainer.classList.remove('is-dialogue');
     document.body.classList.remove('code-focus-open');
     focusView.returnFocus?.focus();
     focusView.returnFocus = null;
