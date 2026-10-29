@@ -4,7 +4,7 @@ title: "Porządkowanie gry za pomocą metod"
 kind: lab
 week: 6
 summary: "Dzielimy rosnący program na małe metody z parametrami, wartościami zwracanymi i prostym zapisem strzałkowym."
-published: true
+published: false
 content_ready: true
 ---
 
