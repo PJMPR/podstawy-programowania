@@ -17,7 +17,7 @@ weeks:
   - number: 7
     title: "Klasy i obiekty – praktyczne wprowadzenie"
   - number: 8
-    title: "Organizowanie kodu w namespace, pakiety i rozwiązania"
+    title: "Organizowanie kodu w przestrzeni nazw. Projekty i solucje"
   - number: 9
     title: "Tablice dwuwymiarowe i reprezentacja świata gry"
   - number: 10
