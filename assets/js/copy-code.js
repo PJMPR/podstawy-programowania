@@ -151,11 +151,13 @@ function createFocusView() {
 function openFocusView(focusView, code, trigger, number) {
     const pre = document.createElement('pre');
     const focusedCode = code.cloneNode(true);
+    const languageLabel = getLanguageLabel(code);
 
     pre.appendChild(focusedCode);
     focusView.codeContainer.replaceChildren(pre);
     focusView.codeContainer.classList.remove('is-dialogue');
-    focusView.title.textContent = `Kod do analizy · fragment ${number}`;
+    focusView.overlay.classList.add('is-code-view');
+    focusView.title.textContent = `Kod do analizy · ${languageLabel} · fragment ${number}`;
     focusView.returnFocus = trigger;
     focusView.overlay.hidden = false;
     document.body.classList.add('code-focus-open');
@@ -168,6 +170,7 @@ function openDialogueView(focusView, quote, trigger, number) {
 
     focusView.codeContainer.replaceChildren(focusedDialogue);
     focusView.codeContainer.classList.add('is-dialogue');
+    focusView.overlay.classList.remove('is-code-view');
     focusView.title.textContent = `Rozmowa Maciusia z Janem · dialog ${number}`;
     focusView.returnFocus = trigger;
     focusView.overlay.hidden = false;
@@ -179,6 +182,7 @@ function closeFocusView(focusView) {
     focusView.overlay.hidden = true;
     focusView.codeContainer.replaceChildren();
     focusView.codeContainer.classList.remove('is-dialogue');
+    focusView.overlay.classList.remove('is-code-view');
     document.body.classList.remove('code-focus-open');
     focusView.returnFocus?.focus();
     focusView.returnFocus = null;
