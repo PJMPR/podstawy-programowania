@@ -10,6 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const focusButton = document.createElement('button');
 
         wrapper.className = 'code-block';
+        wrapper.dataset.language = getLanguageLabel(code);
         pre.parentNode.insertBefore(wrapper, pre);
         wrapper.appendChild(pre);
 
@@ -44,6 +45,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
     setupDialogues(focusView);
 });
+
+function getLanguageLabel(code) {
+    const languageClass = Array.from(code.classList)
+        .find((className) => className.startsWith('language-'));
+
+    if (!languageClass) {
+        return 'KOD';
+    }
+
+    const language = languageClass.replace('language-', '').toLowerCase();
+    const labels = { csharp: 'C#', cs: 'C#' };
+    return labels[language] ?? language.toUpperCase();
+}
 
 function setupDialogues(focusView) {
     const quotes = document.querySelectorAll('.material-content blockquote');

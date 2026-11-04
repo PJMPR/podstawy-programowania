@@ -107,14 +107,59 @@ Napisz metody:
 ```csharp
 void ShowStatus(string name, int health, int maxHealth, int gold)
 void ShowMenu()
+void ShowPanelTitle(string title, ConsoleColor backgroundColor)
 ```
 
 Wymagania:
 
 - `ShowStatus` wyświetla imię, zdrowie i złoto,
 - `ShowMenu` wyświetla trzy dostępne komendy,
+- `ShowPanelTitle` nadaje nagłówkom wspólny wygląd,
 - w pętli nie pozostają kopie instrukcji przeniesionych do metod,
-- metody tylko wyświetlają dane — nie zmieniają stanu gry.
+- metody tylko wyświetlają dane — nie zmieniają stanu gry,
+- po kolorowym fragmencie program wywołuje `Console.ResetColor()`.
+
+Możesz użyć poniższego motywu lub dobrać własne kolory:
+
+```csharp
+void ShowPanelTitle(string title, ConsoleColor backgroundColor)
+{
+    Console.BackgroundColor = backgroundColor;
+    Console.ForegroundColor = ConsoleColor.White;
+    Console.WriteLine($"  {title.ToUpper()}  ");
+    Console.ResetColor();
+}
+
+void ShowStatus(string name, int health, int maxHealth, int gold)
+{
+    ShowPanelTitle("Status bohatera", ConsoleColor.DarkBlue);
+
+    Console.ForegroundColor = ConsoleColor.Cyan;
+    Console.Write("Bohater:  ");
+    Console.ResetColor();
+    Console.WriteLine(name);
+
+    Console.ForegroundColor = ConsoleColor.Green;
+    Console.Write("Zdrowie: ");
+    Console.ResetColor();
+    Console.WriteLine($"{health}/{maxHealth} HP");
+
+    Console.ForegroundColor = ConsoleColor.Yellow;
+    Console.Write("Złoto:    ");
+    Console.ResetColor();
+    Console.WriteLine(gold);
+}
+
+void ShowMenu()
+{
+    ShowPanelTitle("Menu", ConsoleColor.DarkCyan);
+    Console.WriteLine("[1] Atak treningowy");
+    Console.WriteLine("[2] Odpoczynek");
+    Console.WriteLine("[3] Koniec gry");
+}
+```
+
+> **Dostępność:** nie przekazuj znaczenia wyłącznie kolorem. Tekst `Zdrowie`, `Złoto` i numery opcji powinny wystarczyć do zrozumienia ekranu także bez kolorów.
 
 Po zmianie początek pętli powinien wyglądać mniej więcej tak:
 

@@ -48,11 +48,25 @@ Jeśli taki blok występuje w kilku miejscach, trzeba go kopiować. Każda póź
 ```csharp
 void ShowStatus(string heroName, int health, int gold)
 {
-    Console.WriteLine("====================");
-    Console.WriteLine($"Bohater: {heroName}");
-    Console.WriteLine($"Zdrowie: {health}");
-    Console.WriteLine($"Złoto: {gold}");
-    Console.WriteLine("====================");
+    Console.BackgroundColor = ConsoleColor.DarkBlue;
+    Console.ForegroundColor = ConsoleColor.White;
+    Console.WriteLine("  STATUS BOHATERA  ");
+    Console.ResetColor();
+
+    Console.ForegroundColor = ConsoleColor.Cyan;
+    Console.Write("Bohater:  ");
+    Console.ResetColor();
+    Console.WriteLine(heroName);
+
+    Console.ForegroundColor = ConsoleColor.Green;
+    Console.Write("Zdrowie: ");
+    Console.ResetColor();
+    Console.WriteLine($"{health} HP");
+
+    Console.ForegroundColor = ConsoleColor.Yellow;
+    Console.Write("Złoto:    ");
+    Console.ResetColor();
+    Console.WriteLine(gold);
 }
 
 ShowStatus(heroName, health, gold);
@@ -91,6 +105,32 @@ ShowMessage("Słyszysz podejrzane chrupanie.");
 Program przechodzi do ciała metody, wykonuje je, a następnie wraca do miejsca wywołania.
 
 Nazwy metod zapisujemy w C# w stylu `PascalCase`. Dobra nazwa mówi, co metoda robi: `ShowMenu`, `ReadCommand`, `CalculateDamage`. Nazwy `DoIt`, `Thing` i `Method1` są poprawne dla kompilatora, ale nie dla człowieka, który wróci do projektu za tydzień. Tym człowiekiem bardzo często jesteś ty.
+
+### Prosty szablon wyglądu konsoli
+
+Powtarzalny wygląd także warto zamknąć w metodzie. Dzięki temu wszystkie panele mają ten sam nagłówek, a zmiana koloru nie wymaga poprawiania wielu miejsc.
+
+```csharp
+void ShowPanelTitle(string title, ConsoleColor backgroundColor)
+{
+    Console.BackgroundColor = backgroundColor;
+    Console.ForegroundColor = ConsoleColor.White;
+    Console.WriteLine($"  {title.ToUpper()}  ");
+    Console.ResetColor();
+}
+
+void ShowMenu()
+{
+    ShowPanelTitle("Menu", ConsoleColor.DarkCyan);
+    Console.WriteLine("[1] Atak");
+    Console.WriteLine("[2] Leczenie");
+    Console.WriteLine("[3] Koniec gry");
+}
+```
+
+`Console.ForegroundColor` ustawia kolor liter, a `Console.BackgroundColor` kolor tła. `Console.ResetColor()` przywraca ustawienia terminala. Wywołuj je po kolorowym fragmencie, aby reszta programu nie odziedziczyła przypadkowego stylu.
+
+Kolor jest dodatkiem do czytelnego tekstu, nie jego zamiennikiem. Numery opcji, etykiety i komunikaty powinny być zrozumiałe również w terminalu, który nie pokazuje kolorów.
 
 ## 3. Parametry i argumenty
 
