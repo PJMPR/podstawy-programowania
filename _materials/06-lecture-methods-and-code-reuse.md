@@ -84,7 +84,16 @@ Metodę warto wydzielić, gdy fragment:
 ```csharp
 void ShowMessage(string message)
 {
+    Console.BackgroundColor = ConsoleColor.DarkCyan;
+    Console.ForegroundColor = ConsoleColor.White;
+    Console.Write(" INFO ");
+    Console.ResetColor();
+
+    Console.ForegroundColor = ConsoleColor.Cyan;
+    Console.Write("  »  ");
+    Console.ForegroundColor = ConsoleColor.White;
     Console.WriteLine(message);
+    Console.ResetColor();
 }
 ```
 
@@ -101,6 +110,15 @@ Sama definicja nie uruchamia metody. Kod wykona się dopiero po wywołaniu:
 ShowMessage("Wchodzisz do lochu.");
 ShowMessage("Słyszysz podejrzane chrupanie.");
 ```
+
+Na ekranie obie wiadomości mają ten sam szablon:
+
+```text
+ INFO   »  Wchodzisz do lochu.
+ INFO   »  Słyszysz podejrzane chrupanie.
+```
+
+Etykieta `INFO` ma ciemnoturkusowe tło, strzałka jest turkusowa, a treść biała. Metoda odpowiada za cały wygląd komunikatu, więc kod wywołujący przekazuje wyłącznie tekst. Późniejsza zmiana kolorów lub symbolu wymaga poprawienia tylko jednego miejsca.
 
 Program przechodzi do ciała metody, wykonuje je, a następnie wraca do miejsca wywołania.
 
