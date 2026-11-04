@@ -2,7 +2,7 @@
 layout: material
 title: "Losowość i algorytmy mechanik gier"
 kind: lecture
-week: 7
+week: 11
 summary: "Klasa Random, prawdopodobieństwo oraz algorytmy losowania, walki i obliczania obrażeń."
 published: false
 content_ready: false

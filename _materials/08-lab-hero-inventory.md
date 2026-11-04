@@ -1,12 +1,38 @@
 ---
 layout: material
-title: "Ekwipunek bohatera"
+title: "Przestrzenie nazw, projekty i rozwiązania"
 kind: lab
 week: 8
-summary: "Łączymy listę posiadanych przedmiotów ze słownikami ich opisów i efektów."
+summary: "Organizujemy kod w namespace, tworzymy nowe projekty i uczymy się zarządzać pakietami NuGet."
 published: false
 content_ready: false
 ---
+
+## Cel laboratorium
+
+Kiedy projekt rośnie, warto go organizować w logiczne grupy. W tym laboratorium podzielisz grę na moduły, nauczysz się tworzyć namespace i pracować z pakietami.
+
+## Zadania
+
+1. Podziel kod gry na namespace (np. `RogueSemesterGame.Engine`, `RogueSemesterGame.UI`, `RogueSemesterGame.Combat`).
+2. Utwórz nowy projekt biblioteki klasy (Class Library) dla logiki gry.
+3. Przenieś klasy `Player` i `Enemy` do biblioteki.
+4. Dodaj pakiet NuGet (np. `Spectre.Console` do lepszych wyników) i użyj go w projekcie.
+5. Upewnij się, że główny projekt prawidłowo odwołuje się do biblioteki.
+
+## Scenariusze testowe
+
+- Projekt się kompiluje bez błędów.
+- Gra nadal działa po podziale na moduły.
+- Pakiet NuGet jest prawidłowo zainstalowany i użyty.
+- Zmiana kodu w bibliotece jest widoczna w głównym projekcie.
+
+## Kryteria ukończenia
+
+- [ ] Kod jest zorganizowany w sensowne namespace.
+- [ ] Utworzono co najmniej jeden projekt biblioteki.
+- [ ] Pakiet NuGet jest poprawnie zainstalowany.
+- [ ] Aplikacja kompiluje się i działa poprawnie.
 
 ## Cel laboratorium
 

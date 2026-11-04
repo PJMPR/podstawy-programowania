@@ -2,8 +2,8 @@
 layout: material
 title: "Słowniki i przetwarzanie kolekcji"
 kind: lecture
-week: 8
-summary: "Słowniki, pary klucz–wartość oraz wyszukiwanie, zliczanie i filtrowanie danych w kolekcjach."
+week: null
+summary: "Słowniki, pary klucz–wartość oraz wyszukiwanie, zliczanie i filtrowanie danych w kolekcjach (materiał dodatkowy)."
 published: false
 content_ready: false
 ---

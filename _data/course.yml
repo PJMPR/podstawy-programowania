@@ -13,17 +13,17 @@ weeks:
   - number: 5
     title: "Tablice i listy – przechowywanie danych"
   - number: 6
-    title: "Słowniki i przetwarzanie kolekcji"
-  - number: 7
     title: "Metody – organizacja i ponowne wykorzystanie kodu"
+  - number: 7
+    title: "Klasy i obiekty – praktyczne wprowadzenie"
   - number: 8
-    title: "Losowość i algorytmy mechanik gier"
+    title: "Organizowanie kodu w namespace, pakiety i rozwiązania"
   - number: 9
     title: "Tablice dwuwymiarowe i reprezentacja świata gry"
   - number: 10
     title: "Ruch, kolizje i logika rozgrywki"
   - number: 11
-    title: "Klasy i obiekty – praktyczne wprowadzenie"
+    title: "Losowość i algorytmy mechanik gier"
   - number: 12
     title: "Zarządzanie stanem gry i przepływem rozgrywki"
   - number: 13

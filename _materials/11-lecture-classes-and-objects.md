@@ -2,7 +2,7 @@
 layout: material
 title: "Klasy i obiekty — praktyczne wprowadzenie"
 kind: lecture
-week: 11
+week: 7
 summary: "Klasy, obiekty, właściwości, konstruktor i metody na przykładzie bohatera i przeciwnika."
 published: false
 content_ready: false
