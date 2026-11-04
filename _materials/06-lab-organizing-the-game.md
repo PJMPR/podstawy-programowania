@@ -14,16 +14,6 @@ Uporządkuj kod gry bez zmiany jej zachowania. Przećwicz metody `void`, paramet
 
 Po laboratorium główna pętla programu powinna pokazywać przebieg rozgrywki, a szczegóły powinny znajdować się w małych, nazwanych metodach.
 
-## Organizacja pracy — 90 minut
-
-| Etap | Czas |
-|---|---:|
-| Rozgrzewka: rozpoznawanie części metody | 10 min |
-| Metody wyświetlające | 15 min |
-| Parametry i wyniki | 20 min |
-| Walidacja komendy | 15 min |
-| Refaktoryzacja pętli gry | 20 min |
-| Testy i porządki | 10 min |
 
 ## Kod startowy
 
