@@ -29,19 +29,6 @@ W przykładach będą nam towarzyszyć:
 - **Maciuś Pierwszy — junior programista**, pełen pomysłów i odrobiny zbyt dużej wiary w kopiowanie kodu,
 - **Jan Kowalski — senior programista**, który widział już niejeden `Method1` i nadal zachował poczucie humoru.
 
-## Zakres wykładu — 90 minut
-
-| Część | Czas |
-|---|---:|
-| Po co wydzielać metody | 10 min |
-| Definicja, wywołanie i `void` | 15 min |
-| Parametry i argumenty | 15 min |
-| Typ wyniku oraz `return` | 15 min |
-| Zasięg i przepływ danych | 10 min |
-| Krótkie metody i zapis `=>` | 10 min |
-| Refaktoryzacja fragmentu gry | 10 min |
-| Podsumowanie | 5 min |
-
 ## 1. Kiedy kod zaczyna prosić o metodę?
 
 > **Maciuś:** Skopiowałem ten kod tylko cztery razy. To jeszcze nie jest powtórzenie, prawda?
