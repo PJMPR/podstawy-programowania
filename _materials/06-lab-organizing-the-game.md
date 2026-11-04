@@ -68,6 +68,7 @@ while (isRunning)
     }
 }
 ```
+<!-- code-result: Program działa interaktywnie. W każdej turze wyświetla status bohatera i trzy opcje. Atak pokazuje 9 obrażeń, odpoczynek zwiększa zdrowie maksymalnie do 100, a opcja 3 kończy grę. -->
 
 > **Zasada refaktoryzacji:** po każdym zadaniu uruchom program. Zmieniamy organizację kodu, nie zachowanie gry.
 
@@ -88,6 +89,7 @@ int AddGold(int gold, int reward)
 
 bool HasEnoughGold(int gold, int price) => gold >= price;
 ```
+<!-- code-result: Fragment tylko definiuje trzy metody. Przykładowo AddGold(10, 5) zwróci 15, a HasEnoughGold(10, 8) zwróci true. Bez wywołań konsola pozostaje bez zmian. -->
 
 Odpowiedz:
 
@@ -109,6 +111,7 @@ void ShowStatus(string name, int health, int maxHealth, int gold)
 void ShowMenu()
 void ShowPanelTitle(string title, ConsoleColor backgroundColor)
 ```
+<!-- code-result: To wymagane sygnatury metod, a nie kompletny program. Nie generują wyniku i bez ciał metod nie mogą zostać skompilowane. -->
 
 Wymagania:
 
@@ -158,6 +161,7 @@ void ShowMenu()
     Console.WriteLine("[3] Koniec gry");
 }
 ```
+<!-- code-result: Fragment definiuje wspólny wygląd nagłówków, statusu i menu. Sam niczego nie wyświetla. Po wywołaniu ShowStatus("Ada", 70, 100, 15) i ShowMenu() pojawią się dwa kolorowe panele z danymi bohatera i trzema opcjami. -->
 
 > **Dostępność:** nie przekazuj znaczenia wyłącznie kolorem. Tekst `Zdrowie`, `Złoto` i numery opcji powinny wystarczyć do zrozumienia ekranu także bez kolorów.
 
@@ -171,6 +175,7 @@ while (isRunning)
     // dalsza część pętli
 }
 ```
+<!-- code-result: Początek każdej tury wyświetla kolorowy status i menu. Dalszy wynik zależy od kodu umieszczonego w miejscu komentarza. -->
 
 ## Zadanie 3. Metody zwracające wynik
 
@@ -185,6 +190,7 @@ int CalculateDamage(int strength, int weaponDamage)
 int Heal(int health, int amount, int maxHealth)
 bool IsGameOver(int health)
 ```
+<!-- code-result: To wymagane sygnatury. Po zaimplementowaniu CalculateDamage(6, 3) ma zwracać 9, Heal(95, 10, 100) ma zwracać 100, a IsGameOver(0) ma zwracać true. -->
 
 Reguły:
 
@@ -204,6 +210,7 @@ if (IsGameOver(health))
     Console.WriteLine("Koniec gry.");
 }
 ```
+<!-- code-result: damage otrzymuje sumę siły i obrażeń broni, a health wynik leczenia. Napis „Koniec gry.” pojawi się tylko wtedy, gdy IsGameOver(health) zwróci true. -->
 
 ### Szybkie testy
 
@@ -239,6 +246,7 @@ string ReadCommand()
     }
 }
 ```
+<!-- code-result: To nieukończony szablon metody. Po uzupełnieniu ma pytać o „Wybór:”, odrzucać wartości inne niż 1, 2 lub 3 i zwracać pierwszą poprawną komendę. -->
 
 Przetestuj pusty tekst, `7`, `atak` oraz poprawne wartości `1`, `2` i `3`.
 
@@ -252,12 +260,14 @@ int CalculateDamage(int strength, int weaponDamage)
     return strength + weaponDamage;
 }
 ```
+<!-- code-result: Fragment definiuje metodę w zwykłej postaci. CalculateDamage(6, 3) zwróci 9, ale bez wywołania nic nie pojawi się w konsoli. -->
 
 Po zmianie:
 
 ```csharp
 int CalculateDamage(int strength, int weaponDamage) => strength + weaponDamage;
 ```
+<!-- code-result: Krótszy zapis działa identycznie: CalculateDamage(6, 3) zwróci 9. Metoda niczego nie wypisuje. -->
 
 Rozważ osobno:
 
@@ -281,6 +291,10 @@ List<string> inventory = new List<string> { "miecz", "mikstura", "łuk" };
 List<string> longNames = inventory.FindAll(item => item.Length > 5);
 bool hasPotion = inventory.Exists(item => item == "mikstura");
 ```
+<!-- code-result: longNames zawiera: mikstura
+hasPotion ma wartość: true
+
+Fragment nie wypisuje wyników — trzeba użyć Console.WriteLine lub pętli, aby zobaczyć je w konsoli. -->
 
 Wyświetl wyniki, a następnie zmień warunki tak, aby:
 
@@ -316,6 +330,7 @@ while (isRunning)
     }
 }
 ```
+<!-- code-result: Program pokazuje w każdej turze status i menu. Komenda 1 wyświetla 9 obrażeń, komenda 2 leczy bohatera, a komenda 3 kończy pętlę. Dokładny przebieg zależy od wyborów użytkownika. -->
 
 Przenieś do metod także wyświetlanie ekwipunku i historii akcji z projektu z tygodnia 5, jeśli znajdują się w twojej grze.
 
@@ -336,6 +351,7 @@ Znajdź błąd lub problem projektowy w każdym fragmencie i zaproponuj poprawę
 int Heal(int health, int amount) => health + amount;
 Heal(health, 10);
 ```
+<!-- code-result: Heal oblicza nową wartość, ale wynik przepada. Konsola niczego nie wyświetla, a health pozostaje bez zmian. Poprawa: health = Heal(health, 10); -->
 
 ### B. Zmienna poza zasięgiem
 
@@ -347,6 +363,7 @@ if (health < 20)
 
 Console.WriteLine(warning);
 ```
+<!-- code-result: Kod nie skompiluje się. Zmienna warning istnieje tylko wewnątrz bloku if i jest niedostępna w Console.WriteLine(warning). -->
 
 ### C. Metoda orkiestra
 
@@ -359,6 +376,7 @@ int CalculateDamage(int strength, int weaponDamage)
     return strength + weaponDamage;
 }
 ```
+<!-- code-result: Po wywołaniu metoda pyta użytkownika o atak, wyświetla komunikat o animacji i zwraca sumę parametrów. Problem projektowy: metoda obliczeniowa jednocześnie obsługuje wejście i wyjście. -->
 
 ### D. Strzałka za wszelką cenę
 
@@ -366,6 +384,7 @@ int CalculateDamage(int strength, int weaponDamage)
 bool CanHeal(int health, int maxHealth, int potions) =>
     health < maxHealth && potions > 0 && health > 0;
 ```
+<!-- code-result: Metoda niczego nie wypisuje. Zwraca true tylko wtedy, gdy bohater żyje, nie ma pełnego zdrowia i posiada co najmniej jedną miksturę. -->
 
 Czy D jest błędem? Porównaj wersję strzałkową z blokiem `{ }`. Wybierz czytelniejszy zapis i uzasadnij wybór. Możliwa jest więcej niż jedna dobra odpowiedź.
 
@@ -377,6 +396,7 @@ Dodaj metody:
 bool CanAfford(int gold, int price)
 int BuyItem(int gold, int price)
 ```
+<!-- code-result: To wymagane sygnatury metod. Bez ciał kod nie zostanie skompilowany. Przykładowo CanAfford(15, 10) powinno zwrócić true, a BuyItem(15, 10) wartość 5. -->
 
 - `CanAfford` zwraca informację, czy gracz ma wystarczająco dużo złota.
 - `BuyItem` zwraca stan złota po zakupie.

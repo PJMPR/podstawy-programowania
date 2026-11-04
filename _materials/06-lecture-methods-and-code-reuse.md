@@ -42,6 +42,12 @@ Console.WriteLine($"Zdrowie: {health}");
 Console.WriteLine($"Złoto: {gold}");
 Console.WriteLine("====================");
 ```
+<!-- code-result: Przykładowy wynik (dla heroName = "Ada", health = 70, gold = 15):
+====================
+Bohater: Ada
+Zdrowie: 70
+Złoto: 15
+==================== -->
 
 Jeśli taki blok występuje w kilku miejscach, trzeba go kopiować. Każda późniejsza zmiana wymaga poprawienia wszystkich kopii. Możemy zamiast tego nadać operacji nazwę:
 
@@ -71,6 +77,11 @@ void ShowStatus(string heroName, int health, int gold)
 
 ShowStatus(heroName, health, gold);
 ```
+<!-- code-result: Wywołanie wyświetla kolorowy panel statusu. Dla wartości "Ada", 70 i 15 treść wygląda tak:
+STATUS BOHATERA
+Bohater:  Ada
+Zdrowie: 70 HP
+Złoto:    15 -->
 
 Metodę warto wydzielić, gdy fragment:
 
@@ -96,6 +107,7 @@ void ShowMessage(string message)
     Console.ResetColor();
 }
 ```
+<!-- code-result: Ten fragment tylko definiuje metodę ShowMessage. Dopóki metoda nie zostanie wywołana, konsola pozostaje bez zmian. -->
 
 | Element | Przykład | Znaczenie |
 |---|---|---|
@@ -110,6 +122,10 @@ Sama definicja nie uruchamia metody. Kod wykona się dopiero po wywołaniu:
 ShowMessage("Wchodzisz do lochu.");
 ShowMessage("Słyszysz podejrzane chrupanie.");
 ```
+<!-- code-result: INFO   »  Wchodzisz do lochu.
+INFO   »  Słyszysz podejrzane chrupanie.
+
+Etykieta INFO ma ciemnoturkusowe tło, strzałka jest turkusowa, a treść biała. -->
 
 Na ekranie obie wiadomości mają ten sam szablon:
 
@@ -145,6 +161,11 @@ void ShowMenu()
     Console.WriteLine("[3] Koniec gry");
 }
 ```
+<!-- code-result: Fragment tylko definiuje metodę. Po wywołaniu ShowMenu() konsola wyświetli:
+1. Atak
+2. Leczenie
+3. Ucieczka -->
+<!-- code-result: Ten fragment definiuje ShowPanelTitle i ShowMenu. Samo zdefiniowanie metod niczego nie wyświetla. Po wywołaniu ShowMenu() pojawi się kolorowy nagłówek MENU oraz trzy opcje. -->
 
 `Console.ForegroundColor` ustawia kolor liter, a `Console.BackgroundColor` kolor tła. `Console.ResetColor()` przywraca ustawienia terminala. Wywołuj je po kolorowym fragmencie, aby reszta programu nie odziedziczyła przypadkowego stylu.
 
@@ -166,6 +187,7 @@ void ShowStatus(string name, int health)
 
 ShowStatus("Ada", 80);
 ```
+<!-- code-result: Ada: 80 HP -->
 
 `name` i `health` są parametrami, a `"Ada"` i `80` argumentami. Kolejność oraz typ argumentów muszą pasować do parametrów:
 
@@ -173,6 +195,10 @@ ShowStatus("Ada", 80);
 ShowStatus("Ada", 80); // poprawnie
 // ShowStatus(80, "Ada"); // błąd: niewłaściwa kolejność typów
 ```
+<!-- code-result: Pierwsze wywołanie wyświetla:
+Ada: 80 HP
+
+Drugie jest komentarzem. Po usunięciu // kompilator zgłosi błąd, ponieważ argumenty mają niewłaściwe typy i kolejność. -->
 
 Parametry pozwalają użyć tej samej metody dla różnych danych:
 
@@ -180,6 +206,8 @@ Parametry pozwalają użyć tej samej metody dla różnych danych:
 ShowStatus("Ada", 80);
 ShowStatus("Goblin", 35);
 ```
+<!-- code-result: Ada: 80 HP
+Goblin: 35 HP -->
 
 ## 4. `void` czy wartość zwracana?
 
@@ -210,6 +238,7 @@ int CalculateDamage(int strength, int weaponDamage)
 int damage = CalculateDamage(5, 3);
 enemyHealth -= damage;
 ```
+<!-- code-result: CalculateDamage(5, 3) zwraca 8. Zmienna damage otrzymuje wartość 8, a enemyHealth zostaje zmniejszone o 8. Fragment niczego nie wypisuje. -->
 
 `return` kończy działanie metody. Każda możliwa ścieżka metody zwracającej wartość musi zwrócić odpowiedni typ.
 
@@ -227,6 +256,7 @@ int Heal(int health, int amount, int maxHealth)
     return Math.Min(newHealth, maxHealth);
 }
 ```
+<!-- code-result: Fragment definiuje metodę Heal. Przykładowo Heal(95, 10, 100) zwróci 100, ale sama definicja niczego nie wyświetla. -->
 
 Wczesny `return` obsługuje szczególny przypadek bez dodatkowego zagnieżdżania.
 
@@ -248,6 +278,8 @@ int damage = CalculateDamage(strength, weaponDamage);
 enemyHealth -= damage;
 Console.WriteLine($"Zadajesz {damage} obrażeń.");
 ```
+<!-- code-result: Dla strength = 5 i weaponDamage = 3:
+Zadajesz 8 obrażeń. -->
 
 Metoda licząca obrażenia nie pyta o dane i niczego nie wypisuje. Dostaje potrzebne wartości i zwraca wynik. Można ją łatwo sprawdzić:
 
@@ -255,6 +287,8 @@ Metoda licząca obrażenia nie pyta o dane i niczego nie wypisuje. Dostaje potrz
 Console.WriteLine(CalculateDamage(5, 3)); // oczekujemy 8
 Console.WriteLine(CalculateDamage(0, 4)); // oczekujemy 4
 ```
+<!-- code-result: 8
+4 -->
 
 ## 6. Zasięg zmiennych
 
@@ -269,6 +303,7 @@ int CalculateDamage(int strength, int weaponDamage)
 
 // Console.WriteLine(damage); // błąd: tutaj damage nie istnieje
 ```
+<!-- code-result: Metoda zostaje zdefiniowana, ale niczego nie wypisuje. Po odkomentowaniu ostatniej linii kompilator zgłosi błąd zasięgu: damage nie istnieje poza metodą. -->
 
 Parametry również są lokalne dla metody. Dwie metody mogą mieć parametr o tej samej nazwie i nie jest to ta sama zmienna.
 
@@ -283,6 +318,7 @@ bool IsGameOver(int health)
     return health <= 0;
 }
 ```
+<!-- code-result: Fragment definiuje dwie metody. ShowHealth wypisze przekazane zdrowie, a IsGameOver zwróci true dla wartości mniejszej lub równej 0. Bez wywołania nie ma wyniku w konsoli. -->
 
 Blok `if`, `for` lub `while` także tworzy zasięg:
 
@@ -295,6 +331,10 @@ if (health < 20)
 
 // Console.WriteLine(warning); // błąd: warning istnieje tylko w bloku if
 ```
+<!-- code-result: Jeśli health jest mniejsze niż 20, konsola wyświetli:
+Mało zdrowia!
+
+Po odkomentowaniu ostatniej linii kompilator zgłosi błąd, bo warning istnieje tylko wewnątrz bloku if. -->
 
 Zamiast udostępniać wszystkim metodom wszystkie zmienne, przekazujemy tylko dane, których metoda rzeczywiście potrzebuje.
 
@@ -314,10 +354,12 @@ bool IsGameOver(int health)
     return health <= 0;
 }
 ```
+<!-- code-result: Fragment definiuje metodę w zapisie blokowym. IsGameOver(0) zwróci true, a IsGameOver(1) zwróci false. Sama definicja niczego nie wypisuje. -->
 
 ```csharp
 bool IsGameOver(int health) => health <= 0;
 ```
+<!-- code-result: Obie wersje definiują tę samą metodę. IsGameOver(0) zwróci true, a IsGameOver(1) zwróci false. Sama definicja niczego nie wypisuje. -->
 
 Inne przykłady:
 
@@ -325,6 +367,8 @@ Inne przykłady:
 int CalculateDamage(int strength, int weaponDamage) => strength + weaponDamage;
 void ShowSeparator() => Console.WriteLine("--------------------");
 ```
+<!-- code-result: Fragment definiuje dwie krótkie metody. Po wywołaniu ShowSeparator() konsola wyświetli:
+20 znaków „-” tworzących poziomy separator. -->
 
 Użyj `=>`, gdy metoda ma jedno proste wyrażenie i pozostaje czytelna bez dodatkowych zmiennych. Zwykły blok będzie lepszy dla kilku kroków, warunków i wielu instrukcji.
 
@@ -337,6 +381,7 @@ Metoda z ciałem wyrażeniowym ma nazwę i pełną sygnaturę:
 ```csharp
 bool IsGameOver(int health) => health <= 0;
 ```
+<!-- code-result: Fragment definiuje metodę z ciałem wyrażeniowym. IsGameOver(0) zwróci true, a IsGameOver(1) zwróci false. Sama definicja niczego nie wypisuje. -->
 
 Wyrażenie lambda jest krótką, bezimienną funkcją przekazaną w miejscu użycia:
 
@@ -344,6 +389,10 @@ Wyrażenie lambda jest krótką, bezimienną funkcją przekazaną w miejscu uży
 List<string> inventory = new List<string> { "miecz", "mikstura", "łuk" };
 List<string> longNames = inventory.FindAll(item => item.Length > 5);
 ```
+<!-- code-result: longNames zawiera jeden element:
+mikstura
+
+Fragment nie wypisuje listy na konsoli. -->
 
 Czytamy `item => item.Length > 5` jako: „dla elementu `item` sprawdź, czy jego nazwa ma więcej niż 5 znaków”. `FindAll` wykonuje ten test dla każdego elementu i tworzy listę pasujących elementów.
 
@@ -354,6 +403,10 @@ List<int> prices = new List<int> { 25, 100, 250 };
 List<int> expensivePrices = prices.FindAll(price => price >= 100);
 bool hasPotion = inventory.Exists(item => item == "mikstura");
 ```
+<!-- code-result: expensivePrices zawiera: 100, 250
+hasPotion ma wartość: true
+
+Fragment nie wypisuje tych wartości na konsoli. -->
 
 Jeśli warunek robi się długi lub powtarza się, nadaj mu nazwę:
 
@@ -363,6 +416,10 @@ bool IsHealingItem(string item) =>
 
 List<string> healingItems = inventory.FindAll(IsHealingItem);
 ```
+<!-- code-result: Dla wcześniejszej listy inventory kolekcja healingItems zawiera:
+mikstura
+
+Kod niczego nie wypisuje. -->
 
 Nie musisz teraz znać mechanizmu delegatów. Wystarczy praktyczny model: metoda listy prosi o mały warunek, a lambda dostarcza go za pomocą `=>`.
 
@@ -388,6 +445,7 @@ while (!IsGameOver(health))
     }
 }
 ```
+<!-- code-result: Wynik zależy od stanu gry i komend użytkownika. W każdej turze program pokazuje status i menu, odczytuje komendę, a następnie atakuje albo leczy bohatera. -->
 
 Przykładowa walidacja komendy:
 
@@ -408,6 +466,7 @@ string ReadCommand()
     }
 }
 ```
+<!-- code-result: Po wywołaniu metoda wyświetla pytanie „Wybierz 1 lub 2:”. Dla innych danych pokazuje „Nieznana komenda.” i pyta ponownie. Zwraca dopiero tekst "1" albo "2". -->
 
 Główna pętla pokazuje teraz ogólny przebieg gry. Szczegóły nadal istnieją, lecz mają nazwy i własne miejsce.
 
@@ -421,12 +480,14 @@ void CalculateDamage(int strength)
     Console.WriteLine(strength * 2);
 }
 ```
+<!-- code-result: Sam fragment tylko definiuje metodę. Po wywołaniu CalculateDamage(5) konsola wyświetli 10, ale wartości 10 nie można przypisać do zmiennej, ponieważ metoda ma typ void. -->
 
 Jeśli wynik ma być dalej używany, metoda powinna go zwrócić:
 
 ```csharp
 int CalculateDamage(int strength) => strength * 2;
 ```
+<!-- code-result: Metoda niczego nie wypisuje. CalculateDamage(5) zwróci wartość 10 do miejsca wywołania. -->
 
 ### Ignorowanie zwróconej wartości
 
@@ -434,6 +495,7 @@ int CalculateDamage(int strength) => strength * 2;
 Heal(health, 10, 100); // wynik przepada
 health = Heal(health, 10, 100); // wynik zostaje zapisany
 ```
+<!-- code-result: Pierwsze wywołanie oblicza wynik i go porzuca. Drugie zapisuje zwróconą wartość w health. Fragment niczego nie wypisuje. -->
 
 ### Zmiana kopii parametru
 
@@ -443,6 +505,7 @@ void Heal(int health)
     health += 10;
 }
 ```
+<!-- code-result: Fragment tylko definiuje metodę. Zmiana dotyczy lokalnej kopii parametru health, więc zdrowie poza metodą nie zostanie zmienione. -->
 
 Zmiana parametru nie aktualizuje automatycznie zmiennej przekazanej przez wywołującego. Na tym etapie zwracamy nową wartość:
 
@@ -450,6 +513,7 @@ Zmiana parametru nie aktualizuje automatycznie zmiennej przekazanej przez wywoł
 int Heal(int health) => health + 10;
 health = Heal(health);
 ```
+<!-- code-result: Heal zwraca wartość większą o 10, a przypisanie zapisuje ją w health. Dla health = 70 nowa wartość to 80. Fragment niczego nie wypisuje. -->
 
 ### Metoda robi zbyt wiele
 

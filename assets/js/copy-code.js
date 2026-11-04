@@ -1,5 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const codeBlocks = document.querySelectorAll('.material-content pre > code');
+    const codeBlocks = Array.from(document.querySelectorAll('.material-content pre > code'))
+        .filter((code) => code.classList.contains('language-csharp') || code.closest('.language-csharp'));
     const focusView = createFocusView();
 
     codeBlocks.forEach((code, index) => {
@@ -8,11 +9,13 @@ document.addEventListener('DOMContentLoaded', () => {
         const actions = document.createElement('div');
         const copyButton = document.createElement('button');
         const focusButton = document.createElement('button');
+        const result = getExampleResult(code);
 
         wrapper.className = 'code-block';
         wrapper.dataset.language = getLanguageLabel(code);
         pre.parentNode.insertBefore(wrapper, pre);
         wrapper.appendChild(pre);
+        createCodeTabs(wrapper, pre, result, `fragment-${index + 1}`);
 
         actions.className = 'code-actions';
         wrapper.appendChild(actions);
@@ -39,7 +42,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         focusButton.addEventListener('click', () => {
-            openFocusView(focusView, code, focusButton, index + 1);
+            openFocusView(focusView, code, result, focusButton, index + 1);
         });
     });
 
@@ -47,7 +50,8 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 function getLanguageLabel(code) {
-    const languageClass = Array.from(code.classList)
+    const languageOwner = code.closest('[class*="language-"]') ?? code;
+    const languageClass = Array.from(languageOwner.classList)
         .find((className) => className.startsWith('language-'));
 
     if (!languageClass) {
@@ -57,6 +61,90 @@ function getLanguageLabel(code) {
     const language = languageClass.replace('language-', '').toLowerCase();
     const labels = { csharp: 'C#', cs: 'C#' };
     return labels[language] ?? language.toUpperCase();
+}
+
+function getExampleResult(code) {
+    let current = code.parentElement;
+
+    while (current && current.classList.contains('highlight')) {
+        current = current.parentElement;
+    }
+
+    while (current && current !== document.body) {
+        let sibling = current.nextSibling;
+
+        while (sibling && sibling.nodeType === Node.TEXT_NODE && !sibling.textContent.trim()) {
+            sibling = sibling.nextSibling;
+        }
+
+        if (sibling?.nodeType === Node.COMMENT_NODE) {
+            const comment = sibling.textContent.trim();
+            if (comment.startsWith('code-result:')) {
+                return comment.replace(/^code-result:\s*/, '').trim();
+            }
+        }
+
+        current = current.parentElement;
+    }
+
+    return 'Ten fragment przedstawia definicję lub część programu. Nie generuje samodzielnego wyniku.';
+}
+
+function createCodeTabs(container, codePanel, result, idPrefix) {
+    const tabs = document.createElement('div');
+    const codeTab = document.createElement('button');
+    const resultTab = document.createElement('button');
+    const resultPanel = document.createElement('pre');
+    const resultCode = document.createElement('code');
+
+    tabs.className = 'code-tabs';
+    tabs.setAttribute('role', 'tablist');
+    tabs.setAttribute('aria-label', 'Kod i wynik przykładu');
+
+    codeTab.type = 'button';
+    codeTab.className = 'code-tab is-active';
+    codeTab.id = `${idPrefix}-code-tab`;
+    codeTab.textContent = 'Kod';
+    codeTab.setAttribute('role', 'tab');
+    codeTab.setAttribute('aria-selected', 'true');
+
+    resultTab.type = 'button';
+    resultTab.className = 'code-tab';
+    resultTab.id = `${idPrefix}-result-tab`;
+    resultTab.textContent = 'Wynik';
+    resultTab.setAttribute('role', 'tab');
+    resultTab.setAttribute('aria-selected', 'false');
+
+    codePanel.classList.add('code-tab-panel');
+    codePanel.id = `${idPrefix}-code-panel`;
+    codePanel.setAttribute('role', 'tabpanel');
+    codePanel.setAttribute('aria-labelledby', codeTab.id);
+    codeTab.setAttribute('aria-controls', codePanel.id);
+
+    resultPanel.className = 'code-tab-panel code-result-panel';
+    resultPanel.id = `${idPrefix}-result-panel`;
+    resultPanel.hidden = true;
+    resultPanel.setAttribute('role', 'tabpanel');
+    resultPanel.setAttribute('aria-labelledby', resultTab.id);
+    resultTab.setAttribute('aria-controls', resultPanel.id);
+    resultCode.textContent = result;
+    resultPanel.appendChild(resultCode);
+
+    tabs.append(codeTab, resultTab);
+    container.insertBefore(tabs, codePanel);
+    container.appendChild(resultPanel);
+
+    const selectTab = (showResult) => {
+        codeTab.classList.toggle('is-active', !showResult);
+        resultTab.classList.toggle('is-active', showResult);
+        codeTab.setAttribute('aria-selected', String(!showResult));
+        resultTab.setAttribute('aria-selected', String(showResult));
+        codePanel.hidden = showResult;
+        resultPanel.hidden = !showResult;
+    };
+
+    codeTab.addEventListener('click', () => selectTab(false));
+    resultTab.addEventListener('click', () => selectTab(true));
 }
 
 function setupDialogues(focusView) {
@@ -148,13 +236,14 @@ function createFocusView() {
     return focusView;
 }
 
-function openFocusView(focusView, code, trigger, number) {
+function openFocusView(focusView, code, result, trigger, number) {
     const pre = document.createElement('pre');
     const focusedCode = code.cloneNode(true);
     const languageLabel = getLanguageLabel(code);
 
     pre.appendChild(focusedCode);
     focusView.codeContainer.replaceChildren(pre);
+    createCodeTabs(focusView.codeContainer, pre, result, `focus-fragment-${number}`);
     focusView.codeContainer.classList.remove('is-dialogue');
     focusView.overlay.classList.add('is-code-view');
     focusView.title.textContent = `Kod do analizy · ${languageLabel} · fragment ${number}`;
