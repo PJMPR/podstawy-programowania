@@ -155,10 +155,27 @@ Jeśli `List<Enemy>` nie jest rozpoznawana, dodaj `using System.Collections.Gene
 
 ### Diagram modelu z wykładu
 
-<figure class="material-diagram">
-    <img src="/podstawy-programowania/assets/diagrams/07/model-klas.svg" alt="Diagram modelu klas Player i Enemy oraz listy przeciwników">
-    <figcaption>Model klas i obiektów używany w laboratorium.</figcaption>
-</figure>
+```text
++------------------+             +------------------+
+|      Player      |             |      Enemy       |
++------------------+             +------------------+
+| Name             |             | Name             |
+| Health           |             | Health           |
+| MaxHealth        |             | Damage           |
+| Gold             |             | TakeDamage()     |
+| TakeDamage()     |             | IsAlive()        |
+| Heal()           |             +--------+---------+
+| IsAlive()        |                      |
++--------+---------+                      | wiele obiektów
+         |                                v
+         |                       +------------------+
+         +---------------------->| List<Enemy>      |
+             współpracują        +------------------+
+             w walce             | Goblin           |
+                                 | Nietoperz        |
+                                 | Ork              |
+                                 +------------------+
+```
 
 <aside class="material-callout callout-comment">
 <strong>Komentarz</strong>
@@ -344,10 +361,23 @@ Jeśli wydzielisz klasę systemu walki, opisz jej odpowiedzialność jednym zdan
 
 ### Diagram tury
 
-<figure class="material-diagram">
-    <img src="/podstawy-programowania/assets/diagrams/07/przebieg-walki.svg" alt="Diagram przebiegu jednej tury walki">
-    <figcaption>Kolejność operacji w jednej turze walki.</figcaption>
-</figure>
+```text
+atak gracza
+     |
+     v
+czy Enemy żyje? -- nie --> przeciwnik pokonany
+     |
+    tak
+     v
+kontratak Enemy
+     |
+     v
+czy Player żyje? -- nie --> przegrana
+     |
+    tak
+     v
+następna tura
+```
 
 <aside class="material-callout callout-note">
 <strong>Uwaga</strong>
@@ -379,10 +409,16 @@ Gracz powinien potrafić:
 
 ### Diagram relacji
 
-<figure class="material-diagram">
-    <img src="/podstawy-programowania/assets/diagrams/07/relacja-obiektow.svg" alt="Diagram relacji między Player, Item i Enemy">
-    <figcaption>Relacje między obiektami w rozwiniętym modelu gry.</figcaption>
-</figure>
+```text
++------------------+       posiada wiele       +------------------+
+|      Player      |--------------------------->|      Item        |
++------------------+                            +------------------+
+| Health           |                            | Name             |
+| MaxHealth        |                            | HealAmount       |
+| Inventory        |                            | Quantity         |
+| Heal()           |                            | UseOne()         |
++------------------+                            +------------------+
+```
 
 <aside class="material-callout callout-hint">
 <strong>Podpowiedź</strong>
@@ -450,10 +486,25 @@ Rozbuduj przykłady z wykładu do działającej mini-areny. Projekt musi zaczyna
 
 ### Diagram projektu
 
-<figure class="material-diagram">
-    <img src="/podstawy-programowania/assets/diagrams/07/architektura-areny.svg" alt="Diagram architektury projektu mini-areny">
-    <figcaption>Proponowana architektura projektu końcowego.</figcaption>
-</figure>
+```text
+                         +----------------+
+                         |    Program     |
+                         | menu i tury    |
+                         +-------+--------+
+                                 |
+                +----------------+----------------+
+                |                                 |
+                v                                 v
+       +----------------+                +----------------+
+       |     Player     |                |  List<Enemy>   |
+       +-------+--------+                +--------+-------+
+               |                                  |
+               | posiada                          | zawiera wiele
+               v                                  v
+       +----------------+                +----------------+
+       |  Item / Reward |                |     Enemy      |
+       +----------------+                +----------------+
+```
 
 #### Wskazówki jakości projektu
 
