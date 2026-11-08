@@ -156,7 +156,7 @@ Jeśli `List<Enemy>` nie jest rozpoznawana, dodaj `using System.Collections.Gene
 ### Diagram modelu z wykładu
 
 <figure class="material-diagram">
-    <img src="{{ '/assets/diagrams/07/model-klas.svg' | relative_url }}" alt="Diagram modelu klas Player i Enemy oraz listy przeciwników">
+    <img src="/podstawy-programowania/assets/diagrams/07/model-klas.svg" alt="Diagram modelu klas Player i Enemy oraz listy przeciwników">
     <figcaption>Model klas i obiektów używany w laboratorium.</figcaption>
 </figure>
 
@@ -345,7 +345,7 @@ Jeśli wydzielisz klasę systemu walki, opisz jej odpowiedzialność jednym zdan
 ### Diagram tury
 
 <figure class="material-diagram">
-    <img src="{{ '/assets/diagrams/07/przebieg-walki.svg' | relative_url }}" alt="Diagram przebiegu jednej tury walki">
+    <img src="/podstawy-programowania/assets/diagrams/07/przebieg-walki.svg" alt="Diagram przebiegu jednej tury walki">
     <figcaption>Kolejność operacji w jednej turze walki.</figcaption>
 </figure>
 
@@ -380,7 +380,7 @@ Gracz powinien potrafić:
 ### Diagram relacji
 
 <figure class="material-diagram">
-    <img src="{{ '/assets/diagrams/07/relacja-obiektow.svg' | relative_url }}" alt="Diagram relacji między Player, Item i Enemy">
+    <img src="/podstawy-programowania/assets/diagrams/07/relacja-obiektow.svg" alt="Diagram relacji między Player, Item i Enemy">
     <figcaption>Relacje między obiektami w rozwiniętym modelu gry.</figcaption>
 </figure>
 
@@ -451,7 +451,7 @@ Rozbuduj przykłady z wykładu do działającej mini-areny. Projekt musi zaczyna
 ### Diagram projektu
 
 <figure class="material-diagram">
-    <img src="{{ '/assets/diagrams/07/architektura-areny.svg' | relative_url }}" alt="Diagram architektury projektu mini-areny">
+    <img src="/podstawy-programowania/assets/diagrams/07/architektura-areny.svg" alt="Diagram architektury projektu mini-areny">
     <figcaption>Proponowana architektura projektu końcowego.</figcaption>
 </figure>
 
