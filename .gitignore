@@ -15,6 +15,10 @@ build
 .bundle
 .ruby-version
 
+# .NET build artifacts
+**/bin/
+**/obj/
+
 # IDE
 .vscode/
 .idea/

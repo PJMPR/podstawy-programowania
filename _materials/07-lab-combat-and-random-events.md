@@ -20,6 +20,8 @@ Player  →  Enemy  →  lista przeciwników  →  walka  →  mini-projekt
 
 - Każde zadanie wykonuj na kopii działającego rozwiązania z poprzedniego zadania.
 - Rozwijaj poprzednie rozwiązanie małymi zmianami, aby łatwo obserwować ich wpływ.
+- Każde zadanie umieść w osobnej funkcji lub metodzie, na przykład `Task1()`, `Task2()` i `Task3()`.
+- W `Main` pozostaw tylko wybór zadania i wywołanie odpowiedniej funkcji lub metody.
 - Klasy `Player` i `Enemy` trzymaj w osobnych plikach.
 - Po każdej zmianie uruchom program i sprawdź przynajmniej jeden przypadek poprawny oraz jeden brzegowy.
 - Wymagania dotyczące komunikatów możesz realizować w `Program`, ale reguły stanu powinny pozostać w odpowiedniej klasie.
@@ -543,6 +545,9 @@ Rozbuduj przykłady z wykładu do działającej mini-areny. Projekt musi zaczyna
 - Która klasa powinna pilnować liczby przedmiotów?
 
 ## Kryteria zaliczenia
+
+- [ ] Każde zadanie znajduje się w osobnej funkcji lub metodzie.
+- [ ] `Main` nie zawiera całej implementacji zadań — tylko uruchamia wybrane rozwiązanie.
 
 ### Zadania 1–3 — proste
 
