@@ -4,7 +4,7 @@ title: "Laboratorium 07 — rozwijamy klasy Player i Enemy"
 kind: lab
 week: 7
 summary: "Dziewięć zadań rozwijających przykłady z wykładu: bohatera, przeciwnika, kolekcję obiektów i prostą walkę."
-published: false
+published: true
 content_ready: true
 ---
 
