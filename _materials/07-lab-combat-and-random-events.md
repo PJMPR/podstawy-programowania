@@ -26,16 +26,185 @@ Nie kopiuj klasy `Player` ani `Enemy` z wykładu. Każde zadanie wymaga zaprojek
 
 ## Mapa laboratorium
 
-```mermaid
-flowchart TD
-    A[Zadania 1–3<br/>proste: jeden obiekt] --> B[Zadania 4–6<br/>średnie: współpraca obiektów]
-    B --> C[Zadania 7–8<br/>trudne: modelowanie reguł gry]
-    C --> D[Zadanie 9<br/>projekt: mini-system gry]
+```text
++--------------------+     +------------------------+
+| Zadania 1–3        | --> | Zadania 4–6            |
+| jeden obiekt       |     | współpraca obiektów    |
++--------------------+     +------------------------+
+                                      |
+                                      v
+                         +------------------------+
+                         | Zadania 7–8            |
+                         | reguły i relacje       |
+                         +------------------------+
+                                      |
+                                      v
+                         +------------------------+
+                         | Zadanie 9              |
+                         | projekt mini-gry       |
+                         +------------------------+
 ```
 
 ```text
 JEDEN OBIEKT → KILKA OBIEKTÓW → REGUŁY → PROJEKT
 ```
+
+## Kod startowy do skopiowania
+
+Poniższe przykłady są celowo krótkie. Możesz skopiować je do własnego projektu, uruchomić, a następnie wykonywać zadania dodatkowe. Nie traktuj ich jako rozwiązania zadań 1–9 — są materiałem startowym do eksperymentów.
+
+### Przykład A — obiekt z konstruktorem i metodami
+
+Plik `Hero.cs`:
+
+```csharp
+public class Hero
+{
+    public string Name { get; }
+    public int Health { get; private set; }
+    public int MaxHealth { get; }
+
+    public Hero(string name, int maxHealth)
+    {
+        Name = name;
+        MaxHealth = maxHealth;
+        Health = maxHealth;
+    }
+
+    public void TakeDamage(int damage)
+    {
+        Health -= damage;
+
+        if (Health < 0)
+        {
+            Health = 0;
+        }
+    }
+
+    public void Heal(int amount)
+    {
+        Health += amount;
+
+        if (Health > MaxHealth)
+        {
+            Health = MaxHealth;
+        }
+    }
+
+    public bool IsAlive()
+    {
+        return Health > 0;
+    }
+}
+```
+
+Plik `Program.cs`:
+
+```csharp
+Hero hero = new Hero("Maciuś", 100);
+
+Console.WriteLine($"{hero.Name}: {hero.Health}/{hero.MaxHealth} HP");
+hero.TakeDamage(35);
+Console.WriteLine($"Po ataku: {hero.Health} HP");
+hero.Heal(20);
+Console.WriteLine($"Po leczeniu: {hero.Health} HP");
+Console.WriteLine($"Czy żyje? {hero.IsAlive()}");
+```
+
+### Przykład B — wiele obiektów w kolekcji
+
+```csharp
+List<Hero> team = new List<Hero>
+{
+    new Hero("Maciuś", 100),
+    new Hero("Jan", 120),
+    new Hero("Ala", 80)
+};
+
+foreach (Hero hero in team)
+{
+    Console.WriteLine($"{hero.Name}: {hero.Health} HP");
+}
+```
+
+Jeśli projekt nie rozpoznaje `List<T>`, dodaj na początku pliku dyrektywę `using System.Collections.Generic;` albo użyj wersji projektu, w której przestrzenie nazw są już dostępne.
+
+### Przykład C — drugi rodzaj obiektu
+
+```csharp
+public class TrainingDummy
+{
+    public string Name { get; }
+    public int Health { get; private set; }
+
+    public TrainingDummy(string name, int health)
+    {
+        Name = name;
+        Health = health;
+    }
+
+    public void Hit(int damage)
+    {
+        Health -= damage;
+
+        if (Health < 0)
+        {
+            Health = 0;
+        }
+    }
+}
+```
+
+> **Uwaga:** W przykładach użyto angielskich nazw, aby pokazać, że nazwy są decyzją projektową. W zadaniach możesz używać języka polskiego, ale nie mieszaj obu stylów w jednej klasie.
+
+### Diagram kodu startowego
+
+```text
++----------------+             +---------------------+
+|    Program     |             |        Hero         |
++----------------+             +---------------------+
+| tworzy obiekty |------------>| Name                |
+| wywołuje metody|             | Health              |
++----------------+             | MaxHealth           |
+                                | TakeDamage()        |
+                                | Heal()              |
+                                | IsAlive()           |
+                                +----------+----------+
+                                           |
+                                           | wiele obiektów
+                                           v
+                                +---------------------+
+                                | List<Hero> team     |
+                                +---------------------+
+```
+
+### Zadania dodatkowe do przykładu A
+
+1. Dodaj doświadczenie i poziom bohatera. Po zdobyciu ustalonej liczby punktów zwiększ poziom i maksymalne zdrowie.
+2. Dodaj metodę odpoczynku, która leczy tylko wtedy, gdy bohater żyje.
+3. Zabezpiecz metody przed ujemnymi obrażeniami i ujemnym leczeniem. Zdecyduj, czy odrzucasz taką operację, czy traktujesz ją jako zero.
+
+### Zadania dodatkowe do przykładu B
+
+1. Oblicz sumę zdrowia wszystkich bohaterów.
+2. Znajdź bohatera z największą liczbą punktów życia bez używania LINQ.
+3. Usuń z listy bohaterów, którzy nie żyją, i wypisz, ilu pozostało.
+
+### Zadania dodatkowe do przykładu C
+
+1. Dodaj informację, czy manekin jest aktywny.
+2. Dodaj liczbę wszystkich otrzymanych uderzeń.
+3. Napisz metodę resetującą manekin do zdrowia początkowego.
+
+> **Sugestia pracy:** Najpierw uruchom kod bez zmian. Następnie wykonuj tylko jedno dodatkowe zadanie naraz. Po każdej zmianie dopisz scenariusz, który pozwala sprawdzić nową regułę.
+
+> **Maciuś:** Skopiowałem kod, uruchomiłem i wszystko działa.
+>
+> **Jan:** Świetnie. A teraz zmień nazwę `Hero` na własny pomysł i dodaj jedną regułę, której nie ma w przykładzie.
+>
+> **Maciuś:** Czy „bohater czasem odkłada zadanie na później” się liczy?
+>
+> **Jan:** Tylko jeśli potrafisz zapisać to jako stan i metodę.
 
 ---
 
@@ -152,19 +321,14 @@ Wymagania projektowe:
 
 ### Diagram odpowiedzialności
 
-```mermaid
-classDiagram
-    class Produkt {
-        nazwa
-        cena
-        liczbaSztuk
-    }
-    class Automat {
-        produkty
-        pokazProdukty()
-        kupProdukt()
-    }
-    Automat "1" o-- "wiele" Produkt
+```text
++------------------+          1        wiele       +------------------+
+|     Automat      | o---------------------------->|     Produkt      |
++------------------+                               +------------------+
+| - produkty       |                               | - nazwa         |
+| + pokazProdukty  |                               | - cena          |
+| + kupProdukt     |                               | - liczbaSztuk   |
++------------------+                               +------------------+
 ```
 
 **Podpowiedź:** zadaj sobie pytanie, kto powinien wiedzieć, ile kosztuje napój — `Program`, czy `Produkt`? A kto powinien zmniejszyć stan magazynowy — produkt czy automat?
@@ -196,14 +360,23 @@ Wymagania:
 
 ### Diagram przepływu
 
-```mermaid
-flowchart LR
-    A[Program] --> B[Drużyna]
-    B --> C[Postać 1]
-    B --> D[Postać 2]
-    B --> E[Postać 3]
-    B --> F[reguły dodawania i usuwania]
-    B --> G[obliczenia dla całej grupy]
+```text
+                         +----------------------+
+                         |       Program        |
+                         +----------+-----------+
+                                    |
+                                    v
+                         +----------------------+
+                         |       Drużyna        |
+                         +--+--------+--------+--+
+                            |        |        |
+                            v        v        v
+                         Postać 1  Postać 2  Postać 3
+
+                         Drużyna odpowiada za:
+                         - dodawanie i usuwanie,
+                         - skład zespołu,
+                         - obliczenia grupowe.
 ```
 
 **Podpowiedź:** najpierw zaprojektuj operacje na jednej postaci, a dopiero potem operacje na kolekcji. Nie próbuj pisać całej drużyny w jednej metodzie `Main`.
@@ -238,18 +411,21 @@ Wymagania:
 
 ### Diagram współpracy
 
-```mermaid
-sequenceDiagram
-    participant Gracz
-    participant Mag
-    participant Ksiega as Księga zaklęć
-    participant Zaklecie as Zaklęcie
-    Gracz->>Mag: wybiera nazwę zaklęcia
-    Mag->>Ksiega: wyszukuje zaklęcie
-    Ksiega-->>Mag: znaleziono / brak
-    Mag->>Zaklecie: sprawdza koszt
-    Zaklecie-->>Mag: można rzucić / brak many
-    Mag-->>Gracz: wynik operacji
+```text
+Gracz       Mag          Księga zaklęć       Zaklęcie
+  |          |                 |                |
+  | wybiera  |                 |                |
+  |--------->|                 |                |
+  |          | wyszukuje       |                |
+  |          |---------------->|                |
+  |          | znaleziono/brak |                |
+  |          |<----------------|                |
+  |          | sprawdza koszt many              |
+  |          |--------------------------------->|
+  |          | można rzucić/brak many           |
+  |          |<---------------------------------|
+  | wynik    |                 |                |
+  |<---------|                 |                |
 ```
 
 **Podpowiedź:** rozdziel „zaklęcie jako dane” od „maga, który z niego korzysta”. Jeśli jedna klasa zna wszystkie szczegóły drugiej, zastanów się, czy odpowiedzialność nie została umieszczona w złym miejscu.
@@ -284,26 +460,24 @@ Reguły:
 
 ### Diagram modelu
 
-```mermaid
-classDiagram
-    class Klient {
-        nazwa
-        monety
-    }
-    class Zamowienie {
-        klient
-        produkt
-        cena
-        status
-    }
-    class Karczma {
-        kolejkaZamowien
-        przychod
-        dodajZamowienie()
-        obsluzNastepne()
-    }
-    Zamowienie --> Klient
-    Karczma o-- Zamowienie
+```text
++------------------+       zawiera        +------------------+
+|     Karczma      | o------------------->|    Zamówienie    |
++------------------+                      +------------------+
+| - kolejka        |                       | - klient        |
+| - przychód       |                       | - produkt       |
+| + dodaj          |                       | - cena          |
+| + obsłużNastępne |                       | - status        |
++------------------+                      +--------+---------+
+                                                   |
+                                                   | należy do
+                                                   v
+                                          +------------------+
+                                          |      Klient      |
+                                          +------------------+
+                                          | - nazwa          |
+                                          | - monety         |
+                                          +------------------+
 ```
 
 **Podpowiedź:** przed napisaniem kodu narysuj trzy pudełka i strzałki między nimi. Następnie przy każdym pudełku zapisz: „co ten obiekt wie?” oraz „co ten obiekt potrafi?”.
@@ -349,15 +523,32 @@ Wymagania:
 
 ### Diagram cyklu tury
 
-```mermaid
-flowchart TD
-    A[Start tury] --> B{Czy przeciwnik żyje?}
-    B -- Nie --> C[Pomiń przeciwnika]
-    B -- Tak --> D[Oceń HP, odwagę i stan obrony]
-    D --> E[Wybierz akcję]
-    E --> F[Wykonaj akcję]
-    F --> G[Aktualizuj stan]
-    G --> H[Następny przeciwnik]
+```text
+       +-----------+
+       | Start tury|
+       +-----+-----+
+             v
+      +------+------+
+      | Czy żyje?   |
+      +---+------+--+
+       nie|      |tak
+          v      v
+   +------+--+  +-----------------------+
+   | Pomiń   |  | Oceń HP, odwagę,      |
+   | obiekt  |  | obronę                |
+   +---------+  +-----------+-----------+
+                            v
+                    +-------+--------+
+                    | Wybierz akcję  |
+                    +-------+--------+
+                            v
+                    +-------+--------+
+                    | Wykonaj akcję  |
+                    +-------+--------+
+                            v
+                    +-------+--------+
+                    | Aktualizuj stan|
+                    +----------------+
 ```
 
 **Podpowiedź:** najpierw zaprojektuj i przetestuj decyzję dla jednego przeciwnika. Dopiero potem dodaj kolekcję. W przeciwnym razie trudno będzie ustalić, czy błąd dotyczy obiektu, czy pętli.
@@ -405,14 +596,20 @@ Projekt musi zawierać:
 
 ### Diagram planowania projektu
 
-```mermaid
-flowchart LR
-    A[Pomysł] --> B[Klasy i odpowiedzialności]
-    B --> C[Diagram relacji]
-    C --> D[Stan początkowy]
-    D --> E[Metody i reguły]
-    E --> F[Scenariusz działania]
-    F --> G[Testy i poprawki]
+```text
++--------+   +----------------------+   +------------------+
+| Pomysł |-->| Klasy i             |-->| Diagram relacji |
++--------+   | odpowiedzialności   |   +--------+---------+
+             +----------------------+            |
+                                                v
+             +----------------------+   +--------+---------+
+             | Stan początkowy     |<--| Metody i reguły  |
+             +----------+-----------+   +--------+---------+
+                        |                         |
+                        v                         v
+             +----------+-----------+   +---------+--------+
+             | Scenariusz działania |-->| Testy i poprawki |
+             +----------------------+   +------------------+
 ```
 
 ### Karta projektu do uzupełnienia
