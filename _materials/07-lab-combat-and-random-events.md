@@ -1,74 +1,52 @@
 ---
 layout: material
-title: "Laboratorium 07 — klasy i obiekty od zera"
+title: "Laboratorium 07 — rozwijamy klasy Player i Enemy"
 kind: lab
 week: 7
-summary: "Dziewięć zadań o projektowaniu klas, tworzeniu obiektów i modelowaniu prostych elementów gry."
-published: true
+summary: "Dziewięć zadań rozwijających przykłady z wykładu: bohatera, przeciwnika, kolekcję obiektów i prostą walkę."
+published: false
 content_ready: true
 ---
 
 ## Cel laboratorium
 
-W tym laboratorium samodzielnie zaprojektujesz i napiszesz kod oparty na klasach i obiektach. Zadania nie zawierają gotowych fragmentów implementacji z wykładu. Otrzymujesz wymagania, przykładowe dane i kryteria sprawdzenia — sposób rozwiązania należy do Ciebie.
+Wszystkie zadania w tym laboratorium bazują na kodzie pokazanym na wykładzie. Najpierw skopiuj przykłady do własnego projektu, uruchom je i dopiero potem modyfikuj. Nie tworzysz dziewięciu niezależnych programów — rozwijasz jeden mały model gry krok po kroku.
 
-Nie kopiuj klasy `Player` ani `Enemy` z wykładu. Każde zadanie wymaga zaprojektowania własnego modelu, nazw i reguł.
+```text
+Player  →  Enemy  →  lista przeciwników  →  walka  →  mini-projekt
+```
 
 ## Zasady pracy
 
-- Każdą klasę umieść w osobnym pliku.
-- Nazwy klas i właściwości dobieraj samodzielnie, ale zachowuj spójność.
-- Konstruktor powinien tworzyć obiekt gotowy do użycia.
-- Stan obiektu zmieniaj przez jego metody, jeśli dana reguła należy do tego obiektu.
-- W `Main` lub w głównej pętli programu pokazuj działanie obiektów na rzeczywistych danych.
-- Nie dodawaj dziedziczenia, interfejsów, polimorfizmu ani LINQ — nie są potrzebne do tych ćwiczeń.
-- Jeśli zadanie wymaga walidacji, nie wystarczy sam komentarz. Program powinien rzeczywiście zareagować na błędne dane.
+- Każde zadanie wykonuj na kopii działającego rozwiązania z poprzedniego zadania.
+- Nie przepisuj całego programu od nowa — zmieniaj tylko to, co jest potrzebne.
+- Klasy `Player` i `Enemy` trzymaj w osobnych plikach.
+- Po każdej zmianie uruchom program i sprawdź przynajmniej jeden przypadek poprawny oraz jeden brzegowy.
+- Wymagania dotyczące komunikatów możesz realizować w `Program`, ale reguły stanu powinny pozostać w odpowiedniej klasie.
+- Nie dodawaj dziedziczenia, interfejsów, polimorfizmu ani LINQ.
 
-## Mapa laboratorium
+---
 
-```text
-+--------------------+     +------------------------+
-| Zadania 1–3        | --> | Zadania 4–6            |
-| jeden obiekt       |     | współpraca obiektów    |
-+--------------------+     +------------------------+
-                                      |
-                                      v
-                         +------------------------+
-                         | Zadania 7–8            |
-                         | reguły i relacje       |
-                         +------------------------+
-                                      |
-                                      v
-                         +------------------------+
-                         | Zadanie 9              |
-                         | projekt mini-gry       |
-                         +------------------------+
-```
+## Przykłady z wykładu
 
-```text
-JEDEN OBIEKT → KILKA OBIEKTÓW → REGUŁY → PROJEKT
-```
+### Przykład 1 — klasa `Player`
 
-## Kod startowy do skopiowania
-
-Poniższe przykłady są celowo krótkie. Możesz skopiować je do własnego projektu, uruchomić, a następnie wykonywać zadania dodatkowe. Nie traktuj ich jako rozwiązania zadań 1–9 — są materiałem startowym do eksperymentów.
-
-### Przykład A — obiekt z konstruktorem i metodami
-
-Plik `Hero.cs`:
+Plik `Player.cs`:
 
 ```csharp
-public class Hero
+public class Player
 {
     public string Name { get; }
     public int Health { get; private set; }
     public int MaxHealth { get; }
+    public int Gold { get; private set; }
 
-    public Hero(string name, int maxHealth)
+    public Player(string name, int maxHealth, int gold)
     {
         Name = name;
         MaxHealth = maxHealth;
         Health = maxHealth;
+        Gold = gold;
     }
 
     public void TakeDamage(int damage)
@@ -98,52 +76,25 @@ public class Hero
 }
 ```
 
-Plik `Program.cs`:
+### Przykład 2 — klasa `Enemy`
+
+Plik `Enemy.cs`:
 
 ```csharp
-Hero hero = new Hero("Maciuś", 100);
-
-Console.WriteLine($"{hero.Name}: {hero.Health}/{hero.MaxHealth} HP");
-hero.TakeDamage(35);
-Console.WriteLine($"Po ataku: {hero.Health} HP");
-hero.Heal(20);
-Console.WriteLine($"Po leczeniu: {hero.Health} HP");
-Console.WriteLine($"Czy żyje? {hero.IsAlive()}");
-```
-
-### Przykład B — wiele obiektów w kolekcji
-
-```csharp
-List<Hero> team = new List<Hero>
-{
-    new Hero("Maciuś", 100),
-    new Hero("Jan", 120),
-    new Hero("Ala", 80)
-};
-
-foreach (Hero hero in team)
-{
-    Console.WriteLine($"{hero.Name}: {hero.Health} HP");
-}
-```
-
-Jeśli projekt nie rozpoznaje `List<T>`, dodaj na początku pliku dyrektywę `using System.Collections.Generic;` albo użyj wersji projektu, w której przestrzenie nazw są już dostępne.
-
-### Przykład C — drugi rodzaj obiektu
-
-```csharp
-public class TrainingDummy
+public class Enemy
 {
     public string Name { get; }
     public int Health { get; private set; }
+    public int Damage { get; }
 
-    public TrainingDummy(string name, int health)
+    public Enemy(string name, int health, int damage)
     {
         Name = name;
         Health = health;
+        Damage = damage;
     }
 
-    public void Hit(int damage)
+    public void TakeDamage(int damage)
     {
         Health -= damage;
 
@@ -152,553 +103,440 @@ public class TrainingDummy
             Health = 0;
         }
     }
+
+    public bool IsAlive()
+    {
+        return Health > 0;
+    }
 }
 ```
 
-> **Uwaga:** W przykładach użyto angielskich nazw, aby pokazać, że nazwy są decyzją projektową. W zadaniach możesz używać języka polskiego, ale nie mieszaj obu stylów w jednej klasie.
+### Przykład 3 — obiekty i walka
 
-### Diagram kodu startowego
+Plik `Program.cs`:
 
-```text
-+----------------+             +---------------------+
-|    Program     |             |        Hero         |
-+----------------+             +---------------------+
-| tworzy obiekty |------------>| Name                |
-| wywołuje metody|             | Health              |
-+----------------+             | MaxHealth           |
-                                | TakeDamage()        |
-                                | Heal()              |
-                                | IsAlive()           |
-                                +----------+----------+
-                                           |
-                                           | wiele obiektów
-                                           v
-                                +---------------------+
-                                | List<Hero> team     |
-                                +---------------------+
+```csharp
+Player player = new Player("Maciuś", 100, 25);
+Enemy goblin = new Enemy("Goblin", 30, 8);
+
+Console.WriteLine($"{player.Name} spotyka {goblin.Name}.");
+
+goblin.TakeDamage(12);
+Console.WriteLine($"{goblin.Name} ma {goblin.Health} HP.");
+
+if (goblin.IsAlive())
+{
+    player.TakeDamage(goblin.Damage);
+    Console.WriteLine($"{player.Name} ma {player.Health} HP.");
+}
+else
+{
+    Console.WriteLine("Przeciwnik został pokonany.");
+}
 ```
 
-### Zadania dodatkowe do przykładu A
+### Przykład 4 — lista przeciwników
 
-1. Dodaj doświadczenie i poziom bohatera. Po zdobyciu ustalonej liczby punktów zwiększ poziom i maksymalne zdrowie.
-2. Dodaj metodę odpoczynku, która leczy tylko wtedy, gdy bohater żyje.
-3. Zabezpiecz metody przed ujemnymi obrażeniami i ujemnym leczeniem. Zdecyduj, czy odrzucasz taką operację, czy traktujesz ją jako zero.
+```csharp
+List<Enemy> enemies = new List<Enemy>
+{
+    new Enemy("Goblin", 30, 8),
+    new Enemy("Nietoperz", 20, 5),
+    new Enemy("Ork", 70, 15)
+};
 
-### Zadania dodatkowe do przykładu B
+foreach (Enemy enemy in enemies)
+{
+    Console.WriteLine($"{enemy.Name}: {enemy.Health} HP");
+}
+```
 
-1. Oblicz sumę zdrowia wszystkich bohaterów.
-2. Znajdź bohatera z największą liczbą punktów życia bez używania LINQ.
-3. Usuń z listy bohaterów, którzy nie żyją, i wypisz, ilu pozostało.
+Jeśli `List<Enemy>` nie jest rozpoznawana, dodaj `using System.Collections.Generic;` albo użyj projektu, w którym przestrzenie nazw są już dostępne.
 
-### Zadania dodatkowe do przykładu C
+### Diagram modelu z wykładu
 
-1. Dodaj informację, czy manekin jest aktywny.
-2. Dodaj liczbę wszystkich otrzymanych uderzeń.
-3. Napisz metodę resetującą manekin do zdrowia początkowego.
+```text
++------------------+             +------------------+
+|      Player      |             |      Enemy       |
++------------------+             +------------------+
+| Name             |             | Name             |
+| Health           |             | Health           |
+| MaxHealth        |             | Damage           |
+| Gold             |             | TakeDamage()     |
+| TakeDamage()     |             | IsAlive()        |
+| Heal()           |             +--------+---------+
+| IsAlive()        |                      |
++--------+---------+                      | wiele obiektów
+         |                                v
+         |                       +------------------+
+         +---------------------->| List<Enemy>      |
+             współpracują        +------------------+
+             w walce             | Goblin           |
+                                 | Nietoperz        |
+                                 | Ork              |
+                                 +------------------+
+```
 
-> **Sugestia pracy:** Najpierw uruchom kod bez zmian. Następnie wykonuj tylko jedno dodatkowe zadanie naraz. Po każdej zmianie dopisz scenariusz, który pozwala sprawdzić nową regułę.
+> **Komentarz:** Kod jest punktem startowym. W zadaniach nie musisz zachować angielskich nazw, ale jeśli je zmienisz, zmień je konsekwentnie we wszystkich plikach.
 
-> **Maciuś:** Skopiowałem kod, uruchomiłem i wszystko działa.
+> **Maciuś:** Skopiowałem kod z wykładu i mam bohatera oraz goblina.
 >
-> **Jan:** Świetnie. A teraz zmień nazwę `Hero` na własny pomysł i dodaj jedną regułę, której nie ma w przykładzie.
+> **Jan:** A co potrafią?
 >
-> **Maciuś:** Czy „bohater czasem odkłada zadanie na później” się liczy?
+> **Maciuś:** Bohater ma HP, goblin też ma HP.
 >
-> **Jan:** Tylko jeśli potrafisz zapisać to jako stan i metodę.
+> **Jan:** To już początek. Teraz spraw, żeby każdy obiekt miał własne zachowanie, a nie tylko własną etykietę.
 
 ---
 
 ## Zadania proste
 
-### Zadanie 1 — Wizytówka bohatera
+### Zadanie 1 — Rozbuduj bohatera
 
-Utwórz klasę opisującą bohatera gry fantasy. Samodzielnie wybierz nazwę klasy oraz co najmniej cztery właściwości, które mają sens w wizytówce, na przykład imię, profesję, poziom, liczbę punktów reputacji lub ulubioną broń.
+Rozwiń klasę `Player` z przykładu.
 
-Wymagania:
+Dodaj:
 
-- konstruktor przyjmuje dane potrzebne do utworzenia bohatera,
-- program tworzy co najmniej trzy różne obiekty,
-- każdy obiekt jest wypisywany w czytelnej formie,
-- zmiana właściwości jednego bohatera nie zmienia pozostałych,
-- przynajmniej jedna właściwość ma wartość początkową ustalaną wewnątrz konstruktora.
+- właściwość `Level`,
+- właściwość `Experience`,
+- metodę zdobywania doświadczenia,
+- awans po przekroczeniu ustalonego progu.
 
-**Sprawdzenie:** utwórz bohatera o imieniu „Maciuś”, zmień jego poziom, a następnie wyświetl dane pozostałych bohaterów. Ich dane powinny pozostać bez zmian.
+Po awansie zwiększ `MaxHealth` i uzupełnij `Health` do nowego maksimum.
 
-**Podpowiedź:** najpierw zapisz na kartce zdanie: „Mój obiekt ma …”. To zdanie pomoże wybrać właściwości. Nie zaczynaj od metod.
+Sprawdź:
 
-> **Uwaga dla prowadzącego:** Jeśli student tworzy jedną klasę z właściwościami `ImieBohatera1`, `ImieBohatera2` i `ImieBohatera3`, poproś o powrót do modelu „jedna instancja = jeden bohater”.
+- zdobycie małej liczby punktów,
+- zdobycie dokładnie liczby potrzebnej do awansu,
+- zdobycie większej liczby punktów,
+- wyświetlenie poziomu i doświadczenia po każdej operacji.
 
-> **Maciuś:** Zrobiłem jednego bohatera z dwunastoma imionami.
->
-> **Jan:** To bohater czy rada miejska?
->
-> **Maciuś:** Rada miejska. Ale przynajmniej nie muszę tworzyć drugiego obiektu.
+**Podpowiedź:** decyzja o tym, czy nastąpił awans, powinna znajdować się w metodzie odpowiedzialnej za doświadczenie, a nie w kilku miejscach `Program`.
 
----
-
-### Zadanie 2 — Licznik energii
-
-Zaprojektuj klasę reprezentującą źródło energii: baterię, latarkę, generator albo magiczny kryształ.
-
-Obiekt powinien przechowywać:
-
-- nazwę,
-- aktualny poziom energii,
-- maksymalny poziom energii.
-
-Dodaj zachowania pozwalające:
-
-- zużyć określoną ilość energii,
-- naładować urządzenie,
-- sprawdzić, czy energia jest dostępna,
-- wyświetlić aktualny stan.
-
-Reguły:
-
-- energia nie może spaść poniżej zera,
-- energia nie może przekroczyć maksimum,
-- nieprawidłowa wartość początkowa powinna zostać odrzucona albo poprawiona,
-- program ma pokazać co najmniej jeden przypadek próby zużycia większej ilości energii niż dostępna.
-
-**Sprawdzenie:** wykonaj kolejno ładowanie, zużycie, zużycie zbyt dużej ilości oraz ponowne ładowanie. Po każdej operacji wypisz stan.
-
-**Podpowiedź:** wypisz na kartce dwie granice, których nie wolno przekroczyć. Następnie zdecyduj, która metoda ma pilnować każdej granicy.
-
-> **Komentarz:** To ćwiczenie nie jest o baterii. Jest o pilnowaniu poprawnego stanu obiektu.
+> **Uwaga:** Nie twórz publicznej właściwości, która pozwala ustawić poziom na wartość ujemną. Stan powinien pozostać kontrolowany przez klasę.
 
 ---
 
-### Zadanie 3 — Zwierzak w schronisku
+### Zadanie 2 — Bezpieczne obrażenia i leczenie
 
-Utwórz klasę opisującą zwierzę przebywające w schronisku. Wybierz własny zestaw danych, ale obiekt powinien znać co najmniej imię, gatunek, poziom głodu i poziom nastroju.
+Uzupełnij metody `TakeDamage` i `Heal` w klasach `Player` oraz `Enemy` o obsługę błędnych argumentów.
 
-Dodaj metody odpowiadające na pytania:
+Ustal własne reguły dla:
 
-- co dzieje się po nakarmieniu,
-- co dzieje się po zabawie,
-- czy zwierzę wymaga opieki,
-- czy może zostać adoptowane.
+- obrażeń równych zero,
+- obrażeń ujemnych,
+- leczenia równego zero,
+- leczenia ujemnego,
+- obrażeń zadanych pokonanemu obiektowi.
 
-Wymagania:
+Program powinien wypisać informację, czy operacja została wykonana, czy odrzucona.
 
-- wartości głodu i nastroju muszą mieścić się w ustalonym zakresie,
-- konstruktor tworzy zwierzę w sensownym stanie początkowym,
-- program tworzy minimum dwa zwierzęta o różnych danych,
-- co najmniej jedna metoda zwraca wartość `bool`.
+Nie zmieniaj bezpośrednio `Health` w `Program`. Wszystkie zmiany wykonuj przez metody obiektu.
 
-**Sprawdzenie:** przygotuj scenariusz dnia w schronisku: utworzenie zwierząt, karmienie jednego, zabawa z drugim i sprawdzenie ich stanu.
+**Podpowiedź:** najpierw zdecyduj, czy błędną operację ignorujesz, czy sygnalizujesz przez wartość `bool`. Ważne, aby zachowanie było spójne w obu klasach.
 
-**Podpowiedź:** nie twórz osobnej zmiennej `czyMozeBycAdoptowane`, jeśli da się ją obliczyć na podstawie aktualnego stanu obiektu.
+---
 
-> **Maciuś:** Mój pies ma głód równy 140.
->
-> **Jan:** To już nie głód, tylko czarna dziura.
->
-> **Maciuś:** Dlatego właśnie potrzebuję metody, która pilnuje zakresu.
+### Zadanie 3 — Dwa obiekty, dwa niezależne stany
+
+Na podstawie przykładu utwórz:
+
+- dwóch graczy,
+- dwóch przeciwników,
+- osobny scenariusz obrażeń dla każdej pary.
+
+Pokaż, że:
+
+- obrażenia goblina nie zmieniają zdrowia orka,
+- obrażenia jednego gracza nie zmieniają zdrowia drugiego,
+- każdy obiekt ma własne imię i własny stan,
+- dwie zmienne wskazujące różne obiekty nie współdzielą przypadkowo HP.
+
+**Podpowiedź:** wykonaj operację tylko na pierwszym obiekcie, a potem wypisz stan wszystkich czterech. To prosty test niezależności instancji.
 
 ---
 
 ## Zadania średnie
 
-### Zadanie 4 — Automat z napojami
+### Zadanie 4 — Lista przeciwników i raport
 
-Zaprojektuj klasę produktu oraz klasę automatu z napojami. Automat ma przechowywać listę dostępnych produktów, ich ceny i liczbę sztuk.
+Rozwiń listę `enemies` z przykładu do minimum pięciu przeciwników.
 
-Użytkownik powinien móc:
+Dodaj metody lub fragmenty programu, które:
 
-- wyświetlić dostępne produkty,
-- wybrać produkt,
-- zapłacić podaną kwotę,
-- otrzymać informację o braku produktu albo niewystarczającej kwocie,
-- kupić produkt i zmniejszyć jego stan magazynowy.
+- wypisują wszystkich żywych przeciwników,
+- obliczają sumę ich punktów życia,
+- znajdują przeciwnika z największą liczbą HP,
+- liczą, ilu przeciwników zostało pokonanych.
 
-Wymagania projektowe:
+Nie używaj LINQ. Wykorzystaj pętlę `foreach` lub klasyczną pętlę `for`.
 
-- produkt i automat są osobnymi klasami,
-- automat nie może sprzedać produktu z liczbą sztuk równą zero,
-- zakup nie może zmienić stanu innych produktów,
-- program powinien pokazać co najmniej trzy różne wyniki operacji: sukces, brak produktu, za mała kwota.
-
-### Diagram odpowiedzialności
+### Diagram przepływu raportu
 
 ```text
-+------------------+          1        wiele       +------------------+
-|     Automat      | o---------------------------->|     Produkt      |
-+------------------+                               +------------------+
-| - produkty       |                               | - nazwa         |
-| + pokazProdukty  |                               | - cena          |
-| + kupProdukt     |                               | - liczbaSztuk   |
-+------------------+                               +------------------+
+List<Enemy>
+     |
+     v
++----+-----------------------+
+| przejdź po każdym obiekcie |
++----+-----------------------+
+     |
+     +--> IsAlive()  → raport żywych
+     +--> Health     → suma HP
+     +--> Health     → największe HP
+     +--> IsAlive()  → liczba pokonanych
 ```
 
-**Podpowiedź:** zadaj sobie pytanie, kto powinien wiedzieć, ile kosztuje napój — `Program`, czy `Produkt`? A kto powinien zmniejszyć stan magazynowy — produkt czy automat?
-
-> **Uwaga dla prowadzącego:** Zadanie dobrze pokazuje relację „jeden obiekt przechowuje kolekcję innych obiektów”. Nie wymagaj jeszcze obsługi prawdziwych monet ani interfejsu użytkownika.
+**Sugestia:** zapisz osobno wartości pomocnicze do sumy, maksimum i licznika. Nie próbuj obliczać wszystkiego w jednym nieczytelnym wyrażeniu.
 
 ---
 
-### Zadanie 5 — Drużyna poszukiwaczy
+### Zadanie 5 — Wybór przeciwnika do walki
 
-Utwórz klasę postaci oraz klasę drużyny. Drużyna ma posiadać kolekcję postaci i udostępniać operacje na całej grupie.
+Na podstawie listy przeciwników dodaj możliwość wyboru przeciwnika przez gracza.
 
-Drużyna powinna potrafić:
+Program powinien:
 
-- dodać postać,
-- usunąć postać po nazwie albo indeksie,
-- wyświetlić skład,
-- obliczyć sumę punktów życia całej drużyny,
-- znaleźć postać z największą wartością wybranej statystyki.
+- wyświetlić przeciwników z numerami,
+- pobrać numer od użytkownika,
+- sprawdzić, czy numer jest poprawny,
+- sprawdzić, czy wybrany przeciwnik żyje,
+- zwrócić albo zapamiętać wybrany obiekt,
+- pozwolić graczowi zaatakować właśnie ten obiekt.
 
-Postać powinna mieć przynajmniej nazwę, rolę i dwie statystyki liczbowe.
+Obsłuż sytuacje:
 
-Wymagania:
+- tekst zamiast liczby,
+- numer mniejszy od pierwszego,
+- numer większy od liczby elementów,
+- wybór pokonanego przeciwnika.
 
-- nie można dodać dwóch postaci o tej samej nazwie,
-- usuwanie nieistniejącej postaci nie może zakończyć programu błędem,
-- drużyna sama zarządza swoją kolekcją,
-- `Program` nie powinien bezpośrednio modyfikować listy wewnątrz drużyny.
+**Podpowiedź:** najpierw przetestuj wybór bez walki. Dopiero gdy program zawsze wybiera właściwy obiekt, połącz go z `TakeDamage`.
 
-### Diagram przepływu
-
-```text
-                         +----------------------+
-                         |       Program        |
-                         +----------+-----------+
-                                    |
-                                    v
-                         +----------------------+
-                         |       Drużyna        |
-                         +--+--------+--------+--+
-                            |        |        |
-                            v        v        v
-                         Postać 1  Postać 2  Postać 3
-
-                         Drużyna odpowiada za:
-                         - dodawanie i usuwanie,
-                         - skład zespołu,
-                         - obliczenia grupowe.
-```
-
-**Podpowiedź:** najpierw zaprojektuj operacje na jednej postaci, a dopiero potem operacje na kolekcji. Nie próbuj pisać całej drużyny w jednej metodzie `Main`.
-
-> **Maciuś:** Moja drużyna ma dwie postacie, ale jedna z nich nazywa się tak samo jak druga.
+> **Maciuś:** Wybrałem przeciwnika numer 7, ale mam tylko trzech.
 >
-> **Jan:** To drużyna klonów czy błąd w formularzu?
+> **Jan:** To nie wybór przeciwnika, tylko próba zamówienia smoka z nieistniejącej strony menu.
 >
-> **Maciuś:** Automat drużyny powinien pilnować unikalnych nazw.
+> **Maciuś:** Czyli walidacja przed użyciem indeksu.
 
 ---
 
-### Zadanie 6 — Biblioteka zaklęć
+### Zadanie 6 — Pełna tura walki
 
-Zaprojektuj system, w którym mag posiada księgę zaklęć. Zaklęcie powinno mieć nazwę, koszt many, opis i siłę działania. Mag powinien mieć manę oraz kolekcję znanych zaklęć.
+Połącz `Player`, `Enemy` i listę przeciwników w powtarzalną turę walki.
 
-Dodaj możliwość:
+Jedna tura ma przebiegać następująco:
 
-- nauczenia się zaklęcia,
-- wyświetlenia znanych zaklęć,
-- rzucenia wybranego zaklęcia,
-- odrzucenia próby rzucenia nieznanego zaklęcia,
-- odrzucenia próby rzucenia zaklęcia bez wystarczającej many,
-- odnowienia many.
+1. wyświetlenie stanu gracza i wybranego przeciwnika,
+2. atak gracza,
+3. sprawdzenie, czy przeciwnik przeżył,
+4. kontratak przeciwnika tylko wtedy, gdy nadal żyje,
+5. sprawdzenie, czy gracz przeżył,
+6. komunikat o wyniku tury.
 
-Wymagania:
+Dodaj możliwość zakończenia walki po pokonaniu przeciwnika albo gracza.
 
-- to samo zaklęcie nie może zostać dodane drugi raz,
-- rzucenie zaklęcia zmniejsza manę,
-- nieudana próba nie zmienia many,
-- każda klasa ma mieć jasno określoną odpowiedzialność.
+Nie twórz nowej klasy systemu walki, jeśli nie potrafisz jeszcze wyjaśnić jej odpowiedzialności. Najpierw uporządkuj przepływ w metodzie lub kilku małych metodach programu.
 
-### Diagram współpracy
+### Diagram tury
 
 ```text
-Gracz       Mag          Księga zaklęć       Zaklęcie
-  |          |                 |                |
-  | wybiera  |                 |                |
-  |--------->|                 |                |
-  |          | wyszukuje       |                |
-  |          |---------------->|                |
-  |          | znaleziono/brak |                |
-  |          |<----------------|                |
-  |          | sprawdza koszt many              |
-  |          |--------------------------------->|
-  |          | można rzucić/brak many           |
-  |          |<---------------------------------|
-  | wynik    |                 |                |
-  |<---------|                 |                |
+atak gracza
+     |
+     v
+czy Enemy żyje? -- nie --> przeciwnik pokonany
+     |
+    tak
+     v
+kontratak Enemy
+     |
+     v
+czy Player żyje? -- nie --> przegrana
+     |
+    tak
+     v
+następna tura
 ```
 
-**Podpowiedź:** rozdziel „zaklęcie jako dane” od „maga, który z niego korzysta”. Jeśli jedna klasa zna wszystkie szczegóły drugiej, zastanów się, czy odpowiedzialność nie została umieszczona w złym miejscu.
-
-> **Komentarz dla prowadzącego:** Nie wymagaj tutaj systemu obrażeń ani losowości. Celem jest współpraca kilku obiektów i kontrola nieudanych operacji.
+**Uwaga:** najczęstszy błąd to kontratak pokonanego przeciwnika. Warunek `IsAlive()` musi zostać sprawdzony przed jego akcją.
 
 ---
 
 ## Zadania trudne
 
-### Zadanie 7 — Kolejka klientów w karczmie
+### Zadanie 7 — Przedmioty i leczenie z użyciem obiektów
 
-Zaprojektuj model karczmy, w której klienci składają zamówienia, a karczmarz obsługuje je w ustalonej kolejności.
+Dodaj do kodu z wykładu klasę przedmiotu leczniczego. Niech gracz posiada kolekcję przedmiotów.
 
-Potrzebne są co najmniej trzy rodzaje obiektów, na przykład klient, zamówienie i karczma. Samodzielnie zdecyduj, które dane i zachowania należą do poszczególnych klas.
-
-System powinien obsługiwać:
-
-- dodawanie klienta do kolejki,
-- przyjęcie zamówienia,
-- obsłużenie pierwszego oczekującego zamówienia,
-- wyświetlenie aktualnej kolejki,
-- obliczenie przychodu,
-- komunikat, gdy kolejka jest pusta.
-
-Reguły:
-
-- zamówienia są obsługiwane w kolejności zgłoszeń,
-- klient bez wystarczającej liczby monet nie może złożyć zamówienia,
-- obsłużone zamówienie znika z kolejki,
-- dane klientów nie mogą być mieszane między zamówieniami.
-
-### Diagram modelu
-
-```text
-+------------------+       zawiera        +------------------+
-|     Karczma      | o------------------->|    Zamówienie    |
-+------------------+                      +------------------+
-| - kolejka        |                       | - klient        |
-| - przychód       |                       | - produkt       |
-| + dodaj          |                       | - cena          |
-| + obsłużNastępne |                       | - status        |
-+------------------+                      +--------+---------+
-                                                   |
-                                                   | należy do
-                                                   v
-                                          +------------------+
-                                          |      Klient      |
-                                          +------------------+
-                                          | - nazwa          |
-                                          | - monety         |
-                                          +------------------+
-```
-
-**Podpowiedź:** przed napisaniem kodu narysuj trzy pudełka i strzałki między nimi. Następnie przy każdym pudełku zapisz: „co ten obiekt wie?” oraz „co ten obiekt potrafi?”.
-
-> **Maciuś:** Obsługuję klientów metodą `ObsluzWszystkichNaraz`.
->
-> **Jan:** A kolejka?
->
-> **Maciuś:** Kolejka jest smutna, ale za to szybka.
->
-> **Jan:** W karczmie najpierw obsługujemy pierwszego klienta. Nawet gobliny mają swoje prawa.
-
----
-
-### Zadanie 8 — Przeciwnik z zachowaniem
-
-Zbuduj system przeciwników, którzy różnią się statystykami i prostym zachowaniem. Nie korzystaj z dziedziczenia. Każdy przeciwnik ma być obiektem tej samej klasy, ale powinien posiadać dane pozwalające na różne decyzje.
-
-Każdy przeciwnik powinien mieć między innymi:
+Przedmiot powinien mieć:
 
 - nazwę,
-- punkty życia,
-- siłę ataku,
-- poziom odwagi albo agresji,
-- informację, czy żyje.
+- liczbę punktów leczenia,
+- liczbę sztuk.
 
-Zaimplementuj turę, w której przeciwnik wybiera jedną z decyzji:
+Gracz powinien potrafić:
 
-- atak,
-- obrona,
-- ucieczka,
-- oczekiwanie.
+- dodać przedmiot do kolekcji,
+- wyświetlić ekwipunek,
+- użyć wybranego przedmiotu,
+- zwiększyć HP, ale nie powyżej `MaxHealth`,
+- zmniejszyć liczbę sztuk,
+- odrzucić użycie nieistniejącego albo pustego przedmiotu.
 
-Decyzja ma zależeć od stanu przeciwnika, na przykład od poziomu HP i odwagi. Utwórz grupę co najmniej czterech przeciwników i przeprowadź kilka tur.
-
-Wymagania:
-
-- pokonany przeciwnik nie może wykonywać akcji,
-- obrona powinna mieć widoczny skutek w kolejnej turze,
-- ucieczka powinna zmienić stan obiektu,
-- przebieg każdej tury powinien być czytelnie wypisany,
-- reguły decyzji powinny znajdować się w klasie przeciwnika albo w osobnej klasie odpowiedzialnej za wybór akcji — nie w kilkudziesięciu warunkach w `Main`.
-
-### Diagram cyklu tury
+### Diagram relacji
 
 ```text
-       +-----------+
-       | Start tury|
-       +-----+-----+
-             v
-      +------+------+
-      | Czy żyje?   |
-      +---+------+--+
-       nie|      |tak
-          v      v
-   +------+--+  +-----------------------+
-   | Pomiń   |  | Oceń HP, odwagę,      |
-   | obiekt  |  | obronę                |
-   +---------+  +-----------+-----------+
-                            v
-                    +-------+--------+
-                    | Wybierz akcję  |
-                    +-------+--------+
-                            v
-                    +-------+--------+
-                    | Wykonaj akcję  |
-                    +-------+--------+
-                            v
-                    +-------+--------+
-                    | Aktualizuj stan|
-                    +----------------+
++------------------+       posiada wiele       +------------------+
+|      Player      |--------------------------->|      Item        |
++------------------+                            +------------------+
+| Health           |                            | Name             |
+| MaxHealth        |                            | HealAmount       |
+| Inventory        |                            | Quantity         |
+| Heal()           |                            | UseOne()         |
++------------------+                            +------------------+
 ```
 
-**Podpowiedź:** najpierw zaprojektuj i przetestuj decyzję dla jednego przeciwnika. Dopiero potem dodaj kolekcję. W przeciwnym razie trudno będzie ustalić, czy błąd dotyczy obiektu, czy pętli.
-
-> **Uwaga:** „zachowanie” w tym zadaniu nie oznacza jeszcze sztucznej inteligencji. To kilka jasno zapisanych reguł i decyzji zależnych od stanu.
+**Podpowiedź:** `Player` powinien decydować, czy może przyjąć leczenie, a `Item` powinien pilnować liczby własnych sztuk. Nie trzymaj obu reguł w jednej instrukcji w `Main`.
 
 ---
 
-### Zadanie 9 — Projekt: mini-arena obiektowa
+### Zadanie 8 — Różne typy przeciwników bez dziedziczenia
 
-Zaprojektuj i zaimplementuj własną mini-grę tekstową opartą na klasach i obiektach. Temat wybierz samodzielnie: arena, ekspedycja, sklep, stacja kosmiczna, laboratorium, turniej kulinarny albo inny świat, w którym występują co najmniej trzy rodzaje bytów.
+Rozbuduj klasę `Enemy`, zachowując jedną klasę dla wszystkich przeciwników.
 
-#### Minimalne wymagania projektu
+Dodaj właściwości, które pozwolą opisać różne zachowania:
 
-Projekt musi zawierać:
+- typ ataku,
+- szansę na obronę albo ucieczkę,
+- nagrodę w złocie,
+- informację, czy przeciwnik jest aktualnie w obronie.
 
-- co najmniej **cztery własne klasy**,
-- co najmniej **dwa obiekty** każdej z dwóch wybranych klas,
-- konstruktory ustawiające poprawny stan początkowy,
-- właściwości opisujące stan obiektów,
-- metody zmieniające stan zgodnie z regułami gry,
-- kolekcję przechowującą obiekty,
-- co najmniej jedną relację między klasami, np. drużyna posiada postacie albo stacja posiada moduły,
-- warunek zwycięstwa i warunek zakończenia niepowodzeniem,
-- minimum pięć różnych komunikatów wynikających z decyzji gracza,
-- obsługę przynajmniej trzech niepoprawnych sytuacji.
+W walce dodaj co najmniej trzy możliwe sytuacje:
 
-#### Ograniczenia
+- zwykły atak,
+- obrona zmniejszająca obrażenia,
+- ucieczka usuwająca przeciwnika z aktywnej walki.
 
-- nie kopiuj gotowego przykładu `Player`/`Enemy`,
-- nie twórz całej gry w jednym pliku i jednej metodzie,
-- nie używaj dziedziczenia ani interfejsów,
-- nie dodawaj mechaniki tylko po to, aby zwiększyć liczbę klas,
-- każda klasa musi mieć uzasadnioną odpowiedzialność.
+Utwórz przynajmniej cztery obiekty `Enemy` z różnymi wartościami tych właściwości. Nie twórz klas `Goblin`, `Ork` i `Dragon`. Celem jest pokazanie, że jedna klasa może tworzyć różne obiekty.
 
-#### Etapy pracy
+**Podpowiedź:** zacznij od jednej reguły, na przykład obrony. Dopiero gdy działa dla jednego przeciwnika, dodaj kolejne zachowania.
 
-1. Opisz pomysł w pięciu zdaniach.
-2. Narysuj diagram klas i relacji.
-3. Wypisz właściwości każdej klasy.
-4. Wypisz metody każdej klasy bez pisania kodu.
-5. Zaimplementuj jeden działający scenariusz.
-6. Dodaj walidację i przypadki niepoprawne.
-7. Przygotuj test ręczny i krótkie podsumowanie decyzji projektowych.
-
-### Diagram planowania projektu
-
-```text
-+--------+   +----------------------+   +------------------+
-| Pomysł |-->| Klasy i             |-->| Diagram relacji |
-+--------+   | odpowiedzialności   |   +--------+---------+
-             +----------------------+            |
-                                                v
-             +----------------------+   +--------+---------+
-             | Stan początkowy     |<--| Metody i reguły  |
-             +----------+-----------+   +--------+---------+
-                        |                         |
-                        v                         v
-             +----------+-----------+   +---------+--------+
-             | Scenariusz działania |-->| Testy i poprawki |
-             +----------------------+   +------------------+
-```
-
-### Karta projektu do uzupełnienia
-
-| Element | Odpowiedź studenta |
-|---|---|
-| Nazwa projektu |  |
-| Główny cel gracza |  |
-| Klasa 1 i odpowiedzialność |  |
-| Klasa 2 i odpowiedzialność |  |
-| Klasa 3 i odpowiedzialność |  |
-| Klasa 4 i odpowiedzialność |  |
-| Kolekcja obiektów |  |
-| Warunek wygranej |  |
-| Warunek przegranej |  |
-| Trzy sytuacje błędne |  |
-
-> **Komentarz dla prowadzącego:** Oceniaj przede wszystkim model i odpowiedzialności klas, a nie rozmiar gry. Mały, spójny projekt jest lepszy niż duża gra, w której wszystkie reguły znajdują się w `Main`.
-
-> **Maciuś:** Mój projekt ma 47 klas i trzy ekrany menu.
->
-> **Jan:** A co potrafi gracz?
->
-> **Maciuś:** Na razie nic, ale architektura jest imponująca.
->
-> **Jan:** Zacznij od jednego działającego scenariusza. Smok może poczekać.
+> **Komentarz:** To nadal podstawy klas i obiektów, a nie pełny system sztucznej inteligencji. Ważniejsze są jasne reguły i poprawny stan niż liczba efektów.
 
 ---
 
-## Sugestie i komentarze do pracy
+### Zadanie 9 — Projekt: arena na bazie kodu z wykładu
 
-### Jak zacząć każde zadanie
+Rozbuduj przykłady z wykładu do działającej mini-areny. Projekt musi zaczynać się od klas `Player` i `Enemy`, a wszystkie nowe elementy powinny rozszerzać istniejący model.
 
-1. Zapisz rzeczowniki z treści zadania — często podpowiadają nazwy klas.
-2. Zapisz czasowniki — często podpowiadają nazwy metod.
-3. Oddziel dane od działań.
-4. Ustal, kto jest właścicielem każdej reguły.
-5. Dopiero potem utwórz pliki i zacznij implementację.
+#### Wymagania obowiązkowe
 
-### Pytania pomocnicze
+- zachowaj klasę `Player` z HP, maksymalnym HP, złotem i metodami zmiany stanu,
+- zachowaj klasę `Enemy` z HP, obrażeniami i metodą sprawdzania życia,
+- utwórz listę co najmniej pięciu przeciwników,
+- pozwól wybrać przeciwnika i przeprowadzić z nim walkę,
+- dodaj co najmniej jedną klasę wynikającą z rozwoju kodu z wykładu, np. przedmiot lub nagrodę,
+- dodaj menu minimum trzech akcji,
+- dodaj warunek zwycięstwa i porażki,
+- obsłuż co najmniej trzy niepoprawne dane użytkownika,
+- po zakończeniu walki pokaż podsumowanie: HP, złoto i liczbę pokonanych przeciwników.
 
-- Czy ten obiekt może istnieć bez tej właściwości?
-- Czy zmiana tej wartości powinna być możliwa z dowolnego miejsca programu?
-- Który obiekt powinien pilnować tej reguły?
-- Czy metoda robi jedną czytelnie nazwaną rzecz?
-- Czy dwa utworzone obiekty są niezależne?
-- Co powinno się stać dla zera, wartości ujemnej i pustej kolekcji?
+#### Etapy realizacji
 
-### Typowe problemy
+1. Uruchom przykłady bez zmian.
+2. Dodaj listę przeciwników.
+3. Dodaj wybór przeciwnika.
+4. Dodaj pełną turę walki.
+5. Dodaj przedmiot, nagrodę albo inny element wynikający z przykładu.
+6. Dodaj menu i warunki końca.
+7. Przetestuj przypadki brzegowe.
 
-| Problem | Pytanie naprowadzające |
-|---|---|
-| Wszystko znajduje się w `Main` | Który fragment opisuje jeden konkretny byt? |
-| Właściwość ma przypadkową wartość | Czy konstruktor ustawia stan początkowy? |
-| HP spada poniżej zera | Która metoda zmienia HP i gdzie pilnuje granicy? |
-| Zmiana jednego obiektu zmienia drugi | Czy utworzono dwa razy `new`, czy skopiowano odwołanie? |
-| Klasa ma kilkanaście niezwiązanych zadań | Czy można podzielić odpowiedzialności? |
-| Program kończy się błędem dla pustej listy | Czy sprawdzono przypadek brzegowy przed odczytem? |
+### Diagram projektu
+
+```text
+                         +----------------+
+                         |    Program     |
+                         | menu i tury    |
+                         +-------+--------+
+                                 |
+                +----------------+----------------+
+                |                                 |
+                v                                 v
+       +----------------+                +----------------+
+       |     Player     |                |  List<Enemy>   |
+       +-------+--------+                +--------+-------+
+               |                                  |
+               | posiada                          | zawiera wiele
+               v                                  v
+       +----------------+                +----------------+
+       |  Item / Reward |                |     Enemy      |
+       +----------------+                +----------------+
+```
+
+#### Ograniczenia projektu
+
+- Nie kopiuj gotowego rozwiązania z internetu.
+- Nie przenoś wszystkich reguł do jednej metody `Main`.
+- Nie dodawaj dziedziczenia ani interfejsów.
+- Każda nowa klasa musi mieć uzasadnioną odpowiedzialność.
+- Kod projektu powinien zawierać komentarz przy co najmniej dwóch decyzjach projektowych: dlaczego właściwość jest prywatna oraz dlaczego dana metoda należy do konkretnej klasy.
+
+> **Maciuś:** Dodałem do areny smoka, sklep, pogodę, zapis gry i trzy zakończenia.
+>
+> **Jan:** A działa podstawowa walka?
+>
+> **Maciuś:** Tylko czasami.
+>
+> **Jan:** Najpierw doprowadź jedną turę od ataku do zwycięstwa. Dopiero potem zapraszaj pogodę na arenę.
+
+---
+
+## Sugestie do pracy
+
+### Gdy nie wiesz, od czego zacząć
+
+1. Uruchom dokładnie przykład z wykładu.
+2. Zmień tylko jedną wartość konstruktora.
+3. Wypisz stan obiektu przed i po wywołaniu metody.
+4. Dodaj przypadek brzegowy.
+5. Dopiero potem przejdź do kolekcji albo pętli walki.
+
+### Pytania kontrolne
+
+- Czy `Player` i `Enemy` są klasami czy obiektami?
+- Co tworzy `new Enemy(...)`?
+- Dlaczego `Health` ma `private set`?
+- Co się stanie, jeśli kontratak nastąpi bez sprawdzenia `IsAlive()`?
+- Dlaczego dwa wywołania `new Enemy(...)` tworzą niezależnych przeciwników?
+- Która klasa powinna pilnować liczby przedmiotów?
 
 ## Kryteria zaliczenia
 
 ### Zadania 1–3 — proste
 
-- [ ] Klasa opisuje jeden wyraźny rodzaj obiektu.
-- [ ] Obiekt jest tworzony przez konstruktor.
-- [ ] Utworzono minimum dwa niezależne obiekty.
-- [ ] Stan obiektu można odczytać i zmienić zgodnie z regułami.
+- [ ] Student poprawnie modyfikuje klasy `Player` i `Enemy`.
+- [ ] Konstruktor nadal tworzy poprawny stan początkowy.
+- [ ] Metody nie pozwalają na oczywiście błędny stan HP.
+- [ ] Obiekty zachowują niezależne dane.
 
 ### Zadania 4–6 — średnie
 
-- [ ] Współpracują co najmniej dwie klasy.
-- [ ] Jedna klasa przechowuje kolekcję innych obiektów.
-- [ ] Niepoprawna operacja nie niszczy stanu programu.
-- [ ] Odpowiedzialności klas są widoczne w nazwach i metodach.
+- [ ] Lista przeciwników jest poprawnie przetwarzana.
+- [ ] Wybór obiektu jest walidowany.
+- [ ] Tura nie wykonuje kontrataku pokonanego przeciwnika.
+- [ ] Program obsługuje zakończenie walki.
 
 ### Zadania 7–9 — trudne
 
-- [ ] Model obejmuje kilka rodzajów obiektów i ich relacje.
-- [ ] Reguły znajdują się w odpowiednich klasach.
-- [ ] Program obsługuje przypadki brzegowe.
-- [ ] Istnieje działający scenariusz od początku do końca.
-- [ ] Student potrafi ustnie wyjaśnić, dlaczego każda klasa istnieje.
+- [ ] Nowe klasy współpracują z `Player` i `Enemy`.
+- [ ] Reguły są umieszczone w odpowiedzialnych klasach.
+- [ ] Projekt ma działający scenariusz od początku do końca.
+- [ ] Student potrafi wyjaśnić, co zmienił w kodzie z wykładu.
 
 ## Co oddać
 
-Do każdego zadania oddaj:
-
-- pliki źródłowe,
+- pliki źródłowe projektu,
 - krótką instrukcję uruchomienia,
-- dwa lub trzy przykładowe scenariusze działania,
-- w zadaniach 5–9 diagram albo tabelę odpowiedzialności,
-- w zadaniu 9 dodatkowo opis decyzji projektowych i listę znanych ograniczeń.
+- zrzut lub tekstowy przykład działania programu,
+- w zadaniu 9 diagram klas albo tabelę odpowiedzialności,
+- listę dwóch decyzji projektowych i trzech przetestowanych przypadków brzegowych.
