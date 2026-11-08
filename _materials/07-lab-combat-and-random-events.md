@@ -4,7 +4,7 @@ title: "Laboratorium 07 — klasy i obiekty od zera"
 kind: lab
 week: 7
 summary: "Dziewięć zadań o projektowaniu klas, tworzeniu obiektów i modelowaniu prostych elementów gry."
-published: false
+published: true
 content_ready: true
 ---
 

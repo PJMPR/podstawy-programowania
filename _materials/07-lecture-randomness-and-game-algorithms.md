@@ -4,7 +4,7 @@ title: "Klasy i obiekty — bohater, przeciwnik i ich odpowiedzialności"
 kind: lecture
 week: 7
 summary: "Praktyczne wprowadzenie do klas, obiektów, właściwości, konstruktorów i metod na przykładzie konsolowej gry."
-published: false
+published: true
 content_ready: true
 ---
 
