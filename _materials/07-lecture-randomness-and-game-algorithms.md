@@ -226,9 +226,9 @@ Nie chcemy tworzyć bohatera w kilku krokach i zastanawiać się, czy ktoś usta
 class Player
 {
     public string Imie { get; set; }
-    public int Hp { get; private set; }
+    public int Hp { get; set; }
     public int MaksymalneHp { get; }
-    public int Zloto { get; private set; }
+    public int Zloto { get; set; }
 
     public Player(string imie, int maksymalneHp, int zloto)
     {
@@ -249,23 +249,22 @@ Player jan = new Player("Jan", 120, 10);
 Console.WriteLine($"{macius.Imie}: {macius.Hp}/{macius.MaksymalneHp} HP");
 ```
 
-### Co oznacza `private set`?
+### Publiczne właściwości na początek
 
 ```csharp
-public int Hp { get; private set; }
+public int Hp { get; set; }
 ```
 
 - każdy kod może odczytać `Hp`,
-- tylko kod wewnątrz klasy `Player` może zmienić `Hp`.
+- każdy kod może zmienić `Hp`.
 
-Dzięki temu nie da się przypadkowo napisać:
+Dzięki temu na tym etapie możemy łatwo obserwować i modyfikować stan obiektu:
 
 ```csharp
-// Nie skompiluje się, bo set jest prywatny.
-macius.Hp = -500;
+macius.Hp = 80;
 ```
 
-> **Ważne:** `private set` jest prostą granicą. Zmiany zdrowia powinny odbywać się przez zachowania klasy, na przykład `TakeDamage` i `Heal`.
+> **Ważne:** Na tym etapie wszystkie właściwości przykładowych klas są publiczne. Reguły poprawnej zmiany zdrowia nadal pokazujemy w metodach `TakeDamage` i `Heal`, ale student może bezpośrednio obserwować i zmieniać właściwości.
 
 ### Diagram tworzenia obiektu
 
@@ -290,7 +289,7 @@ Jeżeli wszystkie reguły zmiany HP znajdują się w `Program.cs`, klasa nadal j
 class Player
 {
     public string Imie { get; }
-    public int Hp { get; private set; }
+    public int Hp { get; set; }
     public int MaksymalneHp { get; }
 
     public Player(string imie, int maksymalneHp)
@@ -385,7 +384,7 @@ Przeciwnik ma podobne dane, ale na tym etapie tworzymy osobną, prostą klasę:
 class Enemy
 {
     public string Nazwa { get; }
-    public int Hp { get; private set; }
+    public int Hp { get; set; }
     public int Obrazenia { get; }
 
     public Enemy(string nazwa, int hp, int obrazenia)
@@ -578,7 +577,7 @@ class Item
 {
     public string Nazwa { get; }
     public int Cena { get; }
-    public int LiczbaSztuk { get; private set; }
+    public int LiczbaSztuk { get; set; }
 
     public Item(string nazwa, int cena)
     {
@@ -640,7 +639,7 @@ Jeśli grupa zapyta, dlaczego `drugiGoblin = goblin` nie tworzy kopii, wystarczy
 - Właściwości przechowują dane obiektu.
 - Konstruktor ustawia poprawny stan początkowy.
 - Metody opisują czynności wykonywane przez obiekt.
-- `private set` ogranicza miejsce, w którym można zmienić właściwość.
+- Publiczne właściwości pozwalają na prostą obserwację i modyfikację stanu na początku nauki.
 - Każde `new Enemy(...)` tworzy niezależnego przeciwnika.
 - Klasa powinna mieć jasną odpowiedzialność.
 - Na tym etapie nie potrzebujemy jeszcze dziedziczenia ani polimorfizmu.
@@ -651,7 +650,7 @@ Jeśli grupa zapyta, dlaczego `drugiGoblin = goblin` nie tworzy kopii, wystarczy
 class Enemy
 {
     public string Nazwa { get; }
-    public int Hp { get; private set; }
+    public int Hp { get; set; }
 
     public Enemy(string nazwa, int hp)
     {
@@ -684,7 +683,7 @@ Console.WriteLine($"{goblin.Nazwa}: {goblin.Hp} HP");
 
 1. Czym różni się klasa `Player` od obiektu `player`?
 2. Po co stosujemy konstruktor?
-3. Co daje zapis `public int Hp { get; private set; }`?
+3. Co daje zapis `public int Hp { get; set; }`?
 4. Dlaczego `new Enemy("Goblin", 30)` tworzy osobny obiekt?
 5. Gdzie powinna znajdować się reguła ograniczająca HP do zera?
 6. Dlaczego lepiej wywołać `enemy.TakeDamage(10)` niż zmieniać HP przeciwnika w dziesięciu miejscach?

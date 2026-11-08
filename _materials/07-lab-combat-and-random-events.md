@@ -10,7 +10,7 @@ content_ready: true
 
 ## Cel laboratorium
 
-Wszystkie zadania w tym laboratorium bazują na kodzie pokazanym na wykładzie. Najpierw skopiuj przykłady do własnego projektu, uruchom je i dopiero potem modyfikuj. Nie tworzysz dziewięciu niezależnych programów — rozwijasz jeden mały model gry krok po kroku.
+Wszystkie zadania w tym laboratorium bazują na kodzie pokazanym na wykładzie. Najpierw skopiuj przykłady do własnego projektu, uruchom je i dopiero potem modyfikuj. Rozwijasz jeden mały model gry krok po kroku.
 
 ```text
 Player  →  Enemy  →  lista przeciwników  →  walka  →  mini-projekt
@@ -19,11 +19,11 @@ Player  →  Enemy  →  lista przeciwników  →  walka  →  mini-projekt
 ## Zasady pracy
 
 - Każde zadanie wykonuj na kopii działającego rozwiązania z poprzedniego zadania.
-- Nie przepisuj całego programu od nowa — zmieniaj tylko to, co jest potrzebne.
+- Rozwijaj poprzednie rozwiązanie małymi zmianami, aby łatwo obserwować ich wpływ.
 - Klasy `Player` i `Enemy` trzymaj w osobnych plikach.
 - Po każdej zmianie uruchom program i sprawdź przynajmniej jeden przypadek poprawny oraz jeden brzegowy.
 - Wymagania dotyczące komunikatów możesz realizować w `Program`, ale reguły stanu powinny pozostać w odpowiedniej klasie.
-- Nie dodawaj dziedziczenia, interfejsów, polimorfizmu ani LINQ.
+- Skup się na klasach, obiektach, właściwościach, metodach i kolekcjach poznanych na wykładzie.
 
 ---
 
@@ -37,9 +37,9 @@ Plik `Player.cs`:
 public class Player
 {
     public string Name { get; }
-    public int Health { get; private set; }
+    public int Health { get; set; }
     public int MaxHealth { get; }
-    public int Gold { get; private set; }
+    public int Gold { get; set; }
 
     public Player(string name, int maxHealth, int gold)
     {
@@ -84,7 +84,7 @@ Plik `Enemy.cs`:
 public class Enemy
 {
     public string Name { get; }
-    public int Health { get; private set; }
+    public int Health { get; set; }
     public int Damage { get; }
 
     public Enemy(string name, int health, int damage)
@@ -155,29 +155,15 @@ Jeśli `List<Enemy>` nie jest rozpoznawana, dodaj `using System.Collections.Gene
 
 ### Diagram modelu z wykładu
 
-```text
-+------------------+             +------------------+
-|      Player      |             |      Enemy       |
-+------------------+             +------------------+
-| Name             |             | Name             |
-| Health           |             | Health           |
-| MaxHealth        |             | Damage           |
-| Gold             |             | TakeDamage()     |
-| TakeDamage()     |             | IsAlive()        |
-| Heal()           |             +--------+---------+
-| IsAlive()        |                      |
-+--------+---------+                      | wiele obiektów
-         |                                v
-         |                       +------------------+
-         +---------------------->| List<Enemy>      |
-             współpracują        +------------------+
-             w walce             | Goblin           |
-                                 | Nietoperz        |
-                                 | Ork              |
-                                 +------------------+
-```
+<figure class="material-diagram">
+    <img src="{{ '/assets/diagrams/07/model-klas.svg' | relative_url }}" alt="Diagram modelu klas Player i Enemy oraz listy przeciwników">
+    <figcaption>Model klas i obiektów używany w laboratorium.</figcaption>
+</figure>
 
-> **Komentarz:** Kod jest punktem startowym. W zadaniach nie musisz zachować angielskich nazw, ale jeśli je zmienisz, zmień je konsekwentnie we wszystkich plikach.
+<aside class="material-callout callout-comment">
+<strong>Komentarz</strong>
+<p>Kod jest punktem startowym. Możesz zachować angielskie nazwy albo zmienić je na polskie — ważna jest konsekwencja we wszystkich plikach.</p>
+</aside>
 
 > **Maciuś:** Skopiowałem kod z wykładu i mam bohatera oraz goblina.
 >
@@ -211,9 +197,15 @@ Sprawdź:
 - zdobycie większej liczby punktów,
 - wyświetlenie poziomu i doświadczenia po każdej operacji.
 
-**Podpowiedź:** decyzja o tym, czy nastąpił awans, powinna znajdować się w metodzie odpowiedzialnej za doświadczenie, a nie w kilku miejscach `Program`.
+<aside class="material-callout callout-hint">
+<strong>Podpowiedź</strong>
+<p>Decyzja o tym, czy nastąpił awans, powinna znajdować się w metodzie odpowiedzialnej za doświadczenie.</p>
+</aside>
 
-> **Uwaga:** Nie twórz publicznej właściwości, która pozwala ustawić poziom na wartość ujemną. Stan powinien pozostać kontrolowany przez klasę.
+<aside class="material-callout callout-note">
+<strong>Uwaga</strong>
+<p>Zadbaj, aby stan poziomu pozostał poprawny. Najwygodniej kontrolować jego zmianę wewnątrz klasy.</p>
+</aside>
 
 ---
 
@@ -231,9 +223,12 @@ Ustal własne reguły dla:
 
 Program powinien wypisać informację, czy operacja została wykonana, czy odrzucona.
 
-Nie zmieniaj bezpośrednio `Health` w `Program`. Wszystkie zmiany wykonuj przez metody obiektu.
+Zmiany `Health` wykonuj przez metody obiektu, aby reguły zdrowia pozostały w jednym miejscu.
 
-**Podpowiedź:** najpierw zdecyduj, czy błędną operację ignorujesz, czy sygnalizujesz przez wartość `bool`. Ważne, aby zachowanie było spójne w obu klasach.
+<aside class="material-callout callout-hint">
+<strong>Podpowiedź</strong>
+<p>Najpierw zdecyduj, czy błędną operację ignorujesz, czy sygnalizujesz przez wartość `bool`. Zachowanie powinno być spójne w obu klasach.</p>
+</aside>
 
 ---
 
@@ -252,7 +247,10 @@ Pokaż, że:
 - każdy obiekt ma własne imię i własny stan,
 - dwie zmienne wskazujące różne obiekty nie współdzielą przypadkowo HP.
 
-**Podpowiedź:** wykonaj operację tylko na pierwszym obiekcie, a potem wypisz stan wszystkich czterech. To prosty test niezależności instancji.
+<aside class="material-callout callout-hint">
+<strong>Podpowiedź</strong>
+<p>Wykonaj operację tylko na pierwszym obiekcie, a potem wypisz stan wszystkich czterech. To prosty test niezależności instancji.</p>
+</aside>
 
 ---
 
@@ -269,7 +267,7 @@ Dodaj metody lub fragmenty programu, które:
 - znajdują przeciwnika z największą liczbą HP,
 - liczą, ilu przeciwników zostało pokonanych.
 
-Nie używaj LINQ. Wykorzystaj pętlę `foreach` lub klasyczną pętlę `for`.
+Raport zbuduj za pomocą pętli i wartości pomocniczych, tak aby było widać kolejne obiekty oraz obliczenia.
 
 ### Diagram przepływu raportu
 
@@ -287,7 +285,10 @@ List<Enemy>
      +--> IsAlive()  → liczba pokonanych
 ```
 
-**Sugestia:** zapisz osobno wartości pomocnicze do sumy, maksimum i licznika. Nie próbuj obliczać wszystkiego w jednym nieczytelnym wyrażeniu.
+<aside class="material-callout callout-suggestion">
+<strong>Sugestia</strong>
+<p>Zapisz osobno wartości pomocnicze do sumy, maksimum i licznika. Dzięki temu kolejne obliczenia będą łatwiejsze do sprawdzenia.</p>
+</aside>
 
 ---
 
@@ -311,7 +312,10 @@ Obsłuż sytuacje:
 - numer większy od liczby elementów,
 - wybór pokonanego przeciwnika.
 
-**Podpowiedź:** najpierw przetestuj wybór bez walki. Dopiero gdy program zawsze wybiera właściwy obiekt, połącz go z `TakeDamage`.
+<aside class="material-callout callout-hint">
+<strong>Podpowiedź</strong>
+<p>Najpierw przetestuj wybór bez walki. Gdy program wybiera właściwy obiekt, połącz go z `TakeDamage`.</p>
+</aside>
 
 > **Maciuś:** Wybrałem przeciwnika numer 7, ale mam tylko trzech.
 >
@@ -336,29 +340,19 @@ Jedna tura ma przebiegać następująco:
 
 Dodaj możliwość zakończenia walki po pokonaniu przeciwnika albo gracza.
 
-Nie twórz nowej klasy systemu walki, jeśli nie potrafisz jeszcze wyjaśnić jej odpowiedzialności. Najpierw uporządkuj przepływ w metodzie lub kilku małych metodach programu.
+Jeśli wydzielisz klasę systemu walki, opisz jej odpowiedzialność jednym zdaniem. W przeciwnym razie uporządkuj przepływ w kilku małych metodach programu.
 
 ### Diagram tury
 
-```text
-atak gracza
-     |
-     v
-czy Enemy żyje? -- nie --> przeciwnik pokonany
-     |
-    tak
-     v
-kontratak Enemy
-     |
-     v
-czy Player żyje? -- nie --> przegrana
-     |
-    tak
-     v
-następna tura
-```
+<figure class="material-diagram">
+    <img src="{{ '/assets/diagrams/07/przebieg-walki.svg' | relative_url }}" alt="Diagram przebiegu jednej tury walki">
+    <figcaption>Kolejność operacji w jednej turze walki.</figcaption>
+</figure>
 
-**Uwaga:** najczęstszy błąd to kontratak pokonanego przeciwnika. Warunek `IsAlive()` musi zostać sprawdzony przed jego akcją.
+<aside class="material-callout callout-note">
+<strong>Uwaga</strong>
+<p>Najczęstszy błąd to kontratak pokonanego przeciwnika. Warunek `IsAlive()` sprawdź przed jego akcją.</p>
+</aside>
 
 ---
 
@@ -385,22 +379,19 @@ Gracz powinien potrafić:
 
 ### Diagram relacji
 
-```text
-+------------------+       posiada wiele       +------------------+
-|      Player      |--------------------------->|      Item        |
-+------------------+                            +------------------+
-| Health           |                            | Name             |
-| MaxHealth        |                            | HealAmount       |
-| Inventory        |                            | Quantity         |
-| Heal()           |                            | UseOne()         |
-+------------------+                            +------------------+
-```
+<figure class="material-diagram">
+    <img src="{{ '/assets/diagrams/07/relacja-obiektow.svg' | relative_url }}" alt="Diagram relacji między Player, Item i Enemy">
+    <figcaption>Relacje między obiektami w rozwiniętym modelu gry.</figcaption>
+</figure>
 
-**Podpowiedź:** `Player` powinien decydować, czy może przyjąć leczenie, a `Item` powinien pilnować liczby własnych sztuk. Nie trzymaj obu reguł w jednej instrukcji w `Main`.
+<aside class="material-callout callout-hint">
+<strong>Podpowiedź</strong>
+<p>`Player` powinien decydować, czy może przyjąć leczenie, a `Item` powinien pilnować liczby własnych sztuk. Rozdziel te reguły między odpowiedzialne obiekty.</p>
+</aside>
 
 ---
 
-### Zadanie 8 — Różne typy przeciwników bez dziedziczenia
+### Zadanie 8 — Różne typy przeciwników
 
 Rozbuduj klasę `Enemy`, zachowując jedną klasę dla wszystkich przeciwników.
 
@@ -417,15 +408,21 @@ W walce dodaj co najmniej trzy możliwe sytuacje:
 - obrona zmniejszająca obrażenia,
 - ucieczka usuwająca przeciwnika z aktywnej walki.
 
-Utwórz przynajmniej cztery obiekty `Enemy` z różnymi wartościami tych właściwości. Nie twórz klas `Goblin`, `Ork` i `Dragon`. Celem jest pokazanie, że jedna klasa może tworzyć różne obiekty.
+Utwórz przynajmniej cztery obiekty `Enemy` z różnymi wartościami tych właściwości. Celem jest pokazanie, że jedna klasa może tworzyć różne obiekty.
 
-**Podpowiedź:** zacznij od jednej reguły, na przykład obrony. Dopiero gdy działa dla jednego przeciwnika, dodaj kolejne zachowania.
+<aside class="material-callout callout-hint">
+<strong>Podpowiedź</strong>
+<p>Zacznij od jednej reguły, na przykład obrony. Gdy działa dla jednego przeciwnika, dodaj kolejne zachowania.</p>
+</aside>
 
-> **Komentarz:** To nadal podstawy klas i obiektów, a nie pełny system sztucznej inteligencji. Ważniejsze są jasne reguły i poprawny stan niż liczba efektów.
+<aside class="material-callout callout-comment">
+<strong>Komentarz</strong>
+<p>To nadal podstawy klas i obiektów. Ważniejsze są jasne reguły i poprawny stan niż liczba efektów.</p>
+</aside>
 
 ---
 
-### Zadanie 9 — Projekt: arena na bazie kodu z wykładu
+### Zadanie 9 — Projekt: arena
 
 Rozbuduj przykłady z wykładu do działającej mini-areny. Projekt musi zaczynać się od klas `Player` i `Enemy`, a wszystkie nowe elementy powinny rozszerzać istniejący model.
 
@@ -453,33 +450,17 @@ Rozbuduj przykłady z wykładu do działającej mini-areny. Projekt musi zaczyna
 
 ### Diagram projektu
 
-```text
-                         +----------------+
-                         |    Program     |
-                         | menu i tury    |
-                         +-------+--------+
-                                 |
-                +----------------+----------------+
-                |                                 |
-                v                                 v
-       +----------------+                +----------------+
-       |     Player     |                |  List<Enemy>   |
-       +-------+--------+                +--------+-------+
-               |                                  |
-               | posiada                          | zawiera wiele
-               v                                  v
-       +----------------+                +----------------+
-       |  Item / Reward |                |     Enemy      |
-       +----------------+                +----------------+
-```
+<figure class="material-diagram">
+    <img src="{{ '/assets/diagrams/07/architektura-areny.svg' | relative_url }}" alt="Diagram architektury projektu mini-areny">
+    <figcaption>Proponowana architektura projektu końcowego.</figcaption>
+</figure>
 
-#### Ograniczenia projektu
+#### Wskazówki jakości projektu
 
-- Nie kopiuj gotowego rozwiązania z internetu.
-- Nie przenoś wszystkich reguł do jednej metody `Main`.
-- Nie dodawaj dziedziczenia ani interfejsów.
-- Każda nowa klasa musi mieć uzasadnioną odpowiedzialność.
-- Kod projektu powinien zawierać komentarz przy co najmniej dwóch decyzjach projektowych: dlaczego właściwość jest prywatna oraz dlaczego dana metoda należy do konkretnej klasy.
+- Każda nowa klasa powinna mieć uzasadnioną odpowiedzialność.
+- Reguły zmiany stanu umieszczaj blisko danych, których dotyczą.
+- Główny program powinien koordynować przebieg gry, a nie zawierać wszystkie reguły.
+- Kod projektu powinien zawierać komentarz przy co najmniej dwóch decyzjach projektowych: dlaczego wybrano dane właściwości oraz dlaczego dana metoda należy do konkretnej klasy.
 
 > **Maciuś:** Dodałem do areny smoka, sklep, pogodę, zapis gry i trzy zakończenia.
 >
@@ -505,7 +486,7 @@ Rozbuduj przykłady z wykładu do działającej mini-areny. Projekt musi zaczyna
 
 - Czy `Player` i `Enemy` są klasami czy obiektami?
 - Co tworzy `new Enemy(...)`?
-- Dlaczego `Health` ma `private set`?
+- Dlaczego `Health` ma `get` i `set`?
 - Co się stanie, jeśli kontratak nastąpi bez sprawdzenia `IsAlive()`?
 - Dlaczego dwa wywołania `new Enemy(...)` tworzą niezależnych przeciwników?
 - Która klasa powinna pilnować liczby przedmiotów?
@@ -538,5 +519,4 @@ Rozbuduj przykłady z wykładu do działającej mini-areny. Projekt musi zaczyna
 - pliki źródłowe projektu,
 - krótką instrukcję uruchomienia,
 - zrzut lub tekstowy przykład działania programu,
-- w zadaniu 9 diagram klas albo tabelę odpowiedzialności,
 - listę dwóch decyzji projektowych i trzech przetestowanych przypadków brzegowych.
