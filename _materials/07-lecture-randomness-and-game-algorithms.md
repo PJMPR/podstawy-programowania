@@ -601,34 +601,6 @@ class Item
 }
 ```
 
-> **Wskazówka dla prowadzącego:** Poproś o wywołanie `RemoveOne()` trzy razy. To dobry moment, by sprawdzić, gdzie powinna znajdować się reguła „liczba sztuk nie może być ujemna”.
-
----
-
-## 11. Notatki i sugestie dla prowadzącego
-
-### Pytania w trakcie
-
-1. Czy klasa `Enemy` jest jednym goblinem, czy opisem wszystkich goblinów?
-2. Co się stanie, jeśli zmienimy `macius.Hp` — czy zmieni się HP Jana?
-3. Dlaczego konstruktor ustawia `Hp` na `MaksymalneHp`?
-4. Kto powinien pilnować, aby HP nie spadło poniżej zera: `Program` czy `Player`?
-5. Czy `Enemy` powinien wypisywać komunikaty w `TakeDamage`?
-
-### Demonstracja na żywo
-
-Najpierw uruchom wersję z luźnymi zmiennymi i dodaj drugiego przeciwnika. Następnie zbuduj `Enemy` w czterech krokach: nazwa klasy, właściwości, konstruktor, `TakeDamage` i `IsAlive`. Po każdym kroku uruchamiaj program.
-
-### Komentarz metodyczny
-
-Warto mówić: „obiekt ma HP” i „obiekt potrafi przyjąć obrażenia”. To dla początkujących bardziej zrozumiałe niż sama lista formalnych definicji. Terminów `instancja`, `stan` i `zachowanie` używaj równolegle z przykładami.
-
-### Opcjonalnie: referencja
-
-Jeśli grupa zapyta, dlaczego `drugiGoblin = goblin` nie tworzy kopii, wystarczy powiedzieć:
-
-> Zmienna obiektowa przechowuje odwołanie do obiektu. Przypisanie kopiuje odwołanie, a nie cały obiekt. Pełne omówienie pamięci i typów referencyjnych zostawiamy na później.
-
 ---
 
 ## Podsumowanie
