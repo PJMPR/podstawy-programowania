@@ -37,18 +37,6 @@ Po wykładzie będziesz potrafić:
 
 > **Zakres:** to praktyczne wprowadzenie do klas i obiektów. Nie wprowadzamy jeszcze dziedziczenia, interfejsów, klas abstrakcyjnych ani polimorfizmu.
 
-## Plan na 90 minut
-
-| Część | Czas |
-|---|---:|
-| Motywacja: jeden bohater, wiele luźnych zmiennych | 10 min |
-| Klasa, obiekt i instancja | 15 min |
-| Właściwości i konstruktor | 20 min |
-| Metody obiektu i kontrola stanu | 15 min |
-| `Player`, `Enemy` i lista przeciwników | 15 min |
-| Refaktoryzacja fragmentu gry | 10 min |
-| Podsumowanie i pytania | 5 min |
-
 ---
 
 ## 1. Problem: dane jednego bytu są rozrzucone
