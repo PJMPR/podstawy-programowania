@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="{{ '/assets/css/site.css' | relative_url }}">
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect rx='12' fill='%23060b14' width='64' height='64'/><path d='M32 7 56 21v22L32 57 8 43V21Z' fill='none' stroke='%2355e6dc' stroke-width='3'/><path d='m21 40 11-21 11 21-11-6Z' fill='%23ffbd66'/></svg>">
 </head>
-<body class="site-body">
+<body class="site-body{% if page.slide_mode %} slide-mode-available{% endif %}">
     <a class="skip-link" href="#main-content">Przejdź do treści</a>
     <div class="ambient-grid" aria-hidden="true"></div>
     {% include header.html %}
@@ -20,5 +20,8 @@
     {% include footer.html %}
     <script src="{{ '/assets/js/copy-code.js' | relative_url }}" defer></script>
     <script src="{{ '/assets/js/mermaid-diagrams.js' | relative_url }}" type="module"></script>
+    {% if page.slide_mode %}
+        <script src="{{ '/assets/js/lecture-slides.js' | relative_url }}" defer></script>
+    {% endif %}
 </body>
 </html>

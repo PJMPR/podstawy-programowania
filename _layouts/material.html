@@ -15,7 +15,15 @@ layout: default
             </span>
             {% include status-badge.html material=page %}
         </div>
-        <h1 class="material-title">{{ page.title }}</h1>
+        <div class="material-title-row">
+            <h1 class="material-title">{{ page.title }}</h1>
+            {% if page.slide_mode %}
+                <button class="slide-mode-toggle" type="button" aria-pressed="false">
+                    <span class="slide-mode-toggle-icon" aria-hidden="true">▣</span>
+                    <span class="slide-mode-toggle-label">Tryb slajdów</span>
+                </button>
+            {% endif %}
+        </div>
     </div>
     
     {% if page.summary %}
@@ -42,3 +50,13 @@ layout: default
         {% include material-nav.html material=page %}
     </div>
 </div>
+
+{% if page.slide_mode %}
+    <nav class="slide-controls" aria-label="Nawigacja prezentacji" hidden>
+        <button class="slide-control slide-prev" type="button" aria-label="Poprzedni slajd">←</button>
+        <span class="slide-counter" aria-live="polite">1 / 1</span>
+        <div class="slide-progress" aria-hidden="true"><span></span></div>
+        <button class="slide-control slide-next" type="button" aria-label="Następny slajd">→</button>
+        <button class="slide-control slide-exit" type="button">Zamknij slajdy</button>
+    </nav>
+{% endif %}

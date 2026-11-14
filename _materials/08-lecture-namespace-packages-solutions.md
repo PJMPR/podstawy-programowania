@@ -6,6 +6,7 @@ week: 8
 summary: "Organizacja kodu C#: namespace, using, projekt .csproj, plik solucji .sln oraz zależności między projektami."
 published: true
 content_ready: true
+slide_mode: true
 ---
 
 ## Cel wykładu
