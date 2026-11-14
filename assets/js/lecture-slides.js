@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
         current = Math.max(0, Math.min(index, slides.length - 1));
         slides.forEach((slide, slideIndex) => {
             const selected = slideIndex === current;
-            slide.hidden = !selected;
+            slide.classList.toggle('is-current', selected);
             slide.setAttribute('aria-hidden', String(!selected));
         });
         previous.disabled = current === 0;
@@ -38,13 +38,12 @@ document.addEventListener('DOMContentLoaded', () => {
         controls.hidden = !enabled;
 
         if (enabled) {
-            slides.forEach((slide) => { slide.hidden = false; });
             splitOverflowingSlides(slides);
             const hashSlide = Number(location.hash.match(/^#slajd-(\d+)$/)?.[1]);
             showSlide(Number.isFinite(hashSlide) ? hashSlide - 1 : current, true);
         } else {
             slides.forEach((slide) => {
-                slide.hidden = false;
+                slide.classList.remove('is-current');
                 slide.removeAttribute('aria-hidden');
             });
             history.replaceState(null, '', `${location.pathname}${location.search}`);
@@ -62,7 +61,6 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!active) return;
         window.clearTimeout(resizeTimer);
         resizeTimer = window.setTimeout(() => {
-            slides.forEach((slide) => { slide.hidden = false; });
             splitOverflowingSlides(slides);
             showSlide(current);
         }, 120);

@@ -97,8 +97,6 @@ które zmienne należą do gracza.
 >
 > **Jan:** Gratuluję. Właśnie stworzyłeś ręcznie klasę, tylko bez klasy i z większą liczbą okazji do literówki.
 
-> **Komentarz dla prowadzącego:** Nie zaczynaj od formalnych definicji. Najpierw pokaż koszt rozproszonych zmiennych. Klasa ma rozwiązać konkretny problem organizacyjny.
-
 ---
 
 ## 2. Klasa i obiekt — przepis i gotowe danie
@@ -202,8 +200,6 @@ Console.WriteLine($"{player.Imie} ma {player.Zloto} sztuk złota.");
 | Obiekt | `player` | konkretny egzemplarz, camelCase |
 | Właściwość | `Hp` | dane obiektu, PascalCase |
 | Metoda | `TakeDamage()` | zachowanie obiektu, PascalCase |
-
-> **Komentarz dla prowadzącego:** Na tym etapie wystarczy auto-właściwość `{ get; set; }`. Nie rozwijaj jeszcze różnicy między wszystkimi rodzajami właściwości.
 
 ---
 
