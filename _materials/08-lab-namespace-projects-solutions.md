@@ -245,7 +245,7 @@ dotnet run
 
 ## Zadanie 1. Proste — mapa plików i przestrzeni nazw
 
-> **Maciuś:** Przeniosłem `Weapon.cs` do folderu `Characters`. Miecz jest teraz postacią?
+> **Maciek:** Przeniosłem `Weapon.cs` do folderu `Characters`. Miecz jest teraz postacią?
 >
 > **Jan:** Tylko jeśli zacznie podejmować własne decyzje. Folder pomaga nam znaleźć plik, ale nie zmienia jego namespace ani osobowości.
 
@@ -302,7 +302,7 @@ Po eksperymencie przenieś plik z powrotem do `Items`.
 
 ## Zadanie 2. Proste — pełna nazwa i dyrektywa `using`
 
-> **Maciuś:** Usunąłem `using` i klasa zniknęła. Czy kompilator ją skasował?
+> **Maciek:** Usunąłem `using` i klasa zniknęła. Czy kompilator ją skasował?
 >
 > **Jan:** Nie. Zgubiłeś skrót do adresu, nie budynek. Podaj pełną nazwę typu, a znowu go znajdziesz.
 
@@ -344,7 +344,7 @@ Samodzielnie zapisz analogiczną deklarację `Weapon`. Uruchom program, a nastę
 
 ## Zadanie 3. Proste — konflikt nazw i alias
 
-> **Maciuś:** Mam dwa typy `Item`. Kompilator powinien przecież zgadnąć, który mam na myśli.
+> **Maciek:** Mam dwa typy `Item`. Kompilator powinien przecież zgadnąć, który mam na myśli.
 >
 > **Jan:** Oczywiście. Zaraz potem wybierze ci też obiad i odpowie za ciebie na egzaminie. Nadaj typom aliasy.
 
@@ -615,7 +615,7 @@ dotnet run --project .\RogueArena.App\RogueArena.App.csproj
 
 ## Zadanie 4. Średnie — plik `.sln` a zależność projektu
 
-> **Maciuś:** Oba projekty są widoczne w Solution Explorerze, więc na pewno się znają.
+> **Maciek:** Oba projekty są widoczne w Solution Explorerze, więc na pewno się znają.
 >
 > **Jan:** Ja też widzę sąsiada przez okno, ale to nie znaczy, że mam klucz do jego mieszkania. Potrzebujesz `ProjectReference`.
 
@@ -668,7 +668,7 @@ Uzupełnij tabelę:
 
 ## Zadanie 5. Średnie — nowy moduł ekwipunku
 
-> **Maciuś:** Umieszczę `Inventory` w `Program.cs`. Przecież aplikacja i tak go używa.
+> **Maciek:** Umieszczę `Inventory` w `Program.cs`. Przecież aplikacja i tak go używa.
 >
 > **Jan:** Lodówka też używa prądu, ale elektrownia nie stoi w kuchni. Model ekwipunku należy do biblioteki z regułami gry.
 
@@ -746,7 +746,7 @@ Tymczasowo usuń `public` z deklaracji `Inventory`. Zbuduj plik `.sln`, przeczyt
 
 ## Zadanie 6. Średnie — importy globalne i granice projektów
 
-> **Maciuś:** Dodałem `global using` w aplikacji. Teraz wszystkie projekty na komputerze powinny go widzieć.
+> **Maciek:** Dodałem `global using` w aplikacji. Teraz wszystkie projekty na komputerze powinny go widzieć.
 >
 > **Jan:** „Globalny” oznacza cały projekt, nie całą planetę. Biblioteka nadal potrzebuje własnych importów.
 
@@ -892,7 +892,7 @@ Kompilator ma pomóc ustalić, dlaczego nie wszystkie są dostępne.
 
 ## Zadanie 7. Trudne — śledztwo kompilatora
 
-> **Maciuś:** Kompilator pokazał dwanaście błędów, więc zrobiłem dwanaście przypadkowych zmian.
+> **Maciek:** Kompilator pokazał dwanaście błędów, więc zrobiłem dwanaście przypadkowych zmian.
 >
 > **Jan:** Doskonała metoda, jeśli celem jest dwadzieścia cztery błędy. Zacznij od pierwszego komunikatu i naprawiaj po jednej przyczynie.
 
@@ -949,7 +949,7 @@ Oddaj tabelę z co najmniej czterema wierszami:
 
 ## Zadanie 8. Trudne — trzeci projekt i poprawny kierunek zależności
 
-> **Maciuś:** Najprościej będzie, jeśli każdy projekt będzie zależał od każdego. Nikt nie poczuje się pominięty.
+> **Maciek:** Najprościej będzie, jeśli każdy projekt będzie zależał od każdego. Nikt nie poczuje się pominięty.
 >
 > **Jan:** Projekty nie potrzebują integracyjnego ogniska. Potrzebują kierunku zależności, który nie prowadzi w kółko.
 
@@ -1028,7 +1028,7 @@ Następnie:
 
 ## Zadanie 9. Projekt — „Rogue Semester: modułowa wyprawa”
 
-> **Maciuś:** Mam już trzy projekty, siedem namespace i czternaście `using`. Czy to znaczy, że architektura jest dobra?
+> **Maciek:** Mam już trzy projekty, siedem namespace i czternaście `using`. Czy to znaczy, że architektura jest dobra?
 >
 > **Jan:** Nie. To znaczy, że umiesz liczyć. Dobra architektura będzie wtedy, gdy każdy element ma jasne zadanie, a całość nadal daje się uruchomić.
 

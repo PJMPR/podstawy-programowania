@@ -16,6 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const progress = controls.querySelector('.slide-progress span');
     let current = 0;
     let active = false;
+    let isLayouting = false;
 
     function showSlide(index, moveFocus = false) {
         current = Math.max(0, Math.min(index, slides.length - 1));
@@ -33,6 +34,17 @@ document.addEventListener('DOMContentLoaded', () => {
         if (moveFocus) slides[current].focus({ preventScroll: true });
     }
 
+    function relayoutSlides() {
+        if (isLayouting) return;
+        isLayouting = true;
+        requestAnimationFrame(() => {
+            separateDiagramSlides(slides);
+            splitOverflowingSlides(slides);
+            showSlide(current);
+            isLayouting = false;
+        });
+    }
+
     function setMode(enabled) {
         active = enabled;
         document.body.classList.toggle('is-slide-mode', enabled);
@@ -42,8 +54,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (enabled) {
             separateDialogueSlides(slides);
-            separateDiagramSlides(slides);
-            splitOverflowingSlides(slides);
+            relayoutSlides();
             const hashSlide = Number(location.hash.match(/^#slajd-(\d+)$/)?.[1]);
             showSlide(Number.isFinite(hashSlide) ? hashSlide - 1 : current, true);
         } else {
@@ -62,10 +73,8 @@ document.addEventListener('DOMContentLoaded', () => {
     next.addEventListener('click', () => showSlide(current + 1, true));
 
     document.addEventListener('mermaid:rendered', () => {
-        separateDiagramSlides(slides);
         if (active) {
-            splitOverflowingSlides(slides);
-            showSlide(current);
+            relayoutSlides();
         }
     });
 
@@ -74,8 +83,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!active) return;
         window.clearTimeout(resizeTimer);
         resizeTimer = window.setTimeout(() => {
-            splitOverflowingSlides(slides);
-            showSlide(current);
+            relayoutSlides();
         }, 120);
     });
 

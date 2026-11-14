@@ -28,7 +28,7 @@ Po wykładzie potrafisz:
 
 W przykładach będą nam towarzyszyć:
 
-- **Maciuś Pierwszy — junior programista**, który próbuje naprawić brakujący typ, dopisując kolejne `using`,
+- **Maciek Pierwszy — junior programista**, który próbuje naprawić brakujący typ, dopisując kolejne `using`,
 - **Jan Kowalski — senior programista**, który wie, że import nie przywołuje biblioteki z internetu.
 
 ---
@@ -152,7 +152,7 @@ Player player = new Player();
 
 Obie wersje wskazują ten sam typ. `using RogueGame.Characters;` pozwala kompilatorowi odnaleźć `Player` po krótkiej nazwie w danym pliku.
 
-> **Maciuś:** Dodałem `using RogueGame.Core;`, więc projekt powinien już znać bibliotekę.
+> **Maciek:** Dodałem `using RogueGame.Core;`, więc projekt powinien już znać bibliotekę.
 >
 > **Jan:** Nie. Powiedziałeś tylko: „gdy biblioteka będzie znana, pozwól mi używać krótkich nazw”. Najpierw projekt musi otrzymać odwołanie do tej biblioteki.
 

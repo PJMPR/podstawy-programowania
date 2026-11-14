@@ -118,7 +118,7 @@ public class Enemy
 Plik `Program.cs`:
 
 ```csharp
-Player player = new Player("Maciuś", 100, 25);
+Player player = new Player("Maciek", 100, 25);
 Enemy goblin = new Enemy("Goblin", 30, 8);
 
 Console.WriteLine($"{player.Name} spotyka {goblin.Name}.");
@@ -184,11 +184,11 @@ Jeśli `List<Enemy>` nie jest rozpoznawana, dodaj `using System.Collections.Gene
 <p>Kod jest punktem startowym. Możesz zachować angielskie nazwy albo zmienić je na polskie — ważna jest konsekwencja we wszystkich plikach.</p>
 </aside>
 
-> **Maciuś:** Skopiowałem kod z wykładu i mam bohatera oraz goblina.
+> **Maciek:** Skopiowałem kod z wykładu i mam bohatera oraz goblina.
 >
 > **Jan:** A co potrafią?
 >
-> **Maciuś:** Bohater ma HP, goblin też ma HP.
+> **Maciek:** Bohater ma HP, goblin też ma HP.
 >
 > **Jan:** To już początek. Teraz spraw, żeby każdy obiekt miał własne zachowanie, a nie tylko własną etykietę.
 
@@ -336,11 +336,11 @@ Obsłuż sytuacje:
 <p>Najpierw przetestuj wybór bez walki. Gdy program wybiera właściwy obiekt, połącz go z `TakeDamage`.</p>
 </aside>
 
-> **Maciuś:** Wybrałem przeciwnika numer 7, ale mam tylko trzech.
+> **Maciek:** Wybrałem przeciwnika numer 7, ale mam tylko trzech.
 >
 > **Jan:** To nie wybór przeciwnika, tylko próba zamówienia smoka z nieistniejącej strony menu.
 >
-> **Maciuś:** Czyli walidacja przed użyciem indeksu.
+> **Maciek:** Czyli walidacja przed użyciem indeksu.
 
 ---
 
@@ -515,11 +515,11 @@ Rozbuduj przykłady z wykładu do działającej mini-areny. Projekt musi zaczyna
 - Główny program powinien koordynować przebieg gry, a nie zawierać wszystkie reguły.
 - Kod projektu powinien zawierać komentarz przy co najmniej dwóch decyzjach projektowych: dlaczego wybrano dane właściwości oraz dlaczego dana metoda należy do konkretnej klasy.
 
-> **Maciuś:** Dodałem do areny smoka, sklep, pogodę, zapis gry i trzy zakończenia.
+> **Maciek:** Dodałem do areny smoka, sklep, pogodę, zapis gry i trzy zakończenia.
 >
 > **Jan:** A działa podstawowa walka?
 >
-> **Maciuś:** Tylko czasami.
+> **Maciek:** Tylko czasami.
 >
 > **Jan:** Najpierw doprowadź jedną turę od ataku do zwycięstwa. Dopiero potem zapraszaj pogodę na arenę.
 

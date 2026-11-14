@@ -71,15 +71,15 @@ flowchart LR
 
 ### Rozmowa Maćka i Jana
 
-> **Maciuś:** Dodałem `hpBohatera`, `hpGoblin1`, `hpGoblin2` i `hpGoblin3`. Teraz gra obsługuje trzech przeciwników!
+> **Maciek:** Dodałem `hpBohatera`, `hpGoblin1`, `hpGoblin2` i `hpGoblin3`. Teraz gra obsługuje trzech przeciwników!
 >
 > **Jan:** A jeśli dodasz czwartego?
 >
-> **Maciuś:** Dopiszę `hpGoblin4`.
+> **Maciek:** Dopiszę `hpGoblin4`.
 >
 > **Jan:** A jeśli dodamy smoka?
 >
-> **Maciuś:** Dopiszę `hpSmoka`.
+> **Maciek:** Dopiszę `hpSmoka`.
 >
 > **Jan:** Gratuluję. Właśnie stworzyłeś ręcznie klasę, tylko bez klasy i z większą liczbą okazji do literówki.
 
@@ -323,17 +323,17 @@ flowchart TB
 
 ### Rozmowa Maćka i Jana
 
-> **Jan:** Maciuś, ile masz HP?
+> **Jan:** Maciek, ile masz HP?
 >
-> **Maciuś:** 65.
+> **Maciek:** 65.
 >
 > **Jan:** To cię uleczę o 500.
 >
-> **Maciuś:** Super, mam teraz 565 HP i jestem silniejszy od smoka!
+> **Maciek:** Super, mam teraz 565 HP i jestem silniejszy od smoka!
 >
 > **Jan:** Albo użyjemy `Heal`, a klasa dopilnuje limitu.
 >
-> **Maciuś:** Czyli metoda jest jak strażnik przy bramie HP?
+> **Maciek:** Czyli metoda jest jak strażnik przy bramie HP?
 >
 > **Jan:** Tak. I nie wpuszcza ani ujemnych punktów życia, ani leczenia do nieskończoności.
 
