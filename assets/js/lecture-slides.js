@@ -133,6 +133,7 @@ function buildSlides(content) {
 function splitOverflowingSlides(slides) {
     for (let index = 0; index < slides.length; index += 1) {
         const slide = slides[index];
+        let previousHeight = slide.scrollHeight;
 
         while (slide.scrollHeight > slide.clientHeight + 2 && slide.children.length > 2) {
             let continuation = slides[index + 1];
@@ -146,6 +147,13 @@ function splitOverflowingSlides(slides) {
             const node = slide.lastElementChild;
             continuation.insertBefore(node, continuation.children[1] || null);
             moveLeadInWithContent(slide, continuation, node);
+
+            const currentHeight = slide.scrollHeight;
+            if (currentHeight >= previousHeight) {
+                slide.classList.add('is-dense-slide');
+                break;
+            }
+            previousHeight = currentHeight;
         }
 
         if (slide.scrollHeight > slide.clientHeight + 2) {
