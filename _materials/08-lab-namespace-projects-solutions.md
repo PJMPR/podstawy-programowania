@@ -1,16 +1,16 @@
 ---
 layout: material
-title: "Laboratorium 08 — przestrzenie nazw, projekty, rozwiązania i importy"
+title: "Laboratorium 08 — przestrzenie nazw, projekty, pliki solucji i importy"
 kind: lab
 week: 8
-summary: "Dziewięć zadań o namespace, using, projektach .NET, rozwiązaniach i zależnościach: od jednego projektu do samodzielnej aplikacji wieloprojektowej."
+summary: "Dziewięć zadań o namespace, using, projektach .csproj, plikach solucji .sln i zależnościach między projektami."
 published: true
 content_ready: true
 ---
 
 ## Cel laboratorium
 
-Podczas laboratorium uporządkujesz kod gry na czterech poziomach: plików, przestrzeni nazw, projektów i rozwiązania. Nauczysz się rozpoznawać, kiedy potrzebny jest `using`, kiedy `ProjectReference`, a kiedy `PackageReference`.
+Podczas laboratorium uporządkujesz kod gry na czterech poziomach: plików `.cs`, przestrzeni nazw, projektów `.csproj` i pliku solucji `.sln`. Nauczysz się rozpoznawać, kiedy potrzebny jest `using`, kiedy `ProjectReference`, a kiedy `PackageReference`.
 
 Do wykonania jest **9 zadań**:
 
@@ -33,7 +33,7 @@ jeden projekt  →  importy  →  biblioteka klas  →  zależności  →  proje
 - Nazwy projektów, folderów i namespace zapisuj dokładnie tak, jak podano; C# rozróżnia wielkość liter.
 - Zachowaj rozwiązania zadań 1–8 — wykorzystasz je w zadaniu 9.
 
-> **Ważne:** `using`, odwołanie do projektu i dodanie projektu do rozwiązania to trzy różne operacje. W zadaniach należy świadomie wskazywać, która z nich rozwiązuje dany problem.
+> **Ważne:** `using`, odwołanie do projektu przez `ProjectReference` i dodanie projektu `.csproj` do pliku `.sln` to trzy różne operacje. W zadaniach należy świadomie wskazywać, która z nich rozwiązuje dany problem.
 
 ---
 
@@ -306,7 +306,7 @@ Po eksperymencie przenieś plik z powrotem do `Items`.
 >
 > **Jan:** Nie. Zgubiłeś skrót do adresu, nie budynek. Podaj pełną nazwę typu, a znowu go znajdziesz.
 
-W kopii rozwiązania zadania 1 usuń z `Program.cs`:
+W kopii projektu po zadaniu 1 usuń z `Program.cs`:
 
 ```csharp
 using DungeonOrganizer.Items;
@@ -408,9 +408,9 @@ Symbol na mapie: !
 
 # Poziom średni — zadania 4–6
 
-## Rozwiązanie startowe „Rogue Arena” — aplikacja i biblioteka klas
+## Plik solucji „Rogue Arena” — aplikacja i biblioteka
 
-Zacznij w nowym pustym katalogu `RogueArena`. Utwórz rozwiązanie oraz dwa projekty:
+Zacznij w nowym pustym katalogu `RogueArena`. Utwórz plik solucji `RogueArena.sln` oraz dwa projekty `.csproj`:
 
 ```powershell
 dotnet new sln --name RogueArena --format sln
@@ -555,7 +555,7 @@ Ada zadaje 12 obrażeń.
 Ork: 33 HP
 -->
 
-### Diagram klas rozwiązania startowego
+### Diagram klas projektów z pliku `.sln`
 
 ```mermaid
 classDiagram
@@ -604,7 +604,7 @@ RogueArena.Core
 └── CombatRules — reguły obliczania obrażeń
 ```
 
-Zbuduj i uruchom rozwiązanie startowe:
+Zbuduj plik solucji i uruchom projekt aplikacji:
 
 ```powershell
 dotnet build .\RogueArena.sln
@@ -613,7 +613,7 @@ dotnet run --project .\RogueArena.App\RogueArena.App.csproj
 
 ---
 
-## Zadanie 4. Średnie — rozwiązanie a zależność projektu
+## Zadanie 4. Średnie — plik `.sln` a zależność projektu
 
 > **Maciuś:** Oba projekty są widoczne w Solution Explorerze, więc na pewno się znają.
 >
@@ -621,9 +621,9 @@ dotnet run --project .\RogueArena.App\RogueArena.App.csproj
 
 Przeprowadź dwa kontrolowane eksperymenty.
 
-### Eksperyment A — projekt poza rozwiązaniem
+### Eksperyment A — projekt poza plikiem `.sln`
 
-Usuń `RogueArena.Core` wyłącznie z rozwiązania:
+Usuń `RogueArena.Core.csproj` wyłącznie z pliku `RogueArena.sln`:
 
 ```powershell
 dotnet sln .\RogueArena.sln remove .\RogueArena.Core\RogueArena.Core.csproj
@@ -635,11 +635,11 @@ Następnie wykonaj:
 dotnet build .\RogueArena.App\RogueArena.App.csproj
 ```
 
-Zapisz wynik i wyjaśnij, dlaczego aplikacja nadal może znać bibliotekę. Potem dodaj projekt z powrotem do rozwiązania.
+Zapisz wynik i wyjaśnij, dlaczego aplikacja nadal może znać bibliotekę. Potem dodaj projekt `.csproj` z powrotem do pliku `.sln`.
 
 ### Eksperyment B — brak odwołania
 
-Usuń `ProjectReference` z `RogueArena.App.csproj`, ale pozostaw oba projekty w rozwiązaniu. Zbuduj rozwiązanie i przeczytaj błędy.
+Usuń `ProjectReference` z `RogueArena.App.csproj`, ale pozostaw oba projekty wpisane w pliku `.sln`. Zbuduj plik `.sln` i przeczytaj błędy.
 
 Przywróć zależność poleceniem:
 
@@ -651,7 +651,7 @@ dotnet add .\RogueArena.App\RogueArena.App.csproj reference .\RogueArena.Core\Ro
 
 Uzupełnij tabelę:
 
-| Operacja | Projekt widoczny w rozwiązaniu? | Typy dostępne dla aplikacji? |
+| Operacja | Projekt wpisany do pliku `.sln`? | Typy dostępne dla aplikacji? |
 |---|---|---|
 | `dotnet sln add` | ... | ... |
 | `ProjectReference` | ... | ... |
@@ -659,8 +659,8 @@ Uzupełnij tabelę:
 
 ### Kryteria ukończenia
 
-- [ ] Student odróżnia członkostwo w rozwiązaniu od zależności kompilacji.
-- [ ] Po eksperymentach oba projekty ponownie należą do rozwiązania.
+- [ ] Student odróżnia wpis projektu w pliku `.sln` od zależności kompilacji.
+- [ ] Po eksperymentach oba projekty ponownie są wpisane do pliku `.sln`.
 - [ ] `RogueArena.App` ma dokładnie jedno odwołanie do `RogueArena.Core`.
 - [ ] Całość ponownie się buduje i uruchamia.
 
@@ -732,7 +732,7 @@ Nie przenoś klas `Item` i `Inventory` do projektu aplikacji. To model i reguły
 
 ### Eksperyment z dostępnością
 
-Tymczasowo usuń `public` z deklaracji `Inventory`. Zbuduj rozwiązanie, przeczytaj błąd, a następnie przywróć `public`.
+Tymczasowo usuń `public` z deklaracji `Inventory`. Zbuduj plik `.sln`, przeczytaj błąd, a następnie przywróć `public`.
 
 ### Kryteria ukończenia
 
@@ -787,17 +787,17 @@ Odpowiedz:
 - [ ] `Program.cs` korzysta z importów globalnych aplikacji.
 - [ ] Biblioteka ma własny, niezależny `GlobalUsings.cs`.
 - [ ] Student potrafi wyjaśnić, że `global using` działa w granicach jednego projektu.
-- [ ] Rozwiązanie buduje się przy wyłączonych importach niejawnych biblioteki.
+- [ ] Wszystkie projekty z pliku `.sln` budują się przy wyłączonych importach niejawnych biblioteki.
 
 ---
 
 # Poziom trudny — zadania 7–8
 
-## Rozwiązanie diagnostyczne „Broken Quest” — projekt do naprawy
+## Plik solucji diagnostycznej „Broken Quest” — `.sln` do naprawy
 
-Skopiuj ukończone rozwiązanie „Rogue Arena” po zadaniu 6 do nowego katalogu `BrokenQuest`. Zmień nazwę katalogu rozwiązania tylko na poziomie systemu plików — nazwy projektów mogą pozostać `RogueArena.*`.
+Skopiuj ukończony plik solucji „Rogue Arena” wraz z projektami po zadaniu 6 do nowego katalogu `BrokenQuest`. Zmień nazwę katalogu tylko na poziomie systemu plików — nazwa pliku `.sln` i nazwy projektów `.csproj` mogą pozostać `RogueArena.*`.
 
-Następnie celowo wprowadź poniższe wersje plików. Rozwiązanie diagnostyczne **ma zawierać błędy**. Zadania 7 i 8 polegają na ich systematycznym znalezieniu oraz dalszej rozbudowie.
+Następnie celowo wprowadź poniższe wersje plików. Projekty z diagnostycznego pliku `.sln` **mają zawierać błędy**. Zadania 7 i 8 polegają na ich systematycznym znalezieniu oraz dalszej rozbudowie.
 
 ### `RogueArena.Core/Characters/Companion.cs`
 
@@ -847,9 +847,9 @@ Console.WriteLine($"Nagroda: {reward} szt. złota");
 
 ### Dodatkowa zmiana
 
-Usuń `ProjectReference` do `RogueArena.Core` z `RogueArena.App.csproj`, ale pozostaw oba projekty w rozwiązaniu.
+Usuń `ProjectReference` do `RogueArena.Core` z `RogueArena.App.csproj`, ale pozostaw oba projekty wpisane w pliku `.sln`.
 
-### Diagram klas rozwiązania diagnostycznego
+### Diagram klas projektów z diagnostycznego pliku `.sln`
 
 Diagram pokazuje typy, które powinny współpracować w scenariuszu. Nie rozstrzyga, czy ich namespace, dostępność i zależności projektów są obecnie poprawne — to należy ustalić w zadaniu 7.
 
@@ -896,7 +896,7 @@ Kompilator ma pomóc ustalić, dlaczego nie wszystkie są dostępne.
 >
 > **Jan:** Doskonała metoda, jeśli celem jest dwadzieścia cztery błędy. Zacznij od pierwszego komunikatu i naprawiaj po jednej przyczynie.
 
-Napraw rozwiązanie diagnostyczne „Broken Quest” bez przenoszenia klas do projektu aplikacji i bez kopiowania ich do `Program.cs`.
+Napraw projekty z pliku solucji „Broken Quest” bez przenoszenia klas do projektu aplikacji i bez kopiowania ich do `Program.cs`.
 
 ### Procedura
 
@@ -909,7 +909,7 @@ Napraw rozwiązanie diagnostyczne „Broken Quest” bez przenoszenia klas do pr
    - niewłaściwa dostępność typu.
 4. Napraw tylko jedną przyczynę.
 5. Ponów budowanie.
-6. Powtarzaj, aż rozwiązanie się skompiluje.
+6. Powtarzaj, aż wszystkie projekty z pliku `.sln` się skompilują.
 
 ### Warunki rozwiązania
 
@@ -942,7 +942,7 @@ Oddaj tabelę z co najmniej czterema wierszami:
 - [ ] Wszystkie cztery kategorie problemów zostały rozpoznane.
 - [ ] Każda naprawa odpowiada rzeczywistej przyczynie.
 - [ ] Końcowy kierunek zależności to `RogueArena.App → RogueArena.Core`.
-- [ ] Rozwiązanie kompiluje się bez błędów.
+- [ ] Wszystkie projekty z pliku `.sln` kompilują się bez błędów.
 - [ ] Raport opisuje tok diagnozy, a nie tylko stan końcowy.
 
 ---
@@ -953,7 +953,7 @@ Oddaj tabelę z co najmniej czterema wierszami:
 >
 > **Jan:** Projekty nie potrzebują integracyjnego ogniska. Potrzebują kierunku zależności, który nie prowadzi w kółko.
 
-Rozbuduj naprawione rozwiązanie o bibliotekę raportów:
+Rozbuduj naprawiony plik `.sln` o projekt biblioteki raportów:
 
 ```powershell
 dotnet new classlib --name RogueArena.Reporting
@@ -1015,8 +1015,8 @@ Następnie:
 
 ### Kryteria ukończenia
 
-- [ ] Rozwiązanie zawiera trzy projekty.
-- [ ] Wszystkie projekty zostały dodane do rozwiązania.
+- [ ] Plik `.sln` zawiera wpisy trzech projektów `.csproj`.
+- [ ] Wszystkie projekty zostały dodane do pliku `.sln`.
 - [ ] Zależności są jednokierunkowe i nie tworzą cyklu.
 - [ ] `Reporting` korzysta z publicznych typów `Core`.
 - [ ] `App` uruchamia scenariusz i wyświetla oba raporty.
@@ -1036,7 +1036,7 @@ Zaprojektuj i wykonaj samodzielną aplikację konsolową wykorzystującą rozwi�
 
 Nie otrzymujesz kompletnego kodu startowego. Możesz kopiować i dostosowywać własne poprawne klasy z wcześniejszych zadań.
 
-## Minimalna struktura rozwiązania
+## Minimalna struktura pliku `.sln` i projektów
 
 ```text
 RogueSemester/
@@ -1055,7 +1055,7 @@ RogueSemester/
     └── Reports/
 ```
 
-Dozwolona jest bardziej szczegółowa organizacja, ale rozwiązanie musi zawierać co najmniej trzy powyższe projekty.
+Dozwolona jest bardziej szczegółowa organizacja, ale plik solucji `.sln` musi zawierać co najmniej trzy powyższe projekty `.csproj`.
 
 ## Odpowiedzialności projektów
 
@@ -1119,12 +1119,12 @@ Program powinien:
 
 ## Wymagania dotyczące projektów
 
-- Wszystkie projekty należą do jednego rozwiązania.
+- Wszystkie projekty `.csproj` są wpisane do jednego pliku solucji `.sln`.
 - `App` ma odwołanie do `Core` i `Reporting`.
 - `Reporting` ma odwołanie do `Core`.
 - `Core` nie ma odwołania do pozostałych projektów.
-- Rozwiązanie nie zawiera zależności cyklicznych.
-- Każdy projekt buduje się jako część całego rozwiązania.
+- Graf projektów nie zawiera zależności cyklicznych.
+- Każdy projekt buduje się podczas budowania pliku `.sln`.
 
 ## Diagram wymaganych zależności
 
@@ -1180,7 +1180,7 @@ Dołącz plik `README.md`, który zawiera:
 
 Sprawdź co najmniej:
 
-1. zbudowanie całego rozwiązania jednym poleceniem,
+1. zbudowanie wszystkich projektów z pliku `.sln` jednym poleceniem,
 2. uruchomienie właściwego projektu aplikacji,
 3. pustą nazwę bohatera,
 4. pokonanie jednego i wszystkich przeciwników,
@@ -1192,7 +1192,7 @@ Sprawdź co najmniej:
 
 ## Kryteria ukończenia projektu
 
-- [ ] Rozwiązanie zawiera co najmniej trzy poprawnie nazwane projekty.
+- [ ] Plik `.sln` zawiera co najmniej trzy poprawnie nazwane projekty `.csproj`.
 - [ ] Każdy typ znajduje się w logicznym pliku, folderze i namespace.
 - [ ] Graf zależności jest zgodny z wymaganiami i nie ma cykli.
 - [ ] `Core` nie obsługuje konsoli.
@@ -1216,7 +1216,7 @@ Sprawdź co najmniej:
 6. Jaki zasięg ma `global using`?
 7. Co opisuje plik `.csproj`?
 8. Czym różni się aplikacja od biblioteki klas?
-9. Czy dodanie projektu do rozwiązania tworzy `ProjectReference`?
+9. Czy dodanie projektu `.csproj` do pliku `.sln` tworzy `ProjectReference`?
 10. Dlaczego typ z biblioteki często musi być `public`?
 11. Czym różnią się `ProjectReference` i `PackageReference`?
 12. Dlaczego biblioteka reguł gry nie powinna zależeć od aplikacji konsolowej?
@@ -1226,8 +1226,8 @@ Sprawdź co najmniej:
 ## Co oddać
 
 - rozwiązania zadań 1–3 wykonane w projekcie „Dungeon Organizer”,
-- rozwiązania zadań 4–6 wykonane w rozwiązaniu „Rogue Arena”,
-- naprawione i rozbudowane rozwiązanie zadań 7–8,
+- rozwiązania zadań 4–6 wykonane w projektach z pliku `RogueArena.sln`,
+- naprawiony i rozbudowany plik `.sln` wraz z projektami zadań 7–8,
 - kompletny projekt z zadania 9,
 - raport błędów z zadania 7,
 - `README.md` projektu końcowego,
@@ -1243,7 +1243,7 @@ Po ukończeniu laboratorium potrafisz:
 - rozróżniać zwykłe, globalne i niejawne importy,
 - odczytywać podstawową strukturę `.csproj`,
 - tworzyć aplikacje oraz biblioteki klas,
-- grupować projekty w rozwiązaniu,
+- grupować projekty `.csproj` w pliku solucji `.sln`,
 - dodawać poprawne zależności między projektami,
 - diagnozować brak namespace, importu, dostępności lub odwołania,
 - projektować jednokierunkowy graf zależności,

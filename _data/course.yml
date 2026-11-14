@@ -17,7 +17,7 @@ weeks:
   - number: 7
     title: "Klasy i obiekty – praktyczne wprowadzenie"
   - number: 8
-    title: "Przestrzenie nazw, projekty i solucje"
+    title: "Przestrzenie nazw, projekty i pliki solucji (.sln)"
   - number: 9
     title: "Tablice dwuwymiarowe i reprezentacja świata gry"
   - number: 10

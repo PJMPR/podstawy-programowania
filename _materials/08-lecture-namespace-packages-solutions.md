@@ -1,9 +1,9 @@
 ---
 layout: material
-title: "Przestrzenie nazw, projekty, rozwiązania i importy"
+title: "Przestrzenie nazw, projekty, pliki solucji i importy"
 kind: lecture
 week: 8
-summary: "Organizacja kodu C#: namespace, using, struktura projektu .NET, plik .csproj, rozwiązania oraz zależności między projektami."
+summary: "Organizacja kodu C#: namespace, using, projekt .csproj, plik solucji .sln oraz zależności między projektami."
 published: true
 content_ready: true
 ---
@@ -14,14 +14,14 @@ Mały program może mieścić się w jednym pliku. Rosnąca gra szybko potrzebuj
 
 Po wykładzie potrafisz:
 
-- odróżnić plik, przestrzeń nazw, projekt i rozwiązanie,
+- odróżnić plik źródłowy, przestrzeń nazw, projekt `.csproj` i plik solucji `.sln`,
 - utworzyć przestrzeń nazw za pomocą `namespace`,
 - korzystać z typów przez pełną nazwę lub dyrektywę `using`,
 - wyjaśnić, czego `using` nie robi,
 - odczytać podstawowe elementy pliku `.csproj`,
 - rozpoznać projekt aplikacji i bibliotekę klas,
 - dodać zależność między projektami,
-- zorganizować małe rozwiązanie bez niepotrzebnego komplikowania go.
+- zorganizować mały plik solucji `.sln` bez niepotrzebnego komplikowania jego struktury.
 
 > **Cel praktyczny:** uporządkujemy kod gry tak, aby `Program.cs` uruchamiał aplikację, projekt `RogueGame.Core` zawierał reguły gry, a nazwy klas jasno wskazywały ich rolę.
 
@@ -34,19 +34,19 @@ W przykładach będą nam towarzyszyć:
 
 ## 1. Cztery poziomy organizacji kodu
 
-Słowa „plik”, „namespace”, „projekt” i „solution” opisują różne rzeczy.
+Słowa „plik źródłowy”, „namespace”, „projekt” i „plik solucji” opisują różne rzeczy.
 
 | Element | Przykład | Odpowiedzialność |
 |---|---|---|
 | plik źródłowy | `Player.cs` | przechowuje tekst kodu |
 | przestrzeń nazw | `RogueGame.Core.Characters` | nadaje typom logiczne, pełne nazwy |
 | projekt | `RogueGame.Core.csproj` | określa, co i jak kompilujemy |
-| rozwiązanie | `RogueGame.sln` | grupuje projekty do wspólnej pracy |
+| plik solucji | `RogueGame.sln` | grupuje projekty `.csproj` do wspólnej pracy |
 
 ```mermaid
 flowchart TB
-    S[Rozwiązanie RogueGame] --> A[Projekt RogueGame.App]
-    S --> C[Projekt RogueGame.Core]
+    S[Plik solucji RogueGame.sln] --> A[Projekt RogueGame.App.csproj]
+    S --> C[Projekt RogueGame.Core.csproj]
     A --> A1[Program.cs]
     C --> C1[Player.cs]
     C --> C2[Enemy.cs]
@@ -67,7 +67,7 @@ RogueGame.App zależy od RogueGame.Core.
 Player i Enemy należą do RogueGame.Core.Characters.
 ```
 
-> **Najważniejszy model:** plik przechowuje kod, namespace nazywa typy, projekt je kompiluje, a rozwiązanie pomaga zarządzać grupą projektów.
+> **Najważniejszy model:** plik `.cs` przechowuje kod, namespace nazywa typy, projekt `.csproj` je kompiluje, a plik solucji `.sln` grupuje projekty do wspólnej pracy.
 
 ### Pytanie do sali
 
@@ -160,7 +160,7 @@ Obie wersje wskazują ten sam typ. `using RogueGame.Characters;` pozwala kompila
 Dyrektywa `using`:
 
 - nie pobiera pakietu,
-- nie dodaje projektu do rozwiązania,
+- nie dodaje projektu `.csproj` do pliku solucji `.sln`,
 - nie tworzy zależności między projektami,
 - nie kopiuje ani nie uruchamia kodu,
 - nie daje dostępu do elementów niedostępnych z danego miejsca.
@@ -341,7 +341,7 @@ Na początku jeden projekt jest wystarczający. Drugi ma sens, gdy chcemy utworz
 
 ## 8. Odwołanie między projektami
 
-Samo umieszczenie dwóch projektów w rozwiązaniu nie pozwala im używać swoich typów. Aplikacja musi otrzymać odwołanie do biblioteki:
+Samo umieszczenie dwóch projektów w pliku solucji `.sln` nie pozwala im używać swoich typów. Aplikacja musi otrzymać odwołanie do biblioteki:
 
 ```xml
 <ItemGroup>
@@ -389,9 +389,9 @@ Biblioteka z regułami gry nie powinna zależeć od konsolowego `Program.cs`. Dz
 
 ---
 
-## 9. Rozwiązanie — wspólne miejsce dla projektów
+## 9. Plik solucji `.sln` — wspólna lista projektów
 
-Rozwiązanie grupuje projekty używane razem. Ułatwia ich otwieranie, budowanie i pracę w IDE. Samo nie jest kolejną biblioteką i nie trafia do uruchomionej gry.
+Plik solucji `.sln` grupuje projekty `.csproj` używane razem. Ułatwia ich otwieranie, budowanie i pracę w IDE. Nie jest kolejnym projektem ani biblioteką i nie trafia do uruchomionej gry.
 
 ```powershell
 dotnet new sln --name RogueGame --format sln
@@ -408,15 +408,15 @@ dotnet run --project .\RogueGame.App\RogueGame.App.csproj
 
 | Polecenie | Efekt |
 |---|---|
-| `dotnet new sln --format sln` | tworzy rozwiązanie w pliku `.sln` |
+| `dotnet new sln --format sln` | tworzy plik solucji `.sln` |
 | `dotnet new console` | tworzy projekt aplikacji |
 | `dotnet new classlib` | tworzy bibliotekę klas |
-| `dotnet sln ... add` | rejestruje projekt w rozwiązaniu |
+| `dotnet sln ... add` | rejestruje projekt `.csproj` w pliku `.sln` |
 | `dotnet add ... reference` | tworzy zależność między projektami |
 | `dotnet build` | przywraca zależności i kompiluje |
 | `dotnet run --project` | buduje i uruchamia wskazaną aplikację |
 
-> **Ważne:** „projekt należy do rozwiązania” i „projekt zależy od innego projektu” to niezależne informacje. Pierwszą ustala `dotnet sln add`, drugą `ProjectReference`.
+> **Ważne:** „projekt `.csproj` jest wpisany do pliku `.sln`” i „projekt zależy od innego projektu” to niezależne informacje. Pierwszą ustala `dotnet sln add`, drugą `ProjectReference`.
 
 ---
 
@@ -497,7 +497,7 @@ public class Player
 
 Klasa jest `public`, aby można było użyć jej w innym projekcie.
 
-### Krok 3: dodajemy projekty do rozwiązania
+### Krok 3: dodajemy projekty `.csproj` do pliku `.sln`
 
 ```powershell
 dotnet sln .\RogueGame.sln add .\RogueGame.App\RogueGame.App.csproj
@@ -576,9 +576,9 @@ using RogueGame.Core.Characters; // liczba mnoga
 
 Te nazwy są różne. Kompilator nie poprawia ich na podstawie podobieństwa.
 
-#### Dodanie projektu tylko do rozwiązania
+#### Dodanie projektu tylko do pliku `.sln`
 
-Projekt jest widoczny w IDE, ale aplikacja nie ma `ProjectReference`. Widoczność w drzewie rozwiązania nie jest zależnością kompilacji.
+Projekt jest widoczny w IDE, bo wpisano go do pliku `.sln`, ale aplikacja nie ma `ProjectReference`. Widoczność w drzewie pliku solucji nie jest zależnością kompilacji.
 
 #### Klasa bez `public`
 
@@ -681,7 +681,7 @@ using            → krótszy zapis nazwy w kodzie
 project          → jednostka kompilacji
 ProjectReference → zależność od własnego projektu
 PackageReference → zależność od pakietu NuGet
-solution         → grupa projektów do wspólnej pracy
+plik .sln        → lista projektów do wspólnej pracy
 ```
 
 ---
@@ -693,7 +693,7 @@ solution         → grupa projektów do wspólnej pracy
 3. Co zmienia dyrektywa `using RogueGame.Core.Characters;`?
 4. Dlaczego samo `using` nie wystarczy do użycia klasy z innego projektu?
 5. Czym różni się `ProjectReference` od `PackageReference`?
-6. Czy dodanie dwóch projektów do jednego rozwiązania tworzy między nimi zależność?
+6. Czy dodanie dwóch projektów `.csproj` do jednego pliku `.sln` tworzy między nimi zależność?
 7. Po co bibliotece modyfikator `public` przy klasie używanej przez aplikację?
 8. Kiedy alias `using GamePlayer = ...` jest przydatny?
 9. Dlaczego `Console` może działać bez widocznego `using System;`?
@@ -701,13 +701,13 @@ solution         → grupa projektów do wspólnej pracy
 
 ## Podsumowanie
 
-- Plik przechowuje kod, namespace nadaje typowi logiczną nazwę, projekt go kompiluje, a rozwiązanie grupuje projekty.
+- Plik `.cs` przechowuje kod, namespace nadaje typowi logiczną nazwę, projekt `.csproj` go kompiluje, a plik solucji `.sln` grupuje projekty.
 - Namespace i folder warto nazywać podobnie, ale kompilator nie wymaga takiej zgodności.
 - `using` skraca odwołania do typów, które są już dostępne dla projektu.
 - `global using` działa w całym projekcie, a `ImplicitUsings` może generować typowe importy.
 - `.csproj` opisuje sposób budowania projektu oraz jego zależności.
 - Aplikacja jest uruchamialna, a biblioteka klas dostarcza kod innym projektom.
 - `ProjectReference` łączy własne projekty, a `PackageReference` dodaje pakiet zewnętrzny.
-- Dodanie projektu do rozwiązania nie tworzy automatycznie zależności.
+- Dodanie projektu do pliku `.sln` nie tworzy automatycznie zależności.
 - Typ używany z innego projektu musi być dostępny, najczęściej `public`.
 - Najpierw porządkujemy kod klasami, namespace i folderami; nowy projekt tworzymy dla wyraźnej granicy odpowiedzialności.
