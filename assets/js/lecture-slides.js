@@ -38,6 +38,8 @@ document.addEventListener('DOMContentLoaded', () => {
         controls.hidden = !enabled;
 
         if (enabled) {
+            slides.forEach((slide) => { slide.hidden = false; });
+            splitOverflowingSlides(slides);
             const hashSlide = Number(location.hash.match(/^#slajd-(\d+)$/)?.[1]);
             showSlide(Number.isFinite(hashSlide) ? hashSlide - 1 : current, true);
         } else {
@@ -54,6 +56,17 @@ document.addEventListener('DOMContentLoaded', () => {
     exit.addEventListener('click', () => setMode(false));
     previous.addEventListener('click', () => showSlide(current - 1, true));
     next.addEventListener('click', () => showSlide(current + 1, true));
+
+    let resizeTimer;
+    window.addEventListener('resize', () => {
+        if (!active) return;
+        window.clearTimeout(resizeTimer);
+        resizeTimer = window.setTimeout(() => {
+            slides.forEach((slide) => { slide.hidden = false; });
+            splitOverflowingSlides(slides);
+            showSlide(current);
+        }, 120);
+    });
 
     document.addEventListener('keydown', (event) => {
         if (!active || document.querySelector('.code-focus-overlay:not([hidden]), .mermaid-focus-overlay:not([hidden])')) return;
@@ -87,7 +100,7 @@ function buildSlides(content) {
     let slide = null;
 
     nodes.forEach((node) => {
-        if (!slide || node.tagName === 'H2') {
+        if (!slide || node.tagName === 'H2' || node.tagName === 'H3') {
             slide = document.createElement('section');
             slide.className = 'lecture-slide';
             slide.tabIndex = -1;
@@ -104,4 +117,46 @@ function buildSlides(content) {
     });
     content.appendChild(fragment);
     return slides;
+}
+
+function splitOverflowingSlides(slides) {
+    for (let index = 0; index < slides.length; index += 1) {
+        const slide = slides[index];
+
+        while (slide.scrollHeight > slide.clientHeight + 2 && slide.children.length > 2) {
+            let continuation = slides[index + 1];
+
+            if (!continuation?.classList.contains('is-auto-continuation')) {
+                continuation = createContinuationSlide(slide);
+                slide.after(continuation);
+                slides.splice(index + 1, 0, continuation);
+            }
+
+            const node = slide.lastElementChild;
+            continuation.insertBefore(node, continuation.children[1] || null);
+        }
+
+        if (slide.scrollHeight > slide.clientHeight + 2) {
+            slide.classList.add('is-dense-slide');
+        }
+    }
+
+    slides.forEach((slide, index) => {
+        const heading = slide.querySelector('h2, h3');
+        slide.setAttribute('aria-label', heading?.textContent || `Slajd ${index + 1}`);
+    });
+}
+
+function createContinuationSlide(source) {
+    const slide = document.createElement('section');
+    const sourceHeading = source.querySelector('h2, h3');
+    const heading = sourceHeading?.cloneNode(true) || document.createElement('h2');
+
+    slide.className = 'lecture-slide is-auto-continuation';
+    slide.tabIndex = -1;
+    slide.setAttribute('role', 'group');
+    heading.classList.add('slide-continuation-title');
+    heading.textContent = `${sourceHeading?.textContent || 'Materiał'} — ciąg dalszy`;
+    slide.appendChild(heading);
+    return slide;
 }
