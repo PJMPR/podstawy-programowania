@@ -71,9 +71,15 @@ table { width: 100%; margin: 1.5rem 0; border-collapse: collapse; } th,td { padd
 .mermaid-focus-header { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: .85rem 1rem; border-bottom: 1px solid var(--line); background: linear-gradient(90deg,rgba(85,230,220,.12),var(--panel) 35%,rgba(183,167,255,.1)); }
 .mermaid-focus-header::before { content: '◇'; color: var(--amber); font: 700 1rem/1 var(--display); }
 .mermaid-focus-header h2 { flex: 1; margin: 0; color: var(--cyan-soft); font: 600 clamp(.8rem,2vw,1rem)/1.2 var(--display); letter-spacing: .08em; text-transform: uppercase; }
-.mermaid-focus-content { min-width: 0; min-height: 0; overflow: auto; display: grid; place-items: center; padding: clamp(1rem,4vw,3rem); background: radial-gradient(circle at 85% 10%,rgba(183,167,255,.1),transparent 32%),#03070d; }
-.mermaid-focus-diagram { display: grid; min-width: max-content; min-height: 100%; place-items: center; }
-.mermaid-focus-diagram svg { display: block; width: min(1200px,80vw) !important; max-width: none !important; height: auto !important; margin: auto; }
+.mermaid-focus-content { min-width: 0; min-height: 0; overflow: auto; display: grid; place-items: center; padding: clamp(1rem,3vw,2rem); background: radial-gradient(circle at 85% 10%,rgba(183,167,255,.1),transparent 32%),#03070d; }
+.mermaid-focus-diagram { display: grid; width: 100%; height: 100%; min-width: 0; min-height: 0; place-items: center; }
+.mermaid-focus-diagram svg { display: block; width: 100% !important; max-width: 100% !important; height: 100% !important; max-height: 100% !important; margin: auto; }
+.mermaid-focus-content,.code-focus-content { scrollbar-width: thin; scrollbar-color: var(--cyan) #07111d; }
+.mermaid-focus-content::-webkit-scrollbar,.code-focus-content::-webkit-scrollbar { width: 12px; height: 12px; }
+.mermaid-focus-content::-webkit-scrollbar-track,.code-focus-content::-webkit-scrollbar-track { border: 1px solid #172b3d; background: #07111d; }
+.mermaid-focus-content::-webkit-scrollbar-thumb,.code-focus-content::-webkit-scrollbar-thumb { border: 3px solid #07111d; border-radius: 999px; background: linear-gradient(180deg,var(--cyan),#2f9f9a); }
+.mermaid-focus-content::-webkit-scrollbar-thumb:hover,.code-focus-content::-webkit-scrollbar-thumb:hover { background: linear-gradient(180deg,var(--cyan-soft),var(--cyan)); }
+.mermaid-focus-content::-webkit-scrollbar-corner,.code-focus-content::-webkit-scrollbar-corner { background: #07111d; }
 
 .plan-container { padding-top: .5rem; }.weeks-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(310px,1fr)); gap: 1.1rem; }
 .week-card { overflow: hidden; padding: 1.25rem; transition: transform .2s,border-color .2s; }.week-card::after { content: attr(data-week); position: absolute; right: .7rem; top: -.65rem; color: rgba(85,230,220,.07); font: 700 6rem/1 var(--display); pointer-events: none; }.week-card:hover { z-index: 1; transform: translateY(-4px); border-color: var(--cyan); }

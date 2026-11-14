@@ -188,18 +188,16 @@ function cloneSvgWithUniqueIds(sourceSvg, prefix) {
 
     clone.querySelectorAll('*').forEach((element) => {
         Array.from(element.attributes).forEach((attribute) => {
-            let value = attribute.value;
-
-            idMap.forEach((newId, oldId) => {
-                value = value
-                    .replaceAll(`url(#${oldId})`, `url(#${newId})`)
-                    .replaceAll(`#${oldId}`, `#${newId}`);
-            });
+            const value = replaceIdReferences(attribute.value, idMap);
 
             if (value !== attribute.value) {
                 element.setAttribute(attribute.name, value);
             }
         });
+    });
+
+    clone.querySelectorAll('style').forEach((styleElement) => {
+        styleElement.textContent = replaceIdReferences(styleElement.textContent, idMap);
     });
 
     clone.removeAttribute('width');
@@ -208,6 +206,18 @@ function cloneSvgWithUniqueIds(sourceSvg, prefix) {
     clone.setAttribute('aria-hidden', 'true');
 
     return clone;
+}
+
+function replaceIdReferences(value, idMap) {
+    let updatedValue = value;
+
+    idMap.forEach((newId, oldId) => {
+        updatedValue = updatedValue
+            .replaceAll(`url(#${oldId})`, `url(#${newId})`)
+            .replaceAll(`#${oldId}`, `#${newId}`);
+    });
+
+    return updatedValue;
 }
 
 function replaceCodeBlock(code, index) {
