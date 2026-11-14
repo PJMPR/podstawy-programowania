@@ -73,6 +73,8 @@ async function renderMermaidDiagrams(codeBlocks) {
 
         console.error('Nie udało się wyrenderować diagramów Mermaid.', error);
     }
+
+    document.dispatchEvent(new CustomEvent('mermaid:rendered'));
 }
 
 function addExpandButton(figure, focusView, number) {

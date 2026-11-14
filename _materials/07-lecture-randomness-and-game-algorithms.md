@@ -69,20 +69,6 @@ flowchart LR
     H --> D
 ```
 
-**Wersja tekstowa diagramu:**
-
-```text
-Gracz
-├── imie
-├── hp
-├── złoto
-├── pozycjaX
-└── pozycjaY
-
-Walka, ruch i renderowanie muszą osobno pamiętać,
-które zmienne należą do gracza.
-```
-
 ### Rozmowa Maćka i Jana
 
 > **Maciuś:** Dodałem `hpBohatera`, `hpGoblin1`, `hpGoblin2` i `hpGoblin3`. Teraz gra obsługuje trzech przeciwników!

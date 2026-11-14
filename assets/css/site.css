@@ -9,6 +9,11 @@
 }
 
 * { box-sizing: border-box; }
+* { scrollbar-width: thin; scrollbar-color: var(--cyan) rgba(6,16,26,.85); }
+*::-webkit-scrollbar { width: 10px; height: 10px; }
+*::-webkit-scrollbar-track { border-radius: 99px; background: rgba(6,16,26,.85); }
+*::-webkit-scrollbar-thumb { border: 2px solid rgba(6,16,26,.85); border-radius: 99px; background: linear-gradient(var(--cyan),var(--lavender)); }
+*::-webkit-scrollbar-thumb:hover { background: linear-gradient(var(--cyan-soft),var(--amber)); }
 html { scroll-behavior: smooth; }
 body { margin: 0; min-height: 100vh; color: var(--text); background: var(--space); font: 16px/1.7 var(--body); }
 body::before { content: ''; position: fixed; inset: 0; z-index: -3; background: radial-gradient(circle at 15% 10%, rgba(85,230,220,.12), transparent 30%), radial-gradient(circle at 85% 25%, rgba(183,167,255,.1), transparent 28%), linear-gradient(160deg,#07101c,#04070d 68%); }
@@ -94,6 +99,20 @@ body.is-slide-mode .code-block .highlight .c,body.is-slide-mode .code-block .hig
 .code-block .highlight .c::before,.code-block .highlight .c1::before,.code-block .highlight .cm::before { content: '◆'; margin-right: .45rem; color: var(--amber); font-size: .62em; font-style: normal; vertical-align: .12em; }
 .code-focus-content .c,.code-focus-content .c1,.code-focus-content .cm { margin-left: .35rem; padding-left: .7rem; border-left: 2px solid var(--amber); color: #c3d4dd; background: rgba(255,189,102,.06); font-style: italic; }
 .code-focus-content .c::before,.code-focus-content .c1::before,.code-focus-content .cm::before { content: '◆'; margin-right: .5rem; color: var(--amber); font-size: .62em; font-style: normal; vertical-align: .12em; }
+
+.question-heading { position: relative; padding: .85rem 1rem .85rem 3.6rem; border: 1px solid rgba(255,189,102,.42); border-radius: 5px 18px 5px 5px; background: linear-gradient(135deg,rgba(255,189,102,.13),rgba(17,31,49,.88)); }
+.question-heading::before { content: '?'; position: absolute; top: 50%; left: 1rem; display: grid; width: 1.8rem; height: 1.8rem; border: 1px solid var(--amber); border-radius: 50%; place-items: center; color: #061016; background: var(--amber); font: 800 1rem/1 var(--display); transform: translateY(-50%); }
+.answer-toggle { display: inline-flex; align-items: center; gap: .65rem; margin: 1rem 0; padding: .65rem 1rem; border: 1px solid var(--cyan); border-radius: 4px 14px 4px 4px; color: var(--cyan-soft); background: rgba(6,16,26,.92); cursor: pointer; font: 700 .72rem/1 var(--display); letter-spacing: .06em; text-transform: uppercase; }
+.answer-toggle > span:first-child { display: grid; width: 1.45rem; height: 1.45rem; border-radius: 50%; place-items: center; color: #061016; background: var(--cyan); font-size: .9rem; }
+.answer-toggle:hover,.answer-toggle:focus-visible,.answer-toggle[aria-expanded='true'] { color: #061016; background: var(--cyan); outline: none; }
+.answer-toggle:hover > span:first-child,.answer-toggle:focus-visible > span:first-child,.answer-toggle[aria-expanded='true'] > span:first-child { color: var(--cyan); background: #061016; }
+.lecture-answer { max-height: min(32vh,280px); overflow: auto; margin: .25rem 0 1rem; padding: 1rem 1.1rem 1rem 3.5rem; border: 1px solid rgba(85,230,220,.4); border-left: 4px solid var(--cyan); border-radius: 4px 16px 4px 16px; color: var(--text); background: linear-gradient(135deg,rgba(85,230,220,.11),rgba(17,31,49,.9)); }
+.lecture-answer[hidden] { display: none; }
+.lecture-answer::before { content: '✓'; float: left; display: grid; width: 1.7rem; height: 1.7rem; margin-left: -2.5rem; border-radius: 50%; place-items: center; color: #061016; background: var(--cyan); font: 800 .9rem/1 var(--display); }
+.lecture-answer > :first-child { margin-top: 0; }
+.lecture-answer > :last-child { margin-bottom: 0; }
+body.is-slide-mode .is-diagram-slide .mermaid-figure { display: grid; width: min(100%,1200px); max-height: 68vh; margin: 0 auto; place-items: center; }
+body.is-slide-mode .is-diagram-slide .mermaid { max-height: 58vh; }
 
 @media (max-width:700px) {
   .material-title-row { align-items: stretch; flex-direction: column; }

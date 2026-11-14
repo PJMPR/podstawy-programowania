@@ -5,6 +5,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (!content || !toggle || !controls) return;
 
+    removeRedundantTextDiagrams(content);
+    enhanceQuestions(content);
     const slides = buildSlides(content);
     const previous = controls.querySelector('.slide-prev');
     const next = controls.querySelector('.slide-next');
@@ -38,6 +40,7 @@ document.addEventListener('DOMContentLoaded', () => {
         controls.hidden = !enabled;
 
         if (enabled) {
+            separateDiagramSlides(slides);
             splitOverflowingSlides(slides);
             const hashSlide = Number(location.hash.match(/^#slajd-(\d+)$/)?.[1]);
             showSlide(Number.isFinite(hashSlide) ? hashSlide - 1 : current, true);
@@ -55,6 +58,14 @@ document.addEventListener('DOMContentLoaded', () => {
     exit.addEventListener('click', () => setMode(false));
     previous.addEventListener('click', () => showSlide(current - 1, true));
     next.addEventListener('click', () => showSlide(current + 1, true));
+
+    document.addEventListener('mermaid:rendered', () => {
+        separateDiagramSlides(slides);
+        if (active) {
+            splitOverflowingSlides(slides);
+            showSlide(current);
+        }
+    });
 
     let resizeTimer;
     window.addEventListener('resize', () => {
@@ -157,4 +168,78 @@ function createContinuationSlide(source) {
     heading.textContent = `${sourceHeading?.textContent || 'Materiał'} — ciąg dalszy`;
     slide.appendChild(heading);
     return slide;
+}
+
+function removeRedundantTextDiagrams(content) {
+    content.querySelectorAll('p').forEach((paragraph) => {
+        if (!paragraph.textContent.trim().startsWith('Wersja tekstowa diagramu:')) return;
+        const textDiagram = paragraph.nextElementSibling;
+        if (textDiagram?.matches('.highlighter-rouge, pre')) textDiagram.remove();
+        paragraph.remove();
+    });
+}
+
+function enhanceQuestions(content) {
+    const answers = Array.from(content.querySelectorAll('p')).filter((paragraph) => {
+        const label = paragraph.querySelector(':scope > strong:first-child')?.textContent.trim().toLowerCase();
+        return label?.startsWith('odpowiedź') || label?.startsWith('oczekiwana odpowiedź');
+    });
+
+    answers.forEach((answer, index) => {
+        const button = document.createElement('button');
+        const answerBox = document.createElement('div');
+        const answerId = `lecture-answer-${index + 1}`;
+
+        answerBox.className = 'lecture-answer';
+        answerBox.id = answerId;
+        answerBox.hidden = true;
+        answer.parentNode.insertBefore(answerBox, answer);
+        answerBox.appendChild(answer);
+
+        button.type = 'button';
+        button.className = 'answer-toggle';
+        button.setAttribute('aria-expanded', 'false');
+        button.setAttribute('aria-controls', answerId);
+        button.innerHTML = '<span aria-hidden="true">?</span><span>Pokaż odpowiedź</span>';
+        answerBox.before(button);
+
+        findPreviousQuestionHeading(button)?.classList.add('question-heading');
+        button.addEventListener('click', () => {
+            const willOpen = answerBox.hidden;
+            answerBox.hidden = !willOpen;
+            button.setAttribute('aria-expanded', String(willOpen));
+            button.lastElementChild.textContent = willOpen ? 'Ukryj odpowiedź' : 'Pokaż odpowiedź';
+        });
+    });
+}
+
+function findPreviousQuestionHeading(element) {
+    let current = element.previousElementSibling;
+    while (current) {
+        if (/^H[23]$/.test(current.tagName)) return current;
+        current = current.previousElementSibling;
+    }
+    return null;
+}
+
+function separateDiagramSlides(slides) {
+    for (let index = 0; index < slides.length; index += 1) {
+        const slide = slides[index];
+        const figures = Array.from(slide.querySelectorAll(':scope > .mermaid-figure'));
+
+        figures.forEach((figure) => {
+            const contentBesidesDiagram = Array.from(slide.children).filter((child) =>
+                child !== figure && child.tagName !== 'HR' && !child.classList.contains('slide-continuation-title')
+            );
+            if (contentBesidesDiagram.length <= 1) return;
+
+            const diagramSlide = createContinuationSlide(slide);
+            diagramSlide.classList.add('is-diagram-slide');
+            diagramSlide.querySelector('.slide-continuation-title').textContent = 'Diagram';
+            diagramSlide.appendChild(figure);
+            slide.after(diagramSlide);
+            slides.splice(index + 1, 0, diagramSlide);
+            index += 1;
+        });
+    }
 }
