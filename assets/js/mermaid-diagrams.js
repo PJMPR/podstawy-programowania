@@ -62,9 +62,9 @@ async function renderMermaidDiagrams(codeBlocks) {
         });
 
         await mermaid.run({ nodes: diagrams.map(({ diagram }) => diagram) });
-        diagrams.forEach(({ figure, diagram }, index) => {
+        diagrams.forEach(({ figure }, index) => {
             figure.classList.add('is-rendered');
-            addExpandButton(figure, diagram, focusView, index + 1);
+            addExpandButton(figure, focusView, index + 1);
         });
     } catch (error) {
         diagrams.forEach(({ figure, diagram, source }) => {
@@ -75,7 +75,11 @@ async function renderMermaidDiagrams(codeBlocks) {
     }
 }
 
-function addExpandButton(figure, diagram, focusView, number) {
+function addExpandButton(figure, focusView, number) {
+    if (!figure.querySelector('svg')) {
+        return;
+    }
+
     const button = document.createElement('button');
 
     button.type = 'button';
@@ -85,7 +89,7 @@ function addExpandButton(figure, diagram, focusView, number) {
     figure.appendChild(button);
 
     button.addEventListener('click', () => {
-        openMermaidFocusView(focusView, diagram, button, number);
+        openMermaidFocusView(focusView, figure, button, number);
     });
 }
 
@@ -122,7 +126,6 @@ function createMermaidFocusView() {
         title,
         closeButton,
         content,
-        diagram: null,
         returnFocus: null
     };
 
@@ -141,31 +144,70 @@ function createMermaidFocusView() {
     return focusView;
 }
 
-function openMermaidFocusView(focusView, diagram, trigger, number) {
-    focusView.diagram = diagram;
+function openMermaidFocusView(focusView, figure, trigger, number) {
+    const sourceSvg = figure.querySelector('svg');
+
+    if (!sourceSvg) {
+        return;
+    }
+
+    const modalSvg = cloneSvgWithUniqueIds(sourceSvg, `modal-diagram-${number}`);
+    const container = document.createElement('div');
+
+    container.className = 'mermaid-focus-diagram';
+    container.appendChild(modalSvg);
     focusView.returnFocus = trigger;
     focusView.title.textContent = `Diagram ${number}`;
-    focusView.content.appendChild(diagram);
+    focusView.content.replaceChildren(container);
     focusView.overlay.hidden = false;
     document.body.classList.add('mermaid-focus-open');
     focusView.closeButton.focus();
 }
 
 function closeMermaidFocusView(focusView) {
-    if (focusView.diagram) {
-        const figure = focusView.returnFocus?.closest('.mermaid-figure');
-        const caption = figure?.querySelector('.mermaid-caption');
-
-        if (figure && caption) {
-            figure.insertBefore(focusView.diagram, caption);
-        }
-    }
-
     focusView.overlay.hidden = true;
-    focusView.diagram = null;
+    focusView.content.replaceChildren();
     document.body.classList.remove('mermaid-focus-open');
     focusView.returnFocus?.focus();
     focusView.returnFocus = null;
+}
+
+function cloneSvgWithUniqueIds(sourceSvg, prefix) {
+    const clone = sourceSvg.cloneNode(true);
+    const idMap = new Map();
+    const elementsWithIds = [clone, ...clone.querySelectorAll('[id]')]
+        .filter((element) => element.id);
+
+    elementsWithIds.forEach((element, index) => {
+        const oldId = element.id;
+        const newId = `${prefix}-${index}-${oldId}`;
+
+        idMap.set(oldId, newId);
+        element.id = newId;
+    });
+
+    clone.querySelectorAll('*').forEach((element) => {
+        Array.from(element.attributes).forEach((attribute) => {
+            let value = attribute.value;
+
+            idMap.forEach((newId, oldId) => {
+                value = value
+                    .replaceAll(`url(#${oldId})`, `url(#${newId})`)
+                    .replaceAll(`#${oldId}`, `#${newId}`);
+            });
+
+            if (value !== attribute.value) {
+                element.setAttribute(attribute.name, value);
+            }
+        });
+    });
+
+    clone.removeAttribute('width');
+    clone.removeAttribute('height');
+    clone.style.removeProperty('max-width');
+    clone.setAttribute('aria-hidden', 'true');
+
+    return clone;
 }
 
 function replaceCodeBlock(code, index) {

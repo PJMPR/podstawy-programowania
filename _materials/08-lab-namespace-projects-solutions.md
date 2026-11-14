@@ -39,7 +39,7 @@ jeden projekt  →  importy  →  biblioteka klas  →  zależności  →  proje
 
 # Poziom prosty — zadania 1–3
 
-## Baza kodu A — jeden projekt do skopiowania
+## Projekt startowy „Dungeon Organizer” — jeden projekt
 
 Utwórz projekt:
 
@@ -187,7 +187,55 @@ public static class GamePrinter
 }
 ```
 
-Uruchom bazę:
+### Diagram klas projektu startowego
+
+```mermaid
+classDiagram
+    namespace DungeonOrganizer_Characters {
+        class Player {
+            +string Name
+            +int Health
+            +Player(string name, int health)
+            +TakeDamage(int damage) void
+        }
+
+        class Enemy {
+            +string Name
+            +int Health
+            +Enemy(string name, int health)
+            +TakeDamage(int damage) void
+        }
+    }
+
+    namespace DungeonOrganizer_Items {
+        class Item {
+            +string Name
+            +int Price
+            +Item(string name, int price)
+        }
+    }
+
+    namespace DungeonOrganizer_UI {
+        class GamePrinter {
+            <<static>>
+            +ShowHeader(string title) void
+            +ShowCharacter(string name, int health) void
+            +ShowItem(string name, int price) void
+        }
+    }
+
+    GamePrinter ..> Player : wyświetla dane
+    GamePrinter ..> Enemy : wyświetla dane
+    GamePrinter ..> Item : wyświetla dane
+```
+
+```text
+Player i Enemy należą do DungeonOrganizer.Characters.
+Item należy do DungeonOrganizer.Items.
+GamePrinter należy do DungeonOrganizer.UI i wyświetla przekazane dane.
+```
+
+Uruchom projekt startowy:
 
 ```powershell
 dotnet run
@@ -201,7 +249,7 @@ dotnet run
 >
 > **Jan:** Tylko jeśli zacznie podejmować własne decyzje. Folder pomaga nam znaleźć plik, ale nie zmienia jego namespace ani osobowości.
 
-Na podstawie bazy A przygotuj tabelę zawierającą dla każdego typu:
+Na podstawie projektu startowego „Dungeon Organizer” przygotuj tabelę zawierającą dla każdego typu:
 
 1. nazwę pliku,
 2. nazwę folderu,
@@ -360,7 +408,7 @@ Symbol na mapie: !
 
 # Poziom średni — zadania 4–6
 
-## Baza kodu B — aplikacja i biblioteka klas
+## Rozwiązanie startowe „Rogue Arena” — aplikacja i biblioteka klas
 
 Zacznij w nowym pustym katalogu `RogueArena`. Utwórz rozwiązanie oraz dwa projekty:
 
@@ -507,7 +555,56 @@ Ada zadaje 12 obrażeń.
 Ork: 33 HP
 -->
 
-Zbuduj i uruchom bazę:
+### Diagram klas rozwiązania startowego
+
+```mermaid
+classDiagram
+    namespace RogueArena_Core_Characters {
+        class Hero {
+            +string Name
+            +int Health
+            +Hero(string name, int health)
+            +TakeDamage(int damage) void
+        }
+
+        class Monster {
+            +string Name
+            +int Health
+            +Monster(string name, int health)
+            +TakeDamage(int damage) void
+        }
+    }
+
+    namespace RogueArena_Core_Combat {
+        class CombatRules {
+            <<static>>
+            +CalculateDamage(int strength, int weaponDamage) int
+        }
+    }
+
+    namespace RogueArena_App_UI {
+        class ArenaPrinter {
+            <<static>>
+            +ShowTitle(string title) void
+            +ShowHealth(string name, int health) void
+        }
+    }
+
+    CombatRules ..> Monster : oblicza obrażenia
+    ArenaPrinter ..> Hero : wyświetla dane
+    ArenaPrinter ..> Monster : wyświetla dane
+```
+
+```text
+RogueArena.App
+└── ArenaPrinter — prezentacja danych
+
+RogueArena.Core
+├── Hero i Monster — model postaci
+└── CombatRules — reguły obliczania obrażeń
+```
+
+Zbuduj i uruchom rozwiązanie startowe:
 
 ```powershell
 dotnet build .\RogueArena.sln
@@ -696,11 +793,11 @@ Odpowiedz:
 
 # Poziom trudny — zadania 7–8
 
-## Baza kodu C — rozwiązanie do naprawy
+## Rozwiązanie diagnostyczne „Broken Quest” — projekt do naprawy
 
-Skopiuj ukończoną bazę B po zadaniu 6 do nowego katalogu `BrokenQuest`. Zmień nazwy katalogu rozwiązania tylko na poziomie systemu plików — nazwy projektów mogą pozostać `RogueArena.*`.
+Skopiuj ukończone rozwiązanie „Rogue Arena” po zadaniu 6 do nowego katalogu `BrokenQuest`. Zmień nazwę katalogu rozwiązania tylko na poziomie systemu plików — nazwy projektów mogą pozostać `RogueArena.*`.
 
-Następnie celowo wprowadź poniższe wersje plików. Baza C **ma zawierać błędy**. Zadania 7 i 8 polegają na ich systematycznym znalezieniu oraz dalszej rozbudowie.
+Następnie celowo wprowadź poniższe wersje plików. Rozwiązanie diagnostyczne **ma zawierać błędy**. Zadania 7 i 8 polegają na ich systematycznym znalezieniu oraz dalszej rozbudowie.
 
 ### `RogueArena.Core/Characters/Companion.cs`
 
@@ -752,6 +849,45 @@ Console.WriteLine($"Nagroda: {reward} szt. złota");
 
 Usuń `ProjectReference` do `RogueArena.Core` z `RogueArena.App.csproj`, ale pozostaw oba projekty w rozwiązaniu.
 
+### Diagram klas rozwiązania diagnostycznego
+
+Diagram pokazuje typy, które powinny współpracować w scenariuszu. Nie rozstrzyga, czy ich namespace, dostępność i zależności projektów są obecnie poprawne — to należy ustalić w zadaniu 7.
+
+```mermaid
+classDiagram
+    class Hero {
+        +string Name
+        +int Health
+        +Hero(string name, int health)
+        +TakeDamage(int damage) void
+    }
+
+    class Companion {
+        +string Name
+        +Companion(string name)
+    }
+
+    class RewardCalculator {
+        <<static>>
+        +Calculate(int monsterHealth) int
+    }
+
+    class Program {
+        <<entrypoint>>
+    }
+
+    Program ..> Hero : tworzy
+    Program ..> Companion : tworzy
+    Program ..> RewardCalculator : oblicza nagrodę
+```
+
+```text
+Program potrzebuje trzech typów z biblioteki Core:
+Hero, Companion i RewardCalculator.
+
+Kompilator ma pomóc ustalić, dlaczego nie wszystkie są dostępne.
+```
+
 ---
 
 ## Zadanie 7. Trudne — śledztwo kompilatora
@@ -760,7 +896,7 @@ Usuń `ProjectReference` do `RogueArena.Core` z `RogueArena.App.csproj`, ale poz
 >
 > **Jan:** Doskonała metoda, jeśli celem jest dwadzieścia cztery błędy. Zacznij od pierwszego komunikatu i naprawiaj po jednej przyczynie.
 
-Napraw bazę C bez przenoszenia klas do projektu aplikacji i bez kopiowania ich do `Program.cs`.
+Napraw rozwiązanie diagnostyczne „Broken Quest” bez przenoszenia klas do projektu aplikacji i bez kopiowania ich do `Program.cs`.
 
 ### Procedura
 
@@ -1089,8 +1225,8 @@ Sprawdź co najmniej:
 
 ## Co oddać
 
-- rozwiązania zadań 1–3 na bazie A,
-- rozwiązania zadań 4–6 na bazie B,
+- rozwiązania zadań 1–3 wykonane w projekcie „Dungeon Organizer”,
+- rozwiązania zadań 4–6 wykonane w rozwiązaniu „Rogue Arena”,
 - naprawione i rozbudowane rozwiązanie zadań 7–8,
 - kompletny projekt z zadania 9,
 - raport błędów z zadania 7,
