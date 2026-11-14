@@ -100,6 +100,11 @@ function createMermaidFocusView() {
     const dialog = document.createElement('section');
     const header = document.createElement('header');
     const title = document.createElement('h2');
+    const zoomControls = document.createElement('div');
+    const zoomOutButton = document.createElement('button');
+    const zoomLabel = document.createElement('output');
+    const zoomInButton = document.createElement('button');
+    const zoomResetButton = document.createElement('button');
     const closeButton = document.createElement('button');
     const content = document.createElement('div');
 
@@ -112,13 +117,31 @@ function createMermaidFocusView() {
     header.className = 'mermaid-focus-header';
     title.id = 'mermaid-focus-title';
     title.textContent = 'Diagram';
+    zoomControls.className = 'mermaid-zoom-controls';
+    zoomControls.setAttribute('aria-label', 'Skala diagramu');
+    zoomOutButton.type = 'button';
+    zoomOutButton.className = 'mermaid-zoom-btn';
+    zoomOutButton.textContent = '−';
+    zoomOutButton.setAttribute('aria-label', 'Pomniejsz diagram');
+    zoomLabel.className = 'mermaid-zoom-label';
+    zoomLabel.textContent = '100%';
+    zoomLabel.setAttribute('aria-live', 'polite');
+    zoomInButton.type = 'button';
+    zoomInButton.className = 'mermaid-zoom-btn';
+    zoomInButton.textContent = '+';
+    zoomInButton.setAttribute('aria-label', 'Powiększ diagram');
+    zoomResetButton.type = 'button';
+    zoomResetButton.className = 'mermaid-zoom-btn mermaid-zoom-reset';
+    zoomResetButton.textContent = 'Dopasuj';
+    zoomResetButton.setAttribute('aria-label', 'Dopasuj diagram do okna');
     closeButton.type = 'button';
     closeButton.className = 'mermaid-focus-close';
     closeButton.textContent = 'Zamknij';
     closeButton.setAttribute('aria-label', 'Zamknij powiększony diagram');
     content.className = 'mermaid-focus-content';
 
-    header.append(title, closeButton);
+    zoomControls.append(zoomOutButton, zoomLabel, zoomInButton, zoomResetButton);
+    header.append(title, zoomControls, closeButton);
     dialog.append(header, content);
     overlay.appendChild(dialog);
     document.body.appendChild(overlay);
@@ -126,11 +149,19 @@ function createMermaidFocusView() {
     const focusView = {
         overlay,
         title,
+        zoomOutButton,
+        zoomInButton,
+        zoomResetButton,
+        zoomLabel,
         closeButton,
         content,
+        zoom: 100,
         returnFocus: null
     };
 
+    zoomOutButton.addEventListener('click', () => setMermaidZoom(focusView, focusView.zoom - 25));
+    zoomInButton.addEventListener('click', () => setMermaidZoom(focusView, focusView.zoom + 25));
+    zoomResetButton.addEventListener('click', () => setMermaidZoom(focusView, 100));
     closeButton.addEventListener('click', () => closeMermaidFocusView(focusView));
     overlay.addEventListener('click', (event) => {
         if (event.target === overlay) {
@@ -138,10 +169,26 @@ function createMermaidFocusView() {
         }
     });
     document.addEventListener('keydown', (event) => {
-        if (event.key === 'Escape' && !overlay.hidden) {
+        if (overlay.hidden) return;
+        if (event.key === 'Escape') {
             closeMermaidFocusView(focusView);
+        } else if (event.key === '+' || event.key === '=') {
+            event.preventDefault();
+            setMermaidZoom(focusView, focusView.zoom + 25);
+        } else if (event.key === '-') {
+            event.preventDefault();
+            setMermaidZoom(focusView, focusView.zoom - 25);
+        } else if (event.key === '0') {
+            event.preventDefault();
+            setMermaidZoom(focusView, 100);
         }
     });
+
+    content.addEventListener('wheel', (event) => {
+        if (!event.ctrlKey || overlay.hidden) return;
+        event.preventDefault();
+        setMermaidZoom(focusView, focusView.zoom + (event.deltaY < 0 ? 25 : -25));
+    }, { passive: false });
 
     return focusView;
 }
@@ -161,9 +208,18 @@ function openMermaidFocusView(focusView, figure, trigger, number) {
     focusView.returnFocus = trigger;
     focusView.title.textContent = `Diagram ${number}`;
     focusView.content.replaceChildren(container);
+    setMermaidZoom(focusView, 100);
     focusView.overlay.hidden = false;
     document.body.classList.add('mermaid-focus-open');
     focusView.closeButton.focus();
+}
+
+function setMermaidZoom(focusView, zoom) {
+    focusView.zoom = Math.max(50, Math.min(300, zoom));
+    focusView.content.style.setProperty('--diagram-size', `${focusView.zoom}%`);
+    focusView.zoomLabel.textContent = `${focusView.zoom}%`;
+    focusView.zoomOutButton.disabled = focusView.zoom === 50;
+    focusView.zoomInButton.disabled = focusView.zoom === 300;
 }
 
 function closeMermaidFocusView(focusView) {

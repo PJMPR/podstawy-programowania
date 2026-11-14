@@ -14,7 +14,7 @@ slide_mode: true
 Na początku gry dane bohatera często wyglądają tak:
 
 ```csharp
-string imieBohatera = "Maciuś";
+string imieBohatera = "Bohater";
 int hpBohatera = 80;
 int zlotoBohatera = 25;
 int pozycjaXBohatera = 2;
@@ -43,7 +43,7 @@ Po wykładzie będziesz potrafić:
 ## 1. Problem: dane jednego bytu są rozrzucone
 
 ```csharp
-string imie = "Maciuś";
+string imie = "Bohater";
 int hp = 80;
 int maksymalneHp = 100;
 int zloto = 25;
@@ -93,17 +93,9 @@ flowchart LR
 
 ```mermaid
 flowchart LR
-    K[Klasa Player<br/>opis i reguły] -->|new| P1[Obiekt player<br/>Maciuś]
-    K -->|new| P2[Obiekt player<br/>Jan]
-    K -->|new| P3[Obiekt player<br/>inny bohater]
-```
-
-```text
-Klasa Player (przepis)
-        │ new
-        ├── playerMacius  (konkretny obiekt)
-        ├── playerJan     (konkretny obiekt)
-        └── playerRuda    (konkretny obiekt)
+    K[Klasa Player<br/>opis i reguły] -->|new| P1[Obiekt playerOne<br/>pierwszy gracz]
+    K -->|new| P2[Obiekt playerTwo<br/>drugi gracz]
+    K -->|new| P3[Obiekt playerThree<br/>trzeci gracz]
 ```
 
 Ta sama klasa może utworzyć wiele obiektów. Każdy obiekt ma własne wartości właściwości.
@@ -121,19 +113,19 @@ class Player
 Tworzenie dwóch obiektów:
 
 ```csharp
-Player macius = new Player();
-macius.Imie = "Maciuś";
-macius.Hp = 80;
+Player playerOne = new Player();
+playerOne.Imie = "Pierwszy gracz";
+playerOne.Hp = 80;
 
-Player jan = new Player();
-jan.Imie = "Jan";
-jan.Hp = 95;
+Player playerTwo = new Player();
+playerTwo.Imie = "Drugi gracz";
+playerTwo.Hp = 95;
 
-Console.WriteLine(macius.Imie); // Maciuś
-Console.WriteLine(jan.Imie);    // Jan
+Console.WriteLine(playerOne.Imie); // Pierwszy gracz
+Console.WriteLine(playerTwo.Imie); // Drugi gracz
 ```
 
-`macius` i `jan` są obiektami tej samej klasy, ale przechowują różne dane.
+`playerOne` i `playerTwo` są obiektami tej samej klasy, ale przechowują różne dane.
 
 > **Uwaga:** zapis `new Player()` oznacza „utwórz nowy obiekt klasy `Player`”. Nazwa klasy opisuje typ, a nazwa zmiennej wskazuje konkretny obiekt.
 
@@ -170,7 +162,7 @@ class Player
 
 ```csharp
 Player player = new Player();
-player.Imie = "Maciuś";
+player.Imie = "Bohater";
 player.Hp = 80;
 player.Zloto = 25;
 
@@ -214,10 +206,10 @@ class Player
 Tworzenie obiektu:
 
 ```csharp
-Player macius = new Player("Maciuś", 100, 25);
-Player jan = new Player("Jan", 120, 10);
+Player player = new Player("Bohater", 100, 25);
+Player secondPlayer = new Player("Drugi gracz", 120, 10);
 
-Console.WriteLine($"{macius.Imie}: {macius.Hp}/{macius.MaksymalneHp} HP");
+Console.WriteLine($"{player.Imie}: {player.Hp}/{player.MaksymalneHp} HP");
 ```
 
 ### Publiczne właściwości na początek
@@ -232,7 +224,7 @@ public int Hp { get; set; }
 Dzięki temu na tym etapie możemy łatwo obserwować i modyfikować stan obiektu:
 
 ```csharp
-macius.Hp = 80;
+player.Hp = 80;
 ```
 
 > **Ważne:** Na tym etapie wszystkie właściwości przykładowych klas są publiczne. Reguły poprawnej zmiany zdrowia nadal pokazujemy w metodach `TakeDamage` i `Heal`, ale student może bezpośrednio obserwować i zmieniać właściwości.
@@ -243,9 +235,9 @@ macius.Hp = 80;
 sequenceDiagram
     participant Program
     participant Konstruktor as Player()
-    participant Obiekt as macius
-    Program->>Konstruktor: new Player("Maciuś", 100, 25)
-    Konstruktor->>Obiekt: Imie = "Maciuś"
+    participant Obiekt as player
+    Program->>Konstruktor: new Player("Bohater", 100, 25)
+    Konstruktor->>Obiekt: Imie = "Bohater"
     Konstruktor->>Obiekt: Hp = 100, Zloto = 25
     Konstruktor-->>Program: gotowy obiekt Player
 ```
@@ -300,7 +292,7 @@ class Player
 Użycie:
 
 ```csharp
-Player player = new Player("Maciuś", 100);
+Player player = new Player("Bohater", 100);
 
 player.TakeDamage(35);
 Console.WriteLine(player.Hp); // 65
@@ -423,7 +415,7 @@ flowchart LR
 ## 7. Prosta walka obiektów
 
 ```csharp
-Player player = new Player("Maciuś", 100);
+Player player = new Player("Bohater", 100);
 Enemy enemy = new Enemy("Goblin", 30, 8);
 
 Console.WriteLine($"{player.Imie} spotyka: {enemy.Nazwa}");
@@ -510,7 +502,7 @@ Console.WriteLine(ork.Hp);
 
 ```csharp
 Player player;
-// player.Imie = "Maciuś"; // błąd: obiekt nie został utworzony
+// player.Imie = "Bohater"; // błąd: obiekt nie został utworzony
 ```
 
 Sama zmienna typu `Player` nie tworzy obiektu. Potrzebne jest `new Player(...)`.

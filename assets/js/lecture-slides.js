@@ -8,6 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
     removeRedundantTextDiagrams(content);
     enhanceQuestions(content);
     const slides = buildSlides(content);
+    separateDialogueSlides(slides);
     const previous = controls.querySelector('.slide-prev');
     const next = controls.querySelector('.slide-next');
     const exit = controls.querySelector('.slide-exit');
@@ -40,6 +41,7 @@ document.addEventListener('DOMContentLoaded', () => {
         controls.hidden = !enabled;
 
         if (enabled) {
+            separateDialogueSlides(slides);
             separateDiagramSlides(slides);
             splitOverflowingSlides(slides);
             const hashSlide = Number(location.hash.match(/^#slajd-(\d+)$/)?.[1]);
@@ -143,6 +145,7 @@ function splitOverflowingSlides(slides) {
 
             const node = slide.lastElementChild;
             continuation.insertBefore(node, continuation.children[1] || null);
+            moveLeadInWithContent(slide, continuation, node);
         }
 
         if (slide.scrollHeight > slide.clientHeight + 2) {
@@ -154,6 +157,16 @@ function splitOverflowingSlides(slides) {
         const heading = slide.querySelector('h2, h3');
         slide.setAttribute('aria-label', heading?.textContent || `Slajd ${index + 1}`);
     });
+}
+
+function moveLeadInWithContent(sourceSlide, targetSlide, movedNode) {
+    const isContentBlock = movedNode.matches(
+        '.code-block, .highlighter-rouge, pre, table, .mermaid-figure, ul, ol'
+    );
+    const leadIn = sourceSlide.lastElementChild;
+
+    if (!isContentBlock || leadIn?.tagName !== 'P' || !leadIn.textContent.trim().endsWith(':')) return;
+    targetSlide.insertBefore(leadIn, movedNode);
 }
 
 function createContinuationSlide(source) {
@@ -239,6 +252,32 @@ function separateDiagramSlides(slides) {
             diagramSlide.appendChild(figure);
             slide.after(diagramSlide);
             slides.splice(index + 1, 0, diagramSlide);
+            index += 1;
+        });
+    }
+}
+
+function separateDialogueSlides(slides) {
+    for (let index = 0; index < slides.length; index += 1) {
+        const slide = slides[index];
+        const dialogues = Array.from(slide.querySelectorAll(':scope > .dialogue-card'));
+
+        dialogues.forEach((dialogue) => {
+            const contentBesidesDialogue = Array.from(slide.children).filter((child) =>
+                child !== dialogue && child.tagName !== 'HR' && !child.classList.contains('slide-continuation-title')
+            );
+            const hasOnlyHeading = contentBesidesDialogue.length === 1 && /^H[23]$/.test(contentBesidesDialogue[0].tagName);
+            if (hasOnlyHeading) {
+                slide.classList.add('is-dialogue-slide');
+                return;
+            }
+
+            const dialogueSlide = createContinuationSlide(slide);
+            dialogueSlide.classList.add('is-dialogue-slide');
+            dialogueSlide.querySelector('.slide-continuation-title').textContent = 'Rozmowa Maćka z Janem';
+            dialogueSlide.appendChild(dialogue);
+            slide.after(dialogueSlide);
+            slides.splice(index + 1, 0, dialogueSlide);
             index += 1;
         });
     }
