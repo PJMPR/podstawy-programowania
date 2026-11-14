@@ -19,6 +19,7 @@ function findMermaidCodeBlocks() {
 
 async function renderMermaidDiagrams(codeBlocks) {
     const diagrams = codeBlocks.map((code, index) => replaceCodeBlock(code, index));
+    const focusView = createMermaidFocusView();
 
     try {
         const { default: mermaid } = await import(MERMAID_MODULE_URL);
@@ -61,7 +62,10 @@ async function renderMermaidDiagrams(codeBlocks) {
         });
 
         await mermaid.run({ nodes: diagrams.map(({ diagram }) => diagram) });
-        diagrams.forEach(({ figure }) => figure.classList.add('is-rendered'));
+        diagrams.forEach(({ figure, diagram }, index) => {
+            figure.classList.add('is-rendered');
+            addExpandButton(figure, diagram, focusView, index + 1);
+        });
     } catch (error) {
         diagrams.forEach(({ figure, diagram, source }) => {
             showMermaidFallback(figure, diagram, source);
@@ -69,6 +73,99 @@ async function renderMermaidDiagrams(codeBlocks) {
 
         console.error('Nie udało się wyrenderować diagramów Mermaid.', error);
     }
+}
+
+function addExpandButton(figure, diagram, focusView, number) {
+    const button = document.createElement('button');
+
+    button.type = 'button';
+    button.className = 'mermaid-expand-btn';
+    button.textContent = 'Powiększ';
+    button.setAttribute('aria-label', `Powiększ diagram ${number}`);
+    figure.appendChild(button);
+
+    button.addEventListener('click', () => {
+        openMermaidFocusView(focusView, diagram, button, number);
+    });
+}
+
+function createMermaidFocusView() {
+    const overlay = document.createElement('div');
+    const dialog = document.createElement('section');
+    const header = document.createElement('header');
+    const title = document.createElement('h2');
+    const closeButton = document.createElement('button');
+    const content = document.createElement('div');
+
+    overlay.className = 'mermaid-focus-overlay';
+    overlay.hidden = true;
+    dialog.className = 'mermaid-focus-dialog';
+    dialog.setAttribute('role', 'dialog');
+    dialog.setAttribute('aria-modal', 'true');
+    dialog.setAttribute('aria-labelledby', 'mermaid-focus-title');
+    header.className = 'mermaid-focus-header';
+    title.id = 'mermaid-focus-title';
+    title.textContent = 'Diagram';
+    closeButton.type = 'button';
+    closeButton.className = 'mermaid-focus-close';
+    closeButton.textContent = 'Zamknij';
+    closeButton.setAttribute('aria-label', 'Zamknij powiększony diagram');
+    content.className = 'mermaid-focus-content';
+
+    header.append(title, closeButton);
+    dialog.append(header, content);
+    overlay.appendChild(dialog);
+    document.body.appendChild(overlay);
+
+    const focusView = {
+        overlay,
+        title,
+        closeButton,
+        content,
+        diagram: null,
+        returnFocus: null
+    };
+
+    closeButton.addEventListener('click', () => closeMermaidFocusView(focusView));
+    overlay.addEventListener('click', (event) => {
+        if (event.target === overlay) {
+            closeMermaidFocusView(focusView);
+        }
+    });
+    document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape' && !overlay.hidden) {
+            closeMermaidFocusView(focusView);
+        }
+    });
+
+    return focusView;
+}
+
+function openMermaidFocusView(focusView, diagram, trigger, number) {
+    focusView.diagram = diagram;
+    focusView.returnFocus = trigger;
+    focusView.title.textContent = `Diagram ${number}`;
+    focusView.content.appendChild(diagram);
+    focusView.overlay.hidden = false;
+    document.body.classList.add('mermaid-focus-open');
+    focusView.closeButton.focus();
+}
+
+function closeMermaidFocusView(focusView) {
+    if (focusView.diagram) {
+        const figure = focusView.returnFocus?.closest('.mermaid-figure');
+        const caption = figure?.querySelector('.mermaid-caption');
+
+        if (figure && caption) {
+            figure.insertBefore(focusView.diagram, caption);
+        }
+    }
+
+    focusView.overlay.hidden = true;
+    focusView.diagram = null;
+    document.body.classList.remove('mermaid-focus-open');
+    focusView.returnFocus?.focus();
+    focusView.returnFocus = null;
 }
 
 function replaceCodeBlock(code, index) {
