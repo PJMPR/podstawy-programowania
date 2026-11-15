@@ -39,7 +39,6 @@ document.addEventListener('DOMContentLoaded', () => {
         isLayouting = true;
         requestAnimationFrame(() => {
             separateDiagramSlides(slides);
-            splitOverflowingSlides(slides);
             showSlide(current);
             isLayouting = false;
         });
@@ -136,53 +135,6 @@ function buildSlides(content) {
     });
     content.appendChild(fragment);
     return slides;
-}
-
-function splitOverflowingSlides(slides) {
-    for (let index = 0; index < slides.length; index += 1) {
-        const slide = slides[index];
-        let previousHeight = slide.scrollHeight;
-
-        while (slide.scrollHeight > slide.clientHeight + 2 && slide.children.length > 2) {
-            let continuation = slides[index + 1];
-
-            if (!continuation?.classList.contains('is-auto-continuation')) {
-                continuation = createContinuationSlide(slide);
-                slide.after(continuation);
-                slides.splice(index + 1, 0, continuation);
-            }
-
-            const node = slide.lastElementChild;
-            continuation.insertBefore(node, continuation.children[1] || null);
-            moveLeadInWithContent(slide, continuation, node);
-
-            const currentHeight = slide.scrollHeight;
-            if (currentHeight >= previousHeight) {
-                slide.classList.add('is-dense-slide');
-                break;
-            }
-            previousHeight = currentHeight;
-        }
-
-        if (slide.scrollHeight > slide.clientHeight + 2) {
-            slide.classList.add('is-dense-slide');
-        }
-    }
-
-    slides.forEach((slide, index) => {
-        const heading = slide.querySelector('h2, h3');
-        slide.setAttribute('aria-label', heading?.textContent || `Slajd ${index + 1}`);
-    });
-}
-
-function moveLeadInWithContent(sourceSlide, targetSlide, movedNode) {
-    const isContentBlock = movedNode.matches(
-        '.code-block, .highlighter-rouge, pre, table, .mermaid-figure, ul, ol'
-    );
-    const leadIn = sourceSlide.lastElementChild;
-
-    if (!isContentBlock || leadIn?.tagName !== 'P' || !leadIn.textContent.trim().endsWith(':')) return;
-    targetSlide.insertBefore(leadIn, movedNode);
 }
 
 function createContinuationSlide(source) {

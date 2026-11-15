@@ -80,7 +80,7 @@ body.is-slide-mode .material-content { height: 100%; padding: 0; border: 0; bord
 body.is-slide-mode .material-content::before { display: none; }
 .lecture-slide { min-width: 0; }
 .slide-continuation-title { display: none; }
-body.is-slide-mode .lecture-slide { display: flex; flex-direction: column; justify-content: center; width: 100%; height: 100dvh; overflow: hidden; padding: clamp(1.2rem,4vh,3.2rem) clamp(1rem,5vw,5rem) clamp(6rem,12vh,8rem); }
+body.is-slide-mode .lecture-slide { display: flex; flex-direction: column; justify-content: safe center; width: 100%; height: 100dvh; overflow-x: hidden; overflow-y: auto; padding: clamp(1.2rem,4vh,3.2rem) clamp(1rem,5vw,5rem) clamp(6rem,12vh,8rem); }
 body.is-slide-mode .lecture-slide:not(.is-current) { position: fixed; inset: 0; z-index: -1; visibility: hidden; pointer-events: none; }
 body.is-slide-mode .lecture-slide:focus { outline: none; }
 body.is-slide-mode .slide-continuation-title { display: block; color: var(--muted); }
