@@ -74,11 +74,26 @@ Oba projekty od początku się kompilują. Miejsca wymagające implementacji ozn
 | `FirstDungeonMap.App` | `FirstDungeonMap.App.UI` | wyświetlanie mapy i legendy |
 
 ```mermaid
-flowchart LR
-    A[FirstDungeonMap.App] -->|ProjectReference| C[FirstDungeonMap.Core]
-    P[Program] --> R[MapRenderer]
-    P --> D[DungeonMap]
-    R -. nie modyfikuje .-> M[char[,]]
+flowchart TB
+    S[Plik solucji FirstDungeonMap.Starter.slnx] --> A[Projekt FirstDungeonMap.App.csproj]
+    S --> C[Projekt FirstDungeonMap.Core.csproj]
+    A --> P[Program.cs]
+    A --> R[MapRenderer.cs]
+    C --> D[DungeonMap.cs]
+    P --> R
+    P --> D
+    A -. odwołanie do projektu .-> C
+```
+
+```text
+FirstDungeonMap.Starter.slnx
+├── FirstDungeonMap.App.csproj
+│   ├── Program.cs
+│   └── MapRenderer.cs
+└── FirstDungeonMap.Core.csproj
+    └── DungeonMap.cs
+
+Kierunek zależności: FirstDungeonMap.App → FirstDungeonMap.Core
 ```
 
 `Core` nie zależy od `App` i nie używa `Console`. `App` uzyskuje dostęp do publicznej klasy `DungeonMap` dzięki `ProjectReference`, a zapis nazwy skraca dyrektywa:
