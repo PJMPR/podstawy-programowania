@@ -25,7 +25,7 @@ char[,] → pętle zagnieżdżone → generator mapy → gracz jako nakładka �
 
 ## Zasady pracy
 
-- Pracuj na kopii całej solucji `examples/09-first-dungeon-map-starter`.
+- Pracuj na własnym forku repozytorium startowego.
 - Każde zadanie uruchamiaj przez przygotowane menu i osobną metodę `Task1()`–`Task7()`.
 - Rozwiązuj zadania po kolei — późniejsze korzystają z wcześniejszych metod.
 - Po każdym zadaniu zbuduj plik `.slnx` i uruchom projekt `FirstDungeonMap.App`.
@@ -39,10 +39,33 @@ char[,] → pętle zagnieżdżone → generator mapy → gracz jako nakładka �
 
 ---
 
-# Projekt startowy
+# Repozytorium i projekt startowy
+
+Kod startowy znajduje się w repozytorium:
+
+[https://github.com/PJMPR/pprg-lab01-template](https://github.com/PJMPR/pprg-lab01-template)
+
+Przed rozpoczęciem laboratorium:
+
+1. Otwórz podany link i zaloguj się w serwisie GitHub.
+2. Użyj przycisku **Fork**, aby utworzyć kopię repozytorium na swoim koncie.
+3. Sklonuj **własny fork** na komputer.
+4. Otwórz sklonowany katalog w IDE.
+5. Pracuj i zapisuj rozwiązania we własnym repozytorium.
+
+Przykładowe klonowanie po wykonaniu forka:
+
+```powershell
+git clone https://github.com/TWOJ-LOGIN/pprg-lab01-template.git
+cd pprg-lab01-template
+```
+
+Zastąp `TWOJ-LOGIN` własną nazwą użytkownika GitHub. Nie klonuj repozytorium prowadzącego jako miejsca docelowego swojej pracy, ponieważ nie będziesz mieć uprawnień do wysyłania do niego zmian.
+
+Po sklonowaniu projekt startowy ma następującą strukturę:
 
 ```text
-examples/09-first-dungeon-map-starter/
+pprg-lab01-template/
 ├── src/
 │   └── DungeonMap/
 │       ├── DungeonMap.slnx
@@ -61,8 +84,8 @@ examples/09-first-dungeon-map-starter/
 Uruchomienie:
 
 ```powershell
-dotnet build .\examples\09-first-dungeon-map-starter\src\DungeonMap\DungeonMap.slnx
-dotnet run --project .\examples\09-first-dungeon-map-starter\src\DungeonMap\FirstDungeonMap.App\FirstDungeonMap.App.csproj
+dotnet build .\src\DungeonMap\DungeonMap.slnx
+dotnet run --project .\src\DungeonMap\FirstDungeonMap.App\FirstDungeonMap.App.csproj
 ```
 
 Oba projekty od początku się kompilują. Miejsca wymagające implementacji oznaczono `TODO`.
@@ -684,14 +707,9 @@ Sprawdź poprawną mapę, narożnik `(0, 0)`, pole gracza, pole wyjścia, wspó�
 - listę wykonanych scenariuszy testowych,
 - odpowiedzi z eksperymentów w zadaniach 1, 4 i 5.
 
-## Materiały pomocnicze
+## Repozytorium do oddania
 
-```text
-examples/09-first-dungeon-map-starter   — baza z TODO dla studentów
-examples/09-first-dungeon-map-solution  — przykładowe rozwiązanie prowadzącego
-```
-
-Rozwiązanie prowadzącego jest jednym z poprawnych wariantów. Inny układ mapy lub podział metod jest prawidłowy, jeśli spełnia wymagania i student potrafi go uzasadnić.
+Do oddania przygotuj własny fork repozytorium `pprg-lab01-template` z rozwiązaniami i historią commitów. Inny układ mapy lub podział metod jest prawidłowy, jeśli spełnia wymagania i potrafisz go uzasadnić.
 
 ## Podsumowanie
 
