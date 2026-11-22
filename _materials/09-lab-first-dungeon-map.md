@@ -62,6 +62,22 @@ cd pprg-lab01-template
 
 Zastąp `TWOJ-LOGIN` własną nazwą użytkownika GitHub. Nie klonuj repozytorium prowadzącego jako miejsca docelowego swojej pracy, ponieważ nie będziesz mieć uprawnień do wysyłania do niego zmian.
 
+## Import projektu do IDE
+
+Projekt przeznaczony do zaimportowania lub otwarcia w IDE znajduje się w katalogu:
+
+```text
+src/DungeonMap
+```
+
+Projekt nazywa się **DungeonMap**. W zależności od używanego IDE otwórz katalog `src/DungeonMap` albo znajdujący się w nim plik solucji:
+
+```text
+src/DungeonMap/DungeonMap.slnx
+```
+
+Nie otwieraj pojedynczego pliku `.cs` zamiast całej solucji — IDE powinno wczytać oba projekty: `FirstDungeonMap.App` i `FirstDungeonMap.Core`.
+
 Po sklonowaniu projekt startowy ma następującą strukturę:
 
 ```text
