@@ -43,24 +43,26 @@ char[,] → pętle zagnieżdżone → generator mapy → gracz jako nakładka �
 
 ```text
 examples/09-first-dungeon-map-starter/
-├── FirstDungeonMap.Starter.slnx
-├── FirstDungeonMap.App/
-│   ├── FirstDungeonMap.App.csproj
-│   ├── Program.cs
-│   └── UI/
-│       └── MapRenderer.cs
-├── FirstDungeonMap.Core/
-│   ├── FirstDungeonMap.Core.csproj
-│   └── Maps/
-│       └── DungeonMap.cs
+├── src/
+│   └── DungeonMap/
+│       ├── DungeonMap.slnx
+│       ├── FirstDungeonMap.App/
+│       │   ├── FirstDungeonMap.App.csproj
+│       │   ├── Program.cs
+│       │   └── UI/
+│       │       └── MapRenderer.cs
+│       └── FirstDungeonMap.Core/
+│           ├── FirstDungeonMap.Core.csproj
+│           └── Maps/
+│               └── DungeonMap.cs
 └── README.md
 ```
 
 Uruchomienie:
 
 ```powershell
-dotnet build .\examples\09-first-dungeon-map-starter\FirstDungeonMap.Starter.slnx
-dotnet run --project .\examples\09-first-dungeon-map-starter\FirstDungeonMap.App\FirstDungeonMap.App.csproj
+dotnet build .\examples\09-first-dungeon-map-starter\src\DungeonMap\DungeonMap.slnx
+dotnet run --project .\examples\09-first-dungeon-map-starter\src\DungeonMap\FirstDungeonMap.App\FirstDungeonMap.App.csproj
 ```
 
 Oba projekty od początku się kompilują. Miejsca wymagające implementacji oznaczono `TODO`.
@@ -75,8 +77,10 @@ Oba projekty od początku się kompilują. Miejsca wymagające implementacji ozn
 
 ```mermaid
 flowchart TB
-    S[Plik solucji FirstDungeonMap.Starter.slnx] --> A[Projekt FirstDungeonMap.App.csproj]
-    S --> C[Projekt FirstDungeonMap.Core.csproj]
+    SRC[Katalog src] --> F[Katalog DungeonMap]
+    F --> S[Plik solucji DungeonMap.slnx]
+    F --> A[Projekt FirstDungeonMap.App.csproj]
+    F --> C[Projekt FirstDungeonMap.Core.csproj]
     A --> P[Program.cs]
     A --> R[MapRenderer.cs]
     C --> D[DungeonMap.cs]
@@ -86,12 +90,16 @@ flowchart TB
 ```
 
 ```text
-FirstDungeonMap.Starter.slnx
-├── FirstDungeonMap.App.csproj
-│   ├── Program.cs
-│   └── MapRenderer.cs
-└── FirstDungeonMap.Core.csproj
-    └── DungeonMap.cs
+src/
+└── DungeonMap/
+    ├── DungeonMap.slnx
+    ├── FirstDungeonMap.App/
+    │   ├── FirstDungeonMap.App.csproj
+    │   ├── Program.cs
+    │   └── UI/MapRenderer.cs
+    └── FirstDungeonMap.Core/
+        ├── FirstDungeonMap.Core.csproj
+        └── Maps/DungeonMap.cs
 
 Kierunek zależności: FirstDungeonMap.App → FirstDungeonMap.Core
 ```
@@ -317,7 +325,7 @@ Pole pod graczem: map[2, 2]
 >
 > **Jan:** Wtedy zgubisz informację, gdzie kończy się wiersz. Plansza potrzebuje dwóch wymiarów i dwóch pętli.
 
-W `FirstDungeonMap.App/Program.cs`, w `Task1()`, znajduje się gotowa tablica:
+W `src/DungeonMap/FirstDungeonMap.App/Program.cs`, w `Task1()`, znajduje się gotowa tablica:
 
 ```csharp
 char[,] map =
@@ -395,9 +403,9 @@ Zmień wyłącznie `width` i `height` na `8 × 5`, a potem `20 × 4`. Kod nadal 
 
 ## Zadanie 3. Średnie — metody tworzenia i wyświetlania mapy
 
-Przenieś generator do `FirstDungeonMap.Core/Maps/DungeonMap.cs`, do metody `DungeonMap.Create(int width, int height)`. Metoda ma utworzyć, wypełnić i zwrócić mapę. Wymiar mniejszy niż `3` powinien zostać odrzucony z czytelnym komunikatem.
+Przenieś generator do `src/DungeonMap/FirstDungeonMap.Core/Maps/DungeonMap.cs`, do metody `DungeonMap.Create(int width, int height)`. Metoda ma utworzyć, wypełnić i zwrócić mapę. Wymiar mniejszy niż `3` powinien zostać odrzucony z czytelnym komunikatem.
 
-Uzupełnij też `FirstDungeonMap.App/UI/MapRenderer.cs`, metodę `MapRenderer.Print(char[,] map, int playerX = -1, int playerY = -1)`. Parametry gracza mogą na tym etapie pozostać niewykorzystane. Renderowanie należy do aplikacji, ponieważ używa `Console`.
+Uzupełnij też `src/DungeonMap/FirstDungeonMap.App/UI/MapRenderer.cs`, metodę `MapRenderer.Print(char[,] map, int playerX = -1, int playerY = -1)`. Parametry gracza mogą na tym etapie pozostać niewykorzystane. Renderowanie należy do aplikacji, ponieważ używa `Console`.
 
 W `Task3()`:
 
@@ -671,7 +679,7 @@ Sprawdź poprawną mapę, narożnik `(0, 0)`, pole gracza, pole wyjścia, wspó�
 - kompletny projekt oparty na starterze,
 - rozwiązania `Task1()`–`Task7()`,
 - uzupełnione klasy `DungeonMap` i `MapRenderer`,
-- oba projekty oraz plik `FirstDungeonMap.Starter.slnx`,
+- oba projekty oraz plik `DungeonMap.slnx`,
 - przykład działania projektu lub zrzut konsoli,
 - listę wykonanych scenariuszy testowych,
 - odpowiedzi z eksperymentów w zadaniach 1, 4 i 5.
