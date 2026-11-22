@@ -1,3 +1,5 @@
+namespace FirstDungeonMap.Core.Maps;
+
 public static class DungeonMap
 {
     public static char[,] Create(int width, int height)
@@ -11,20 +13,11 @@ public static class DungeonMap
     public static char[,] CreateSample()
     {
         char[,] map = Create(12, 7);
-
-        // Elementy potrzebne do ćwiczeń 4–6.
         map[1, 10] = '>';
         map[3, 4] = '#';
         map[3, 5] = '#';
         map[4, 8] = '$';
-
         return map;
-    }
-
-    public static void Print(char[,] map, int playerX = -1, int playerY = -1)
-    {
-        // TODO: renderuj mapę w konwencji map[y, x]. Gracz ma być nakładką.
-        Console.WriteLine($"[Mapa {map.GetLength(1)} × {map.GetLength(0)} — uzupełnij renderowanie]");
     }
 
     public static bool IsInside(char[,] map, int x, int y)
@@ -47,14 +40,9 @@ public static class DungeonMap
 
     public static bool TryFindSymbol(char[,] map, char symbol, out int foundX, out int foundY)
     {
-        // TODO: przeszukaj mapę i zwróć współrzędne pierwszego wystąpienia.
+        // TODO: zwróć współrzędne pierwszego wystąpienia.
         foundX = -1;
         foundY = -1;
         return false;
-    }
-
-    public static void PrintLegend()
-    {
-        Console.WriteLine("Legenda: # ściana | . podłoga | @ gracz | > wyjście | $ skarb");
     }
 }

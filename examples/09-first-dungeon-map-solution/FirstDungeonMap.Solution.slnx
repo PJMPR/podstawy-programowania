@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="FirstDungeonMap.App/FirstDungeonMap.App.csproj" />
+  <Project Path="FirstDungeonMap.Core/FirstDungeonMap.Core.csproj" />
+</Solution>

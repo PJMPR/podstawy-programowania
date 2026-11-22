@@ -1,3 +1,5 @@
+namespace FirstDungeonMap.Core.Maps;
+
 public static class DungeonMap
 {
     public static char[,] Create(int width, int height)
@@ -32,23 +34,9 @@ public static class DungeonMap
         return map;
     }
 
-    public static void Print(char[,] map, int playerX = -1, int playerY = -1)
-    {
-        for (int y = 0; y < map.GetLength(0); y++)
-        {
-            for (int x = 0; x < map.GetLength(1); x++)
-            {
-                Console.Write(x == playerX && y == playerY ? '@' : map[y, x]);
-            }
-
-            Console.WriteLine();
-        }
-    }
-
     public static bool IsInside(char[,] map, int x, int y)
     {
-        return x >= 0 && x < map.GetLength(1) &&
-               y >= 0 && y < map.GetLength(0);
+        return x >= 0 && x < map.GetLength(1) && y >= 0 && y < map.GetLength(0);
     }
 
     public static bool IsWalkable(char[,] map, int x, int y)
@@ -92,10 +80,5 @@ public static class DungeonMap
         foundX = -1;
         foundY = -1;
         return false;
-    }
-
-    public static void PrintLegend()
-    {
-        Console.WriteLine("Legenda: # ściana | . podłoga | @ gracz | > wyjście | $ skarb");
     }
 }

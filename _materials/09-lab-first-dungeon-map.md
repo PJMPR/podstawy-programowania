@@ -25,10 +25,12 @@ char[,] → pętle zagnieżdżone → generator mapy → gracz jako nakładka �
 
 ## Zasady pracy
 
-- Pracuj na kopii `examples/09-first-dungeon-map-starter`.
+- Pracuj na kopii całej solucji `examples/09-first-dungeon-map-starter`.
 - Każde zadanie uruchamiaj przez przygotowane menu i osobną metodę `Task1()`–`Task7()`.
 - Rozwiązuj zadania po kolei — późniejsze korzystają z wcześniejszych metod.
-- Po każdym zadaniu wykonaj `dotnet build` i uruchom program.
+- Po każdym zadaniu zbuduj plik `.slnx` i uruchom projekt `FirstDungeonMap.App`.
+- Logikę tworzenia i sprawdzania mapy umieszczaj w `FirstDungeonMap.Core`; obsługę konsoli i renderowanie w `FirstDungeonMap.App`.
+- Zachowaj kierunek zależności `FirstDungeonMap.App → FirstDungeonMap.Core`.
 - Nie wpisuj wymiarów na stałe w pętlach. Używaj `GetLength(0)` i `GetLength(1)`.
 - Przed odczytem `map[y, x]` dla zmiennych współrzędnych sprawdź granice.
 - Nie dodawaj jeszcze sterowania WASD.
@@ -41,19 +43,228 @@ char[,] → pętle zagnieżdżone → generator mapy → gracz jako nakładka �
 
 ```text
 examples/09-first-dungeon-map-starter/
-├── FirstDungeonMap.Starter.csproj
-├── Program.cs
-├── DungeonMap.cs
+├── FirstDungeonMap.Starter.slnx
+├── FirstDungeonMap.App/
+│   ├── FirstDungeonMap.App.csproj
+│   ├── Program.cs
+│   └── UI/
+│       └── MapRenderer.cs
+├── FirstDungeonMap.Core/
+│   ├── FirstDungeonMap.Core.csproj
+│   └── Maps/
+│       └── DungeonMap.cs
 └── README.md
 ```
 
 Uruchomienie:
 
 ```powershell
-dotnet run --project .\examples\09-first-dungeon-map-starter\FirstDungeonMap.Starter.csproj
+dotnet build .\examples\09-first-dungeon-map-starter\FirstDungeonMap.Starter.slnx
+dotnet run --project .\examples\09-first-dungeon-map-starter\FirstDungeonMap.App\FirstDungeonMap.App.csproj
 ```
 
-Projekt od początku się kompiluje. Miejsca wymagające implementacji oznaczono `TODO`.
+Oba projekty od początku się kompilują. Miejsca wymagające implementacji oznaczono `TODO`.
+
+## Projekty, namespace i zależność
+
+| Projekt | Namespace | Odpowiedzialność |
+|---|---|---|
+| `FirstDungeonMap.Core` | `FirstDungeonMap.Core.Maps` | tworzenie mapy, granice, dostępność i wyszukiwanie symboli |
+| `FirstDungeonMap.App` | `FirstDungeonMap.App` | punkt wejścia, menu i przebieg zadań |
+| `FirstDungeonMap.App` | `FirstDungeonMap.App.UI` | wyświetlanie mapy i legendy |
+
+```mermaid
+flowchart LR
+    A[FirstDungeonMap.App] -->|ProjectReference| C[FirstDungeonMap.Core]
+    P[Program] --> R[MapRenderer]
+    P --> D[DungeonMap]
+    R -. nie modyfikuje .-> M[char[,]]
+```
+
+`Core` nie zależy od `App` i nie używa `Console`. `App` uzyskuje dostęp do publicznej klasy `DungeonMap` dzięki `ProjectReference`, a zapis nazwy skraca dyrektywa:
+
+```csharp
+using FirstDungeonMap.Core.Maps;
+```
+
+## Krótkie wprowadzenie — `public` i `private`
+
+Modyfikator dostępu określa, **z którego miejsca kodu można użyć klasy, metody albo pola**. W tym laboratorium korzystamy przede wszystkim z dwóch modyfikatorów:
+
+- `public` — element jest dostępny również z kodu znajdującego się poza daną klasą, a w przypadku publicznych typów także z innego projektu mającego odpowiednie odwołanie,
+- `private` — element jest dostępny wyłącznie wewnątrz klasy, w której został zadeklarowany.
+
+```text
+public  → część udostępniona innym klasom
+private → szczegół działania ukryty wewnątrz klasy
+```
+
+W projekcie startowym aplikacja musi używać klasy `DungeonMap` z biblioteki `FirstDungeonMap.Core`. Dlatego klasa oraz wywoływane przez aplikację metody są `public`:
+
+```csharp
+namespace FirstDungeonMap.Core.Maps;
+
+public static class DungeonMap
+{
+    public static char[,] Create(int width, int height)
+    {
+        // Implementacja metody.
+    }
+
+    public static bool IsInside(char[,] map, int x, int y)
+    {
+        // Implementacja metody.
+    }
+}
+```
+
+`Program` nie musi udostępniać metod poszczególnych zadań innym klasom. Są one szczegółem sterowania aplikacją, dlatego mogą być `private`:
+
+```csharp
+namespace FirstDungeonMap.App;
+
+public static class Program
+{
+    public static void Main()
+    {
+        Task1();
+    }
+
+    private static void Task1()
+    {
+        Console.WriteLine("Uruchamiam zadanie 1.");
+    }
+}
+```
+
+Kod wewnątrz `Program` może wywołać `Task1()`, ale poniższe wywołanie zapisane w innej klasie nie skompiluje się:
+
+```csharp
+Program.Task1(); // błąd: Task1 jest private
+```
+
+### Przykład — ukrycie pola
+
+Pole może być `private`, a jego wartość udostępniona przez publiczną metodę. Dzięki temu kod spoza klasy nie może przypadkowo zmienić danych bez kontroli:
+
+```csharp
+public class MapCounter
+{
+    private int visitedFields;
+
+    public void VisitField()
+    {
+        visitedFields++;
+    }
+
+    public int GetVisitedFields()
+    {
+        return visitedFields;
+    }
+}
+```
+
+```csharp
+MapCounter counter = new MapCounter();
+counter.VisitField();
+
+Console.WriteLine(counter.GetVisitedFields()); // działa
+// counter.visitedFields = 100;                // błąd: pole jest private
+```
+
+<aside class="material-callout callout-note">
+<strong>Uwaga</strong>
+<p><code>public</code> nie oznacza „lepsze”, a <code>private</code> nie oznacza „zabronione”. Udostępniaj tylko te elementy, które rzeczywiście mają być używane przez inne klasy. Szczegóły pomocnicze pozostawiaj prywatne.</p>
+</aside>
+
+### Przykłady do analizy
+
+#### Przykład A — metoda publiczna i prywatna
+
+```csharp
+public static class MapValidator
+{
+    public static bool HasExit(char[,] map)
+    {
+        return CountExits(map) == 1;
+    }
+
+    private static int CountExits(char[,] map)
+    {
+        int count = 0;
+
+        for (int y = 0; y < map.GetLength(0); y++)
+        {
+            for (int x = 0; x < map.GetLength(1); x++)
+            {
+                if (map[y, x] == '>')
+                {
+                    count++;
+                }
+            }
+        }
+
+        return count;
+    }
+}
+```
+
+Przeanalizuj:
+
+1. Którą metodę może wywołać `Program`?
+2. Dlaczego `CountExits` może pozostać `private`?
+3. Czy `HasExit` może wywołać `CountExits`?
+4. Co zmieni się po ustawieniu `CountExits` jako `public`?
+
+#### Przykład B — zbyt ograniczony dostęp
+
+```csharp
+private static class DungeonMap
+{
+    public static char[,] Create(int width, int height)
+    {
+        return new char[height, width];
+    }
+}
+```
+
+Przeanalizuj:
+
+1. Czy `Program` z projektu `FirstDungeonMap.App` może użyć tej klasy?
+2. Czy publiczna metoda pomaga, jeśli sama klasa nie jest dostępna?
+3. Jaki modyfikator powinna mieć `DungeonMap`, aby aplikacja mogła jej używać?
+
+> **Ważne:** ten dokładny przykład umieszczony bezpośrednio w przestrzeni nazw nie skompiluje się również dlatego, że typ najwyższego poziomu nie może być `private`. Klasy najwyższego poziomu używane przez inny projekt deklarujemy tutaj jako `public`.
+
+#### Przykład C — prywatna metoda zadania
+
+```csharp
+public static class Program
+{
+    public static void Main()
+    {
+        Task2();
+    }
+
+    private static void Task2()
+    {
+        char[,] map = new char[5, 8];
+        Console.WriteLine(map.Length);
+    }
+}
+```
+
+Przeanalizuj:
+
+1. Dlaczego `Main` może wywołać `Task2`?
+2. Czy `MapRenderer` może wywołać `Task2`?
+3. Czy istnieje potrzeba zmiany `Task2` na `public`?
+
+### Krótka zasada na laboratorium
+
+- `DungeonMap`, `MapRenderer` i metody używane przez inne klasy — `public`.
+- `Task1()`–`Task7()` oraz pomocnicze szczegóły używane tylko przez `Program` — `private`.
+- Jeśli kompilator zgłasza niedostępność elementu, najpierw sprawdź modyfikator klasy, potem modyfikator metody, a następnie zależność projektu i namespace.
 
 | Symbol | Znaczenie | Dane mapy? |
 |---:|---|---|
@@ -91,7 +302,7 @@ Pole pod graczem: map[2, 2]
 >
 > **Jan:** Wtedy zgubisz informację, gdzie kończy się wiersz. Plansza potrzebuje dwóch wymiarów i dwóch pętli.
 
-W `Task1()` znajduje się gotowa tablica:
+W `FirstDungeonMap.App/Program.cs`, w `Task1()`, znajduje się gotowa tablica:
 
 ```csharp
 char[,] map =
@@ -169,9 +380,9 @@ Zmień wyłącznie `width` i `height` na `8 × 5`, a potem `20 × 4`. Kod nadal 
 
 ## Zadanie 3. Średnie — metody tworzenia i wyświetlania mapy
 
-Przenieś generator do `DungeonMap.Create(int width, int height)`. Metoda ma utworzyć, wypełnić i zwrócić mapę. Wymiar mniejszy niż `3` powinien zostać odrzucony z czytelnym komunikatem.
+Przenieś generator do `FirstDungeonMap.Core/Maps/DungeonMap.cs`, do metody `DungeonMap.Create(int width, int height)`. Metoda ma utworzyć, wypełnić i zwrócić mapę. Wymiar mniejszy niż `3` powinien zostać odrzucony z czytelnym komunikatem.
 
-Uzupełnij też `DungeonMap.Print(char[,] map, int playerX = -1, int playerY = -1)`. Parametry gracza mogą na tym etapie pozostać niewykorzystane.
+Uzupełnij też `FirstDungeonMap.App/UI/MapRenderer.cs`, metodę `MapRenderer.Print(char[,] map, int playerX = -1, int playerY = -1)`. Parametry gracza mogą na tym etapie pozostać niewykorzystane. Renderowanie należy do aplikacji, ponieważ używa `Console`.
 
 W `Task3()`:
 
@@ -195,7 +406,7 @@ map[1, 10] = '>'; // y = 1, x = 10
 
 ### Kryteria ukończenia
 
-- [ ] Tworzenie i wyświetlanie są rozdzielone.
+- [ ] Tworzenie w `Core` i wyświetlanie w `App` są rozdzielone.
 - [ ] `Create` działa dla różnych poprawnych wymiarów.
 - [ ] Mapa zawiera wyjście, skarb i przeszkody.
 - [ ] Wszystkie symbole mieszczą się w tablicy.
@@ -216,7 +427,7 @@ int playerX = 2;
 int playerY = 2;
 ```
 
-Rozbuduj `Print`: na współrzędnych gracza wypisuj `@`, na innych polach `map[y, x]`. Nie zapisuj `@` do tablicy.
+Rozbuduj `MapRenderer.Print`: na współrzędnych gracza wypisuj `@`, na innych polach `map[y, x]`. Nie zapisuj `@` do tablicy.
 
 ```text
 czy x == playerX i y == playerY?
@@ -244,7 +455,7 @@ Wyświetl gracza na podłodze `(2, 2)`, a potem bezpośrednio wypisz `map[player
 
 ## Zadanie 5. Trudniejsze — bezpieczne współrzędne
 
-Uzupełnij `IsInside(char[,] map, int x, int y)`. Wynik jest prawdziwy tylko dla:
+W klasie `FirstDungeonMap.Core.Maps.DungeonMap` uzupełnij `IsInside(char[,] map, int x, int y)`. Wynik jest prawdziwy tylko dla:
 
 ```text
 0 <= x < szerokość
@@ -407,7 +618,8 @@ Sprawdź poprawną mapę, narożnik `(0, 0)`, pole gracza, pole wyjścia, wspó�
 - Nie zastępuj `char[,]` listą napisów ani wielowierszowym napisem.
 - Nie dodawaj ruchu, walki ani losowego generatora.
 - Nie używaj `IndexOutOfRangeException` jako sposobu sprawdzania granic.
-- Nie duplikuj pętli wyświetlającej — korzystaj z `DungeonMap.Print`.
+- Nie duplikuj pętli wyświetlającej — korzystaj z `MapRenderer.Print`.
+- Nie dodawaj `Console.WriteLine` ani zależności do `FirstDungeonMap.App` w projekcie `Core`.
 
 ## Kryteria ukończenia projektu
 
@@ -419,6 +631,7 @@ Sprawdź poprawną mapę, narożnik `(0, 0)`, pole gracza, pole wyjścia, wspó�
 - [ ] Walidacja rozpoznaje pięć wymaganych problemów.
 - [ ] Błędne dane nie kończą programu wyjątkiem.
 - [ ] Kod buduje się bez błędów.
+- [ ] Oba projekty mają spójne namespace, a zależność prowadzi tylko z `App` do `Core`.
 
 ---
 
@@ -435,12 +648,15 @@ Sprawdź poprawną mapę, narożnik `(0, 0)`, pole gracza, pole wyjścia, wspó�
 9. Dlaczego `@` nie powinno zastępować terenu?
 10. Jak znaleźć symbol bez założenia rozmiaru?
 11. Co zwrócić, jeśli symbol nie istnieje?
+12. Dlaczego `DungeonMap` należy do `Core`, a `MapRenderer` do `App`?
+13. Czym różnią się `ProjectReference` i dyrektywa `using`?
 
 ## Co oddać
 
 - kompletny projekt oparty na starterze,
 - rozwiązania `Task1()`–`Task7()`,
-- uzupełnioną klasę `DungeonMap`,
+- uzupełnione klasy `DungeonMap` i `MapRenderer`,
+- oba projekty oraz plik `FirstDungeonMap.Starter.slnx`,
 - przykład działania projektu lub zrzut konsoli,
 - listę wykonanych scenariuszy testowych,
 - odpowiedzi z eksperymentów w zadaniach 1, 4 i 5.
