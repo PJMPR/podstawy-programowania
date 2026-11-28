@@ -237,6 +237,13 @@ tablicy, ale ukrycie jej wewnątrz obiektu, który będzie pilnował własnych r
 
 ## Krok 1. `DungeonMap` staje się klasą obiektów
 
+<div class="refactor-context">
+<p><strong>Miejsce zmiany:</strong> plik <code>DungeonRider.Core/Maps/DungeonMap.cs</code>, deklaracja klasy <code>DungeonMap</code> na początku pliku.</p>
+<p><strong>Problem:</strong> klasa statyczna jest tylko zbiorem narzędzi. Nie reprezentuje konkretnej mapy, dlatego tablica musi być przekazywana do każdej operacji.</p>
+<p><strong>Cel kroku:</strong> umożliwić tworzenie niezależnych obiektów map, z których każdy przechowuje własną tablicę pól.</p>
+<p><strong>Kontrola:</strong> po zmianie zapis <code>new DungeonMap(...)</code> ma być dozwolony, a pole <code>fields</code> ma należeć do obiektu.</p>
+</div>
+
 > **Maciej:** Przecież już mamy klasę `DungeonMap`. Ma nazwę klasy, zawiera metody i kod działa. Po co ją zmieniać?
 >
 > **Jan:** Nazwa `class` jeszcze nie oznacza, że korzystamy z obiektów. `DungeonMap` jest teraz klasą statyczną, czyli zbiorem metod. Nie możemy utworzyć konkretnej mapy i powiedzieć: „to jest mapa pierwszego poziomu”. Dane nadal znajdują się w osobnej tablicy przekazywanej do każdej metody.
@@ -271,6 +278,13 @@ public class DungeonMap
 utworzeniu obiektu pole nie zacznie wskazywać innej tablicy.
 
 ## Krok 2. Konstruktor tworzy poprawny obiekt
+
+<div class="refactor-context">
+<p><strong>Miejsce zmiany:</strong> ten sam plik <code>DungeonMap.cs</code>; metoda <code>Create</code> oraz kod, który dotychczas tworzył i wypełniał tablicę.</p>
+<p><strong>Problem:</strong> metoda <code>Create</code> zwraca samą tablicę, więc utworzony wynik nadal nie jest obiektem <code>DungeonMap</code>. Inicjalizacja danych pozostaje oddzielona od właściciela tych danych.</p>
+<p><strong>Cel kroku:</strong> przenieść tworzenie tablicy i ścian do konstruktora, aby każdy nowy obiekt mapy od razu był gotowy do użycia.</p>
+<p><strong>Kontrola:</strong> wywołanie <code>new DungeonMap(12, 7)</code> ma utworzyć mapę z poprawnymi wymiarami, ścianami na krawędziach i podłogą wewnątrz.</p>
+</div>
 
 > **Maciej:** Najpierw utworzę pusty obiekt, a potem osobno ustawię szerokość, wysokość i tablicę. Będę mógł wykonać każdy krok oddzielnie.
 >
@@ -327,6 +341,13 @@ mniejszej niż `3` zostanie użyte `3`.
 
 ## Krok 3. Metody pracują na stanie obiektu
 
+<div class="refactor-context">
+<p><strong>Miejsce zmiany:</strong> metody <code>IsInside</code>, <code>IsWalkable</code>, <code>CountSymbol</code> i <code>TryFindSymbol</code> w <code>DungeonMap.cs</code> oraz ich wywołania w <code>Program.cs</code>.</p>
+<p><strong>Problem:</strong> każda metoda otrzymuje tablicę jako parametr, chociaż po poprzednich krokach obiekt ma już własne <code>fields</code>. Można więc przekazać tablicę niezwiązaną z obiektem.</p>
+<p><strong>Cel kroku:</strong> usunąć <code>static</code> i parametr <code>char[,] map</code>, a operacje wykonywać na stanie bieżącego obiektu.</p>
+<p><strong>Kontrola:</strong> wywołania mają mieć postać <code>map.IsWalkable(x, y)</code>, a nie <code>DungeonMap.IsWalkable(map, x, y)</code>.</p>
+</div>
+
 > **Maciej:** Zostawię parametr `char[,] map`, bo wcześniej działał. Im mniej zmienimy w sygnaturach metod, tym bezpieczniejsza będzie refaktoryzacja.
 >
 > **Jan:** Małe kroki są dobrym pomysłem, ale pozostawienie tego parametru utrzyma stary problem. Obiekt ma już własne pole `fields`, a metoda przyjmowałaby jeszcze drugą tablicę. Nie byłoby wiadomo, która z nich jest właściwym stanem obiektu.
@@ -374,6 +395,13 @@ Wywołanie zmienia się z `DungeonMap.IsWalkable(map, x, y)` na
 
 ## Krok 4. Kontrolowany odczyt i zapis pól
 
+<div class="refactor-context">
+<p><strong>Miejsce zmiany:</strong> wszystkie bezpośrednie użycia zapisu <code>map[y, x]</code> w <code>Program.cs</code> oraz odczyt tablicy w <code>MapRenderer.cs</code>.</p>
+<p><strong>Problem:</strong> kod spoza mapy zna jej wewnętrzną tablicę, kolejność indeksów i sam musi pamiętać o sprawdzaniu granic. Jedna pomyłka może naruszyć stan mapy.</p>
+<p><strong>Cel kroku:</strong> pozostawić tablicę jako <code>private</code> i udostępnić jedną kontrolowaną drogę odczytu oraz zapisu przez <code>GetField</code> i <code>SetField</code>.</p>
+<p><strong>Kontrola:</strong> poza klasą <code>DungeonMap</code> nie powinno pozostać żadne indeksowanie jej tablicy za pomocą <code>[y, x]</code>.</p>
+</div>
+
 <p class="refactor-label refactor-before">Kod ze startera — bezpośredni dostęp do tablicy do podmiany</p>
 
 ```csharp
@@ -415,6 +443,13 @@ Przy odczycie pola spoza mapy metoda zwraca `#`, czyli pole niedostępne. Próba
 poza mapą niczego nie zmienia, a program może działać dalej.
 
 ## Krok 5. Gracz jako obiekt
+
+<div class="refactor-context">
+<p><strong>Miejsce zmiany:</strong> stałe <code>PlayerX</code>, <code>PlayerY</code> i lokalne zmienne <code>playerX</code>, <code>playerY</code> w <code>Program.cs</code>. Dodaj nowy plik <code>DungeonRider.Core/Game/Player.cs</code>.</p>
+<p><strong>Problem:</strong> współrzędne i imię gracza są luźnymi wartościami. Program musi sam pamiętać, że należą do jednej postaci i powinny być przekazywane oraz zmieniane razem.</p>
+<p><strong>Cel kroku:</strong> utworzyć obiekt <code>Player</code>, który jest właścicielem imienia i pozycji oraz ogranicza ich niekontrolowaną zmianę.</p>
+<p><strong>Kontrola:</strong> <code>Program</code> ma przechowywać zmienną <code>Player player</code>, a renderer odczytywać <code>player.X</code> i <code>player.Y</code>.</p>
+</div>
 
 > **Maciej:** Pozycja gracza to tylko dwie liczby. Czy naprawdę potrzebujemy dla nich całej klasy?
 >
@@ -465,6 +500,13 @@ Player player = new Player("Ada", 2, 2);
 
 ## Krok 6. Zachowanie gracza trafia do `Player`
 
+<div class="refactor-context">
+<p><strong>Miejsce zmiany:</strong> nowa klasa <code>Player</code> oraz kod odpowiedzialny za zmianę pozycji w <code>Program.cs</code>.</p>
+<p><strong>Problem:</strong> jeśli współrzędne zmienia kod zewnętrzny, łatwo ominąć sprawdzenie mapy albo zaktualizować tylko jedną z nich. Reguła ruchu zostałaby rozproszona między kilkoma miejscami.</p>
+<p><strong>Cel kroku:</strong> skupić obliczenie, sprawdzenie i zatwierdzenie ruchu w jednej metodzie <code>TryMove</code> należącej do gracza.</p>
+<p><strong>Kontrola:</strong> tylko <code>Player</code> może ustawiać <code>X</code> i <code>Y</code>, a zablokowany ruch nie zmienia żadnej właściwości.</p>
+</div>
+
 > **Maciej:** W `Program` obliczę ruch, a potem ustawię osobno `player.X` i `player.Y`. Tam i tak odczytujemy klawiaturę, więc wszystko będzie w jednym miejscu.
 >
 > **Jan:** `Program` powinien rozpoznać polecenie użytkownika, ale nie musi znać szczegółów zmiany pozycji. Jeśli pozwolimy mu ustawiać właściwości, inny fragment programu może przesunąć gracza bez sprawdzenia ściany albo zmienić tylko jedną współrzędną.
@@ -514,6 +556,13 @@ public bool TryMove(int dx, int dy, DungeonMap map)
 `Player` odpowiada za swoją pozycję, a o regułę dostępności pyta `DungeonMap`.
 
 ## Krok 7. `DungeonGame` łączy obiekty
+
+<div class="refactor-context">
+<p><strong>Miejsce zmiany:</strong> dodaj plik <code>DungeonRider.Core/Game/DungeonGame.cs</code>, a następnie zmień tworzenie danych w <code>Program.cs</code> i parametr metody <code>MapRenderer.Print</code>.</p>
+<p><strong>Problem:</strong> mapa i gracz są już obiektami, ale nadal krążą po programie osobno. Wraz z kolejnymi elementami gry rosłaby liczba parametrów i reguł przechowywanych w <code>Program</code>.</p>
+<p><strong>Cel kroku:</strong> utworzyć jeden obiekt reprezentujący bieżącą rozgrywkę i umieścić w nim reguły wymagające współpracy mapy z graczem.</p>
+<p><strong>Kontrola:</strong> <code>Program</code> i renderer mają korzystać z jednego obiektu <code>DungeonGame</code>, a dostęp do mapy i gracza odbywa się przez <code>game.Map</code> oraz <code>game.Player</code>.</p>
+</div>
 
 <p class="refactor-label refactor-before">Kod do podmiany — osobne dane przekazywane do renderera</p>
 

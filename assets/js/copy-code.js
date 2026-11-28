@@ -10,8 +10,15 @@ document.addEventListener('DOMContentLoaded', () => {
         const copyButton = document.createElement('button');
         const focusButton = document.createElement('button');
         const result = getExampleResult(code);
+        const sourceContainer = pre.closest('.highlighter-rouge') ?? pre;
+        const refactorLabel = sourceContainer.previousElementSibling;
 
         wrapper.className = 'code-block';
+        if (refactorLabel?.classList.contains('refactor-before')) {
+            wrapper.classList.add('refactor-code-before');
+        } else if (refactorLabel?.classList.contains('refactor-after')) {
+            wrapper.classList.add('refactor-code-after');
+        }
         wrapper.dataset.language = getLanguageLabel(code);
         pre.parentNode.insertBefore(wrapper, pre);
         wrapper.appendChild(pre);
