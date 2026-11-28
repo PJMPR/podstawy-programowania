@@ -237,9 +237,17 @@ tablicy, ale ukrycie jej wewnątrz obiektu, który będzie pilnował własnych r
 
 ## Krok 1. `DungeonMap` staje się klasą obiektów
 
-> **Maciej:** Przecież już mamy klasę `DungeonMap`. Co tu zmieniać?
+> **Maciej:** Przecież już mamy klasę `DungeonMap`. Ma nazwę klasy, zawiera metody i kod działa. Po co ją zmieniać?
 >
-> **Jan:** Mamy klasę statyczną, ale nie mamy obiektu mapy. Każda metoda nadal prosi o tablicę. Niech konkretny obiekt przechowuje własne pola.
+> **Jan:** Nazwa `class` jeszcze nie oznacza, że korzystamy z obiektów. `DungeonMap` jest teraz klasą statyczną, czyli zbiorem metod. Nie możemy utworzyć konkretnej mapy i powiedzieć: „to jest mapa pierwszego poziomu”. Dane nadal znajdują się w osobnej tablicy przekazywanej do każdej metody.
+>
+> **Maciej:** Ale przekazywanie tablicy jako parametru jest proste. Czy naprawdę jest w tym coś złego?
+>
+> **Jan:** Przy jednej mapie problem jest mało widoczny. Wyobraź sobie jednak dwie mapy: `firstLevel` i `secondLevel`. Łatwo przez pomyłkę sprawdzić współrzędne z pierwszego poziomu na tablicy drugiego. Klasa nie potrafi rozpoznać takiej pomyłki, bo żadna tablica do niej nie należy.
+>
+> **Maciej:** Czyli chodzi o to, żeby każda mapa sama przechowywała swoje pola?
+>
+> **Jan:** Dokładnie. Obiekt `DungeonMap` będzie reprezentował jedną konkretną mapę. Dane i operacje na nich znajdą się razem, a wywołanie `map.IsWalkable(...)` jasno pokaże, którą mapę sprawdzamy.
 
 ```csharp
 public class DungeonMap
@@ -253,9 +261,17 @@ utworzeniu obiektu pole nie zacznie wskazywać innej tablicy.
 
 ## Krok 2. Konstruktor tworzy poprawny obiekt
 
-> **Maciej:** Najpierw utworzę pusty obiekt, a potem osobno ustawię szerokość, wysokość i tablicę.
+> **Maciej:** Najpierw utworzę pusty obiekt, a potem osobno ustawię szerokość, wysokość i tablicę. Będę mógł wykonać każdy krok oddzielnie.
 >
-> **Jan:** Wtedy przez chwilę istnieje niepoprawna mapa. Konstruktor powinien od razu przygotować obiekt gotowy do użycia.
+> **Jan:** Tylko co się stanie, jeżeli zapomnisz o jednym z tych kroków albo wywołasz metodę pomiędzy nimi? Powstanie obiekt, który nazywa się mapą, ale nie ma jeszcze poprawnych pól.
+>
+> **Maciej:** Mogę przecież pamiętać o właściwej kolejności.
+>
+> **Jan:** Ty możesz pamiętać dzisiaj, lecz inna osoba używająca klasy nie powinna znać ukrytej instrukcji jej składania. Dobry obiekt powinien być gotowy do pracy natychmiast po utworzeniu. Konstruktor zbiera wymagane dane i wykonuje wszystkie konieczne czynności w jednym miejscu.
+>
+> **Maciej:** Czyli `new DungeonMap(12, 7)` ma od razu dać mapę o właściwym rozmiarze, z podłogą i ścianami?
+>
+> **Jan:** Tak. Dzięki temu nie da się przypadkiem pominąć inicjalizacji. Konstruktor pilnuje też minimalnych wymiarów, więc pozostałe metody mogą zakładać, że pracują na przygotowanej mapie.
 
 ```csharp
 public int Width => fields.GetLength(1);
@@ -284,9 +300,17 @@ mniejszej niż `3` zostanie użyte `3`.
 
 ## Krok 3. Metody pracują na stanie obiektu
 
-> **Maciej:** Zostawię parametr `char[,] map`, bo wcześniej działał.
+> **Maciej:** Zostawię parametr `char[,] map`, bo wcześniej działał. Im mniej zmienimy w sygnaturach metod, tym bezpieczniejsza będzie refaktoryzacja.
 >
-> **Jan:** Metoda obiektu zna już swoje `fields`. Parametr byłby dwiema odpowiedziami na pytanie „którą mapę sprawdzamy?”.
+> **Jan:** Małe kroki są dobrym pomysłem, ale pozostawienie tego parametru utrzyma stary problem. Obiekt ma już własne pole `fields`, a metoda przyjmowałaby jeszcze drugą tablicę. Nie byłoby wiadomo, która z nich jest właściwym stanem obiektu.
+>
+> **Maciej:** Mógłbym zawsze przekazywać `fields`.
+>
+> **Jan:** Wewnątrz obiektu nie ma potrzeby przekazywania mu jego własnych danych. To tak, jakbyś pytał gracza o jego imię, ale za każdym razem podawał mu inne imię jako parametr. Metoda obiektu powinna korzystać ze stanu obiektu, na którym została wywołana.
+>
+> **Maciej:** Czy dlatego zamiast `DungeonMap.IsWalkable(map, x, y)` napiszemy `map.IsWalkable(x, y)`?
+>
+> **Jan:** Właśnie tak. Pierwszy zapis mówi „użyj narzędzia i przekaż mu tablicę”. Drugi mówi „zapytaj tę konkretną mapę o jej pole”. Kod staje się krótszy, ale ważniejsze jest to, że trudniej pomylić dane należące do różnych obiektów.
 
 ```csharp
 public bool IsInside(int x, int y)
@@ -319,14 +343,38 @@ public void SetField(int x, int y, char symbol)
 }
 ```
 
-> **Maciej:** Publiczna tablica byłaby krótsza.
+> **Maciej:** Publiczna tablica byłaby krótsza. Mógłbym nadal pisać `map[y, x]` i nie potrzebowalibyśmy `GetField` ani `SetField`.
 >
-> **Jan:** Krótsza przy pierwszym zapisie, droższa przy każdym błędzie. Teraz wszystkie odczyty i zapisy przechodzą przez jedną kontrolowaną drogę.
+> **Jan:** Byłoby krócej w miejscu użycia, ale każda część programu mogłaby zmienić dowolne pole bez sprawdzenia granic i bez wiedzy klasy `DungeonMap`. Klasa przechowywałaby dane, lecz nie miałaby nad nimi żadnej kontroli.
+>
+> **Maciej:** Przecież i tak mogę uważać, żeby nie podać złych współrzędnych.
+>
+> **Jan:** Jeśli poprawność zależy wyłącznie od pamięci programisty, ten sam warunek trzeba zachować w wielu miejscach. Gdy odczyt i zapis przechodzą przez metody, sprawdzenie `IsInside` zapisujemy raz. Każdy fragment programu korzysta wtedy z tej samej zasady.
+>
+> **Maciej:** Czyli `private` nie służy tylko do ukrywania kodu?
+>
+> **Jan:** Dokładnie. Chodzi o ochronę spójności obiektu. Kod zewnętrzny mówi mapie, co chce zrobić, a mapa decyduje, jak wykonać to bezpiecznie. Dzięki temu późniejsza zmiana sposobu przechowywania pól nie wymaga poprawiania całego programu.
 
 Przy odczycie pola spoza mapy metoda zwraca `#`, czyli pole niedostępne. Próba zapisu
 poza mapą niczego nie zmienia, a program może działać dalej.
 
 ## Krok 5. Gracz jako obiekt
+
+> **Maciej:** Pozycja gracza to tylko dwie liczby. Czy naprawdę potrzebujemy dla nich całej klasy?
+>
+> **Jan:** Osobno są to dwie liczby, ale razem opisują konkretną postać. Do gracza dojdą też imię, liczba zebranych skarbów i zachowanie związane z ruchem. Jeżeli pozostawimy je jako luźne zmienne, `Program` będzie musiał pamiętać, które dane należą do siebie.
+>
+> **Maciej:** Mogę nazwać je `playerX`, `playerY` i `playerName`. Wtedy będzie wiadomo.
+>
+> **Jan:** Nazwy pomagają czytać kod, ale nie pilnują jego reguł. Możesz przypadkiem zmienić tylko `playerX`, przekazać współrzędne w złej kolejności albo pomieszać dane dwóch graczy. Obiekt grupuje stan i daje mu jednego właściciela.
+>
+> **Maciej:** A po co `private set`? Publiczne właściwości byłyby łatwiejsze do zmieniania.
+>
+> **Jan:** Właśnie dlatego ograniczamy zapis. Inne klasy powinny móc odczytać pozycję, żeby narysować gracza, ale nie powinny przenosić go z pominięciem zasad ruchu. Później pozycję zmieni metoda klasy `Player`, która sprawdzi cały ruch jako jedną operację.
+>
+> **Maciej:** Czyli klasa nie jest opakowaniem utworzonym tylko po to, żeby mieć kolejny plik?
+>
+> **Jan:** Nie. Ma sens wtedy, gdy nadaje powiązanym danym właściciela i chroni reguły ich zmiany. W tym przypadku obiekt odpowiada na pytanie: „jaki jest stan tego konkretnego gracza?”.
 
 ```csharp
 public class Player
@@ -352,9 +400,21 @@ Player player = new Player("Ada", 2, 2);
 
 ## Krok 6. Zachowanie gracza trafia do `Player`
 
-> **Maciej:** W `Program` ustawię osobno `player.X` i `player.Y`.
+> **Maciej:** W `Program` obliczę ruch, a potem ustawię osobno `player.X` i `player.Y`. Tam i tak odczytujemy klawiaturę, więc wszystko będzie w jednym miejscu.
 >
-> **Jan:** Właśnie temu zapobiega `private set`. Gracz ma sam sprawdzić ruch i zmienić obie współrzędne jako jedną operację.
+> **Jan:** `Program` powinien rozpoznać polecenie użytkownika, ale nie musi znać szczegółów zmiany pozycji. Jeśli pozwolimy mu ustawiać właściwości, inny fragment programu może przesunąć gracza bez sprawdzenia ściany albo zmienić tylko jedną współrzędną.
+>
+> **Maciej:** Mogę najpierw sprawdzić `map.IsWalkable`, a dopiero potem wykonać dwa przypisania.
+>
+> **Jan:** To zadziała w jednym miejscu. Gdy ruch pojawi się również przy pułapce, teleportacji albo sterowaniu drugą postacią, łatwo skopiować tylko część reguły. Metoda `TryMove` tworzy jedną oficjalną drogę wykonywania zwykłego ruchu.
+>
+> **Maciej:** Dlaczego metoda zwraca `bool`, zamiast po prostu przesunąć gracza?
+>
+> **Jan:** Ponieważ ruch może się udać albo zostać zablokowany. `Player` podejmuje decyzję i aktualizuje swój stan, a kod wywołujący otrzymuje prostą informację o wyniku. Może na jej podstawie wyświetlić komunikat, nie zmieniając samodzielnie pozycji.
+>
+> **Maciej:** Rozumiem — najpierw liczymy `nextX` i `nextY`, potem sprawdzamy oba, a dopiero na końcu zmieniamy stan gracza.
+>
+> **Jan:** Tak. Dzięki temu nie istnieje moment, w którym zmieniliśmy `X`, ale `Y` jeszcze pozostało stare, albo wykonaliśmy połowę niedozwolonego ruchu.
 
 ```csharp
 public bool TryMove(int dx, int dy, DungeonMap map)
@@ -389,9 +449,21 @@ public class DungeonGame
 }
 ```
 
-> **Maciej:** Czy `DungeonGame` nie jest tylko dodatkowym pudełkiem?
+> **Maciej:** Czy `DungeonGame` nie jest tylko dodatkowym pudełkiem? Renderer może dostać osobno `map` i `player`, tak jak wcześniej dostawał tablicę oraz współrzędne.
 >
-> **Jan:** Jest miejscem dla reguł całej rozgrywki. Mapa pilnuje pól, gracz pozycji, a gra ich poprawnej współpracy.
+> **Jan:** Na tym etapie rzeczywiście dałoby się przekazać dwa parametry. Pomyśl jednak, co stanie się później, gdy pojawią się przeciwnicy, wynik, numer poziomu i informacja o zakończeniu gry. Lista parametrów będzie rosła, a `Program` stanie się miejscem przechowującym cały stan rozgrywki.
+>
+> **Maciej:** Czy nie możemy po prostu dodawać kolejnych właściwości do `Player`?
+>
+> **Jan:** Tylko te, które naprawdę opisują gracza. Mapa nie należy do gracza, a warunek zakończenia dotyczy współpracy gracza z mapą. Jeśli gracz stoi na polu `>`, to ani sam gracz, ani sama mapa nie zawierają całej informacji potrzebnej do oceny sytuacji.
+>
+> **Maciej:** Czyli `DungeonGame` ma przechowywać obiekty biorące udział w jednej rozgrywce?
+>
+> **Jan:** Tak. Staje się właścicielem stanu całej sesji i miejscem dla reguł łączących kilka obiektów. `DungeonMap` pilnuje pól, `Player` swojej pozycji, a `DungeonGame` odpowiada na pytania dotyczące ich współpracy, na przykład czy gra już się zakończyła.
+>
+> **Maciej:** W takim razie renderer może przyjąć jeden obiekt `DungeonGame` i znaleźć w nim wszystko, czego potrzebuje do narysowania bieżącego stanu.
+>
+> **Jan:** Dokładnie. Nie chodzi o zmniejszenie liczby parametrów za wszelką cenę, lecz o przekazanie spójnego modelu jednej rozgrywki.
 
 Renderer przyjmuje jeden spójny obiekt:
 
