@@ -249,6 +249,17 @@ tablicy, ale ukrycie jej wewnątrz obiektu, który będzie pilnował własnych r
 >
 > **Jan:** Dokładnie. Obiekt `DungeonMap` będzie reprezentował jedną konkretną mapę. Dane i operacje na nich znajdą się razem, a wywołanie `map.IsWalkable(...)` jasno pokaże, którą mapę sprawdzamy.
 
+<p class="refactor-label refactor-before">Kod ze startera — usuń modyfikator <code>static</code> z klasy</p>
+
+```csharp
+public static class DungeonMap
+{
+    // Metody statyczne z Lab09.
+}
+```
+
+<p class="refactor-label refactor-after">Kod po zmianie — klasa będzie tworzyć obiekty map</p>
+
 ```csharp
 public class DungeonMap
 {
@@ -272,6 +283,22 @@ utworzeniu obiektu pole nie zacznie wskazywać innej tablicy.
 > **Maciej:** Czyli `new DungeonMap(12, 7)` ma od razu dać mapę o właściwym rozmiarze, z podłogą i ścianami?
 >
 > **Jan:** Tak. Dzięki temu nie da się przypadkiem pominąć inicjalizacji. Konstruktor pilnuje też minimalnych wymiarów, więc pozostałe metody mogą zakładać, że pracują na przygotowanej mapie.
+
+<p class="refactor-label refactor-before">Kod ze startera — metoda Create zostanie zastąpiona konstruktorem</p>
+
+```csharp
+public static char[,] Create(int width, int height)
+{
+    width = Math.Max(width, 3);
+    height = Math.Max(height, 3);
+
+    char[,] map = new char[height, width];
+    // Wypełnianie tablicy.
+    return map;
+}
+```
+
+<p class="refactor-label refactor-after">Kod po zmianie — pole, właściwości i konstruktor</p>
 
 ```csharp
 public int Width => fields.GetLength(1);
@@ -312,6 +339,23 @@ mniejszej niż `3` zostanie użyte `3`.
 >
 > **Jan:** Właśnie tak. Pierwszy zapis mówi „użyj narzędzia i przekaż mu tablicę”. Drugi mówi „zapytaj tę konkretną mapę o jej pole”. Kod staje się krótszy, ale ważniejsze jest to, że trudniej pomylić dane należące do różnych obiektów.
 
+<p class="refactor-label refactor-before">Kod ze startera — metody statyczne otrzymują tablicę</p>
+
+```csharp
+public static bool IsInside(char[,] map, int x, int y)
+{
+    return x >= 0 && x < map.GetLength(1) &&
+           y >= 0 && y < map.GetLength(0);
+}
+
+public static bool IsWalkable(char[,] map, int x, int y)
+{
+    return IsInside(map, x, y) && map[y, x] != '#';
+}
+```
+
+<p class="refactor-label refactor-after">Kod po zmianie — metody korzystają z fields bieżącego obiektu</p>
+
 ```csharp
 public bool IsInside(int x, int y)
 {
@@ -329,6 +373,18 @@ Wywołanie zmienia się z `DungeonMap.IsWalkable(map, x, y)` na
 `TryFindSymbol` do `TryFind`.
 
 ## Krok 4. Kontrolowany odczyt i zapis pól
+
+<p class="refactor-label refactor-before">Kod ze startera — bezpośredni dostęp do tablicy do podmiany</p>
+
+```csharp
+map[1, 10] = '>';
+char symbol = map[y, x];
+```
+
+Po ukryciu tablicy `fields` taki kod nie będzie już dostępny poza `DungeonMap`.
+Zastąp go publicznymi metodami obiektu.
+
+<p class="refactor-label refactor-after">Kod po zmianie — kontrolowany odczyt i zapis</p>
 
 ```csharp
 public char GetField(int x, int y)
@@ -376,6 +432,15 @@ poza mapą niczego nie zmienia, a program może działać dalej.
 >
 > **Jan:** Nie. Ma sens wtedy, gdy nadaje powiązanym danym właściciela i chroni reguły ich zmiany. W tym przypadku obiekt odpowiada na pytanie: „jaki jest stan tego konkretnego gracza?”.
 
+<p class="refactor-label refactor-before">Kod ze startera — luźne zmienne do usunięcia z Program</p>
+
+```csharp
+int playerX = 2;
+int playerY = 2;
+```
+
+<p class="refactor-label refactor-after">Kod po zmianie — dane gracza należą do klasy Player</p>
+
 ```csharp
 public class Player
 {
@@ -416,6 +481,21 @@ Player player = new Player("Ada", 2, 2);
 >
 > **Jan:** Tak. Dzięki temu nie istnieje moment, w którym zmieniliśmy `X`, ale `Y` jeszcze pozostało stare, albo wykonaliśmy połowę niedozwolonego ruchu.
 
+<p class="refactor-label refactor-before">Antywzorzec — nie dodawaj takiej logiki do Program</p>
+
+```csharp
+int nextX = playerX + dx;
+int nextY = playerY + dy;
+
+if (DungeonMap.IsWalkable(map, nextX, nextY))
+{
+    playerX = nextX;
+    playerY = nextY;
+}
+```
+
+<p class="refactor-label refactor-after">Kod po zmianie — Player wykonuje całą operację ruchu</p>
+
 ```csharp
 public bool TryMove(int dx, int dy, DungeonMap map)
 {
@@ -434,6 +514,16 @@ public bool TryMove(int dx, int dy, DungeonMap map)
 `Player` odpowiada za swoją pozycję, a o regułę dostępności pyta `DungeonMap`.
 
 ## Krok 7. `DungeonGame` łączy obiekty
+
+<p class="refactor-label refactor-before">Kod do podmiany — osobne dane przekazywane do renderera</p>
+
+```csharp
+MapRenderer.Print(map, playerX, playerY);
+```
+
+Najpierw utwórz obiekt grupujący mapę oraz gracza.
+
+<p class="refactor-label refactor-after">Kod po zmianie — wspólny model rozgrywki</p>
 
 ```csharp
 public class DungeonGame
