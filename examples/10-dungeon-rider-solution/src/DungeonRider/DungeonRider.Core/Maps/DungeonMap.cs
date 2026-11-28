@@ -9,8 +9,8 @@ public class DungeonMap
 
     public DungeonMap(int width, int height)
     {
-        if (width < 3 || height < 3)
-            throw new ArgumentException("Mapa musi mieć co najmniej 3 × 3 pola.");
+        width = Math.Max(width, 3);
+        height = Math.Max(height, 3);
 
         fields = new char[height, width];
         for (int y = 0; y < Height; y++)
@@ -20,14 +20,13 @@ public class DungeonMap
 
     public char GetField(int x, int y)
     {
-        EnsureInside(x, y);
-        return fields[y, x];
+        return IsInside(x, y) ? fields[y, x] : '#';
     }
 
     public void SetField(int x, int y, char symbol)
     {
-        EnsureInside(x, y);
-        fields[y, x] = symbol;
+        if (IsInside(x, y))
+            fields[y, x] = symbol;
     }
 
     public bool IsInside(int x, int y) => x >= 0 && x < Width && y >= 0 && y < Height;
@@ -59,8 +58,4 @@ public class DungeonMap
 
     private bool IsEdge(int x, int y) => x == 0 || x == Width - 1 || y == 0 || y == Height - 1;
 
-    private void EnsureInside(int x, int y)
-    {
-        if (!IsInside(x, y)) throw new ArgumentOutOfRangeException($"Pole ({x}, {y}) leży poza mapą.");
-    }
 }

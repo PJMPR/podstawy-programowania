@@ -11,8 +11,7 @@ public class Player
 
     public Player(string name, int x, int y)
     {
-        if (string.IsNullOrWhiteSpace(name)) throw new ArgumentException("Gracz musi mieć imię.");
-        Name = name;
+        Name = string.IsNullOrWhiteSpace(name) ? "Gracz" : name;
         X = x;
         Y = y;
     }

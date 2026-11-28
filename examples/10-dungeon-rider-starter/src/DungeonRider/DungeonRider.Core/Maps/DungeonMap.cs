@@ -4,8 +4,8 @@ public static class DungeonMap
 {
     public static char[,] Create(int width, int height)
     {
-        if (width < 3 || height < 3)
-            throw new ArgumentException("Mapa musi mieć co najmniej 3 × 3 pola.");
+        width = Math.Max(width, 3);
+        height = Math.Max(height, 3);
 
         char[,] map = new char[height, width];
         for (int y = 0; y < map.GetLength(0); y++)

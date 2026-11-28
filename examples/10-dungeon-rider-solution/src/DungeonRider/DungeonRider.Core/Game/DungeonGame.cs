@@ -10,8 +10,6 @@ public class DungeonGame
 
     public DungeonGame(DungeonMap map, Player player)
     {
-        if (!map.IsWalkable(player.X, player.Y))
-            throw new ArgumentException("Gracz musi rozpocząć na dostępnym polu.");
         Map = map;
         Player = player;
     }
