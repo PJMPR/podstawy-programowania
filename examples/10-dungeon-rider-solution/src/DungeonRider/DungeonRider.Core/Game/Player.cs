@@ -7,6 +7,7 @@ public class Player
     public string Name { get; }
     public int X { get; private set; }
     public int Y { get; private set; }
+    public int MovesCount { get; private set; }
     public int CollectedTreasures { get; private set; }
 
     public Player(string name, int x, int y)
@@ -23,6 +24,7 @@ public class Player
         if (!map.IsWalkable(nextX, nextY)) return false;
         X = nextX;
         Y = nextY;
+        MovesCount++;
         CollectTreasure(map);
         return true;
     }

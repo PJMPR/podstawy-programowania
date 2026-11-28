@@ -638,47 +638,49 @@ public static void Print(DungeonGame game)
 Wykonuj je na zrefaktoryzowanym kodzie. Wersja dla prowadzącego znajduje się w
 `examples/10-dungeon-rider-solution`.
 
-## Zadanie 1 — łatwe: imię gracza
+## Zadanie 1 — łatwe: licznik udanych ruchów
 
-Dodaj do `Player` imię przekazywane przez konstruktor. Jeśli przekazane imię jest puste
-albo składa się wyłącznie z białych znaków, użyj wartości `"Gracz"`. Renderer ma
-wyświetlać imię pod mapą.
-
-### Kryteria ukończenia
-
-- [ ] `Name` można odczytać, ale nie zmienić po utworzeniu gracza.
-- [ ] Dla pustego imienia konstruktor ustawia wartość `"Gracz"`.
-- [ ] `Program` tworzy gracza z imieniem.
-- [ ] Renderer nie otrzymuje osobnego parametru `string`.
-
-## Zadanie 2 — średnie: bezpieczny ruch
-
-Dodaj `Player.TryMove(int dx, int dy, DungeonMap map)`. Metoda oblicza proponowaną
-pozycję, pyta mapę o dostępność i zmienia `X` oraz `Y` tylko dla poprawnego ruchu.
-W `Program` obsłuż `W`, `A`, `S`, `D` oraz wyjście klawiszem `Q`.
+Dodaj do `Player` właściwość `MovesCount`. Jej wartość początkowa wynosi `0`, a po każdym
+udanym wywołaniu `TryMove` zwiększa się o jeden. Ruch zablokowany przez ścianę lub granicę
+mapy nie może zmienić licznika. Wyświetl liczbę ruchów pod mapą.
 
 ### Kryteria ukończenia
 
-- [ ] Gracz nie wychodzi poza mapę i nie przechodzi przez `#`.
-- [ ] Zablokowany ruch nie zmienia żadnej współrzędnej.
-- [ ] Sterowanie nie odczytuje prywatnej tablicy mapy.
-- [ ] `Q` kończy program.
-- [ ] Odpowiedzialność za zmianę pozycji pozostaje w `Player`.
+- [ ] `MovesCount` można odczytać, ale nie ustawić spoza klasy `Player`.
+- [ ] Nowy gracz rozpoczyna z wartością `0`.
+- [ ] Poprawny ruch zwiększa licznik dokładnie o jeden.
+- [ ] Ruch zablokowany nie zmienia licznika.
+- [ ] Renderer pokazuje aktualną liczbę ruchów.
 
-## Zadanie 3 — trudniejsze: skarby i koniec gry
+## Zadanie 2 — średnie: zbieranie skarbów
 
-Dodaj do `Player` licznik `CollectedTreasures`. Po poprawnym wejściu na `$` gracz zwiększa
-licznik, a mapa zamienia pole na `.`. Ponowne odwiedzenie pola nie daje punktu. Dodaj do
-`DungeonGame` właściwość `IsFinished`, która zwraca `true`, gdy gracz stoi na wyjściu `>`.
+Dodaj do `Player` właściwość `CollectedTreasures`. Po poprawnym wejściu na pole `$`
+zwiększ licznik, a symbol skarbu na mapie zamień na `.`. Wydziel prywatną metodę
+`CollectTreasure(DungeonMap map)` i wywołaj ją po zatwierdzeniu ruchu.
 
 ### Kryteria ukończenia
 
-- [ ] Licznika nie można ustawić spoza `Player`.
-- [ ] Skarb jest zbierany dopiero po poprawnym ruchu.
-- [ ] Jedno pole zwiększa licznik najwyżej raz.
-- [ ] Mapa odpowiada za zmianę własnego pola.
-- [ ] Wejście na `>` kończy pętlę komunikatem zwycięstwa.
-- [ ] Renderer pokazuje aktualny licznik.
+- [ ] `CollectedTreasures` można zmieniać tylko wewnątrz `Player`.
+- [ ] Skarb jest zbierany dopiero po udanym ruchu na jego pole.
+- [ ] Po zebraniu `$` zmienia się na `.`.
+- [ ] Powrót na to samo pole nie zwiększa licznika ponownie.
+- [ ] Renderer pokazuje liczbę zebranych skarbów.
+
+## Zadanie 3 — trudniejsze: wyjście odblokowane po zebraniu skarbów
+
+Rozbuduj `DungeonGame` o właściwości `RemainingTreasures`, `IsAtExit` i `IsFinished`.
+Gra kończy się zwycięstwem tylko wtedy, gdy gracz stoi na polu `>` i na mapie nie pozostał
+żaden skarb. Wejście na wyjście przed zebraniem wszystkiego nie kończy gry. Wyświetl wtedy
+informację, ile skarbów pozostało, i pozwól graczowi kontynuować.
+
+### Kryteria ukończenia
+
+- [ ] `RemainingTreasures` korzysta z metody `Map.Count('$')`.
+- [ ] `IsAtExit` sprawdza symbol pod aktualną pozycją gracza.
+- [ ] Samo wejście na `>` nie wystarcza do zwycięstwa.
+- [ ] `IsFinished` jest prawdziwe tylko na wyjściu i przy zerowej liczbie skarbów.
+- [ ] Komunikat na zablokowanym wyjściu podaje liczbę pozostałych skarbów.
+- [ ] Po zebraniu wszystkich skarbów wejście na `>` kończy grę.
 
 ## Pytania kontrolne
 

@@ -27,6 +27,8 @@ public static class Program
 
             if ((dx != 0 || dy != 0) && !game.Player.TryMove(dx, dy, game.Map))
                 Console.WriteLine("Ruch zablokowany.");
+            else if (game.IsAtExit && !game.IsFinished)
+                Console.WriteLine($"Wyjście jest zamknięte. Pozostałe skarby: {game.RemainingTreasures}.");
             MapRenderer.Print(game);
         }
 

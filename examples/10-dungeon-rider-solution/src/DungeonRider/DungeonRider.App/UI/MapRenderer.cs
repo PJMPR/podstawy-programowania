@@ -13,6 +13,7 @@ public static class MapRenderer
             Console.WriteLine();
         }
         Console.WriteLine("Legenda: # ściana | . podłoga | @ gracz | > wyjście | $ skarb");
-        Console.WriteLine($"Gracz: {game.Player.Name} | Skarby: {game.Player.CollectedTreasures}");
+        Console.WriteLine($"Gracz: {game.Player.Name} | Ruchy: {game.Player.MovesCount}");
+        Console.WriteLine($"Skarby: {game.Player.CollectedTreasures} | Pozostało: {game.RemainingTreasures}");
     }
 }
