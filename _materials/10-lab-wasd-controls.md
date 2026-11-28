@@ -1,300 +1,360 @@
 ---
 layout: material
-title: "Laboratorium 10 — sterowanie WASD i kolizje"
+title: "Laboratorium 10 — refaktoryzacja do kodu obiektowego"
 kind: lab
 week: 10
-summary: "Siedem zadań o odczytywaniu klawiszy, proponowanym ruchu, kolizjach, interakcjach i prostej turze gry."
+summary: "Refaktoryzacja działającego DungeonRidera z Lab09 do klas, obiektów, metod i konstruktorów."
 published: true
 content_ready: true
 ---
 
+<aside class="material-callout callout-note">
+<strong>Kod startowy</strong>
+<p>Kod startowy do laboratorium zostanie dostarczony przez assignment na platformie <code>classroom50.ord</code>. Otwórz udostępnione zadanie, zaakceptuj je i pracuj we własnym repozytorium utworzonym przez platformę.</p>
+</aside>
+
 ## Cel laboratorium
 
-Zamienisz statyczną mapę z poprzedniego laboratorium w prostą grę turową. Odczytasz klawisze `W`, `A`, `S`, `D`, obliczysz proponowaną pozycję, sprawdzisz kolizje i dopiero wtedy zatwierdzisz ruch. Dodasz także przedmioty, drzwi, przeciwnika i warunek zwycięstwa.
-
-Do wykonania jest **7 zadań**:
-
-- zadania 1–2 — proste,
-- zadania 3–4 — średnie,
-- zadania 5–6 — trudniejsze,
-- zadanie 7 — projekt integracyjny.
+Kod z Lab09 działa, ale stan gry jest rozproszony między tablicą `char[,]`, zmiennymi
+`playerX`, `playerY` i metodami statycznymi. Nie tworzymy gry od nowa. Zachowujemy jej
+zachowanie i **refaktoryzujemy** kod tak, aby mapa, gracz i rozgrywka stały się
+współpracującymi obiektami.
 
 ```text
-klawisz → dx/dy → proponowana pozycja → walidacja → ruch → interakcja → następna tura
+działający kod z Lab09 → klasy → konstruktory → obiekty → hermetyzacja → współpraca obiektów
 ```
+
+Po laboratorium potrafisz rozpoznać dane i zachowania jednego obiektu, utworzyć klasę,
+konstruktor i obiekt, zastąpić luźne zmienne właściwościami, przenieść metody statyczne
+do właściwych obiektów oraz ukryć szczegóły implementacji.
 
 <aside class="material-callout callout-note">
-<strong>Najważniejsza zasada</strong>
-<p>Najpierw oblicz i sprawdź proponowany ruch. Aktualną pozycję gracza zmień dopiero wtedy, gdy ruch jest dozwolony.</p>
+<strong>Refaktoryzacja</strong>
+<p>To zmiana budowy kodu bez celowej zmiany jego dotychczasowego zachowania. Po każdym kroku projekt powinien się kompilować i wyświetlać tę samą mapę.</p>
 </aside>
-
-## Zasady pracy
-
-- Pracuj na własnym repozytorium utworzonym przez GitHub Classroom.
-- Każde zadanie uruchamiaj przez menu i osobną metodę `Task1()`–`Task7()`.
-- Rozwiązuj zadania po kolei — późniejsze wykorzystują wcześniejsze metody.
-- Po każdym zadaniu zbuduj plik `.slnx` i uruchom `DungeonRaider.App`.
-- Logikę ruchu i kolizji umieszczaj w `DungeonRaider.Core`; konsolę i rysowanie w `DungeonRaider.App`.
-- Zachowaj kierunek zależności `DungeonRaider.App → DungeonRaider.Core`.
-- Stosuj konwencję `map[y, x]`.
-- Nie zapisuj `@` ani `M` w mapie — są nakładkami renderera.
 
 ---
 
-# Repozytorium i projekt startowy
+# Część 1. Punkt wyjścia — rozwiązanie Lab09
 
-Kod do GitHub Classroom znajduje się w `examples/10-dungeon-raider-starter`. Rozwiązanie prowadzącego jest przechowywane osobno w `examples/10-dungeon-raider-solution`. Do Classroom skopiuj wyłącznie starter.
+## Starter
 
-Otwórz `src/DungeonRaider/DungeonRaider.slnx` i uruchom:
+Starter znajduje się w `examples/10-dungeon-rider-starter`. Jest to **gotowe,
+działające rozwiązanie Lab09**, przemianowane na `DungeonRider`. Nie zawiera luk `TODO`.
 
 ```powershell
-dotnet build .\src\DungeonRaider\DungeonRaider.slnx
-dotnet run --project .\src\DungeonRaider\DungeonRaider.App\DungeonRaider.App.csproj
+cd .\examples\10-dungeon-rider-starter
+dotnet build .\src\DungeonRider\DungeonRider.slnx
+dotnet run --project .\src\DungeonRider\DungeonRider.App\DungeonRider.App.csproj
 ```
-
-Starter kompiluje się przed rozpoczęciem pracy. Miejsca przeznaczone do uzupełnienia oznaczono `TODO`.
 
 ```text
-src/DungeonRaider/
-├── DungeonRaider.slnx
-├── DungeonRaider.App/
-│   ├── Program.cs
-│   └── UI/MapRenderer.cs
-└── DungeonRaider.Core/
-    └── Game/Movement.cs
+DungeonRider/
+└── src/
+    └── DungeonRider/
+        ├── DungeonRider.slnx
+        ├── DungeonRider.App/
+        │   ├── Program.cs
+        │   └── UI/MapRenderer.cs
+        └── DungeonRider.Core/
+            └── Maps/DungeonMap.cs
 ```
 
-| Projekt | Odpowiedzialność |
-|---|---|
-| `DungeonRaider.Core` | kierunek ruchu, granice i reguły wejścia na pole |
-| `DungeonRaider.App` | menu, pętla gry, komunikaty i odczyt klawiatury |
-| `DungeonRaider.App.UI` | wyświetlanie mapy, aktorów i stanu gry |
-
-## Symbole mapy
-
-| Symbol | Znaczenie | Element mapy? |
-|---:|---|---:|
-| `#` | ściana | tak |
-| `.` | podłoga | tak |
-| `G` | złoto | tak |
-| `K` | klucz | tak |
-| `D` | zamknięte drzwi | tak |
-| `E` | wyjście | tak |
-| `@` | gracz | nie — nakładka |
-| `M` | przeciwnik | nie — nakładka |
-
----
-
-# Poziom prosty — zadania 1–2
-
-## Zadanie 1. Proste — odczytywanie poleceń
-
-Uzupełnij `Movement.TryGetDirection(ConsoleKey key, out int dx, out int dy)`. Metoda ma zamieniać klawisz na zmianę współrzędnych:
-
-| Klawisz | `dx` | `dy` |
-|---:|---:|---:|
-| `W` | `0` | `-1` |
-| `A` | `-1` | `0` |
-| `S` | `0` | `1` |
-| `D` | `1` | `0` |
-
-Dla innego klawisza ustaw `dx = 0`, `dy = 0` i zwróć `false`. W `Task1()` odczytuj klawisze przez `Console.ReadKey(true)`, pokazuj wynik i kończ po `Q`.
-
-### Kryteria ukończenia
-
-- [ ] Cztery klawisze zwracają właściwe `dx` i `dy`.
-- [ ] Nieznany klawisz zwraca `false` i `(0, 0)`.
-- [ ] Odczytany klawisz nie pojawia się automatycznie w konsoli.
-- [ ] `Q` kończy pętlę bez ruchu.
-
----
-
-## Zadanie 2. Proste — proponowana pozycja
-
-W `Task2()` przechowuj `playerX` i `playerY`. Po poprawnym klawiszu oblicz osobno:
+Mapa jest tablicą przekazywaną do statycznych metod:
 
 ```csharp
-int nextX = playerX + dx;
-int nextY = playerY + dy;
+char[,] map = DungeonMap.CreateSample();
+int playerX = 2;
+int playerY = 2;
+
+MapRenderer.Print(map, playerX, playerY);
+Console.WriteLine(DungeonMap.CountSymbol(map, '$'));
 ```
 
-Wyświetl pozycję aktualną i proponowaną, a następnie zatwierdź ruch. Nie sprawdzaj jeszcze ścian. Niepoprawny klawisz nie może zmienić pozycji.
+`DungeonMap` nie reprezentuje jeszcze konkretnej mapy. Jest pojemnikiem na operacje,
+a tablicę trzeba przekazywać do każdej z nich:
 
-### Kryteria ukończenia
-
-- [ ] Nowa pozycja powstaje w osobnych zmiennych.
-- [ ] `x` zmienia się dla `A/D`, a `y` dla `W/S`.
-- [ ] Nieznany klawisz nie przesuwa gracza.
-- [ ] Pozycja jest zatwierdzana dopiero po obliczeniu obu współrzędnych.
-
----
-
-# Poziom średni — zadania 3–4
-
-## Zadanie 3. Średnie — granice mapy i ściany
-
-Uzupełnij `Movement.IsInside` oraz `Movement.CanEnter`. Pole jest niedostępne, gdy leży poza mapą, jest ścianą `#` albo jest drzwiami `D`, a gracz nie ma klucza.
-
-W `Task3()` dla każdego poprawnego polecenia:
-
-1. oblicz `nextX` i `nextY`,
-2. sprawdź proponowane pole,
-3. przy błędzie pozostaw stare współrzędne,
-4. przy poprawnym ruchu zatwierdź obie współrzędne,
-5. ponownie narysuj planszę.
-
-<aside class="material-callout callout-hint">
-<strong>Podpowiedź</strong>
-<p>Najpierw wywołaj <code>IsInside</code>, a dopiero potem odczytaj <code>map[y, x]</code>.</p>
-</aside>
-
-### Kryteria ukończenia
-
-- [ ] Gracz nie wychodzi poza mapę ani nie przechodzi przez `#`.
-- [ ] Tablica nie jest odczytywana przed sprawdzeniem granic.
-- [ ] Nieudany ruch nie zmienia pozycji.
-- [ ] Komunikat opisuje ostatnią próbę ruchu.
-
----
-
-## Zadanie 4. Średnie — zbieranie złota
-
-Dodaj pola `G` i licznik `gold`. Po **poprawnym ruchu** na złoto zwiększ licznik, zamień pole na `.` i ustaw komunikat `Zebrano złoto.`. Ponowne wejście na to samo pole nie może drugi raz zwiększyć wyniku.
-
-### Eksperyment
-
-Wyjaśnij, dlaczego interakcja wykonana przed sprawdzeniem ruchu mogłaby pozwolić zebrać przedmiot bez wejścia na jego pole.
-
-### Kryteria ukończenia
-
-- [ ] Złoto jest zbierane tylko po zatwierdzonym ruchu.
-- [ ] Zebrane `G` zmienia się w `.`.
-- [ ] Jedno pole zwiększa licznik dokładnie raz.
-- [ ] Próba wejścia w ścianę nie uruchamia interakcji.
-
----
-
-# Poziom trudniejszy — zadania 5–6
-
-## Zadanie 5. Trudniejsze — klucz i drzwi
-
-Dodaj pola `K` i `D` oraz zmienną `hasKey`.
-
-- Wejście na `K` ustawia `hasKey = true` i usuwa klucz z mapy.
-- Wejście na `D` bez klucza jest niedozwolone.
-- Wejście na `D` z kluczem otwiera drzwi, zużywa klucz i pozostawia gracza na tym polu.
-- Stan klucza oraz ostatni komunikat są widoczne pod mapą.
-
-### Kryteria ukończenia
-
-- [ ] Klucz można podnieść tylko raz.
-- [ ] Drzwi blokują gracza bez klucza.
-- [ ] Klucz pozwala wejść na drzwi i zostaje zużyty.
-- [ ] Otwarte drzwi nie blokują kolejnych przejść.
-
----
-
-## Zadanie 6. Trudniejsze — tura przeciwnika
-
-Przechowuj przeciwnika jako osobne `enemyX` i `enemyY`. Po każdym **poprawnym ruchu gracza** przeciwnik wykonuje najwyżej jeden krok:
-
-1. najpierw próbuje zmniejszyć różnicę w osi `x`,
-2. jeżeli krok jest zablokowany albo `x` jest równe, próbuje osi `y`,
-3. nie wychodzi poza mapę i nie przechodzi przez `#` ani `D`,
-4. wejście na pozycję gracza kończy grę porażką.
-
-Niepoprawny klawisz i zablokowany ruch gracza nie uruchamiają tury przeciwnika.
-
-### Kryteria ukończenia
-
-- [ ] Przeciwnik wykonuje maksymalnie jeden krok na turę.
-- [ ] Porusza się tylko po poprawnym ruchu gracza.
-- [ ] Respektuje granice, ściany i zamknięte drzwi.
-- [ ] Spotkanie kończy grę czytelnym komunikatem.
-- [ ] `M` nie jest zapisane w mapie.
-
----
-
-# Zadanie projektowe
-
-## Zadanie 7. Projekt — „Ucieczka z lochu”
-
-Zbuduj kompletny poziom gry konsolowej wykorzystujący elementy z zadań 1–6.
-
-## Wymagania obowiązkowe
-
-Gra musi zawierać:
-
-1. sterowanie `WASD` oraz zakończenie przez `Q`,
-2. prostokątną mapę z granicami i wewnętrznymi ścianami,
-3. gracza przechowywanego poza mapą,
-4. co najmniej dwa pola złota `G`,
-5. jeden klucz `K` i jedne drzwi `D`,
-6. wyjście `E`, które daje zwycięstwo dopiero po zebraniu całego złota,
-7. przeciwnika poruszającego się po poprawnej turze gracza,
-8. liczniki ruchów i złota,
-9. komunikat ostatniej akcji,
-10. ekran końcowy: zwycięstwo, porażka albo rezygnacja.
-
-## Kolejność tury
-
-```text
-1. Odczytaj klawisz i wyznacz dx/dy.
-2. Oblicz nextX/nextY.
-3. Sprawdź i zatwierdź ruch gracza.
-4. Obsłuż G, K, D albo E.
-5. Jeżeli gra trwa, wykonaj ruch przeciwnika.
-6. Sprawdź porażkę i narysuj kolejny stan.
+```csharp
+public static bool IsWalkable(char[,] map, int x, int y)
+{
+    return IsInside(map, x, y) && map[y, x] != '#';
+}
 ```
 
-Jeśli gracz wejdzie na `E` przed zebraniem całego złota, gra trwa, a komunikat podaje, ile złota brakuje. Nie jest wymagane tworzenie klas `Player` ani `Enemy` — klasy będą tematem następnego tygodnia.
+Kod jest poprawny, lecz dane jednego pojęcia są rozdzielone. Celem nie jest usunięcie
+tablicy, ale ukrycie jej wewnątrz obiektu, który będzie pilnował własnych reguł.
 
-## Scenariusze testowe
+### Analiza przed zmianami
 
-1. Nieznany klawisz nie zmienia świata.
-2. Ruch w ścianę nie zwiększa licznika ruchów.
-3. Złoto można zebrać tylko raz.
-4. Drzwi nie przepuszczają bez klucza.
-5. Klucz otwiera drzwi i znika z ekwipunku.
-6. Wyjście z brakującym złotem nie kończy gry.
-7. Wyjście po zebraniu złota daje zwycięstwo.
-8. Przeciwnik nie przechodzi przez przeszkody.
-9. Spotkanie z przeciwnikiem daje porażkę.
-10. `Q` kończy grę jako rezygnacja.
-
-## Kryteria ukończenia projektu
-
-- [ ] Wszystkie obowiązkowe symbole mają działające reguły.
-- [ ] Walidacja poprzedza każdą zmianę pozycji.
-- [ ] Interakcja zachodzi dopiero po poprawnym ruchu.
-- [ ] Tura przeciwnika zachodzi we właściwym momencie.
-- [ ] Istnieją trzy czytelne zakończenia gry.
-- [ ] Liczniki i komunikat odpowiadają stanowi gry.
-- [ ] Kod nie duplikuje logiki granic i kolizji.
-- [ ] Projekt buduje się bez błędów.
+1. Które dane opisują mapę?
+2. Które dane opisują gracza?
+3. Które metody potrzebują tablicy `map`?
+4. Dlaczego `playerX` i `playerY` powinny zawsze zmieniać się razem?
 
 ---
+
+# Część 2. Refaktoryzacja krok po kroku
+
+## Krok 1. `DungeonMap` staje się klasą obiektów
+
+> **Maciej:** Przecież już mamy klasę `DungeonMap`. Co tu zmieniać?
+>
+> **Jan:** Mamy klasę statyczną, ale nie mamy obiektu mapy. Każda metoda nadal prosi o tablicę. Niech konkretny obiekt przechowuje własne pola.
+
+```csharp
+public class DungeonMap
+{
+    private readonly char[,] fields;
+}
+```
+
+`private` chroni tablicę przed dowolną zmianą spoza klasy. `readonly` oznacza, że po
+utworzeniu obiektu pole nie zacznie wskazywać innej tablicy.
+
+## Krok 2. Konstruktor tworzy poprawny obiekt
+
+> **Maciej:** Najpierw utworzę pusty obiekt, a potem osobno ustawię szerokość, wysokość i tablicę.
+>
+> **Jan:** Wtedy przez chwilę istnieje niepoprawna mapa. Konstruktor powinien od razu przygotować obiekt gotowy do użycia.
+
+```csharp
+public int Width => fields.GetLength(1);
+public int Height => fields.GetLength(0);
+
+public DungeonMap(int width, int height)
+{
+    if (width < 3 || height < 3)
+        throw new ArgumentException("Mapa musi mieć co najmniej 3 × 3 pola.");
+
+    fields = new char[height, width];
+
+    for (int y = 0; y < Height; y++)
+    for (int x = 0; x < Width; x++)
+        fields[y, x] = IsEdge(x, y) ? '#' : '.';
+}
+```
+
+```csharp
+DungeonMap map = new DungeonMap(12, 7);
+```
+
+Konstruktor ma nazwę klasy, nie podaje typu zwracanego i wykonuje się przy `new`.
+
+## Krok 3. Metody pracują na stanie obiektu
+
+> **Maciej:** Zostawię parametr `char[,] map`, bo wcześniej działał.
+>
+> **Jan:** Metoda obiektu zna już swoje `fields`. Parametr byłby dwiema odpowiedziami na pytanie „którą mapę sprawdzamy?”.
+
+```csharp
+public bool IsInside(int x, int y)
+{
+    return x >= 0 && x < Width && y >= 0 && y < Height;
+}
+
+public bool IsWalkable(int x, int y)
+{
+    return IsInside(x, y) && fields[y, x] != '#';
+}
+```
+
+Wywołanie zmienia się z `DungeonMap.IsWalkable(map, x, y)` na
+`map.IsWalkable(x, y)`. Tak samo przenieś `CountSymbol` do `Count` oraz
+`TryFindSymbol` do `TryFind`.
+
+## Krok 4. Kontrolowany odczyt i zapis pól
+
+```csharp
+public char GetField(int x, int y)
+{
+    EnsureInside(x, y);
+    return fields[y, x];
+}
+
+public void SetField(int x, int y, char symbol)
+{
+    EnsureInside(x, y);
+    fields[y, x] = symbol;
+}
+
+private void EnsureInside(int x, int y)
+{
+    if (!IsInside(x, y))
+        throw new ArgumentOutOfRangeException($"Pole ({x}, {y}) leży poza mapą.");
+}
+```
+
+> **Maciej:** Publiczna tablica byłaby krótsza.
+>
+> **Jan:** Krótsza przy pierwszym zapisie, droższa przy każdym błędzie. Teraz wszystkie odczyty i zapisy przechodzą przez jedną kontrolowaną drogę.
+
+## Krok 5. Gracz jako obiekt
+
+```csharp
+public class Player
+{
+    public string Name { get; }
+    public int X { get; private set; }
+    public int Y { get; private set; }
+
+    public Player(string name, int x, int y)
+    {
+        Name = name;
+        X = x;
+        Y = y;
+    }
+}
+```
+
+```csharp
+Player player = new Player("Ada", 2, 2);
+```
+
+`private set` pozwala odczytać pozycję z zewnątrz, lecz zmieniać ją tylko metodom klasy.
+
+## Krok 6. Zachowanie gracza trafia do `Player`
+
+> **Maciej:** W `Program` ustawię osobno `player.X` i `player.Y`.
+>
+> **Jan:** Właśnie temu zapobiega `private set`. Gracz ma sam sprawdzić ruch i zmienić obie współrzędne jako jedną operację.
+
+```csharp
+public bool TryMove(int dx, int dy, DungeonMap map)
+{
+    int nextX = X + dx;
+    int nextY = Y + dy;
+
+    if (!map.IsWalkable(nextX, nextY))
+        return false;
+
+    X = nextX;
+    Y = nextY;
+    return true;
+}
+```
+
+`Player` odpowiada za swoją pozycję, a o regułę dostępności pyta `DungeonMap`.
+
+## Krok 7. `DungeonGame` łączy obiekty
+
+```csharp
+public class DungeonGame
+{
+    public DungeonMap Map { get; }
+    public Player Player { get; }
+
+    public DungeonGame(DungeonMap map, Player player)
+    {
+        if (!map.IsWalkable(player.X, player.Y))
+            throw new ArgumentException("Gracz musi rozpocząć na dostępnym polu.");
+
+        Map = map;
+        Player = player;
+    }
+}
+```
+
+> **Maciej:** Czy `DungeonGame` nie jest tylko dodatkowym pudełkiem?
+>
+> **Jan:** Jest miejscem dla reguł całej rozgrywki. Mapa pilnuje pól, gracz pozycji, a gra ich poprawnej współpracy.
+
+Renderer przyjmuje jeden spójny obiekt:
+
+```csharp
+public static void Print(DungeonGame game)
+{
+    for (int y = 0; y < game.Map.Height; y++)
+    {
+        for (int x = 0; x < game.Map.Width; x++)
+        {
+            bool isPlayer = x == game.Player.X && y == game.Player.Y;
+            Console.Write(isPlayer ? '@' : game.Map.GetField(x, y));
+        }
+        Console.WriteLine();
+    }
+}
+```
+
+### Sprawdzenie refaktoryzacji
+
+- [ ] Projekt buduje się po każdym kroku.
+- [ ] Mapa ma te same wymiary i symbole co wcześniej.
+- [ ] `char[,]` jest prywatnym szczegółem `DungeonMap`.
+- [ ] Nie istnieją luźne zmienne `playerX` i `playerY`.
+- [ ] Nie przekazujesz tablicy do metod mapy.
+- [ ] Pozycji gracza nie można zmienić poza `Player`.
+- [ ] `Program` tworzy obiekty, ale nie przejmuje ich odpowiedzialności.
+
+---
+
+# Część 3. Zadania do samodzielnego wykonania
+
+Wykonuj je na zrefaktoryzowanym kodzie. Wersja dla prowadzącego znajduje się w
+`examples/10-dungeon-rider-solution`.
+
+## Zadanie 1 — łatwe: imię gracza
+
+Dodaj do `Player` imię przekazywane przez konstruktor. Imię nie może być puste ani składać
+się wyłącznie z białych znaków. Renderer ma wyświetlać je pod mapą.
+
+### Kryteria ukończenia
+
+- [ ] `Name` można odczytać, ale nie zmienić po utworzeniu gracza.
+- [ ] Konstruktor odrzuca puste imię czytelnym wyjątkiem.
+- [ ] `Program` tworzy gracza z imieniem.
+- [ ] Renderer nie otrzymuje osobnego parametru `string`.
+
+## Zadanie 2 — średnie: bezpieczny ruch
+
+Dodaj `Player.TryMove(int dx, int dy, DungeonMap map)`. Metoda oblicza proponowaną
+pozycję, pyta mapę o dostępność i zmienia `X` oraz `Y` tylko dla poprawnego ruchu.
+W `Program` obsłuż `W`, `A`, `S`, `D` oraz wyjście klawiszem `Q`.
+
+### Kryteria ukończenia
+
+- [ ] Gracz nie wychodzi poza mapę i nie przechodzi przez `#`.
+- [ ] Zablokowany ruch nie zmienia żadnej współrzędnej.
+- [ ] Sterowanie nie odczytuje prywatnej tablicy mapy.
+- [ ] `Q` kończy program.
+- [ ] Odpowiedzialność za zmianę pozycji pozostaje w `Player`.
+
+## Zadanie 3 — trudniejsze: skarby i koniec gry
+
+Dodaj do `Player` licznik `CollectedTreasures`. Po poprawnym wejściu na `$` gracz zwiększa
+licznik, a mapa zamienia pole na `.`. Ponowne odwiedzenie pola nie daje punktu. Dodaj do
+`DungeonGame` właściwość `IsFinished`, która zwraca `true`, gdy gracz stoi na wyjściu `>`.
+
+### Kryteria ukończenia
+
+- [ ] Licznika nie można ustawić spoza `Player`.
+- [ ] Skarb jest zbierany dopiero po poprawnym ruchu.
+- [ ] Jedno pole zwiększa licznik najwyżej raz.
+- [ ] Mapa odpowiada za zmianę własnego pola.
+- [ ] Wejście na `>` kończy pętlę komunikatem zwycięstwa.
+- [ ] Renderer pokazuje aktualny licznik.
 
 ## Pytania kontrolne
 
-1. Dlaczego `W` zmniejsza `y`?
-2. Czym różni się pozycja aktualna od proponowanej?
-3. Dlaczego granice sprawdzamy przed `map[y, x]`?
-4. Kiedy ruch należy uznać za turę?
-5. Dlaczego interakcja zachodzi po zatwierdzeniu ruchu?
-6. Jak zapobiec wielokrotnemu zebraniu przedmiotu?
-7. Dlaczego aktorzy są nakładkami, a drzwi częścią mapy?
-8. Gdzie najlepiej sprawdzać zwycięstwo i porażkę?
+1. Czym różni się klasa od obiektu tej klasy?
+2. Po co obiektowi konstruktor?
+3. Dlaczego tablica `fields` jest `private`?
+4. Kiedy metoda powinna być metodą obiektu, a nie `static`?
+5. Co daje `private set` przy `X` i `Y`?
+6. Dlaczego `TryMove` zmienia obie współrzędne dopiero po walidacji?
+7. Za co odpowiada `DungeonMap`, za co `Player`, a za co `DungeonGame`?
+8. Po czym poznasz, że refaktoryzacja nie zmieniła wcześniejszego zachowania?
 
 ## Co oddać
 
-- kompletny projekt oparty na starterze,
-- rozwiązania `Task1()`–`Task7()`,
-- uzupełnione `Movement.cs` i `MapRenderer.cs`,
-- oba projekty oraz plik `DungeonRaider.slnx`,
-- historię commitów i listę wykonanych scenariuszy testowych,
-- odpowiedź: „Dlaczego ruch jest najpierw proponowany, a później zatwierdzany?”.
+- zrefaktoryzowaną solucję `DungeonRider`,
+- klasy `DungeonMap`, `Player` i `DungeonGame`,
+- rozwiązania trzech zadań,
+- działającą pętlę demonstracyjną,
+- krótką odpowiedź: „Która zmiana najbardziej ograniczyła możliwość utworzenia niepoprawnego stanu i dlaczego?”.
 
 ## Podsumowanie
 
-Po laboratorium potrafisz odczytywać klawisze bez echa, zamieniać je na wektor ruchu, bezpiecznie sprawdzać współrzędne, obsługiwać kolizje i interakcje oraz uporządkować prostą turę gry.
+Zaczęliśmy od poprawnego kodu proceduralnego. Tablica nadal istnieje, lecz stała się
+szczegółem obiektu mapy. Współrzędne nadal są liczbami, lecz należą do gracza i są
+zmieniane przez jego metodę. Klasy nadają danym właścicieli i skupiają reguły w miejscach,
+które potrafią ich pilnować.

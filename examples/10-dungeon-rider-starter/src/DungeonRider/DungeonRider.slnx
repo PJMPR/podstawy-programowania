@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="DungeonRider.App/DungeonRider.App.csproj" />
+  <Project Path="DungeonRider.Core/DungeonRider.Core.csproj" />
+</Solution>

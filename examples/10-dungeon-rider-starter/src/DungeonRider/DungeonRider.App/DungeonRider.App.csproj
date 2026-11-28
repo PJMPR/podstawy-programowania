@@ -6,6 +6,6 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
   <ItemGroup>
-    <ProjectReference Include="..\DungeonRaider.Core\DungeonRaider.Core.csproj" />
+    <ProjectReference Include="..\DungeonRider.Core\DungeonRider.Core.csproj" />
   </ItemGroup>
 </Project>
