@@ -1,0 +1,1682 @@
+[
+  {
+    "Content": "Która cecha opisuje tablicę w C#?",
+    "QuestionType": 1,
+    "NumberOfOptions": 4,
+    "Points": 1,
+    "Answers": [
+      {
+        "Content": "A. Pierwszy indeks wynosi 1",
+        "Weight": null,
+        "Correct": false
+      },
+      {
+        "Content": "B. Ma stały rozmiar po utworzeniu",
+        "Weight": null,
+        "Correct": true
+      },
+      {
+        "Content": "C. Używa Count zamiast Length",
+        "Weight": null,
+        "Correct": false
+      },
+      {
+        "Content": "D. Może przechowywać elementy dowolnych typów naraz",
+        "Weight": null,
+        "Correct": false
+      }
+    ]
+  },
+  {
+    "Content": "<p>Jakie wartości zawiera nowa tablica?</p><pre><code>int[] punkty = new int[3];</code></pre>",
+    "QuestionType": 1,
+    "NumberOfOptions": 4,
+    "Points": 1,
+    "Answers": [
+      {
+        "Content": "A. 1, 2, 3",
+        "Weight": null,
+        "Correct": false
+      },
+      {
+        "Content": "B. Nie zawiera żadnych miejsc",
+        "Weight": null,
+        "Correct": false
+      },
+      {
+        "Content": "C. 0, 0, 0",
+        "Weight": null,
+        "Correct": true
+      },
+      {
+        "Content": "D. null, null, null",
+        "Weight": null,
+        "Correct": false
+      }
+    ]
+  },
+  {
+    "Content": "<p>Co wypisze kod?</p><pre><code>string[] wrogowie = { &quot;Szczur&quot;, &quot;Goblin&quot;, &quot;Ork&quot; };&#10;Console.WriteLine(wrogowie[1]);</code></pre>",
+    "QuestionType": 1,
+    "NumberOfOptions": 4,
+    "Points": 1,
+    "Answers": [
+      {
+        "Content": "A. Wystąpi błąd zakresu",
+        "Weight": null,
+        "Correct": false
+      },
+      {
+        "Content": "B. Ork",
+        "Weight": null,
+        "Correct": false
+      },
+      {
+        "Content": "C. Goblin",
+        "Weight": null,
+        "Correct": true
+      },
+      {
+        "Content": "D. Szczur",
+        "Weight": null,
+        "Correct": false
+      }
+    ]
+  },
+  {
+    "Content": "Które informacje o tablicy długości 6 są prawdziwe?",
+    "QuestionType": 1,
+    "NumberOfOptions": 4,
+    "Points": 1,
+    "Answers": [
+      {
+        "Content": "A. Ostatni poprawny indeks to 5",
+        "Weight": null,
+        "Correct": true
+      },
+      {
+        "Content": "B. Poprawne indeksy to 0–5",
+        "Weight": null,
+        "Correct": true
+      },
+      {
+        "Content": "C. Ostatni poprawny indeks to 6",
+        "Weight": null,
+        "Correct": false
+      },
+      {
+        "Content": "D. Odczyt indeksu 6 może spowodować IndexOutOfRangeException",
+        "Weight": null,
+        "Correct": true
+      }
+    ]
+  },
+  {
+    "Content": "<p>Gracz wybrał pozycję numer 3. Jak obliczyć indeks?</p>",
+    "QuestionType": 1,
+    "NumberOfOptions": 4,
+    "Points": 1,
+    "Answers": [
+      {
+        "Content": "A. int indeks = numer;",
+        "Weight": null,
+        "Correct": false
+      },
+      {
+        "Content": "B. int indeks = -numer;",
+        "Weight": null,
+        "Correct": false
+      },
+      {
+        "Content": "C. int indeks = numer - 1;",
+        "Weight": null,
+        "Correct": true
+      },
+      {
+        "Content": "D. int indeks = numer + 1;",
+        "Weight": null,
+        "Correct": false
+      }
+    ]
+  },
+  {
+    "Content": "Który warunek poprawnie przechodzi po całej tablicy dane?",
+    "QuestionType": 1,
+    "NumberOfOptions": 4,
+    "Points": 1,
+    "Answers": [
+      {
+        "Content": "A. i <= dane.Length",
+        "Weight": null,
+        "Correct": false
+      },
+      {
+        "Content": "B. i < dane.Length",
+        "Weight": null,
+        "Correct": true
+      },
+      {
+        "Content": "C. i == dane.Length",
+        "Weight": null,
+        "Correct": false
+      },
+      {
+        "Content": "D. i > dane.Length",
+        "Weight": null,
+        "Correct": false
+      }
+    ]
+  },
+  {
+    "Content": "Kiedy foreach jest dobrym wyborem?",
+    "QuestionType": 1,
+    "NumberOfOptions": 4,
+    "Points": 1,
+    "Answers": [
+      {
+        "Content": "A. Gdy zmieniamy element tablicy przez zmienną pętli",
+        "Weight": null,
+        "Correct": false
+      },
+      {
+        "Content": "B. Gdy nie potrzebujemy indeksu",
+        "Weight": null,
+        "Correct": true
+      },
+      {
+        "Content": "C. Gdy usuwamy elementy listy podczas iteracji",
+        "Weight": null,
+        "Correct": false
+      },
+      {
+        "Content": "D. Gdy odczytujemy wszystkie elementy",
+        "Weight": null,
+        "Correct": true
+      }
+    ]
+  },
+  {
+    "Content": "<p>Jaką wartość otrzyma <code>suma</code>?</p><pre><code>int[] zloto = { 4, 10, 0, 7 };&#10;int suma = 0;&#10;foreach (int x in zloto) suma += x;</code></pre>",
+    "QuestionType": 1,
+    "NumberOfOptions": 4,
+    "Points": 1,
+    "Answers": [
+      {
+        "Content": "A. 17",
+        "Weight": null,
+        "Correct": false
+      },
+      {
+        "Content": "B. 0",
+        "Weight": null,
+        "Correct": false
+      },
+      {
+        "Content": "C. 4",
+        "Weight": null,
+        "Correct": false
+      },
+      {
+        "Content": "D. 21",
+        "Weight": null,
+        "Correct": true
+      }
+    ]
+  },
+  {
+    "Content": "Po co rzutować sumę na double przed obliczeniem średniej?",
+    "QuestionType": 1,
+    "NumberOfOptions": 4,
+    "Points": 1,
+    "Answers": [
+      {
+        "Content": "A. Aby pominąć zera",
+        "Weight": null,
+        "Correct": false
+      },
+      {
+        "Content": "B. Aby zachować część ułamkową",
+        "Weight": null,
+        "Correct": true
+      },
+      {
+        "Content": "C. Aby wynik był całkowity",
+        "Weight": null,
+        "Correct": false
+      },
+      {
+        "Content": "D. Aby zmienić rozmiar tablicy",
+        "Weight": null,
+        "Correct": false
+      }
+    ]
+  },
+  {
+    "Content": "Dlaczego maksimum niepustej kolekcji warto zainicjalizować jej pierwszym elementem?",
+    "QuestionType": 1,
+    "NumberOfOptions": 4,
+    "Points": 1,
+    "Answers": [
+      {
+        "Content": "A. Zero może nie należeć do danych",
+        "Weight": null,
+        "Correct": true
+      },
+      {
+        "Content": "B. Indeks 0 nie istnieje",
+        "Weight": null,
+        "Correct": false
+      },
+      {
+        "Content": "C. Wszystkie dane mogą być ujemne",
+        "Weight": null,
+        "Correct": true
+      },
+      {
+        "Content": "D. Pierwszy element zawsze jest największy",
+        "Weight": null,
+        "Correct": false
+      }
+    ]
+  },
+  {
+    "Content": "Co zwykle oznacza indeks równy -1 w algorytmie wyszukiwania?",
+    "QuestionType": 1,
+    "NumberOfOptions": 4,
+    "Points": 1,
+    "Answers": [
+      {
+        "Content": "A. Znaleziono pierwszy element",
+        "Weight": null,
+        "Correct": false
+      },
+      {
+        "Content": "B. Kolekcja ma ujemną długość",
+        "Weight": null,
+        "Correct": false
+      },
+      {
+        "Content": "C. Nie znaleziono elementu",
+        "Weight": null,
+        "Correct": true
+      },
+      {
+        "Content": "D. Znaleziono ostatni element",
+        "Weight": null,
+        "Correct": false
+      }
+    ]
+  },
+  {
+    "Content": "Które stwierdzenia opisują List<T>?",
+    "QuestionType": 1,
+    "NumberOfOptions": 4,
+    "Points": 1,
+    "Answers": [
+      {
+        "Content": "A. Jej rozmiar może się zmieniać",
+        "Weight": null,
+        "Correct": true
+      },
+      {
+        "Content": "B. Add dodaje element na końcu",
+        "Weight": null,
+        "Correct": true
+      },
+      {
+        "Content": "C. Liczbę elementów zwraca Count",
+        "Weight": null,
+        "Correct": true
+      },
+      {
+        "Content": "D. Liczbę elementów zawsze zwraca Length",
+        "Weight": null,
+        "Correct": false
+      }
+    ]
+  },
+  {
+    "Content": "Które opisy operacji listy są poprawne?",
+    "QuestionType": 1,
+    "NumberOfOptions": 4,
+    "Points": 1,
+    "Answers": [
+      {
+        "Content": "A. Remove usuwa pierwsze wystąpienie",
+        "Weight": null,
+        "Correct": true
+      },
+      {
+        "Content": "B. Clear usuwa samą zmienną listy",
+        "Weight": null,
+        "Correct": false
+      },
+      {
+        "Content": "C. Contains sprawdza obecność wartości",
+        "Weight": null,
+        "Correct": true
+      },
+      {
+        "Content": "D. IndexOf zwraca pierwszy indeks albo -1",
+        "Weight": null,
+        "Correct": true
+      }
+    ]
+  },
+  {
+    "Content": "Dlaczego nie należy usuwać elementów listy w foreach iterującym po tej liście?",
+    "QuestionType": 1,
+    "NumberOfOptions": 4,
+    "Points": 1,
+    "Answers": [
+      {
+        "Content": "A. foreach zamienia listę w tablicę",
+        "Weight": null,
+        "Correct": false
+      },
+      {
+        "Content": "B. Zmiana kolekcji może spowodować InvalidOperationException",
+        "Weight": null,
+        "Correct": true
+      },
+      {
+        "Content": "C. Lista jest zawsze tylko do odczytu",
+        "Weight": null,
+        "Correct": false
+      },
+      {
+        "Content": "D. Remove działa tylko dla tablic",
+        "Weight": null,
+        "Correct": false
+      }
+    ]
+  },
+  {
+    "Content": "Dlaczego przy usuwaniu wielu elementów po indeksie warto iść od końca listy?",
+    "QuestionType": 1,
+    "NumberOfOptions": 4,
+    "Points": 1,
+    "Answers": [
+      {
+        "Content": "A. Aby RemoveAt usuwało wartości",
+        "Weight": null,
+        "Correct": false
+      },
+      {
+        "Content": "B. Lista nie pozwala iść od początku",
+        "Weight": null,
+        "Correct": false
+      },
+      {
+        "Content": "C. Aby Count się nie zmieniało",
+        "Weight": null,
+        "Correct": false
+      },
+      {
+        "Content": "D. Aby nie pominąć elementów przesuniętych w lewo",
+        "Weight": null,
+        "Correct": true
+      }
+    ]
+  },
+  {
+    "Content": "Które stwierdzenia o Dictionary<TKey, TValue> są prawdziwe?",
+    "QuestionType": 1,
+    "NumberOfOptions": 4,
+    "Points": 1,
+    "Answers": [
+      {
+        "Content": "A. Klucze muszą być unikalne",
+        "Weight": null,
+        "Correct": true
+      },
+      {
+        "Content": "B. Klucz zawsze musi być typu int",
+        "Weight": null,
+        "Correct": false
+      },
+      {
+        "Content": "C. Dostęp odbywa się przez klucz",
+        "Weight": null,
+        "Correct": true
+      },
+      {
+        "Content": "D. Wartości mogą się powtarzać",
+        "Weight": null,
+        "Correct": true
+      }
+    ]
+  },
+  {
+    "Content": "Jak bezpiecznie odczytać wartość dla klucza pochodzącego od użytkownika?",
+    "QuestionType": 1,
+    "NumberOfOptions": 4,
+    "Points": 1,
+    "Answers": [
+      {
+        "Content": "A. Sprawdzić Length",
+        "Weight": null,
+        "Correct": false
+      },
+      {
+        "Content": "B. Najpierw sprawdzić ContainsKey",
+        "Weight": null,
+        "Correct": true
+      },
+      {
+        "Content": "C. Zamienić słownik na bool",
+        "Weight": null,
+        "Correct": false
+      },
+      {
+        "Content": "D. Zawsze użyć indeksatora bez sprawdzania",
+        "Weight": null,
+        "Correct": false
+      }
+    ]
+  },
+  {
+    "Content": "<p>Co zrobi instrukcja, gdy klucz już istnieje?</p><pre><code>ceny[&quot;Miecz&quot;] = 45;</code></pre>",
+    "QuestionType": 1,
+    "NumberOfOptions": 4,
+    "Points": 1,
+    "Answers": [
+      {
+        "Content": "A. Usunie klucz",
+        "Weight": null,
+        "Correct": false
+      },
+      {
+        "Content": "B. Zmieni klucz na 45",
+        "Weight": null,
+        "Correct": false
+      },
+      {
+        "Content": "C. Zmieni wartość przypisaną do klucza",
+        "Weight": null,
+        "Correct": true
+      },
+      {
+        "Content": "D. Zawsze wywoła błąd duplikatu",
+        "Weight": null,
+        "Correct": false
+      }
+    ]
+  },
+  {
+    "Content": "Które dopasowania kolekcji do problemu są trafne?",
+    "QuestionType": 1,
+    "NumberOfOptions": 4,
+    "Points": 1,
+    "Answers": [
+      {
+        "Content": "A. Tablica — kolekcja stale rosnąca i malejąca",
+        "Weight": null,
+        "Correct": false
+      },
+      {
+        "Content": "B. Słownik — ceny według nazw przedmiotów",
+        "Weight": null,
+        "Correct": true
+      },
+      {
+        "Content": "C. Lista — zmieniająca się zawartość plecaka",
+        "Weight": null,
+        "Correct": true
+      },
+      {
+        "Content": "D. Tablica — wyniki dokładnie pięciu tur",
+        "Weight": null,
+        "Correct": true
+      }
+    ]
+  },
+  {
+    "Content": "<p>Co jest błędem w pętli?</p><pre><code>for (int i = 0; i &lt;= przedmioty.Length; i++)&#10;    Console.WriteLine(przedmioty[i]);</code></pre>",
+    "QuestionType": 1,
+    "NumberOfOptions": 4,
+    "Points": 1,
+    "Answers": [
+      {
+        "Content": "A. Warunek powinien używać < zamiast <=",
+        "Weight": null,
+        "Correct": true
+      },
+      {
+        "Content": "B. Tablic nie można używać w for",
+        "Weight": null,
+        "Correct": false
+      },
+      {
+        "Content": "C. Ostatnia iteracja odczyta indeks równy Length",
+        "Weight": null,
+        "Correct": true
+      },
+      {
+        "Content": "D. Licznik musi zaczynać się od 1",
+        "Weight": null,
+        "Correct": false
+      }
+    ]
+  },
+  {
+    "Content": "Po co wydziela się kod do metod?",
+    "QuestionType": 1,
+    "NumberOfOptions": 4,
+    "Points": 1,
+    "Answers": [
+      {
+        "Content": "A. Aby poprawić czytelność głównego przebiegu",
+        "Weight": null,
+        "Correct": true
+      },
+      {
+        "Content": "B. Aby każda metoda robiła jak najwięcej",
+        "Weight": null,
+        "Correct": false
+      },
+      {
+        "Content": "C. Aby nadać operacji nazwę",
+        "Weight": null,
+        "Correct": true
+      },
+      {
+        "Content": "D. Aby ograniczyć powtarzanie",
+        "Weight": null,
+        "Correct": true
+      }
+    ]
+  },
+  {
+    "Content": "Które elementy należą do deklaracji metody?",
+    "QuestionType": 1,
+    "NumberOfOptions": 4,
+    "Points": 1,
+    "Answers": [
+      {
+        "Content": "A. Nazwa",
+        "Weight": null,
+        "Correct": true
+      },
+      {
+        "Content": "B. Typ zwracany",
+        "Weight": null,
+        "Correct": true
+      },
+      {
+        "Content": "C. Obowiązkowa pętla for",
+        "Weight": null,
+        "Correct": false
+      },
+      {
+        "Content": "D. Lista parametrów",
+        "Weight": null,
+        "Correct": true
+      }
+    ]
+  },
+  {
+    "Content": "Jaka jest różnica między parametrem a argumentem?",
+    "QuestionType": 1,
+    "NumberOfOptions": 4,
+    "Points": 1,
+    "Answers": [
+      {
+        "Content": "A. Argument musi być tekstem",
+        "Weight": null,
+        "Correct": false
+      },
+      {
+        "Content": "B. Argument to konkretna wartość przy wywołaniu",
+        "Weight": null,
+        "Correct": true
+      },
+      {
+        "Content": "C. Parametr zawsze oznacza void",
+        "Weight": null,
+        "Correct": false
+      },
+      {
+        "Content": "D. Parametr jest deklarowany w nagłówku metody",
+        "Weight": null,
+        "Correct": true
+      }
+    ]
+  },
+  {
+    "Content": "Co oznacza typ zwracany void?",
+    "QuestionType": 1,
+    "NumberOfOptions": 4,
+    "Points": 1,
+    "Answers": [
+      {
+        "Content": "A. Metoda nie zwraca wartości do miejsca wywołania",
+        "Weight": null,
+        "Correct": true
+      },
+      {
+        "Content": "B. Metoda musi przyjmować bool",
+        "Weight": null,
+        "Correct": false
+      },
+      {
+        "Content": "C. Metoda zwraca zero",
+        "Weight": null,
+        "Correct": false
+      },
+      {
+        "Content": "D. Metoda nie wykonuje instrukcji",
+        "Weight": null,
+        "Correct": false
+      }
+    ]
+  },
+  {
+    "Content": "<p>Co zwróci wywołanie <code>CalculateDamage(6, 4)</code>?</p><pre><code>int CalculateDamage(int sila, int bron)&#10;{&#10;    return sila + bron;&#10;}</code></pre>",
+    "QuestionType": 1,
+    "NumberOfOptions": 4,
+    "Points": 1,
+    "Answers": [
+      {
+        "Content": "A. 24",
+        "Weight": null,
+        "Correct": false
+      },
+      {
+        "Content": "B. 2",
+        "Weight": null,
+        "Correct": false
+      },
+      {
+        "Content": "C. Nic",
+        "Weight": null,
+        "Correct": false
+      },
+      {
+        "Content": "D. 10",
+        "Weight": null,
+        "Correct": true
+      }
+    ]
+  },
+  {
+    "Content": "Co robi return w metodzie zwracającej wartość?",
+    "QuestionType": 1,
+    "NumberOfOptions": 4,
+    "Points": 1,
+    "Answers": [
+      {
+        "Content": "A. Przekazuje wynik do miejsca wywołania",
+        "Weight": null,
+        "Correct": true
+      },
+      {
+        "Content": "B. Automatycznie wypisuje wynik",
+        "Weight": null,
+        "Correct": false
+      },
+      {
+        "Content": "C. Kończy wykonanie metody",
+        "Weight": null,
+        "Correct": true
+      },
+      {
+        "Content": "D. Zawsze kończy cały program",
+        "Weight": null,
+        "Correct": false
+      }
+    ]
+  },
+  {
+    "Content": "Kiedy wczesny return może poprawić kod?",
+    "QuestionType": 1,
+    "NumberOfOptions": 4,
+    "Points": 1,
+    "Answers": [
+      {
+        "Content": "A. Gdy void musi zwrócić int",
+        "Weight": null,
+        "Correct": false
+      },
+      {
+        "Content": "B. Gdy zastępuje każdą instrukcję if",
+        "Weight": null,
+        "Correct": false
+      },
+      {
+        "Content": "C. Gdy zmniejsza zagnieżdżenia",
+        "Weight": null,
+        "Correct": true
+      },
+      {
+        "Content": "D. Gdy przypadek szczególny można zakończyć od razu",
+        "Weight": null,
+        "Correct": true
+      }
+    ]
+  },
+  {
+    "Content": "Jak rozumieć jedną odpowiedzialność metody?",
+    "QuestionType": 1,
+    "NumberOfOptions": 4,
+    "Points": 1,
+    "Answers": [
+      {
+        "Content": "A. Metoda wykonuje jedną jasno nazwaną operację",
+        "Weight": null,
+        "Correct": true
+      },
+      {
+        "Content": "B. Metoda jednocześnie czyta, walczy, zapisuje i rysuje",
+        "Weight": null,
+        "Correct": false
+      },
+      {
+        "Content": "C. Nazwa opisuje jej cel",
+        "Weight": null,
+        "Correct": true
+      },
+      {
+        "Content": "D. Długa nazwa z wieloma And zawsze oznacza dobry projekt",
+        "Weight": null,
+        "Correct": false
+      }
+    ]
+  },
+  {
+    "Content": "Które zdania o zmiennych lokalnych są prawdziwe?",
+    "QuestionType": 1,
+    "NumberOfOptions": 4,
+    "Points": 1,
+    "Answers": [
+      {
+        "Content": "A. Każda jest globalna",
+        "Weight": null,
+        "Correct": false
+      },
+      {
+        "Content": "B. Dwie metody nie mogą mieć lokalnych zmiennych o tej samej nazwie",
+        "Weight": null,
+        "Correct": false
+      },
+      {
+        "Content": "C. Są dostępne tylko w swoim zasięgu",
+        "Weight": null,
+        "Correct": true
+      },
+      {
+        "Content": "D. Po zakończeniu metody jej zmienna lokalna nie jest dostępna",
+        "Weight": null,
+        "Correct": true
+      }
+    ]
+  },
+  {
+    "Content": "<p>Ile wynosi zewnętrzne <code>health</code> po wywołaniu?</p><pre><code>void Heal(int health) { health += 10; }&#10;int health = 70;&#10;Heal(health);</code></pre>",
+    "QuestionType": 1,
+    "NumberOfOptions": 4,
+    "Points": 1,
+    "Answers": [
+      {
+        "Content": "A. 70",
+        "Weight": null,
+        "Correct": true
+      },
+      {
+        "Content": "B. 80",
+        "Weight": null,
+        "Correct": false
+      },
+      {
+        "Content": "C. Zmienna zostanie usunięta",
+        "Weight": null,
+        "Correct": false
+      },
+      {
+        "Content": "D. 10",
+        "Weight": null,
+        "Correct": false
+      }
+    ]
+  },
+  {
+    "Content": "<p>Który zapis zachowuje zwrócony wynik?</p><pre><code>int Heal(int health, int amount) =&gt; health + amount;</code></pre>",
+    "QuestionType": 1,
+    "NumberOfOptions": 4,
+    "Points": 1,
+    "Answers": [
+      {
+        "Content": "A. return health; poza metodą",
+        "Weight": null,
+        "Correct": false
+      },
+      {
+        "Content": "B. Heal(health, 10);",
+        "Weight": null,
+        "Correct": false
+      },
+      {
+        "Content": "C. void = Heal(health, 10);",
+        "Weight": null,
+        "Correct": false
+      },
+      {
+        "Content": "D. health = Heal(health, 10);",
+        "Weight": null,
+        "Correct": true
+      }
+    ]
+  },
+  {
+    "Content": "Co oznacza <code>bool IsAlive(int hp) =&gt; hp &gt; 0;</code>?",
+    "QuestionType": 1,
+    "NumberOfOptions": 4,
+    "Points": 1,
+    "Answers": [
+      {
+        "Content": "A. Krótki zapis metody zwracającej wynik wyrażenia",
+        "Weight": null,
+        "Correct": true
+      },
+      {
+        "Content": "B. Automatyczne wypisanie wyniku",
+        "Weight": null,
+        "Correct": false
+      },
+      {
+        "Content": "C. Ustawienie hp na zero",
+        "Weight": null,
+        "Correct": false
+      },
+      {
+        "Content": "D. Pętlę nieskończoną",
+        "Weight": null,
+        "Correct": false
+      }
+    ]
+  },
+  {
+    "Content": "Kiedy zapis strzałkowy metody jest czytelny?",
+    "QuestionType": 1,
+    "NumberOfOptions": 4,
+    "Points": 1,
+    "Answers": [
+      {
+        "Content": "A. Gdy skrót nadal jest zrozumiały",
+        "Weight": null,
+        "Correct": true
+      },
+      {
+        "Content": "B. Dla krótkiej metody będącej jednym wyrażeniem",
+        "Weight": null,
+        "Correct": true
+      },
+      {
+        "Content": "C. Zawsze, niezależnie od złożoności",
+        "Weight": null,
+        "Correct": false
+      },
+      {
+        "Content": "D. Dla wieloetapowej walidacji z pętlą",
+        "Weight": null,
+        "Correct": false
+      }
+    ]
+  },
+  {
+    "Content": "<p>Co znajdzie operacja?</p><pre><code>inventory.FindAll(item =&gt; item == &quot;mikstura&quot;);</code></pre>",
+    "QuestionType": 1,
+    "NumberOfOptions": 4,
+    "Points": 1,
+    "Answers": [
+      {
+        "Content": "A. Wszystkie elementy poza miksturą",
+        "Weight": null,
+        "Correct": false
+      },
+      {
+        "Content": "B. Zawsze pustą listę",
+        "Weight": null,
+        "Correct": false
+      },
+      {
+        "Content": "C. Elementy równe tekstowi mikstura",
+        "Weight": null,
+        "Correct": true
+      },
+      {
+        "Content": "D. Liczbę elementów",
+        "Weight": null,
+        "Correct": false
+      }
+    ]
+  },
+  {
+    "Content": "<p>Co zwróci operacja?</p><pre><code>inventory.Exists(item =&gt; item == &quot;klucz&quot;);</code></pre>",
+    "QuestionType": 1,
+    "NumberOfOptions": 4,
+    "Points": 1,
+    "Answers": [
+      {
+        "Content": "A. Zawsze tekst klucz",
+        "Weight": null,
+        "Correct": false
+      },
+      {
+        "Content": "B. Nową tablicę",
+        "Weight": null,
+        "Correct": false
+      },
+      {
+        "Content": "C. Indeks ostatniego elementu",
+        "Weight": null,
+        "Correct": false
+      },
+      {
+        "Content": "D. bool informujący, czy pasujący element istnieje",
+        "Weight": null,
+        "Correct": true
+      }
+    ]
+  },
+  {
+    "Content": "Dlaczego metoda licząca obrażenia powinna zwykle zwracać wynik?",
+    "QuestionType": 1,
+    "NumberOfOptions": 4,
+    "Points": 1,
+    "Answers": [
+      {
+        "Content": "A. Wynik można dalej wykorzystać",
+        "Weight": null,
+        "Correct": true
+      },
+      {
+        "Content": "B. Console.WriteLine zwraca int",
+        "Weight": null,
+        "Correct": false
+      },
+      {
+        "Content": "C. Obliczenie nie jest związane wyłącznie z konsolą",
+        "Weight": null,
+        "Correct": true
+      },
+      {
+        "Content": "D. void można przypisać do int",
+        "Weight": null,
+        "Correct": false
+      }
+    ]
+  },
+  {
+    "Content": "<p>Co jest problemem, jeśli metoda zwraca nowe zdrowie?</p><pre><code>Heal(health, 10, 100);</code></pre>",
+    "QuestionType": 1,
+    "NumberOfOptions": 4,
+    "Points": 1,
+    "Answers": [
+      {
+        "Content": "A. Metoda nie może mieć trzech argumentów",
+        "Weight": null,
+        "Correct": false
+      },
+      {
+        "Content": "B. Wywołanie musi być w Console.WriteLine",
+        "Weight": null,
+        "Correct": false
+      },
+      {
+        "Content": "C. Wynik zostaje zignorowany",
+        "Weight": null,
+        "Correct": true
+      },
+      {
+        "Content": "D. Należy np. użyć health = Heal(...)",
+        "Weight": null,
+        "Correct": true
+      }
+    ]
+  },
+  {
+    "Content": "Co daje refaktoryzacja pętli gry na małe metody?",
+    "QuestionType": 1,
+    "NumberOfOptions": 4,
+    "Points": 1,
+    "Answers": [
+      {
+        "Content": "A. Szczegóły mają opisowe nazwy",
+        "Weight": null,
+        "Correct": true
+      },
+      {
+        "Content": "B. Główna pętla pokazuje ogólny przebieg",
+        "Weight": null,
+        "Correct": true
+      },
+      {
+        "Content": "C. Warunki przestają być potrzebne",
+        "Weight": null,
+        "Correct": false
+      },
+      {
+        "Content": "D. Wszystkie zmienne stają się globalne",
+        "Weight": null,
+        "Correct": false
+      }
+    ]
+  },
+  {
+    "Content": "<p>Co zrobi metoda dla błędnej komendy?</p><pre><code>while (true)&#10;{&#10;    string? command = Console.ReadLine();&#10;    if (command == &quot;1&quot; || command == &quot;2&quot;) return command;&#10;    Console.WriteLine(&quot;Nieznana komenda.&quot;);&#10;}</code></pre>",
+    "QuestionType": 1,
+    "NumberOfOptions": 4,
+    "Points": 1,
+    "Answers": [
+      {
+        "Content": "A. Zamieni komendę na 1",
+        "Weight": null,
+        "Correct": false
+      },
+      {
+        "Content": "B. Zwróci dopiero tekst 1 albo 2",
+        "Weight": null,
+        "Correct": true
+      },
+      {
+        "Content": "C. Zawsze zakończy program",
+        "Weight": null,
+        "Correct": false
+      },
+      {
+        "Content": "D. Wyświetli komunikat i odczyta ponownie",
+        "Weight": null,
+        "Correct": true
+      }
+    ]
+  },
+  {
+    "Content": "Co odróżnia klasę od obiektu?",
+    "QuestionType": 1,
+    "NumberOfOptions": 4,
+    "Points": 1,
+    "Answers": [
+      {
+        "Content": "A. Klasa opisuje rodzaj obiektów, a obiekt jest egzemplarzem",
+        "Weight": null,
+        "Correct": true
+      },
+      {
+        "Content": "B. Klasa przechowuje tylko liczby",
+        "Weight": null,
+        "Correct": false
+      },
+      {
+        "Content": "C. Obiekt jest przepisem, a klasa egzemplarzem",
+        "Weight": null,
+        "Correct": false
+      },
+      {
+        "Content": "D. To zawsze ta sama zmienna",
+        "Weight": null,
+        "Correct": false
+      }
+    ]
+  },
+  {
+    "Content": "Co oznacza <code>new Player()</code>?",
+    "QuestionType": 1,
+    "NumberOfOptions": 4,
+    "Points": 1,
+    "Answers": [
+      {
+        "Content": "A. Zmianę nazwy klasy",
+        "Weight": null,
+        "Correct": false
+      },
+      {
+        "Content": "B. Utworzenie nowego obiektu klasy Player",
+        "Weight": null,
+        "Correct": true
+      },
+      {
+        "Content": "C. Utworzenie liczby",
+        "Weight": null,
+        "Correct": false
+      },
+      {
+        "Content": "D. Usunięcie klasy",
+        "Weight": null,
+        "Correct": false
+      }
+    ]
+  },
+  {
+    "Content": "<p>Co wypisze kod?</p><pre><code>Player a = new Player();&#10;Player b = new Player();&#10;a.Imie = &quot;Ala&quot;;&#10;b.Imie = &quot;Bartek&quot;;&#10;Console.WriteLine(b.Imie);</code></pre>",
+    "QuestionType": 1,
+    "NumberOfOptions": 4,
+    "Points": 1,
+    "Answers": [
+      {
+        "Content": "A. Bartek",
+        "Weight": null,
+        "Correct": true
+      },
+      {
+        "Content": "B. Obie nazwy",
+        "Weight": null,
+        "Correct": false
+      },
+      {
+        "Content": "C. Ala",
+        "Weight": null,
+        "Correct": false
+      },
+      {
+        "Content": "D. Player",
+        "Weight": null,
+        "Correct": false
+      }
+    ]
+  },
+  {
+    "Content": "Co oznacza <code>public int Hp { get; set; }</code>?",
+    "QuestionType": 1,
+    "NumberOfOptions": 4,
+    "Points": 1,
+    "Answers": [
+      {
+        "Content": "A. set usuwa obiekt",
+        "Weight": null,
+        "Correct": false
+      },
+      {
+        "Content": "B. get tworzy pętlę",
+        "Weight": null,
+        "Correct": false
+      },
+      {
+        "Content": "C. set pozwala ustawić wartość",
+        "Weight": null,
+        "Correct": true
+      },
+      {
+        "Content": "D. get pozwala odczytać wartość",
+        "Weight": null,
+        "Correct": true
+      }
+    ]
+  },
+  {
+    "Content": "Jaka jest rola konstruktora?",
+    "QuestionType": 1,
+    "NumberOfOptions": 4,
+    "Points": 1,
+    "Answers": [
+      {
+        "Content": "A. Ustawia stan początkowy obiektu",
+        "Weight": null,
+        "Correct": true
+      },
+      {
+        "Content": "B. Usuwa obiekt",
+        "Weight": null,
+        "Correct": false
+      },
+      {
+        "Content": "C. Pomaga utworzyć od razu gotowy obiekt",
+        "Weight": null,
+        "Correct": true
+      },
+      {
+        "Content": "D. Zastępuje wszystkie metody",
+        "Weight": null,
+        "Correct": false
+      }
+    ]
+  },
+  {
+    "Content": "<p>Jaki stan ma obiekt?</p><pre><code>Player player = new Player(&quot;Bohater&quot;, 100);</code></pre><p>Konstruktor ustawia <code>Imie</code>, <code>MaksymalneHp</code> i <code>Hp = maksymalneHp</code>.</p>",
+    "QuestionType": 1,
+    "NumberOfOptions": 4,
+    "Points": 1,
+    "Answers": [
+      {
+        "Content": "A. Hp = 0",
+        "Weight": null,
+        "Correct": false
+      },
+      {
+        "Content": "B. Imie = Player",
+        "Weight": null,
+        "Correct": false
+      },
+      {
+        "Content": "C. Imie = Bohater i Hp = 100",
+        "Weight": null,
+        "Correct": true
+      },
+      {
+        "Content": "D. MaksymalneHp = 100",
+        "Weight": null,
+        "Correct": true
+      }
+    ]
+  },
+  {
+    "Content": "Dlaczego ograniczenie HP do zera warto umieścić w TakeDamage?",
+    "QuestionType": 1,
+    "NumberOfOptions": 4,
+    "Points": 1,
+    "Answers": [
+      {
+        "Content": "A. Nie powtarzamy reguły w wielu miejscach",
+        "Weight": null,
+        "Correct": true
+      },
+      {
+        "Content": "B. Klasa pilnuje poprawnej zmiany stanu",
+        "Weight": null,
+        "Correct": true
+      },
+      {
+        "Content": "C. Metoda musi czytać klawiaturę",
+        "Weight": null,
+        "Correct": false
+      },
+      {
+        "Content": "D. Każde wywołanie stosuje tę samą zasadę",
+        "Weight": null,
+        "Correct": true
+      }
+    ]
+  },
+  {
+    "Content": "<p>Ile HP zostanie wypisane?</p><pre><code>Player p = new Player(&quot;Bohater&quot;, 100);&#10;p.TakeDamage(35);&#10;p.Heal(50);&#10;Console.WriteLine(p.Hp);</code></pre><p>Heal ogranicza HP do maksimum.</p>",
+    "QuestionType": 1,
+    "NumberOfOptions": 4,
+    "Points": 1,
+    "Answers": [
+      {
+        "Content": "A. 150",
+        "Weight": null,
+        "Correct": false
+      },
+      {
+        "Content": "B. 100",
+        "Weight": null,
+        "Correct": true
+      },
+      {
+        "Content": "C. 115",
+        "Weight": null,
+        "Correct": false
+      },
+      {
+        "Content": "D. 65",
+        "Weight": null,
+        "Correct": false
+      }
+    ]
+  },
+  {
+    "Content": "<p>Co zwraca metoda?</p><pre><code>public bool IsAlive() { return Hp &gt; 0; }</code></pre>",
+    "QuestionType": 1,
+    "NumberOfOptions": 4,
+    "Points": 1,
+    "Answers": [
+      {
+        "Content": "A. true dla Hp > 0",
+        "Weight": null,
+        "Correct": true
+      },
+      {
+        "Content": "B. Nazwę obiektu",
+        "Weight": null,
+        "Correct": false
+      },
+      {
+        "Content": "C. Zawsze wartość Hp",
+        "Weight": null,
+        "Correct": false
+      },
+      {
+        "Content": "D. false dla Hp = 0",
+        "Weight": null,
+        "Correct": true
+      }
+    ]
+  },
+  {
+    "Content": "Które zdania o List<Enemy> są prawdziwe?",
+    "QuestionType": 1,
+    "NumberOfOptions": 4,
+    "Points": 1,
+    "Answers": [
+      {
+        "Content": "A. Zmiana jednego zawsze zmienia wszystkie",
+        "Weight": null,
+        "Correct": false
+      },
+      {
+        "Content": "B. Każdy element jest obiektem Enemy",
+        "Weight": null,
+        "Correct": true
+      },
+      {
+        "Content": "C. Można iterować foreach",
+        "Weight": null,
+        "Correct": true
+      },
+      {
+        "Content": "D. Osobne new tworzy niezależny obiekt",
+        "Weight": null,
+        "Correct": true
+      }
+    ]
+  },
+  {
+    "Content": "<p>Co wypisze kod?</p><pre><code>Enemy goblin = new Enemy(&quot;Goblin&quot;, 30, 8);&#10;Enemy ork = new Enemy(&quot;Ork&quot;, 70, 15);&#10;goblin.TakeDamage(10);&#10;Console.WriteLine(goblin.Hp);&#10;Console.WriteLine(ork.Hp);</code></pre>",
+    "QuestionType": 1,
+    "NumberOfOptions": 4,
+    "Points": 1,
+    "Answers": [
+      {
+        "Content": "A. 20, potem 60",
+        "Weight": null,
+        "Correct": false
+      },
+      {
+        "Content": "B. 10, potem 10",
+        "Weight": null,
+        "Correct": false
+      },
+      {
+        "Content": "C. 20, potem 70",
+        "Weight": null,
+        "Correct": true
+      },
+      {
+        "Content": "D. 30, potem 70",
+        "Weight": null,
+        "Correct": false
+      }
+    ]
+  },
+  {
+    "Content": "<p>Co jest prawdą po wykonaniu kodu?</p><pre><code>Enemy goblin = new Enemy(&quot;Goblin&quot;, 30, 8);&#10;Enemy drugi = goblin;&#10;drugi.TakeDamage(10);</code></pre>",
+    "QuestionType": 1,
+    "NumberOfOptions": 4,
+    "Points": 1,
+    "Answers": [
+      {
+        "Content": "A. drugi ma niezależne 30 HP",
+        "Weight": null,
+        "Correct": false
+      },
+      {
+        "Content": "B. Powstała niezależna kopia",
+        "Weight": null,
+        "Correct": false
+      },
+      {
+        "Content": "C. goblin.Hp wynosi 20",
+        "Weight": null,
+        "Correct": true
+      },
+      {
+        "Content": "D. Obie zmienne wskazują ten sam obiekt",
+        "Weight": null,
+        "Correct": true
+      }
+    ]
+  },
+  {
+    "Content": "Dlaczego dla różnych przeciwników trzeba używać osobnych <code>new Enemy(...)</code>?",
+    "QuestionType": 1,
+    "NumberOfOptions": 4,
+    "Points": 1,
+    "Answers": [
+      {
+        "Content": "A. Powstają niezależne obiekty",
+        "Weight": null,
+        "Correct": true
+      },
+      {
+        "Content": "B. Zmiana wspólnego obiektu byłaby widoczna przez wszystkie wpisy",
+        "Weight": null,
+        "Correct": true
+      },
+      {
+        "Content": "C. Jedna referencja dodana kilka razy nadal wskazuje ten sam obiekt",
+        "Weight": null,
+        "Correct": true
+      },
+      {
+        "Content": "D. Lista może mieć tylko jednego wroga",
+        "Weight": null,
+        "Correct": false
+      }
+    ]
+  },
+  {
+    "Content": "Dlaczego TakeDamage nie musi wypisywać komunikatu?",
+    "QuestionType": 1,
+    "NumberOfOptions": 4,
+    "Points": 1,
+    "Answers": [
+      {
+        "Content": "A. Metody nie mogą używać konsoli",
+        "Weight": null,
+        "Correct": false
+      },
+      {
+        "Content": "B. Zmiana HP zawsze sama się wyświetla",
+        "Weight": null,
+        "Correct": false
+      },
+      {
+        "Content": "C. Może odpowiadać tylko za zmianę stanu",
+        "Weight": null,
+        "Correct": true
+      },
+      {
+        "Content": "D. Regułę można wykorzystać w innym interfejsie",
+        "Weight": null,
+        "Correct": true
+      }
+    ]
+  },
+  {
+    "Content": "Co daje zastąpienie luźnych danych obiektem Enemy?",
+    "QuestionType": 1,
+    "NumberOfOptions": 4,
+    "Points": 1,
+    "Answers": [
+      {
+        "Content": "A. Klasa pilnuje reguł HP",
+        "Weight": null,
+        "Correct": true
+      },
+      {
+        "Content": "B. Dane jednego wroga są razem",
+        "Weight": null,
+        "Correct": true
+      },
+      {
+        "Content": "C. Każdy wróg wymaga nowych luźnych zmiennych",
+        "Weight": null,
+        "Correct": false
+      },
+      {
+        "Content": "D. Kod wskazuje konkretny obiekt",
+        "Weight": null,
+        "Correct": true
+      }
+    ]
+  },
+  {
+    "Content": "<p>Dlaczego ten kod nie wystarcza do użycia właściwości?</p><pre><code>Player player;</code></pre>",
+    "QuestionType": 1,
+    "NumberOfOptions": 4,
+    "Points": 1,
+    "Answers": [
+      {
+        "Content": "A. Właściwości ustawia się tylko w pętli",
+        "Weight": null,
+        "Correct": false
+      },
+      {
+        "Content": "B. Potrzebne jest new Player(...)",
+        "Weight": null,
+        "Correct": true
+      },
+      {
+        "Content": "C. Player działa tylko w tablicy",
+        "Weight": null,
+        "Correct": false
+      },
+      {
+        "Content": "D. Zadeklarowano zmienną, ale nie utworzono obiektu",
+        "Weight": null,
+        "Correct": true
+      }
+    ]
+  },
+  {
+    "Content": "Które odpowiedzialności pasują do Player?",
+    "QuestionType": 1,
+    "NumberOfOptions": 4,
+    "Points": 1,
+    "Answers": [
+      {
+        "Content": "A. Przechowywanie stanu bohatera",
+        "Weight": null,
+        "Correct": true
+      },
+      {
+        "Content": "B. Zachowania bezpośrednio związane z bohaterem",
+        "Weight": null,
+        "Correct": true
+      },
+      {
+        "Content": "C. Jednoczesne rysowanie mapy, zapis pliku i sklep",
+        "Weight": null,
+        "Correct": false
+      },
+      {
+        "Content": "D. Pilnowanie reguł leczenia i obrażeń",
+        "Weight": null,
+        "Correct": true
+      }
+    ]
+  },
+  {
+    "Content": "Co zawiera prosta klasa Item z materiału?",
+    "QuestionType": 1,
+    "NumberOfOptions": 4,
+    "Points": 1,
+    "Answers": [
+      {
+        "Content": "A. AddOne i RemoveOne",
+        "Weight": null,
+        "Correct": true
+      },
+      {
+        "Content": "B. Nazwa, Cena i LiczbaSztuk",
+        "Weight": null,
+        "Correct": true
+      },
+      {
+        "Content": "C. Obowiązkowe dziedziczenie po Enemy",
+        "Weight": null,
+        "Correct": false
+      },
+      {
+        "Content": "D. Konstruktor",
+        "Weight": null,
+        "Correct": true
+      }
+    ]
+  },
+  {
+    "Content": "<p>Co zrobi metoda dla <code>LiczbaSztuk = 0</code>?</p><pre><code>if (LiczbaSztuk &gt; 0) LiczbaSztuk--;</code></pre>",
+    "QuestionType": 1,
+    "NumberOfOptions": 4,
+    "Points": 1,
+    "Answers": [
+      {
+        "Content": "A. Ustawi -1",
+        "Weight": null,
+        "Correct": false
+      },
+      {
+        "Content": "B. Usunie obiekt",
+        "Weight": null,
+        "Correct": false
+      },
+      {
+        "Content": "C. Pozostawi 0",
+        "Weight": null,
+        "Correct": true
+      },
+      {
+        "Content": "D. Doda sztukę",
+        "Weight": null,
+        "Correct": false
+      }
+    ]
+  },
+  {
+    "Content": "Które stwierdzenia o wywoływaniu metod są prawdziwe?",
+    "QuestionType": 1,
+    "NumberOfOptions": 4,
+    "Points": 1,
+    "Answers": [
+      {
+        "Content": "A. Każde wywołanie metody musi znajdować się w Console.WriteLine",
+        "Weight": null,
+        "Correct": false
+      },
+      {
+        "Content": "B. Metodę void można wywołać jako osobną instrukcję",
+        "Weight": null,
+        "Correct": true
+      },
+      {
+        "Content": "C. Wynik metody zwracającej wartość można przypisać do zmiennej",
+        "Weight": null,
+        "Correct": true
+      },
+      {
+        "Content": "D. Argumenty są przekazywane w nawiasach przy wywołaniu",
+        "Weight": null,
+        "Correct": true
+      }
+    ]
+  },
+  {
+    "Content": "<p>Co się stanie po zadaniu 50 obrażeń wrogowi z 30 HP, jeśli metoda ogranicza HP do zera?</p>",
+    "QuestionType": 1,
+    "NumberOfOptions": 4,
+    "Points": 1,
+    "Answers": [
+      {
+        "Content": "A. Hp wyniesie 0",
+        "Weight": null,
+        "Correct": true
+      },
+      {
+        "Content": "B. Hp wyniesie -20",
+        "Weight": null,
+        "Correct": false
+      },
+      {
+        "Content": "C. IsAlive() zwróci false",
+        "Weight": null,
+        "Correct": true
+      },
+      {
+        "Content": "D. Obiekt automatycznie zniknie",
+        "Weight": null,
+        "Correct": false
+      }
+    ]
+  }
+]
