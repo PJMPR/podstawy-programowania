@@ -153,22 +153,25 @@ function setupDialogues(focusView) {
 
     quotes.forEach((quote) => {
         const lines = Array.from(quote.querySelectorAll('p'));
-        const hasMacius = lines.some((line) => line.textContent.trim().startsWith('Maciuś:'));
+        const hasMaciej = lines.some((line) => {
+            const text = line.textContent.trim();
+            return text.startsWith('Maciej:') || text.startsWith('Maciuś:');
+        });
         const hasJan = lines.some((line) => line.textContent.trim().startsWith('Jan:'));
 
-        if (!hasMacius || !hasJan) {
+        if (!hasMaciej || !hasJan) {
             return;
         }
 
         dialogueNumber += 1;
         quote.classList.add('dialogue-card');
-        quote.setAttribute('aria-label', `Rozmowa Maciusia z Janem, dialog ${dialogueNumber}`);
+        quote.setAttribute('aria-label', `Rozmowa Macieja z Janem, dialog ${dialogueNumber}`);
 
         lines.forEach((line) => {
             const text = line.textContent.trim();
             line.classList.add('dialogue-line');
 
-            if (text.startsWith('Maciuś:')) {
+            if (text.startsWith('Maciej:') || text.startsWith('Maciuś:')) {
                 line.classList.add('dialogue-junior');
                 line.setAttribute('data-avatar', 'M');
             } else if (text.startsWith('Jan:')) {
